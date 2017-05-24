@@ -1,0 +1,57 @@
+name = 'DolceVitaDog'
+description = Uses the Bootstrap Framework Less source files and must be compiled (not for beginners).
+core = 7.x
+base theme = bootstrap
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Regions
+;;;;;;;;;;;;;;;;;;;;;
+
+regions[zone_user]      	= 'Zone User'
+regions[zone_user_first]	= 'Zone User First'
+regions[zone_user_second]	= 'Zone User Second'
+regions[navigation]     	= 'Navigation'
+regions[header]         	= 'Top Bar'
+regions[highlighted]    	= 'Highlighted'
+regions[help]           	= 'Help'
+regions[content]        	= 'Content'
+regions[sidebar_first]  	= 'Primary'
+regions[sidebar_second] 	= 'Secondary'
+regions[page_top]       	= 'Page top'
+regions[page_bottom]    	= 'Page bottom'
+regions[footer]         	= 'Footer'
+regions[footer_bottom]      = 'Footer Bottom'
+
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Stylesheets
+;;;;;;;;;;;;;;;;;;;;;
+
+stylesheets[all][] = css/style.css
+stylesheets[all][] = css/container.css
+stylesheets[all][] = css/general.css
+stylesheets[all][] = css/menu.css
+stylesheets[all][] = css/homepage.css
+stylesheets[all][] = css/products.css
+stylesheets[all][] = css/zoneuser.css
+stylesheets[all][] = css/user.css
+stylesheets[all][] = css/cart.css
+stylesheets[all][] = css/products.css
+
+;;;;;;;;;;;;;;;;;;;;;
+;; Scripts
+;;;;;;;;;;;;;;;;;;;;;
+
+scripts[] = 'bootstrap/js/affix.js'
+scripts[] = 'bootstrap/js/alert.js'
+scripts[] = 'bootstrap/js/button.js'
+scripts[] = 'bootstrap/js/carousel.js'
+scripts[] = 'bootstrap/js/collapse.js'
+scripts[] = 'bootstrap/js/dropdown.js'
+scripts[] = 'bootstrap/js/modal.js'
+scripts[] = 'bootstrap/js/tooltip.js'
+scripts[] = 'bootstrap/js/popover.js'
+scripts[] = 'bootstrap/js/scrollspy.js'
+scripts[] = 'bootstrap/js/tab.js'
+scripts[] = 'bootstrap/js/transition.js'

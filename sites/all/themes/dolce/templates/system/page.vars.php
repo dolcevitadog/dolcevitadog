@@ -1,0 +1,33 @@
+<?php
+/**
+ * @file
+ * Stub file for "page" theme hook [pre]process functions.
+ */
+
+/**
+ * Pre-processes variables for the "page" theme hook.
+ *
+ * See template for list of available variables.
+ *
+ * @see page.tpl.php
+ *
+ * @ingroup theme_preprocess
+ */
+function dolce_preprocess_page(&$vars) {
+  // Add information about the number of sidebars.
+  $vars['zone_user_first_classes'] = 'col-md-8 col-lg-8 col-sm-6 col-xs-12';
+  $vars['zone_user_second_classes'] = 'col-md-4 col-lg-4 col-sm-6 col-xs-12';
+}
+
+/**
+ * Processes variables for the "page" theme hook.
+ *
+ * See template for list of available variables.
+ *
+ * @see page.tpl.php
+ *
+ * @ingroup theme_process
+ */
+function dolce_process_page(&$variables) {
+  $variables['navbar_classes'] = implode(' ', $variables['navbar_classes_array']);
+}

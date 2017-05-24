@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa|Covered+By+Your+Grace|Nothing+You+Could+Do');
+/*Fonts*/
+.zone-user-wrapper {
+  background: #7f98b3;
+  width: 100%;
+  position: fixed;
+  z-index: 9999;
+  max-height: 40px;
+}
+@media (max-width: 360px) {
+  .zone-user-wrapper {
+    position: relative;
+    max-height: 100%;
+  }
+}
+.region-user-first {
+  float: left;
+  /* LTR */
+}
+/* Menu */
+.navbar.container,
+.navbar.container-fluid {
+  padding-top: 46px;
+  margin: 0 auto;
+}
+/* Footer */
+.footer {
+  background: #494949;
+}
+.footer-bottom {
+  background: #f3f3f3;
+}

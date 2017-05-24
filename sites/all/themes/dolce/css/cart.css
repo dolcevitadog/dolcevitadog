@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa|Covered+By+Your+Grace|Nothing+You+Could+Do');
+/*Fonts*/
+#block-views-shopping-cart-block {
+  margin: 0 auto;
+  margin-left: 50px;
+  /* LTR */
+}
+#block-views-shopping-cart-block .content {
+  background-color: #ffffff;
+  background-image: url('../images/shoppingbag.png');
+  background-position: 5% 48%;
+  box-shadow: 0px 0px 2px 1px #aaa;
+  background-repeat: no-repeat;
+  float: right;
+  /* LTR */
+  margin-left: -60px;
+  /* LTR */
+  padding-left: 50px;
+  /* LTR */
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .view-content,
+#block-views-shopping-cart-block .content .view-shopping-cart .view-footer,
+#block-views-shopping-cart-block .content .view-shopping-cart .view-empty {
+  display: inline;
+  float: left;
+  /* LTR */
+  font-family: "Comfortaa";
+  font-weight: 400;
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .view-content ul,
+#block-views-shopping-cart-block .content .view-shopping-cart .view-content li {
+  margin: 0;
+  padding: 0;
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .view-footer {
+  display: block;
+  float: none;
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .view-empty,
+#block-views-shopping-cart-block .content .view-shopping-cart .line-item-quantity {
+  margin: 0;
+  vertical-align: middle;
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .view-empty p {
+  float: left;
+  /* LTR */
+  line-height: 30px;
+  margin: 0;
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .line-item-summary {
+  display: inline;
+  float: left;
+  /* LTR */
+  height: 34px;
+  line-height: 30px;
+  margin: 0;
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .line-item-summary .line-item-quantity {
+  color: black;
+  text-decoration: none;
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .line-item-summary .line-item-total {
+  color: #888888;
+  float: left;
+  /* LTR */
+  font-family: "Comfortaa";
+  font-weight: 300;
+  height: 100%;
+  line-height: 30px;
+  padding: 0 12px 0 6px;
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .line-item-summary .line-item-total-label {
+  display: none;
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .line-item-summary ul.links {
+  background: #557b9d;
+  clear: none;
+  color: white;
+  display: block;
+  float: left;
+  /* LTR */
+  font-family: "Comfortaa";
+  font-weight: 300;
+  height: 100%;
+  line-height: 30px;
+  margin: 0 0 0 5px;
+  /* LTR */
+  padding: 0 10px;
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .line-item-summary ul.links li {
+  margin: 0;
+  padding: 0;
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .line-item-summary ul.links li p {
+  margin: 0;
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .line-item-summary ul.links li a {
+  color: white;
+  font-weight: 700;
+}
+#block-views-shopping-cart-block .content .view-shopping-cart .line-item-summary ul.links li a:hover {
+  text-decoration: underline;
+}
+/**
+* Payment blocks
+*/
+#block-menu-menu-payment-methods {
+  color: #3f3f3f;
+  padding: 10px;
+}
+#block-menu-menu-payment-methods h2 {
+  display: none;
+}
+#block-menu-menu-payment-methods ul.menu {
+  height: 40px;
+  margin-bottom: 0;
+}
+#block-menu-menu-payment-methods ul.menu li {
+  display: inline;
+  float: left;
+  /* LTR */
+  margin: 0;
+  text-align: center;
+  width: 20%;
+  padding: 0;
+}
+#block-menu-menu-payment-methods ul.menu li:first-child {
+  padding-left: 10px;
+  /* LTR */
+}
+#block-menu-menu-payment-methods ul.menu li a {
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  display: block;
+  height: 30px;
+  margin: 5px 0px;
+  text-indent: -9999px;
+  width: 50px;
+}
+#block-menu-menu-payment-methods ul.menu li .visa {
+  background-image: url('../images/picto_visa_premier.png');
+}
+#block-menu-menu-payment-methods ul.menu li .paypal {
+  background-image: url('../images/picto_paypal.png');
+}
+#block-menu-menu-payment-methods ul.menu li .mastercard {
+  background-image: url('../images/picto_mastercard.png');
+}
+#block-menu-menu-payment-methods ul.menu li .american-express {
+  background-image: url('../images/picto_american_express.png');
+}
+#block-menu-menu-payment-methods ul.menu li .american-express {
+  background-image: url('../images/picto_american_express.png');
+}

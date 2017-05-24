@@ -1,0 +1,35 @@
+@import "variables.less";
+
+.zone-user-wrapper {
+  background: @zoneuserbg;
+  width: 100%;
+  position: fixed;
+  z-index: 9999;
+  max-height: 40px;
+
+  @media (max-width: 360px) {
+    position: relative;
+    max-height: 100%;
+  }
+}
+
+ .region-user-first {
+  float: left; /* LTR */
+}
+
+ /* Menu */
+
+.navbar.container, .navbar.container-fluid {
+  padding-top: 46px;
+  margin: 0 auto;
+}
+
+/* Footer */
+
+.footer {
+  background: @footer_bg;
+}
+
+.footer-bottom {
+  background: @footer_bottom_bg;
+}

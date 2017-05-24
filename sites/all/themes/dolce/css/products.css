@@ -1,0 +1,19 @@
+/*Attributes colors */
+.form-item-attributes-field-color .form-item.form-item-attributes-field-color {
+  float: left;
+  /* LTR */
+  margin-right: 5px;
+  /* LTR */
+  width: auto;
+}
+.form-item-attributes-field-color .commerce-fancy-attributes-color {
+  height: 20px;
+  width: 20px;
+}
+.form-item-attributes-field-color .description .field {
+  border: 1px solid #CBCDCC;
+  padding: 3px;
+}
+.form-item-attributes-field-color .description-selected .field {
+  border-color: #7f98b3;
+}
