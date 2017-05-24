@@ -1,0 +1,48 @@
+<?php
+
+function dolce_product_node_view($node) {
+	$view = views_get_view('suggested_product');
+	$args = array(16, 10);
+	$view->set_arguments($args);
+	$view->set_display('block');
+	$view->execute();
+	if (empty($view->result)) {
+		$args = array(16);
+		$view->set_arguments($args);
+		$view->execute();
+	}
+	return $view->render();
+}
+
+function _dolce_product_get_minimal_related($nid, $color_tid) {
+	$view = views_get_view('suggested_product');
+	$args = array($nid, $color_tid);
+	$view->set_arguments($args);
+	$view->set_display('block');
+	$view->execute();
+	if (empty($view->result)) {
+		$args = array($nid);
+		$view->set_arguments($args);
+		$view->execute();
+	}
+	return $view->render();
+}
+
+function dolce_product_commerce_cart_attributes_refresh_alter(&$commands, $form, $form_state) {
+  // Display an alert message showing the new default product ID.
+  //$commands[] = ajax_command_alert(t('Now defaulted to product @product_id.', array('@product_id' => $form['product_id']['#value'])));
+  $product_id = $form['product_id']['#value'];
+  $product = commerce_product_load($product_id);
+  $color_tid = dolce_product_get_haqihana_color($product);
+  $nid = $product->display_context['entity_id'];
+  //$view_output = views_embed_view('suggested_product','block', $nid, $color_tid);
+  $view_output = _dolce_product_get_minimal_related($nid, $color_tid);
+  $commands[] = ajax_command_replace('#block-views-suggested-product-block', '<div id="block-views-suggested-product-block">' . $view_output . '</div>');
+}
+
+function dolce_product_get_haqihana_color($product) {
+	if (!empty($product->field_color)) {
+		return $product->field_color['und']['0']['tid'];
+	}
+	return NULL;
+}
