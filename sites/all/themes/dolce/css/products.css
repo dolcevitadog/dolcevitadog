@@ -31,6 +31,9 @@
 .field-name-field-images .field-item img {
   margin: 0 auto;
 }
+.node-product-type .field-name-field-gallery {
+  margin-top: 15px;
+}
 .node-product-type .commerce-product-field-title-field {
   clear: both;
   font-family: "Nothing you could do";
