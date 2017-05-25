@@ -1,5 +1,8 @@
 <?php
 
-function dolce_cart_preprocess_block(&$vars) {
-	//krumo($vars);
-} 
+function dolce_cart_preprocess_node(&$vars) {
+    //variable_set('commerce_kickstart_product_ui_spinner_disable', 'TRUE');
+    //krumo(variable_get('commerce_kickstart_product_ui_spinner_disable'));
+    drupal_add_library('system', 'ui.spinner').
+    drupal_add_js(drupal_get_path('module', 'dolce_cart').'/dolce_cart.js');
+}

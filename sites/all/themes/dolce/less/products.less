@@ -1,3 +1,4 @@
+@import "variables.less";
 
 /*Attributes colors */
 .form-item-attributes-field-color {
@@ -16,5 +17,178 @@
   }
   .description-selected .field {
     border-color: #7f98b3;
+  }
+}
+
+.node-product-type {
+  .commerce-product-field-title-field {
+    clear: both;
+    font-family: @headerfont;
+    font-size: 24px;
+    font-weight: 700;
+  }
+  .commerce-product-sku {
+    color: #b1b1b1;
+    font-family: @headerfont;
+    font-size: 13px;
+    font-weight: 400;
+    .commerce-product-sku-label {
+      font-weight: normal;
+    }
+  }
+  .field-name-commerce-price {
+    font-family: @headerfont;
+    font-size: 30px;
+    font-weight: 700;
+    margin-bottom: 20px;
+  }
+  .cloud-zoom-container {
+    margin-bottom: 20px;
+    #wrap {
+      float: inherit;
+      z-index: 10 !important; /* Fix overlay */
+    }
+    .cloud-zoom-gallery-thumbs {
+      clear: both;
+
+      .cloud-zoom-gallery {
+        border: 1px solid #5b5b5b;
+        display: inline-block;
+        float: none;
+        margin: 5px 0;
+      }
+    }
+  }
+  .field-name-body {
+    font-family: @headerfont;
+    font-weight: 400;
+    line-height: 20px;
+    margin-bottom: 20px;
+
+    .read-more,
+    .read-less,
+    .read-more a,
+    .read-less a {
+      font-family: @headerfont;
+      font-size: 14px;
+      font-weight: 400;
+    }
+    .read-more a,
+    .read-less a {
+      background-position: left top; /* LTR */
+      background-repeat: no-repeat;
+      color: #898a8c;
+      display: block;
+      height: 18px;
+      margin-top: 10px;
+      padding-right: 20px; /* LTR */
+      text-decoration: none;
+      text-indent: 25px;
+      text-transform: capitalize;
+
+      &:hover {
+        cursor: pointer;
+        text-decoration: underline;
+      }
+    }
+    .read-more a {
+      background-image: url('../images/btn_read_more.png');
+    }
+    .read-less a {
+      background-image: url('../images/btn_read_less.png');
+    }
+  }
+  .field-type-commerce-product-reference {
+    background: url('../images/bg_product_attributes_bottom.png') center bottom no-repeat;
+    margin-bottom: 15px;
+    padding-bottom: 50px;
+
+    form.commerce-add-to-cart {
+      background: url('../images/bg_product_attributes_top.png') center top no-repeat;
+      padding-top: 40px;
+
+      .form-control {
+        width: auto;
+      }
+      .attribute-widgets {
+        .form-item {
+          position: relative; /* Positions the throbber */
+
+          &:after {
+            clear: both;
+            content: ".";
+            display: block;
+            height: 0;
+            visibility: hidden;
+          }
+          div#edit-attributes-field-color {
+            float: left; /* LTR */
+            width: 50%;
+          }
+          .ajax-progress-throbber { /* Positions the throbber */
+            display: none;
+            position: absolute;
+          }
+          .description {
+            position: relative;
+          }
+        }
+        .form-item-attributes-field-color, .form-item.form-item-attributes-field-hh-color {
+          .form-item.form-item-attributes-field-color, .form-item.form-item-attributes-field-hh-color {
+            float: left; /* LTR */
+            margin-right: 5px; /* LTR */
+            width: auto;
+            label {
+              display: none;
+            }
+          }
+          .commerce-fancy-attributes-color {
+            height: 20px;
+            width: 20px;
+          }
+          .description .field {
+            border: 1px solid #CBCDCC;
+            padding: 3px;
+          }
+          .description-selected .field {
+            border-color: @footer_bg;
+          }
+        }
+      }
+      label {
+        float: left; /* LTR */
+        font-family: @headerfont;
+        font-weight: 600;
+        margin-right: 5px; /* LTR */
+        white-space: nowrap;
+        width: 45%;
+
+        &:after {
+          content: " :";
+        }
+      }
+      .form-item {
+        margin: 0;
+        padding-bottom: 1em;
+      }
+      .form-submit {
+        background-color: @zoneuserbg;
+        background-image: url('../images/bg_shopping_bag.png');
+        background-position: 90% 50%; /* LTR */
+        background-repeat: no-repeat;
+        border: 0;
+        color: #ffffff;
+        font-family: @headerfont;
+        font-size: 17px;
+        font-weight: 400;
+        margin-top: 40px;
+        margin-left: 5px; /* LTR */
+        padding: 5px 50px 5px 10px; /* LTR */
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
   }
 }

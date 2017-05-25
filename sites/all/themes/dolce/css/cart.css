@@ -152,3 +152,6 @@
 #block-menu-menu-payment-methods ul.menu li .american-express {
   background-image: url('../images/picto_american_express.png');
 }
+#block-menu-menu-payment-methods ul.menu li .cheque {
+  background-image: url('../images/picto-cheque.png');
+}
