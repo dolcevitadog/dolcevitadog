@@ -112,3 +112,47 @@ function dolce_form_element(&$variables) {
     // Render the form element build array.
     return drupal_render($build);
 }
+
+/**
+ * Allows sub-themes to alter the array used for associating an icon with text.
+ *
+ * @param array $texts
+ *   An associative array containing the text and icons to be matched, passed
+ *   by reference.
+ *
+ * @see _bootstrap_iconize_text()
+ */
+function dolce_bootstrap_iconize_text_alter(&$texts) {
+    $texts['matches'][t('Checkout')] = 'ok';
+    $texts['matches'][t('Continue to next step')] = 'menu-right';
+    $texts['matches'][t('Back to login')] = 'menu-left';
+    $texts['matches'][t('Create an account')] = 'pencil';
+    $texts['matches'][t('Create new account')] = 'pencil';
+    $texts['matches'][t('Back to login')] = 'pencil';
+    unset($texts['contains'][t('Update')]);
+
+}
+
+/**
+ * Allows sub-themes to alter the array used for colorizing text.
+ *
+ * @param array $texts
+ *   An associative array containing the text and classes to be matched, passed
+ *   by reference.
+ *
+ * @see _bootstrap_colorize_text()
+ */
+function dolce_bootstrap_colorize_text_alter(&$texts) {
+    // This matches the exact string: "My Unique Button Text".
+    $texts['matches'][t('Checkout')] = 'primary';
+    $texts['matches'][t('Continue to next step')] = 'primary';
+    $texts['matches'][t('Create an account')] = 'info';
+    $texts['matches'][t('Back to login')] = 'primary';
+    // Remove matching for strings that contain "apply":
+    unset($texts['contains'][t('Update')]);
+}
+
+function dolce_preprocess_views_view_field(&$vars) {
+
+    $vars['output'] = $vars['field']->advanced_render($vars['row']);
+}

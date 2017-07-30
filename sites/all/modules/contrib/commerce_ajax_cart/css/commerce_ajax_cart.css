@@ -4,7 +4,7 @@
   background : white ;
   padding : 1em ;
   box-sizing: content-box ;
-  box-shadow:  3px 3px #ccc;
+  box-shadow:  3px 3px 3px #ccc;
 }
 
 #commerce-ajax-cart-preview.loading {

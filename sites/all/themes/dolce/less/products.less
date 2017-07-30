@@ -41,7 +41,7 @@
   .field-name-field-gallery {
     margin-top: 15px;
   }
-  
+
   .commerce-product-field-title-field {
     clear: both;
     font-family: @headerfont;
@@ -211,5 +211,62 @@
         }
       }
     }
+  }
+}
+
+#block-dolce-discount-shipping-discount {
+  /* HP blocks: Side advert */
+  clear: both;
+  position: absolute;
+  left: -50px;
+  top: 185px;
+  z-index: 100;
+  @media (max-width: 1024px) {
+    left: 20px;
+  }
+  @media (max-width: 640px){
+    position: relative;
+    left: 0px;
+    top: 0;
+    width: 100%;
+  }
+  #shipping {
+    background-color: #557b9d;
+    border: 6px solid #ccc;
+    color: white;
+    display: block;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px 5px 20px 5px;
+  }
+
+  #shipping #shipping_message span {
+    border-bottom: 1px solid #ffffff;
+    display: block;
+    color: white;
+    font-size: 18px;
+    padding: 10px 0 4px 0;
+    text-transform: uppercase;
+  }
+  #shipping #shipping_message span em {
+    font-size: 27px;
+    font-style: normal;
+  }
+  #shipping #shipping_currency {
+    display: block;
+    font-size: 27px;
+    margin-top: 2px;
+  }
+  #shipping #shipping_message {
+    font-family: @headerfont;
+    font-weight: 400;
+  }
+  #shipping #shipping_message span,
+  #shipping #shipping_message span em,
+  #shipping #shipping_currency {
+    font-family: @headerfont;
+    font-weight: 700;
   }
 }

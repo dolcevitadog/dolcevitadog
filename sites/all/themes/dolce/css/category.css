@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa|Covered+By+Your+Grace|Nothing+You+Could+Do');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+/*Fonts*/
+.view-collection-products ul li {
+  list-style: none;
+}
+.view-collection-products .view-header {
+  position: relative;
+  min-height: 210px;
+}
+.view-collection-products .view-header .item-list h3 {
+  float: right;
+  padding: 5px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.view-collection-products .view-header .item-list h3 a {
+  color: black;
+}
+.view-collection-products .taxonomy-title {
+  font-size: 28px;
+  color: white;
+  background: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  bottom: 0;
+}

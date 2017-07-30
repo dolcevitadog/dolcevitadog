@@ -215,3 +215,62 @@
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .form-submit:hover {
   cursor: pointer;
 }
+#block-dolce-discount-shipping-discount {
+  /* HP blocks: Side advert */
+  clear: both;
+  position: absolute;
+  left: -50px;
+  top: 185px;
+  z-index: 100;
+}
+@media (max-width: 1024px) {
+  #block-dolce-discount-shipping-discount {
+    left: 20px;
+  }
+}
+@media (max-width: 640px) {
+  #block-dolce-discount-shipping-discount {
+    position: relative;
+    left: 0px;
+    top: 0;
+    width: 100%;
+  }
+}
+#block-dolce-discount-shipping-discount #shipping {
+  background-color: #557b9d;
+  border: 6px solid #ccc;
+  color: white;
+  display: block;
+  font-size: 14px;
+  line-height: 24px;
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px 5px 20px 5px;
+}
+#block-dolce-discount-shipping-discount #shipping #shipping_message span {
+  border-bottom: 1px solid #ffffff;
+  display: block;
+  color: white;
+  font-size: 18px;
+  padding: 10px 0 4px 0;
+  text-transform: uppercase;
+}
+#block-dolce-discount-shipping-discount #shipping #shipping_message span em {
+  font-size: 27px;
+  font-style: normal;
+}
+#block-dolce-discount-shipping-discount #shipping #shipping_currency {
+  display: block;
+  font-size: 27px;
+  margin-top: 2px;
+}
+#block-dolce-discount-shipping-discount #shipping #shipping_message {
+  font-family: "Nothing you could do";
+  font-weight: 400;
+}
+#block-dolce-discount-shipping-discount #shipping #shipping_message span,
+#block-dolce-discount-shipping-discount #shipping #shipping_message span em,
+#block-dolce-discount-shipping-discount #shipping #shipping_currency {
+  font-family: "Nothing you could do";
+  font-weight: 700;
+}

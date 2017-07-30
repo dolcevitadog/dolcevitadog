@@ -1,0 +1,160 @@
+<?php
+
+/**
+ * @file
+ * Commerce Shipping quote module that defines shipping rates based on
+ * product's weight in order and shipping regions.
+ */
+
+/**
+ * Implementation of hook_menu().
+ */
+function commerce_shipping_quote_weight_menu() {
+  $items = array();
+
+  $items['admin/commerce/config/shipping-quote'] = array(
+    'title' => 'Shipping quote by weight',
+  //'page callback' => 'drupal_get_form',
+    'page callback' => 'commerce_shipping_quote_weight_admin',
+  //'page arguments' => array('shipping_global_quote_admin'),
+    'access arguments' => array('administer shipping'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'commerce_shipping_quote_weight.admin.inc',
+  );
+  $items['admin/commerce/config/shipping-quote/quote'] = array(
+    'title' => 'Shipping quotes',
+    'access arguments' => array('administer shipping'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  $items['admin/commerce/config/shipping-quote/quote/add'] = array(
+    'title' => 'Add new shipping quote',
+    'page callback' => 'drupal_get_form',
+    //'page callback' => 'shipping_global_quote_add',
+    'page arguments' => array('commerce_shipping_quote_weight_add'),
+    'access arguments' => array('administer shipping'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'commerce_shipping_quote_weight.admin.inc',
+  );
+  $items['admin/commerce/config/shipping-quote/quote/edit/%'] = array(
+    'title' => 'Edit a shipping quote',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('commerce_shipping_quote_weight_edit', 6),
+    'access arguments' => array('administer shipping'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'commerce_shipping_quote_weight.admin.inc',
+  );
+  $items['admin/commerce/config/shipping-quote/quote/delete/%'] = array(
+    'title' => 'Delete a shipping quote',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('commerce_shipping_quote_weight_delete', 6),
+    'access arguments' => array('administer shipping'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'commerce_shipping_quote_weight.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_commerce_shipping_method_info().
+ */
+function commerce_shipping_quote_weight_commerce_shipping_method_info() {
+  return array(
+    'commerce_shipping_quote_weight' => array(
+      'title' => t('Shipping quote by weight'),
+      'description' => t('Adds the shipping quote based on the weight.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_commerce_shipping_service_info().
+ */
+function commerce_shipping_quote_weight_commerce_shipping_service_info() {
+  $services = array();
+
+  // Add the full service array to our return value.
+  $services['commerce_shipping_quote_weight'] = array(
+    'title' => 'Shipping Quote by Weight',
+    'display_title' => 'Shipping Charges',
+    'description' => 'Provides the shipping quote based on the weight',
+    'shipping_method' => 'commerce_shipping_quote_weight',
+    'rules_component' => TRUE,
+    'price_component' => 'commerce_shipping_quote_weight',
+    'callbacks' => array(
+      'rate' => 'commerce_shipping_quote_weight_service_rate_order',
+    ),
+  );
+
+  return $services;
+}
+
+/**
+ * Shipping service callback: returns the base rate for a flat rate service.
+ */
+function commerce_shipping_quote_weight_service_rate_order($shipping_service, $order) {
+  $total = 0;
+  $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+  $weight = commerce_physical_order_weight($order, $unit = 'kg');
+
+  $shipping_address = $order_wrapper->commerce_customer_shipping->commerce_customer_address->value();
+  if ($shipping_address['country']) {
+    $selected_shipping_country = $shipping_address['country'];
+  }
+  //echo "<pre>";print_r($selected_shipping_country);exit;
+
+  $country_name_db = db_select('countries_country', 'cc')
+      ->fields('cc', array('name'))
+      ->condition('iso2', $selected_shipping_country)
+      ->execute()->fetchField();
+  //echo "<pre>";print_r($country_name_db);exit;
+
+  if (isset($country_name_db)) {
+    $selected_shipping_zone_id = db_select('shipping_zones', 'sz')
+      ->fields('sz', array('zid'))
+      ->condition('countries', '%' . db_like($country_name_db) . '%', 'LIKE')
+      ->execute()->fetchField();
+  }
+  else {
+    return array();
+  }
+
+  //echo "<pre>";print_r($selected_shipping_zone_id);exit;
+  // Get shipping zone
+  //$zone = shipping_zones_get('United Arab Emirates,784');
+  //$zone = 'United Arab Emirates';
+  if (!$selected_shipping_zone_id) {
+    return array();
+  }
+  $rate = 0;
+  $currency_code = commerce_default_currency();
+
+  $result = db_select('commerce_shipping_quote_weight', 'csqw')
+    ->fields('csqw')
+    ->condition('zid', $selected_shipping_zone_id)
+    ->condition('minimum_weight', $weight['weight'], '<=')
+    ->condition('maximum_weight', $weight['weight'], '>')
+    ->execute()
+    ->fetchAll();
+  //while ($r = db_fetch_object($result)) {
+  //echo "<pre>";print_r($r);exit;
+  foreach ($result as $r) {
+    $rate = $r->rate;
+    $currency_code = $r->currency_code;
+    break;
+  }
+
+  if ($rate) {
+    //echo "<pre>";print_r($rate);exit;
+    $base_rate = array(
+      'amount' => $rate,
+      'currency_code' => $currency_code,
+      'data' => array(),
+    );
+
+    return $base_rate;
+  }
+  else {
+    return array();
+  }
+}
