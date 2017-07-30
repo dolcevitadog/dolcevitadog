@@ -1,0 +1,217 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa|Covered+By+Your+Grace|Nothing+You+Could+Do');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+/*Fonts*/
+/*Attributes colors */
+.form-item-attributes-field-color .form-item.form-item-attributes-field-color {
+  float: left;
+  /* LTR */
+  margin-right: 5px;
+  /* LTR */
+  width: auto;
+}
+.form-item-attributes-field-color .commerce-fancy-attributes-color {
+  height: 20px;
+  width: 20px;
+}
+.form-item-attributes-field-color .description .field {
+  border: 1px solid #CBCDCC;
+  padding: 3px;
+}
+.form-item-attributes-field-color .description-selected .field {
+  border-color: #7f98b3;
+}
+.field-name-field-gallery .field-item {
+  display: inline-block;
+  box-shadow: 1px 1px 1px;
+  margin: 0 10px;
+}
+.field-name-field-images .field-item {
+  background: #F7F7F7;
+}
+.field-name-field-images .field-item img {
+  margin: 0 auto;
+}
+.node-product-type .field-name-field-gallery {
+  margin-top: 15px;
+}
+.node-product-type .commerce-product-field-title-field {
+  clear: both;
+  font-family: "Nothing you could do";
+  font-size: 24px;
+  font-weight: 700;
+}
+.node-product-type .commerce-product-sku {
+  color: #b1b1b1;
+  font-family: "Nothing you could do";
+  font-size: 13px;
+  font-weight: 400;
+}
+.node-product-type .commerce-product-sku .commerce-product-sku-label {
+  font-weight: normal;
+}
+.node-product-type .field-name-commerce-price {
+  font-family: "Nothing you could do";
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.node-product-type .cloud-zoom-container {
+  margin-bottom: 20px;
+}
+.node-product-type .cloud-zoom-container #wrap {
+  float: inherit;
+  z-index: 10 !important;
+  /* Fix overlay */
+}
+.node-product-type .cloud-zoom-container .cloud-zoom-gallery-thumbs {
+  clear: both;
+}
+.node-product-type .cloud-zoom-container .cloud-zoom-gallery-thumbs .cloud-zoom-gallery {
+  border: 1px solid #5b5b5b;
+  display: inline-block;
+  float: none;
+  margin: 5px 0;
+}
+.node-product-type .field-name-body {
+  font-family: "Raleway";
+  font-weight: 400;
+  line-height: 20px;
+  margin-bottom: 20px;
+}
+.node-product-type .field-name-body .read-more,
+.node-product-type .field-name-body .read-less,
+.node-product-type .field-name-body .read-more a,
+.node-product-type .field-name-body .read-less a {
+  font-family: "Nothing you could do";
+  font-size: 14px;
+  font-weight: 400;
+}
+.node-product-type .field-name-body .read-more a,
+.node-product-type .field-name-body .read-less a {
+  background-position: left top;
+  /* LTR */
+  background-repeat: no-repeat;
+  color: #898a8c;
+  display: block;
+  height: 18px;
+  margin-top: 10px;
+  padding-right: 20px;
+  /* LTR */
+  text-decoration: none;
+  text-indent: 25px;
+  text-transform: capitalize;
+}
+.node-product-type .field-name-body .read-more a:hover,
+.node-product-type .field-name-body .read-less a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.node-product-type .field-name-body .read-more a {
+  background-image: url('../images/btn_read_more.png');
+}
+.node-product-type .field-name-body .read-less a {
+  background-image: url('../images/btn_read_less.png');
+}
+.node-product-type .field-type-commerce-product-reference {
+  background: url('../images/bg_product_attributes_bottom.png') center bottom no-repeat;
+  margin-bottom: 15px;
+  padding-bottom: 50px;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart {
+  background: url('../images/bg_product_attributes_top.png') center top no-repeat;
+  padding-top: 40px;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .form-control {
+  width: auto;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item {
+  position: relative;
+  /* Positions the throbber */
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item:after {
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item div#edit-attributes-field-color {
+  float: left;
+  /* LTR */
+  width: 50%;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item .ajax-progress-throbber {
+  /* Positions the throbber */
+  display: none;
+  position: absolute;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item .description {
+  position: relative;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .form-item.form-item-attributes-field-color,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .form-item.form-item-attributes-field-color,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .form-item.form-item-attributes-field-hh-color,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .form-item.form-item-attributes-field-hh-color {
+  float: left;
+  /* LTR */
+  margin-right: 5px;
+  /* LTR */
+  width: auto;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .form-item.form-item-attributes-field-color label,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .form-item.form-item-attributes-field-color label,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .form-item.form-item-attributes-field-hh-color label,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .form-item.form-item-attributes-field-hh-color label {
+  display: none;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .commerce-fancy-attributes-color,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .commerce-fancy-attributes-color {
+  height: 20px;
+  width: 20px;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .description .field,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .description .field {
+  border: 1px solid #CBCDCC;
+  padding: 3px;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .description-selected .field,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .description-selected .field {
+  border-color: #494949;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart label {
+  float: left;
+  /* LTR */
+  font-family: "Raleway";
+  font-weight: 600;
+  margin-right: 5px;
+  /* LTR */
+  white-space: nowrap;
+  width: 45%;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart label:after {
+  content: " :";
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .form-item {
+  margin: 0;
+  padding-bottom: 1em;
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .form-submit {
+  background-color: #7f98b3;
+  background-image: url('../images/bg_shopping_bag.png');
+  background-position: 90% 50%;
+  /* LTR */
+  background-repeat: no-repeat;
+  border: 0;
+  color: #ffffff;
+  font-family: "Nothing you could do";
+  font-size: 17px;
+  font-weight: 400;
+  margin-top: 40px;
+  margin-left: 5px;
+  /* LTR */
+  padding: 5px 50px 5px 10px;
+  /* LTR */
+}
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .form-submit:hover {
+  cursor: pointer;
+}

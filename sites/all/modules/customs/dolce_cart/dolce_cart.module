@@ -1,0 +1,26 @@
+<?php
+
+function dolce_cart_preprocess_node(&$vars) {
+    //variable_set('commerce_kickstart_product_ui_spinner_disable', 'TRUE');
+    //krumo(variable_get('commerce_kickstart_product_ui_spinner_disable'));
+    drupal_add_library('system', 'ui.spinner');
+    drupal_add_js(drupal_get_path('module', 'dolce_cart').'/dolce_cart.js');
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function dolce_cart_form_alter(&$form, &$form_state, $form_id)
+{
+    if (strstr($form_id, 'commerce_cart_add_to_cart_form')) {
+        $form['#attached']['library'][] = array('commerce_kickstart_product_ui', 'jquery_expander');
+        $node = menu_get_object();
+
+        if (isset($form['attributes']['field_hh_size'])) {
+            $node = menu_get_object();
+            $field_hh_informations = $node->field_hh_informations['und'][0]['value'];
+            $form['attributes']['field_hh_size']['#suffix'] = '<a href="#" data-html="true" data-toggle="popover" title="'.t('Size chart').'" 
+            data-content="'.$field_hh_informations.'">'.t('Size chart').'</a>';
+        }
+    }
+}
