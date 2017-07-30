@@ -20,7 +20,7 @@ function dolce_cart_form_alter(&$form, &$form_state, $form_id)
             $node = menu_get_object();
             $field_hh_informations = $node->field_hh_informations['und'][0]['value'];
             $form['attributes']['field_hh_size']['#suffix'] = '<a href="#" data-html="true" data-toggle="popover" title="'.t('Size chart').'" 
-            data-content="'.$field_hh_informations.'">'.t('Size chart').'</a>';
+            data-content="'.$field_hh_informations.'">'.t('<i class="fa fa-table"></i> Size chart').'</a>';
         }
     }
 }

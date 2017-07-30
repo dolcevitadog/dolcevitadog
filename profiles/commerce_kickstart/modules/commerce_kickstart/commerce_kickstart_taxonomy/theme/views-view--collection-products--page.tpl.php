@@ -28,6 +28,7 @@
  *
  * @ingroup views_templates
  */
+
 ?>
 <div class="<?php print $classes; ?> clearfix">
   <?php print render($title_prefix); ?>

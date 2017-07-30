@@ -1,0 +1,17 @@
+name = Commerce Shipping Quote Zones
+description = Defines zones for commerce shipping quote by weight module for shipment purposes
+package = Commerce
+core = 7.x
+
+dependencies[] = commerce
+dependencies[] = commerce_shipping
+dependencies[] = commerce_shipping_quote_weight
+dependencies[] = commerce_physical
+dependencies[] = countries
+
+; Information added by Drupal.org packaging script on 2015-09-03
+version = "7.x-1.0"
+core = "7.x"
+project = "commerce_shipping_quote_weight"
+datestamp = "1441286944"
+

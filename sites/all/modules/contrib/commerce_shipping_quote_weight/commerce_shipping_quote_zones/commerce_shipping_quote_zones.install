@@ -1,0 +1,41 @@
+<?php
+
+/**
+ * @file
+ * uc_shipping_zones installation file
+ */
+
+/**
+ * Implementation of hook_schema().
+ */
+function commerce_shipping_quote_zones_schema() {
+  $schema['commerce_shipping_quote_zones'] = array(
+    'description' => 'Stores the zones related data required for the shipping quote by module.',
+    'fields' => array(
+      'zid' => array(
+        'type' => 'serial',
+        'not null' => TRUE,
+        'description' => 'The Shipping Zone ID.',
+      ),
+      'name' => array(
+        'type' => 'varchar',
+        'length' => 255,
+        'not null' => FALSE,
+        'description' => 'The Shipping Zone name.',
+      ),
+      'countries' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'description' => 'The countries in the Shipping Zone.',
+      ),
+      'regions' => array(
+        'type' => 'text',
+        'not null' => FALSE,
+        'description' => 'The regions in the Shipping Zone.',
+      ),
+    ),
+    'primary key' => array('zid'),
+  );
+
+  return $schema;
+}

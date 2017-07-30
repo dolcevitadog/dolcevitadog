@@ -10,6 +10,7 @@
  * Helper variables:
  * - $product: The fully loaded product object the title belongs to.
  */
+krumo($title);
 ?>
 <?php if ($title): ?>
 <div class="commerce-product-title">

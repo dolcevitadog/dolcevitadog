@@ -156,3 +156,206 @@
 #block-menu-menu-payment-methods ul.menu li .cheque {
   background-image: url('../images/picto-cheque.png');
 }
+/* Add to cart confirmation modal */
+div.messages.commerce-add-to-cart-confirmation {
+  width: 60%;
+}
+div.messages.commerce-add-to-cart-confirmation .message-inner .added-product-title {
+  font-family: "Raleway";
+  color: #7f98b3;
+  font-size: 20px;
+  width: 80%;
+}
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-images {
+  float: left;
+  margin-right: 10px;
+  width: auto;
+  position: absolute;
+}
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .commerce-product-sku,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hh-color,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hl-size,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hh-size,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-commerce-price,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .views-field-quantity {
+  color: #878380;
+  font-size: 12px;
+  margin-right: 20px;
+  margin-left: 120px;
+}
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .views-field-quantity {
+  color: #878380;
+  font-size: 12px;
+  margin-right: 20px;
+  margin-left: 120px;
+}
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .views-field-commerce-total {
+  margin-left: 120px;
+}
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .views-field-commerce-total .field-content {
+  color: #557b9d;
+  display: inline;
+  float: none;
+}
+div.messages.commerce-add-to-cart-confirmation .message-inner .button-wrapper {
+  background: #f7f7f7;
+}
+div.messages.commerce-add-to-cart-confirmation .message-inner .button-wrapper .button.checkout {
+  background: #557b9d;
+  font-family: "Comfortaa";
+}
+div.messages.commerce-add-to-cart-confirmation .message-inner .button-wrapper .button.continue {
+  font-family: "Comfortaa";
+  background-color: #a3a3a3;
+}
+/* Cart pane before checkout */
+.view-commerce-cart-form .entity-commerce-product .field-name-field-images {
+  float: left;
+  display: inline;
+  margin-right: 15px;
+}
+.view-commerce-cart-form .entity-commerce-product .field-label-inline .field-label {
+  display: inline-block;
+}
+.view-commerce-cart-form .entity-commerce-product .field-label-inline .field-items {
+  display: inline-block;
+}
+.view-commerce-cart-form .views-field-edit-delete .delete-line-item {
+  background: none;
+  border: none;
+  color: #a3a3a3;
+}
+.view-commerce-cart-form .views-field-edit-delete .delete-line-item:hover {
+  text-decoration: underline;
+}
+.view-commerce-cart-form table tbody tr.odd,
+.view-commerce-cart-form table tbody tr.even {
+  background: none;
+}
+/*Ajax Cart Loader */
+#commerce-ajax-cart-preview {
+  background-color: white !important;
+  position: absolute ;
+  background: white ;
+  padding: 1em ;
+  box-sizing: content-box;
+  box-shadow: 3px 3px 3px #ccc;
+}
+#commerce-ajax-cart-preview.loading {
+  min-height: 100px ;
+  min-width: 100px ;
+  background: no-repeat center center url(../images/ajax-loader.gif);
+}
+.view-id-shopping_cart {
+  cursor: pointer ;
+}
+/**********************************************
+* 5.4. Checkout process
+**********************************************/
+/**
+* Checkout progress
+*/
+ul.inline.commerce-checkout-progress li {
+  display: block;
+  float: left;
+}
+ul.inline.commerce-checkout-progress,
+ol.inline.commerce-checkout-progress {
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+ul.inline.commerce-checkout-progress li,
+ol.inline.commerce-checkout-progress li {
+  background-color: #efefef;
+  color: #898A8C;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  margin: 0 0px 10px 0;
+  padding: 15px 15px 15px 35px;
+  /* LTR */
+  position: relative;
+  width: auto;
+  list-style: none;
+}
+ul.inline.commerce-checkout-progress li:after,
+ol.inline.commerce-checkout-progress li:after {
+  background: transparent url('../images/bg_checkout_progress.png') right center no-repeat;
+  /* LTR */
+  content: " ";
+  font-size: 0;
+  display: block;
+  float: right;
+  /* LTR */
+  position: absolute;
+  top: 0;
+  right: -25px;
+  /* LTR */
+  height: 50px;
+  width: 25px;
+  z-index: 2;
+}
+ul.inline.commerce-checkout-progress li.last:after,
+ol.inline.commerce-checkout-progress li.last:after {
+  background: #efefef url('../images/bg_checkout_progress_last.png') right center no-repeat;
+  /* LTR */
+}
+ul.inline.commerce-checkout-progress li.active,
+ol.inline.commerce-checkout-progress li.active,
+ul.inline.commerce-checkout-progress li.last.active,
+ol.inline.commerce-checkout-progress li.last.active {
+  background-color: #7f98b3;
+  color: #ffffff;
+}
+ul.inline.commerce-checkout-progress li.active:after,
+ol.inline.commerce-checkout-progress li.active:after,
+ul.inline.commerce-checkout-progress li.last.active:after,
+ol.inline.commerce-checkout-progress li.last.active:after {
+  background: transparent url('../images/bg_checkout_progress_active.png') right center no-repeat;
+  /* LTR */
+}
+ul.inline.commerce-checkout-progress li.previous,
+ol.inline.commerce-checkout-progress li.previous,
+ul.inline.commerce-checkout-progress li.visited,
+ol.inline.commerce-checkout-progress li.visited {
+  color: rgba(76, 175, 80, 0.48);
+}
+ul.inline.commerce-checkout-progress li.previous a,
+ol.inline.commerce-checkout-progress li.previous a,
+ul.inline.commerce-checkout-progress li.visited a,
+ol.inline.commerce-checkout-progress li.visited a {
+  color: rgba(76, 175, 80, 0.48);
+}
+ul.inline.commerce-checkout-progress li a,
+ol.inline.commerce-checkout-progress li a {
+  font-size: 16px;
+  font-weight: 700;
+}
+/* Checkout Form */
+#commerce-checkout-form-checkout fieldset,
+#commerce-checkout-form-shipping fieldset,
+#commerce-checkout-form-review fieldset {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+#commerce-checkout-form-checkout fieldset legend,
+#commerce-checkout-form-shipping fieldset legend,
+#commerce-checkout-form-review fieldset legend {
+  text-transform: uppercase;
+  background: none;
+  border: none;
+}
+#commerce-checkout-form-checkout .pane-title,
+#commerce-checkout-form-shipping .pane-title,
+#commerce-checkout-form-review .pane-title {
+  background: none;
+  border: none;
+}
+#commerce-checkout-form-checkout .pane-title > td,
+#commerce-checkout-form-shipping .pane-title > td,
+#commerce-checkout-form-review .pane-title > td {
+  text-transform: uppercase;
+  background: none;
+  border: none;
+}
