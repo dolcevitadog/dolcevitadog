@@ -29,6 +29,9 @@
   background: #494949;
   color: #fefefe;
 }
+.footer a {
+  color: #7f98b3;
+}
 .footer .block {
   margin-bottom: 15px;
 }

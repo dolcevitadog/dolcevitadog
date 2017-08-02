@@ -666,7 +666,6 @@ function commerce_cart_block_view($delta) {
           'order' => $order,
           'contents_view' => commerce_embed_view('commerce_cart_block', 'default', array($order->order_id), $_GET['q']),
         );
-
         $content = theme('commerce_cart_block', $variables);
       }
     }

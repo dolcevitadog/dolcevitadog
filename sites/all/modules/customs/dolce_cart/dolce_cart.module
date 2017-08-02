@@ -22,5 +22,13 @@ function dolce_cart_form_alter(&$form, &$form_state, $form_id)
             $form['attributes']['field_hh_size']['#suffix'] = '<a href="#" data-html="true" data-toggle="popover" title="'.t('Size chart').'" 
             data-content="'.$field_hh_informations.'">'.t('<i class="fa fa-table"></i> Size chart').'</a>';
         }
+        $form['#validate'][] = 'dolce_cart_add_to_cart_validate';
+    }
+}
+
+function dolce_cart_add_to_cart_validate($form, &$form_state)
+{
+    if (form_get_errors()) {
+        form_set_error('quantity', '');
     }
 }
