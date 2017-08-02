@@ -14,7 +14,6 @@
         <p><?php print render($content['invoice_header']); ?></p>
     </div>
   </div>
-
   <hr/>
 
   <div class="invoice-header-date"><?php print render($content['invoice_header_date']); ?></div>

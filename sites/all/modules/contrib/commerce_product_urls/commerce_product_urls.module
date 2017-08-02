@@ -85,11 +85,13 @@ function commerce_product_urls_form_alter(&$form, &$form_state, $form_id) {
       if (isset($form_state['default_product']->product_id)) {
         $parsed_url['query'] = _commerce_product_urls_build_query_string($form_state, FALSE);
       }
-      $parsed_url['absolute'] = FALSE;
+      $parsed_url['absolute'] = TRUE;
       $parsed_url['alias'] = TRUE;
       $parsed_url['language'] = $GLOBALS['language'];
       // First argument is always a line item object (see commerce_cart_field_attach_view_alter()).
-      $form_state['build_info']['args'][0]->data['context']['display_path'] = ltrim(url($parsed_url['path'], $parsed_url), '/');
+        /* PATCH COMMIT a9595b0c5b620fbba65e976e6bfdb8e0cd734d83 */
+      //$form_state['build_info']['args'][0]->data['context']['display_path'] = ltrim(url($parsed_url['path'], $parsed_url), '/');
+        $form_state['build_info']['args'][0]->data['context']['display_path'] = url($parsed_url['path'], $parsed_url);
     }
 
     // Our own submit callback to add better form redirect, going back

@@ -69,3 +69,39 @@ function dolce_product_views_pre_view(&$view, &$display_id, &$args)
             }
     }
 }
+
+function dolce_product_entity_view($entity, $type, $view_mode, $langcode) {
+    switch ($type) {
+        case 'commerce_product':
+            global $language;
+            $langcode = $language->language;
+            $entity->content['title_field']['0']['#markup'] = $entity->title_field[$langcode][0]['value'];
+    }
+}
+
+/**
+ * Implements hook_commerce_shipping_service_info_alter().
+ */
+function dolce_product_commerce_shipping_service_info_alter(&$shipping_services)
+{
+    if (isset($shipping_services['free_shipping'])) {
+        $title = $shipping_services['free_shipping']['display_title'];
+        $shipping_services['free_shipping']['display_title'] = t($title);
+    }
+}
+
+function dolce_product_commerce_order_view($order, $view_mode) {
+    // Add content variables for the PDF generation.
+    $payments = commerce_payment_transaction_load_multiple(array(), array('order_id' =>  $order->order_id));
+
+// If you just have one and that's all you want...
+    $payment = !empty($payments) ? array_shift($payments) : NULL;
+    $settings = variable_get('commerce_billy_pdf_text_settings', array());
+    $custom_date_format = !empty($settings['invoice_date_format']) ? $settings['invoice_date_format'] : 'Y-m-d';
+    if ($view_mode == "pdf" || $view_mode == 'canceled') {
+        $payments = commerce_payment_transaction_load_multiple(array(), array('order_id' =>  $order->order_id));
+
+// If you just have one and that's all you want...
+        $payment = !empty($payments) ? array_shift($payments) : NULL;
+    }
+}

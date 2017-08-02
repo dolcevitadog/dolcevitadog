@@ -864,7 +864,6 @@ function commerce_product_reference_field_formatter_view($entity_type, $entity, 
         if ($depth > 20) {
           throw new CommerceProductReferenceRecursiveRenderingException(t('Recursive rendering detected when rendering product (@product_id). Aborting rendering.', array('@product_id' => $item['product_id'])));
         }
-
         $entity = clone $item['entity'];
         unset($entity->content);
         $result[$delta] = entity_view('commerce_product', array($item['product_id'] => $entity), $display['settings']['view_mode'], $langcode, $display['settings']['page']);
