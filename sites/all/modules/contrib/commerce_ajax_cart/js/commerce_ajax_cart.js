@@ -55,7 +55,7 @@
        if ( jQuery('#commerce-ajax-cart-preview').length > 0 ) return ;
        
        /** Append div container **/
-       jQuery(this).append('<div class="loading" id="commerce-ajax-cart-preview"><span>Loading</</div>');
+       jQuery(this).append('<div class="loading" id="commerce-ajax-cart-preview"><span>Loading</span></div>');
 
        /** Set position for cart preview with jquery.ui.position **/
        //jQuery('#commerce-ajax-cart-preview').position(options) ;

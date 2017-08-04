@@ -264,6 +264,12 @@ body {
 }
 .form-item-commerce-payment-payment-details-credit-card-exp-month select,
 .form-item-commerce-payment-payment-details-credit-card-exp-year select {
-  width: 40px;
+  width: 50px;
+  display: inline-block;
+}
+div#payment-details {
+  margin-top: 20px;
+  box-shadow: 0px 0px 4px #aaa;
+  padding: 10px;
   display: inline-block;
 }

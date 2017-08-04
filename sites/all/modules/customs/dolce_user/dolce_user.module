@@ -43,4 +43,7 @@ function dolce_user_form_alter(&$form, &$form_state, $form_id) {
         $form['actions']['submit']['#suffix'] = '<div class="back-to-login clearfix">' . l(t('Back to login'), 'user/login', array('attributes' => array('class' => array('login-account'), 'title' => t('Sign in')))) . '</div>';
         $form['actions']['submit']['#suffix'] .= '</div>';
     }
+    if ($form_id == 'commerce_ajax_cart_form') {
+        $form['empty']['#default_value'] = t('There is no product in your cart');
+    }
 }
