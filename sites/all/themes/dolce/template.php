@@ -128,6 +128,7 @@ function dolce_bootstrap_iconize_text_alter(&$texts) {
     $texts['matches'][t('Back to login')] = 'menu-left';
     $texts['matches'][t('Create an account')] = 'pencil';
     $texts['matches'][t('Create new account')] = 'pencil';
+    $texts['matches'][t('E-mail new password')] = 'lock';
     $texts['matches'][t('Back to login')] = 'pencil';
     unset($texts['contains'][t('Update')]);
 
@@ -147,6 +148,8 @@ function dolce_bootstrap_colorize_text_alter(&$texts) {
     $texts['matches'][t('Checkout')] = 'primary';
     $texts['matches'][t('Continue to next step')] = 'primary';
     $texts['matches'][t('Create an account')] = 'info';
+    $texts['matches'][t('Create new account')] = 'primary';
+    $texts['matches'][t('E-mail new password')] = 'primary';
     $texts['matches'][t('Back to login')] = 'primary';
     // Remove matching for strings that contain "apply":
     unset($texts['contains'][t('Update')]);

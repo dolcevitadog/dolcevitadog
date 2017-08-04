@@ -39,7 +39,7 @@ function dolce_discount_block_view($delta = '') {
 
     switch ($delta) {
         case 'shipping_discount':
-            $amount = '8000';
+            $amount = '4900';
             $items = array(
                 commerce_kickstart_block_build_element(t('<span><em>Free</em> shipping</span> on orders over'), 'shipping_message'),
                 commerce_kickstart_block_build_element(t('@amount', array('@amount' => commerce_currency_format($amount, commerce_default_currency()))), 'shipping_currency'),
@@ -52,7 +52,7 @@ function dolce_discount_block_view($delta = '') {
             $timer = render($block['content']);
             $items = array(
                 commerce_kickstart_block_build_element(t('SAVE 10%'), NULL, 'promotional_banner_saving'),
-                t('Purchases made between Jully 25 - 25 August will be discounted'),
+                t('Purchases made between 1 August - 1 September will be discounted'),
                 //$timer,
                 commerce_kickstart_block_build_element(t('CODE : DOLCESTART'), NULL, 'promotional_banner_special_offer'),
 

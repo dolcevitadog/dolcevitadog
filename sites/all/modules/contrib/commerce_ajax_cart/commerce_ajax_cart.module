@@ -98,7 +98,7 @@ function commerce_ajax_cart_show_contents() {
     $view->set_arguments(array($cart_id)) ;
     $output = $view->execute_display() ;
     if ( !$view->result || count($view->result) == 0 ) {
-      $output = '<div class="empty-cart">' . variable_get('commerce_ajax_cart_text', 'There is no product in your cart' ) . '</div>' ;
+      $output = '<div class="empty-cart">' . t(variable_get('commerce_ajax_cart_text', 'There is no product in your cart' )) . '</div>' ;
     }
     cache_set($cid, $output, 'cache', CACHE_TEMPORARY) ;
     print $output;
