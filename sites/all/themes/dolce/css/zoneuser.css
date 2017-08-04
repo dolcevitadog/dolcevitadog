@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa|Covered+By+Your+Grace|Nothing+You+Could+Do');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+/*Fonts*/
+/*Zone User*/
+#block-menu-menu-user-menu {
+  float: left;
+  position: relative;
+  overflow: hidden;
+  width: 80%;
+}
+#block-menu-menu-user-menu .content {
+  float: right;
+}
+@media (max-width: 1024px) {
+  #block-menu-menu-user-menu {
+    width: 100%;
+  }
+}
+#block-menu-menu-user-menu ul.menu {
+  list-style: none;
+  margin-top: 2px;
+  position: relative;
+  left: 50%;
+  text-align: center;
+}
+#block-menu-menu-user-menu ul.menu li {
+  display: block;
+  float: left;
+  font-size: 0.9em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 3px;
+  position: relative;
+  right: 50%;
+}
+#block-menu-menu-user-menu ul.menu li a {
+  display: block;
+  color: white;
+  font-family: "Comfortaa";
+  font-weight: 400;
+  text-decoration: none;
+}
+#block-menu-menu-user-menu ul.menu li a.active {
+  color: #333;
+  text-decoration: underline;
+}
+#block-menu-menu-user-menu ul.menu li a.active:hover,
+#block-menu-menu-user-menu ul.menu li a:hover {
+  color: white;
+  text-decoration: underline;
+  background: none;
+}
+#block-locale-language {
+  width: 20%;
+  position: relative;
+  float: left;
+}
+#block-locale-language ul {
+  margin: 0;
+}
+#block-locale-language li {
+  font-family: "Comfortaa";
+  list-style: none;
+  display: inline-block;
+  line-height: 32px;
+  margin-right: 5px;
+}
+#block-locale-language li a {
+  color: white;
+  font-size: 0;
+}
+#block-locale-language li a:hover {
+  text-decoration: underline;
+}
+#block-locale-language li img.language-icon {
+  display: inline-block;
+  height: 14px;
+  width: 22px;
+}

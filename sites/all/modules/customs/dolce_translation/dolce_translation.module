@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * Implements hook_node_view().
+ */
+function dolce_translation_node_view($node, $view_mode, $langcode)
+{
+    if (isset($node->field_product) && !empty($node->field_product)) {
+        $breadcrumb = dolce_translation_custom_breadcrumb($node);
+        if($breadcrumb){
+            drupal_set_breadcrumb($breadcrumb);
+        }
+    }
+}
+
+function dolce_translation_custom_breadcrumb($node) {
+    $collection = field_get_items('node', $node, 'field_product_collection');
+    $collection_term = taxonomy_term_load($collection[0]['tid']);
+    $category = field_get_items('node', $node, 'field_product_category');
+    $category_term = taxonomy_term_load($category[0]['tid']);
+    $breadcrumbs = array(
+        l(t('Home'), '<front>'),
+      l(t($collection_term->name),'collection/'.$collection[0]['tid'], array('fragment' => str_replace(' ', '-', $category_term->name))),
+        $node->title,
+    );
+    return $breadcrumbs;
+}
