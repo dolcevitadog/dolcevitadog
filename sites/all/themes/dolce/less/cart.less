@@ -357,3 +357,49 @@ ol.inline.commerce-checkout-progress {
     }
   }
 }
+
+.commerce_stock_notifications_fieldset {
+  margin-top: 15px;
+}
+/* Disable add to cart confirmation on mobile ! */
+@media only screen and (max-width: 480px) {
+  div div.messages.commerce-add-to-cart-confirmation {
+    z-index: 0;
+    display: none;
+  }
+
+  .commerce_add_to_cart_confirmation_overlay {
+    z-index: 0;
+    display: none;
+  }
+}
+
+/* Adaptation of responsive table for Drupal Commerce and DolceVita */
+
+@media
+only screen and (max-width: 768px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+    .commerce-order-handler-area-order-total {
+      .commerce-price-formatted-components {
+        width: 100% !important;
+        .component-total {
+          font-weight: bolder;
+        }
+      }
+    }
+  .views-table {
+    td {
+      /* Behave  like a "row" */
+      border: none !important;
+      //text-align: center;
+      .form-control {
+        max-width: 50px;
+        display: inline-block;
+      }
+      .entity-commerce-product .field-name-field-images {
+        //float: none !important;
+      }
+    }
+  }
+}
