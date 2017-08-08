@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="d2c7d2ad-76bc-44a0-8c56-82bda1789e86" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/themes/dolce/less/general.less" afterPath="$PROJECT_DIR$/sites/all/themes/dolce/less/general.less" />
-    </list>
+    <list default="true" id="d2c7d2ad-76bc-44a0-8c56-82bda1789e86" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -1064,12 +1062,12 @@
       <workItem from="1498919799960" duration="24422000" />
       <workItem from="1501404447243" duration="32136000" />
       <workItem from="1501775488593" duration="7944000" />
-      <workItem from="1502180299672" duration="8471000" />
+      <workItem from="1502180299672" duration="8495000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="116616000" />
+    <option name="totallyTimeSpent" value="116640000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="19" y="22" width="1418" height="790" extended-state="0" />
