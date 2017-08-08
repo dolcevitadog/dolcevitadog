@@ -1,0 +1,66 @@
+@media only screen and (max-width: 768px), (min-device-width: 768px) and (max-device-width: 1024px) {
+  /* Force table to not be like tables anymore */
+  table.ngtable-processed {
+    display: block;
+  }
+  table.ngtable-processed thead,
+  table.ngtable-processed tbody,
+  table.ngtable-processed th,
+  table.ngtable-processed td,
+  table.ngtable-processed tr {
+    display: block;
+  }
+  .views-table {
+    /* Hide table headers (but not display: none;, for accessibility) */
+  }
+  .views-table thead tr {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+  .views-table tr {
+    border: 1px solid #ccc;
+  }
+  .views-table td {
+    /* Behave  like a "row" */
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+  .views-table td::before {
+    width: 50%;
+    padding-right: 15px;
+    text-align: left;
+    content: attr(data-content);
+    display: block;
+  }
+  .views-table td .td-text {
+    float: left;
+    width: 50%;
+  }
+  .views-table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding: 12px 5%;
+    width: 100%;
+  }
+  .views-table td::before,
+  .views-table td .td-text {
+    float: left;
+    width: 50%;
+  }
+  .views-table td::before {
+    width: 50%;
+    padding-right: 15px;
+    text-align: left;
+    content: attr(data-content);
+    display: block;
+  }
+  .views-table td::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}

@@ -2,24 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2c7d2ad-76bc-44a0-8c56-82bda1789e86" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/sites/default/files/languages/fr_ED1JMK7dXO-fTdA1UqSFzz2iXotxkzbjUouu0vn2ptw.js" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/commerce_ajax_cart.module" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/commerce_ajax_cart.module" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/js/commerce_ajax_cart.js" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/js/commerce_ajax_cart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/commerce_coupon.api.php" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/commerce_coupon.api.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/commerce_coupon.info" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/commerce_coupon.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/commerce_coupon.module" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/commerce_coupon.module" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/commerce_coupon.test" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/commerce_coupon.test" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/modules/date/commerce_coupon_date.info" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/modules/date/commerce_coupon_date.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/modules/usage/commerce_coupon_usage.info" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/modules/usage/commerce_coupon_usage.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/modules/user/commerce_coupon_user.info" afterPath="$PROJECT_DIR$/sites/all/modules/contrib/commerce_coupon/modules/user/commerce_coupon_user.info" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/customs/dolce_discount/dolce_discount.module" afterPath="$PROJECT_DIR$/sites/all/modules/customs/dolce_discount/dolce_discount.module" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/customs/dolce_user/dolce_user.module" afterPath="$PROJECT_DIR$/sites/all/modules/customs/dolce_user/dolce_user.module" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/themes/dolce/css/general.css" afterPath="$PROJECT_DIR$/sites/all/themes/dolce/css/general.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/themes/dolce/css/user.css" afterPath="$PROJECT_DIR$/sites/all/themes/dolce/css/user.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/themes/dolce/less/general.less" afterPath="$PROJECT_DIR$/sites/all/themes/dolce/less/general.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/themes/dolce/less/user.less" afterPath="$PROJECT_DIR$/sites/all/themes/dolce/less/user.less" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/customs/dolce_cart/dolce_cart.js" afterPath="$PROJECT_DIR$/sites/all/modules/customs/dolce_cart/dolce_cart.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/modules/customs/dolce_cart/dolce_cart.module" afterPath="$PROJECT_DIR$/sites/all/modules/customs/dolce_cart/dolce_cart.module" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/themes/dolce/css/cart.css" afterPath="$PROJECT_DIR$/sites/all/themes/dolce/css/cart.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/themes/dolce/less/cart.less" afterPath="$PROJECT_DIR$/sites/all/themes/dolce/less/cart.less" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/themes/dolce/template.php" afterPath="$PROJECT_DIR$/sites/all/themes/dolce/template.php" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sites/all/themes/dolce/templates/system/page.vars.php" afterPath="$PROJECT_DIR$/sites/all/themes/dolce/templates/system/page.vars.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -34,41 +23,43 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="commerce_ajax_cart.module" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/commerce_ajax_cart.module">
+      <file leaf-file-name="cart.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/less/cart.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="100" column="124" lean-forward="false" selection-start-line="100" selection-start-column="124" selection-end-line="100" selection-end-column="124" />
+            <state relative-caret-position="295">
+              <caret line="360" column="1" lean-forward="false" selection-start-line="360" selection-start-column="1" selection-end-line="360" selection-end-column="1" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="commerce_ajax_cart.admin.inc" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/commerce_ajax_cart.admin.inc">
+      <file leaf-file-name="responsive_table.less" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/less/responsive_table.less">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="781">
-              <caret line="60" column="14" lean-forward="false" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
+            <state relative-caret-position="120">
+              <caret line="8" column="20" lean-forward="false" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="user.less" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/less/user.less">
+      <file leaf-file-name="template.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/template.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-              <folding />
+            <state relative-caret-position="765">
+              <caret line="161" column="0" lean-forward="false" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
+              <folding>
+                <element signature="n#dolce_form_element#0;n#!!top" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dolce_discount.module" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_discount/dolce_discount.module">
+      <file leaf-file-name="page.vars.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/templates/system/page.vars.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-33">
-              <caret line="54" column="50" lean-forward="false" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
+            <state relative-caret-position="90">
+              <caret line="25" column="78" lean-forward="false" selection-start-line="25" selection-start-column="78" selection-end-line="25" selection-end-column="78" />
               <folding />
             </state>
           </provider>
@@ -77,19 +68,43 @@
       <file leaf-file-name="dolce_product.module" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_product/dolce_product.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
+            <state relative-caret-position="-10">
               <caret line="28" column="36" lean-forward="false" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dolce_product.info" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_product/dolce_product.info">
+      <file leaf-file-name="dolce_user.module" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_user/dolce_user.module">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="3" selection-end-column="15" />
+            <state relative-caret-position="425">
+              <caret line="46" column="81" lean-forward="false" selection-start-line="46" selection-start-column="81" selection-end-line="46" selection-end-column="81" />
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="responsive_cart.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/js/responsive_cart.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="8" column="48" lean-forward="false" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="dolce_cart.module" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_cart/dolce_cart.module">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="216">
+              <caret line="20" column="76" lean-forward="false" selection-start-line="20" selection-start-column="76" selection-end-line="20" selection-end-column="76" />
+              <folding>
+                <marker date="1502202124000" expanded="true" signature="812:864" ph="..." />
+                <marker date="1502202124000" expanded="true" signature="812:891" ph="..." />
+                <marker date="1502202124000" expanded="true" signature="812:941" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -148,12 +163,7 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/profiles/commerce_kickstart/themes/contrib/omega_kickstart/scss/global.scss" />
-        <option value="$PROJECT_DIR$/profiles/commerce_kickstart/modules/contrib/commerce_fancy_attributes/commerce_fancy_attributes.js" />
-        <option value="$PROJECT_DIR$/sites/all/modules/customs/dolce_cart/dolce_cart.js" />
-        <option value="$PROJECT_DIR$/sites/all/themes/dolce/css/container.css" />
         <option value="$PROJECT_DIR$/sites/all/themes/dolce/templates/product/node--product--type.tpl.php" />
-        <option value="$PROJECT_DIR$/sites/all/themes/dolce/templates/system/page.vars.php" />
         <option value="$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/css/commerce_ajax_cart.css" />
         <option value="$PROJECT_DIR$/sites/all/themes/bootstrap/bootstrap.api.php" />
         <option value="$PROJECT_DIR$/sites/all/modules/contrib/commerce_shipping_quote_weight/commerce_shipping_quote_zones/commerce_shipping_quote_zones.install" />
@@ -161,7 +171,6 @@
         <option value="$PROJECT_DIR$/sites/all/themes/dolce/dolce.info" />
         <option value="$PROJECT_DIR$/profiles/commerce_kickstart/modules/commerce_kickstart/commerce_kickstart_slideshow/commerce_kickstart_slideshow.js" />
         <option value="$PROJECT_DIR$/sites/all/modules/customs/dolce_user/dolce_user.info" />
-        <option value="$PROJECT_DIR$/sites/all/themes/dolce/less/cart.less" />
         <option value="$PROJECT_DIR$/sites/all/themes/dolce/templates/view/views-view--suggested-product.tpl.php" />
         <option value="$PROJECT_DIR$/sites/all/themes/dolce/templates/view/views-view.tpl.php" />
         <option value="$PROJECT_DIR$/sites/all/themes/dolce/templates/view/views-view-field--suggested-product--block--title-field.tpl.php" />
@@ -189,16 +198,22 @@
         <option value="$PROJECT_DIR$/sites/all/modules/customs/dolce_product/dolce_product.module" />
         <option value="$PROJECT_DIR$/sites/all/themes/dolce/templates/commerce_order--commerce_order--pdf.tpl.php" />
         <option value="$PROJECT_DIR$/sites/all/themes/dolce/less/general.less" />
-        <option value="$PROJECT_DIR$/sites/all/themes/dolce/template.php" />
         <option value="$PROJECT_DIR$/sites/all/modules/customs/dolce_user/dolce_user.module" />
         <option value="$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/js/commerce_ajax_cart.js" />
         <option value="$PROJECT_DIR$/sites/all/modules/customs/dolce_translation/dolce_translation.info" />
         <option value="$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/commerce_ajax_cart.admin.inc" />
         <option value="$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/commerce_ajax_cart.module" />
         <option value="$PROJECT_DIR$/sites/all/modules/customs/dolce_translation/dolce_translation.module" />
-        <option value="$PROJECT_DIR$/sites/all/modules/customs/dolce_cart/dolce_cart.module" />
         <option value="$PROJECT_DIR$/sites/all/modules/customs/dolce_discount/dolce_discount.module" />
         <option value="$PROJECT_DIR$/sites/all/themes/dolce/less/user.less" />
+        <option value="$PROJECT_DIR$/sites/all/modules/customs/dolce_cart/dolce_cart.js" />
+        <option value="$PROJECT_DIR$/sites/all/themes/dolce/template.php" />
+        <option value="$PROJECT_DIR$/sites/all/themes/dolce/js/css/ng_responsive_tables.css" />
+        <option value="$PROJECT_DIR$/sites/all/themes/dolce/templates/system/page.vars.php" />
+        <option value="$PROJECT_DIR$/sites/all/themes/dolce/less/responsive_table.less" />
+        <option value="$PROJECT_DIR$/sites/all/themes/dolce/js/responsive_cart.js" />
+        <option value="$PROJECT_DIR$/sites/all/themes/dolce/less/cart.less" />
+        <option value="$PROJECT_DIR$/sites/all/modules/customs/dolce_cart/dolce_cart.module" />
       </list>
     </option>
   </component>
@@ -210,7 +225,7 @@
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
-    <option name="x" value="4" />
+    <option name="x" value="19" />
     <option name="y" value="22" />
     <option name="width" value="1418" />
     <option name="height" value="790" />
@@ -230,8 +245,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -564,6 +579,142 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dolcevitadog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dolcevitadog" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sites" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="all" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="themes" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dolce" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngtables" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dolcevitadog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dolcevitadog" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sites" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="all" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="themes" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dolce" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ngtables" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ng_responsive_tables.scss" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NestingTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dolcevitadog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dolcevitadog" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sites" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="all" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="themes" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dolce" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="css" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dolcevitadog" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dolcevitadog" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sites" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="all" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="themes" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dolce" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="images" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -855,12 +1006,13 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/sites/all/themes/dolce/images" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/sites/all/themes/dolce/images" />
       <recent name="$PROJECT_DIR$/sites/all/modules/customs" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/sites/all/themes/dolce/js/ngtables" />
+      <recent name="$PROJECT_DIR$/sites/all/themes/dolce/images" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -959,22 +1111,23 @@
       <workItem from="1497511802896" duration="1421000" />
       <workItem from="1498919799960" duration="24422000" />
       <workItem from="1501404447243" duration="32136000" />
-      <workItem from="1501775488593" duration="7185000" />
+      <workItem from="1501775488593" duration="7944000" />
+      <workItem from="1502180299672" duration="7663000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="107386000" />
+    <option name="totallyTimeSpent" value="115808000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="22" width="1418" height="790" extended-state="0" />
+    <frame x="19" y="22" width="1418" height="790" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24682651" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32871014" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1000,76 +1153,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/profiles/commerce_kickstart/modules/contrib/commerce/modules/product/includes/views/commerce_product.views.inc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-7053">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/profiles/commerce_kickstart/modules/contrib/commerce/modules/product_reference/commerce_product_reference.api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="30" column="37" lean-forward="true" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/profiles/commerce_kickstart/modules/contrib/commerce/modules/product_reference/commerce_product_reference.info">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/profiles/commerce_kickstart/modules/contrib/title/title.api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/profiles/commerce_kickstart/modules/contrib/title/title.field.inc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1773">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sites/all/modules/contrib/commerce_stock/commerce_stock.api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/profiles/commerce_kickstart/modules/contrib/title/title.core.inc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1349">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/profiles/commerce_kickstart/modules/contrib/title/title.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3150">
-          <caret line="226" column="19" lean-forward="false" selection-start-line="226" selection-start-column="2" selection-end-line="226" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/profiles/commerce_kickstart/modules/contrib/commerce/modules/product_reference/commerce_product_reference.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="181">
-          <caret line="857" column="55" lean-forward="true" selection-start-line="857" selection-start-column="55" selection-end-line="857" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/profiles/commerce_kickstart/modules/contrib/commerce/modules/product/includes/views/handlers/commerce_product_handler_field_product.inc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="14" column="52" lean-forward="false" selection-start-line="14" selection-start-column="52" selection-end-line="14" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sites/all/modules/contrib/commerce_stock/commerce_stock.module">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="395">
@@ -1178,7 +1261,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="30" lean-forward="false" selection-start-line="6" selection-start-column="30" selection-end-line="6" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1200,9 +1282,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="285">
           <caret line="22" column="32" lean-forward="true" selection-start-line="22" selection-start-column="32" selection-end-line="22" selection-end-column="32" />
-          <folding>
-            <marker date="1488292574000" expanded="true" signature="601:626" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1210,7 +1289,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="326">
           <caret line="91" column="67" lean-forward="false" selection-start-line="91" selection-start-column="67" selection-end-line="91" selection-end-column="67" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1236,7 +1314,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="360">
           <caret line="27" column="69" lean-forward="false" selection-start-line="27" selection-start-column="57" selection-end-line="27" selection-end-column="69" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1244,7 +1321,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1252,7 +1328,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="604">
           <caret line="231" column="1" lean-forward="false" selection-start-line="196" selection-start-column="0" selection-end-line="231" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1268,7 +1343,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="180" column="36" lean-forward="false" selection-start-line="180" selection-start-column="17" selection-end-line="180" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1276,7 +1350,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
           <caret line="57" column="79" lean-forward="false" selection-start-line="57" selection-start-column="72" selection-end-line="57" selection-end-column="79" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1296,10 +1369,25 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/template.php">
+    <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_translation/dolce_translation.info">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="130" column="55" lean-forward="false" selection-start-line="130" selection-start-column="55" selection-end-line="130" selection-end-column="55" />
+        <state relative-caret-position="0">
+          <caret line="0" column="24" lean-forward="false" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/commerce_ajax_cart.module">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1500">
+          <caret line="100" column="124" lean-forward="false" selection-start-line="100" selection-start-column="124" selection-end-line="100" selection-end-column="124" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/commerce_ajax_cart.admin.inc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="60" column="14" lean-forward="false" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
           <folding />
         </state>
       </provider>
@@ -1312,18 +1400,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_translation/dolce_translation.info">
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/less/user.less">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="24" lean-forward="false" selection-start-line="0" selection-start-column="24" selection-end-line="0" selection-end-column="24" />
+        <state relative-caret-position="375">
+          <caret line="25" column="1" lean-forward="false" selection-start-line="25" selection-start-column="1" selection-end-line="25" selection-end-column="1" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/commerce_ajax_cart.module">
+    <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_cart/dolce_cart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="100" column="124" lean-forward="false" selection-start-line="100" selection-start-column="124" selection-end-line="100" selection-end-column="124" />
+        <state relative-caret-position="285">
+          <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/js/ngtables/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_discount/dolce_discount.module">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="682">
+          <caret line="54" column="50" lean-forward="false" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/js/css/ng_responsive_tables.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-90">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="12" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/js/ngtables/ng_responsive_tables.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1336,9 +1456,77 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/template.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="765">
+          <caret line="161" column="0" lean-forward="false" selection-start-line="161" selection-start-column="0" selection-end-line="161" selection-end-column="0" />
+          <folding>
+            <element signature="n#dolce_form_element#0;n#!!top" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/templates/system/page.vars.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="25" column="78" lean-forward="false" selection-start-line="25" selection-start-column="78" selection-end-line="25" selection-end-column="78" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/js/ngtables/ng_responsive_tables.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="19" column="20" lean-forward="false" selection-start-line="19" selection-start-column="20" selection-end-line="19" selection-end-column="20" />
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/js/ngtables/ng_responsive_tables.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="71" lean-forward="true" selection-start-line="10" selection-start-column="21" selection-end-line="14" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/js/responsive_cart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="48" lean-forward="false" selection-start-line="8" selection-start-column="48" selection-end-line="8" selection-end-column="48" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/less/responsive_table.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="20" lean-forward="false" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/less/cart.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="295">
+          <caret line="360" column="1" lean-forward="false" selection-start-line="360" selection-start-column="1" selection-end-line="360" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_product/dolce_product.module">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-10">
+          <caret line="28" column="36" lean-forward="false" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_user/dolce_user.module">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="537">
+        <state relative-caret-position="425">
           <caret line="46" column="81" lean-forward="false" selection-start-line="46" selection-start-column="81" selection-end-line="46" selection-end-column="81" />
           <folding />
         </state>
@@ -1346,45 +1534,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_cart/dolce_cart.module">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="13" column="1" lean-forward="true" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
+        <state relative-caret-position="216">
+          <caret line="20" column="76" lean-forward="false" selection-start-line="20" selection-start-column="76" selection-end-line="20" selection-end-column="76" />
           <folding>
-            <marker date="1501842052000" expanded="true" signature="965:1017" ph="..." />
-            <marker date="1501842052000" expanded="true" signature="965:1020" ph="..." />
-            <marker date="1501842052000" expanded="true" signature="965:1070" ph="..." />
+            <marker date="1502202124000" expanded="true" signature="812:864" ph="..." />
+            <marker date="1502202124000" expanded="true" signature="812:891" ph="..." />
+            <marker date="1502202124000" expanded="true" signature="812:941" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sites/all/modules/contrib/commerce_ajax_cart/commerce_ajax_cart.admin.inc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="781">
-          <caret line="60" column="14" lean-forward="false" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_product/dolce_product.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="28" column="36" lean-forward="false" selection-start-line="28" selection-start-column="36" selection-end-line="28" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sites/all/modules/customs/dolce_discount/dolce_discount.module">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-33">
-          <caret line="54" column="50" lean-forward="false" selection-start-line="54" selection-start-column="50" selection-end-line="54" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sites/all/themes/dolce/less/user.less">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="21" column="17" lean-forward="false" selection-start-line="21" selection-start-column="17" selection-end-line="21" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>

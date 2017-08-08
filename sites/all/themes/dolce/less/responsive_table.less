@@ -1,0 +1,68 @@
+@media
+only screen and (max-width: 768px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+
+  /* Force table to not be like tables anymore */
+  table.ngtable-processed {
+    display: block;
+    thead, tbody, th, td, tr {
+      display: block;
+    }
+  }
+
+  .views-table {
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr {
+      position: absolute;
+      top: -9999px;
+      left: -9999px;
+    }
+
+    tr {
+      border: 1px solid #ccc;
+    }
+
+    td {
+      /* Behave  like a "row" */
+      border: none;
+      border-bottom: 1px solid #eee;
+      position: relative;
+      padding-left: 50%;
+    }
+    td::before {
+      width: 50%;
+      padding-right: 15px;
+      text-align: left;
+      content: attr(data-content);
+      display: block;
+    }
+    td .td-text {
+      float: left;
+      width: 50%;
+    }
+    td {
+      border: none;
+      border-bottom: 1px solid #eee;
+      position: relative;
+      padding: 12px 5%;
+      width: 100%;
+    }
+    td::before,
+    td .td-text {
+      float: left;
+      width: 50%;
+    }
+    td::before {
+      width: 50%;
+      padding-right: 15px;
+      text-align: left;
+      content: attr(data-content);
+      display: block;
+    }
+    td::after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+  }
+}
