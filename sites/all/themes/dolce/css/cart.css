@@ -177,7 +177,8 @@ div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .con
 div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hl-size,
 div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hh-size,
 div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-commerce-price,
-div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .views-field-quantity {
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .views-field-quantity,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-title-field {
   color: #878380;
   font-size: 12px;
   margin-right: 20px;
