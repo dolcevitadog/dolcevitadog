@@ -264,7 +264,7 @@ body {
 }
 .form-item-commerce-payment-payment-details-credit-card-exp-month select,
 .form-item-commerce-payment-payment-details-credit-card-exp-year select {
-  width: 50px;
+  width: 70px;
   display: inline-block;
 }
 div#payment-details {
