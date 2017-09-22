@@ -1,0 +1,42 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function api_laposte_menu()
+{
+    $items['admin/config/api-laposte'] = array(
+        'title' => t('API Laposte confguration'),
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('api_lapost_config_form'),
+        'access arguments' => array('access content'),
+    );
+
+    return $items;
+}
+
+function api_lapost_config_form($form, $form_state) {
+    $form['api_laposte_x_okapi_key'] = array(
+        '#title' => 'X-Okapi-Key',
+        '#type' => 'textfield',
+        '#size' => 75,
+        '#default_value' => variable_get('api_laposte_x_okapi_key'),
+    );
+
+    return system_settings_form($form);
+}
+
+function api_laposte_get_info($number, $type) {
+    $info = api_laposte_message(api_laposte_call($number));
+    return $info;
+}
+
+function api_laposte_call($number) {
+    $data = exec('curl https://api.laposte.fr/suivi/v1/'.$number.' -H "X-Okapi-Key: '.variable_get('api_laposte_x_okapi_key').'"');
+    $data = json_decode($data);
+    return $data;
+}
+
+function api_laposte_message($data) {
+    return $data->message;
+}
