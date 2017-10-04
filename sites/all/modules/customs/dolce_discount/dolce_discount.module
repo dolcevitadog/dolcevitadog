@@ -51,10 +51,10 @@ function dolce_discount_block_view($delta = '') {
             $block = module_invoke('jquery_countdown_timer', 'block_view', 'jquery_countdown_timer');
             $timer = render($block['content']);
             $items = array(
-                commerce_kickstart_block_build_element(t('SAVE 10%'), NULL, 'promotional_banner_saving'),
-                t('Purchases made between 1 August - 1 September will be discounted'),
+                commerce_kickstart_block_build_element(t('Exceptionnel !'), NULL, 'promotional_banner_saving'),
+                t('Pour la journée des Animaux, bénéficiez de -15% sur votre commande'),
                 //$timer,
-                commerce_kickstart_block_build_element(t('CODE : DOLCESTART'), NULL, 'promotional_banner_special_offer'),
+                commerce_kickstart_block_build_element(t('CODE : ANIMAUX'), NULL, 'promotional_banner_special_offer'),
 
             );
             $block['content'] = commerce_kickstart_block_build_element(implode(' ', $items), 'promotional_banner', NULL, 'div');
