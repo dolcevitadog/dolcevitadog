@@ -52,9 +52,9 @@ function dolce_discount_block_view($delta = '') {
             $timer = render($block['content']);
             $items = array(
                 commerce_kickstart_block_build_element(t('Exceptionnel !'), NULL, 'promotional_banner_saving'),
-                t('Pour la journée des Animaux, bénéficiez de -15% sur votre commande'),
+                t("-10% sur tous les produits aux couleurs de l'automne, "),
                 //$timer,
-                commerce_kickstart_block_build_element(t('CODE : ANIMAUX'), NULL, 'promotional_banner_special_offer'),
+                commerce_kickstart_block_build_element(t('CODE : AUTOMNE'), NULL, 'promotional_banner_special_offer'),
 
             );
             $block['content'] = commerce_kickstart_block_build_element(implode(' ', $items), 'promotional_banner', NULL, 'div');
