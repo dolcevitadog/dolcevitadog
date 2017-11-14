@@ -1,0 +1,5 @@
+name = Dolce Fees
+description = Module to manage Extra Fees for orders
+core = 7.x
+version = 7.x-1.0
+package = Dolce
