@@ -1,0 +1,61 @@
+<?php
+
+function dolce_ticket_commerce_event_ticket_pdf_alter(TCPDF $pdf, CommerceEventTicketEntity $ticket, array &$context) {
+    // Do something with the PDF here.
+    $node = node_load($ticket->nid);
+    $img = $node->field_event_ticket_image['und'][0]['uri'];
+    $path = drupal_realpath($img, '/');
+    $image_width = 180;
+    $image_size = getimagesize($path);
+    $logo_height = $image_size[1] / ($image_size[0] / $image_width);
+    $pdf->Image($path, 10, 180, $image_width, $logo_height, NULL);
+
+}
+
+function dolce_ticket_preprocess_commerce_event_ticket_pdf_info(&$variables) {
+    $ticket = $variables['ticket'];
+
+    $order = commerce_order_load($ticket->order_id);
+    $product = commerce_product_load($ticket->product_id);
+
+    $owner = user_load($order->uid);
+    $node = node_load($ticket->nid);
+    $line_item_id = $ticket->line_item_id;
+    $registrations = $order->data['register_entities'];
+    $regs = end($registrations);
+    $reg = $regs[--$ticket->number];
+
+    $firstname = $reg->field_event_firstname['und']['0']['value'];
+    $lastname = $reg->field_event_lastname['und']['0']['value'];
+    $event_date = $node->field_event_date['und']['0']['date'];
+    $address_items = field_get_items('node', $node, 'field_event_point');
+    $address = $address_items[0]['thoroughfare'].'<br />'.$address_items[0]['premise'].'<br />'.$address_items[0]
+        ['postal_code'].' '.$address_items[0]['locality'];
+    if ($node) {
+        $variables['nid'] = $node->nid;
+        $variables['node_title'] = check_plain($node->title);
+        $variables['node_path'] = 'node/' . $node->nid;
+        $node_products_count = commerce_event_ticket_count_node_products($node);
+        global $base_url;
+        if ($base_url && ($domain = parse_url($base_url, PHP_URL_HOST))) {
+            $variables['node_shortlink'] = $domain . base_path() . $variables['node_path'];
+        }
+    }
+    $variables['display_product_title'] = !$node || ($node_products_count > 1 && $product->title != $node->title);
+    $variables['product_title'] = check_plain($product->title);
+    unset($variables['node_shortlink']);
+    $variables['data'] = array(
+        t('Firstname') => $firstname,
+        t('Lastname') => $lastname,
+        t('Order number') => $order->order_number,
+        t('Order date') => format_date($order->created),
+        t('Event date') => $event_date,
+        t('Address') => $address,
+
+    );
+
+    $unit_price = commerce_event_ticket_get_unit_price($ticket);
+    if ($unit_price) {
+        $variables['data'][t('Unit price')] = $unit_price;
+    }
+}
