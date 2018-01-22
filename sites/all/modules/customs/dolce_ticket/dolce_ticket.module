@@ -27,7 +27,7 @@ function dolce_ticket_preprocess_commerce_event_ticket_pdf_info(&$variables) {
 
     $firstname = $reg->field_event_firstname['und']['0']['value'];
     $lastname = $reg->field_event_lastname['und']['0']['value'];
-    $event_date = $node->field_event_date['und']['0']['date'];
+    $event_date = field_view_field('node', $node, 'field_event_date');//$node->field_event_date['und']['0']['value'];
     $address_items = field_get_items('node', $node, 'field_event_point');
     $address = $address_items[0]['thoroughfare'].'<br />'.$address_items[0]['premise'].'<br />'.$address_items[0]
         ['postal_code'].' '.$address_items[0]['locality'];
@@ -46,10 +46,10 @@ function dolce_ticket_preprocess_commerce_event_ticket_pdf_info(&$variables) {
     unset($variables['node_shortlink']);
     $variables['data'] = array(
         t('Firstname') => $firstname,
-        t('Lastname') => $lastname,
+        t('Nom') => $lastname,
         t('Order number') => $order->order_number,
         t('Order date') => format_date($order->created),
-        t('Event date') => $event_date,
+        t('Event date') => $event_date[0]['#markup'],
         t('Address') => $address,
 
     );
