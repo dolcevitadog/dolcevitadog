@@ -8,7 +8,7 @@ function dolce_ticket_commerce_event_ticket_pdf_alter(TCPDF $pdf, CommerceEventT
     $image_width = 180;
     $image_size = getimagesize($path);
     $logo_height = $image_size[1] / ($image_size[0] / $image_width);
-    $pdf->Image($path, 10, 180, $image_width, $logo_height, NULL);
+    $pdf->Image($path, 10, 190, $image_width, $logo_height, NULL);
 
 }
 
