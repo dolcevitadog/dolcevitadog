@@ -57,6 +57,11 @@ body {
   /* LTR */
   text-transform: capitalize;
 }
+@media (max-width: 450px) {
+  #promotional_banner .promotional_banner_special_offer {
+    position: relative;
+  }
+}
 #block-views-demo-content-slideshow-block-1 {
   /* HP blocks: Slideshow */
 }
@@ -275,4 +280,8 @@ div#payment-details {
 }
 #jquery-countdown-timer-note {
   color: white;
+  width: auto;
+}
+#jquery-countdown-timer {
+  width: auto;
 }
