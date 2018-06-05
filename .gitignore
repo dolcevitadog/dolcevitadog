@@ -1,2 +1,6 @@
+# Ignore configuration files that may contain sensitive information.
+sites/*/settings*.php
 
-sites/default/files/messenger-1v1.jpg
+# Ignore paths that contain user-generated content.
+sites/*/files
+sites/*/private
