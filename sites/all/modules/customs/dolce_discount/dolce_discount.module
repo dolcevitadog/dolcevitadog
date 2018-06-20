@@ -48,13 +48,12 @@ function dolce_discount_block_view($delta = '') {
             break;
 
         case 'promotional_banner':
-            $block = module_invoke('jquery_countdown_timer', 'block_view', 'jquery_countdown_timer');
-            $timer = render($block['content']);
+            //$block = module_invoke('jquery_countdown_timer', 'block_view', 'jquery_countdown_timer');
+            //$timer = render($block['content']);
             $items = array(
                 commerce_kickstart_block_build_element(t('La semaine du Rose ! '), NULL, 'promotional_banner_saving'),
                 t("-10% sur vos harnais Pink jusqu'au 30 Juin 2018"),
-                '<div>'.l('En savoir plus', '/node/52', array('attributes' => array('class' => array('btn btn-info')))).'</div>',
-                $timer,
+                //$timer,
                 commerce_kickstart_block_build_element(t('Code Promo : PINK'), NULL, 'promotional_banner_special_offer'),
 
             );
