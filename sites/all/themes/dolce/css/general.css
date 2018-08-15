@@ -285,6 +285,12 @@ div#payment-details {
 #jquery-countdown-timer {
   width: auto;
 }
+.page-partenaires div.parent {
+  display: flex;
+}
+.page-partenaires div.parent .enfant {
+  margin: auto;
+}
 @media (min-width: 450px) {
   .page-partenaires div.parent {
     display: inherit;
