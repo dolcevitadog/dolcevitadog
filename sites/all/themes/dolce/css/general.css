@@ -285,3 +285,8 @@ div#payment-details {
 #jquery-countdown-timer {
   width: auto;
 }
+@media (min-width: 450px) {
+  .page-partenaires div.parent {
+    display: inherit;
+  }
+}
