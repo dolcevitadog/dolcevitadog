@@ -291,7 +291,7 @@ div#payment-details {
 .page-partenaires div.parent .enfant {
   margin: auto;
 }
-@media (min-width: 450px) {
+@media (max-width: 450px) {
   .page-partenaires div.parent {
     display: inherit;
   }
