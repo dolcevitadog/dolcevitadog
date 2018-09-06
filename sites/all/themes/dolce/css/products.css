@@ -256,7 +256,7 @@
   text-transform: uppercase;
 }
 #block-dolce-discount-shipping-discount #shipping #shipping_message span em {
-  font-size: 27px;
+  font-size: 14px;
   font-style: normal;
 }
 #block-dolce-discount-shipping-discount #shipping #shipping_currency {
@@ -265,12 +265,12 @@
   margin-top: 2px;
 }
 #block-dolce-discount-shipping-discount #shipping #shipping_message {
-  font-family: "Nothing you could do";
+  font-family: "Raleway";
   font-weight: 400;
 }
 #block-dolce-discount-shipping-discount #shipping #shipping_message span,
 #block-dolce-discount-shipping-discount #shipping #shipping_message span em,
 #block-dolce-discount-shipping-discount #shipping #shipping_currency {
-  font-family: "Nothing you could do";
+  font-family: "Raleway";
   font-weight: 700;
 }
