@@ -1,0 +1,50 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function dolce_game_schema()
+{
+    $schema['dolce_game'] = array(
+        'description' => 'The base table for nodes.',
+        'fields' => array(
+            'id' => array(
+                'description' => 'The primary identifier for the coupon code.',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE
+            ),
+            'mail' => array(
+                'description' => 'The mail of the gamer',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE
+            ),
+            'ip' => array(
+                'description' => 'The IP machine for the gamer',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE
+            ),
+            'prov' => array(
+                'description' => 'Ingame or Externgame',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE
+            ),
+            'timestamp' => array(
+                'description' => 'The timestamp for the entry data',
+                'type' => 'int',
+                'unsigned' => TRUE,
+                'not null' => TRUE
+            ),
+
+        ),
+
+    );
+    return $schema;
+
+}
+
+
+

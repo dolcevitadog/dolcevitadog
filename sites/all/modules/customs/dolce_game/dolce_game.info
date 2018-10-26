@@ -1,0 +1,4 @@
+name = Dolce Game
+description = Module permettant de réaliser des jeux concours à gratter
+core = 7.x
+version = 7.x-1.0
