@@ -14,7 +14,7 @@
 
                 var options = {
                     method : 'share',
-                    href   : 'https://www.dolcevitadog.com/fr/jeu-concours-halloween3'
+                    href   : 'https://www.dolcevitadog.com/jeu-concours-halloween'
                 },
             status = '';
 
