@@ -1,0 +1,176 @@
+<?php
+
+function dolce_game_menu() {
+    $items['jeu-concours-halloween'] = array(
+        'title' => t('Participer à notre jeux concours'),
+        'page callback' => 'dolce_game_page',
+        'access arguments' => array('access content'),
+    );
+
+    return $items;
+}
+
+function dolce_game_page() {
+    if (!_user_has_participated()) {
+        drupal_add_css(drupal_get_path('module', 'dolce_game') . '/dolce_game.css');
+        drupal_add_js(drupal_get_path('module', 'dolce_game') . '/scratch.js');
+        drupal_add_js(drupal_get_path('module', 'dolce_game') . '/dolce_game3.js');
+        $output = '<div class="box" id="js-container">';
+        $output .= '<canvas class="canvas" id="js-canvas" width="306" height="306"></canvas>';
+        $output .= drupal_render(drupal_get_form('dolce_game_form'));
+        $output .= '</div>';
+    }
+    else {
+        drupal_add_js(drupal_get_path('module', 'dolce_game') . '/dolce_game3.js');
+        $output = t('Vous avez déjà participé à ce jeu, vous pourrez recommencer demain.');
+        $output .= '<a class="fb-share">Partager</a>';
+    }
+    //echo $output;
+    return $output;
+}
+
+
+function dolce_game_generate_code() {
+    $code = _generateRandomString(6);
+    $code = substr($code, 0, 6);
+    while (_dolce_game_code_exists($code)) {
+        $code = _generateRandomString(6);
+        $code = substr($code, 0, 6);
+    }
+    return $code;
+}
+
+function _dolce_game_code_exists($code) {
+    $result = db_select('dolce_game', 'dg')->fields('dg', array('id'))->condition('id', $code,
+        '=')
+        ->execute()
+        ->fetchAssoc();
+    if (!empty($result)) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+function dolce_game_form($form, &$form_state) {
+
+    if (!isset($_SESSION['played'])) {
+        $code = dolce_game_generate_code();
+        $_SESSION['played'] = $code;
+    }
+    else {
+        $code = $_SESSION['played'];
+    }
+
+    $form['id'] = array(
+        '#type' => 'markup',
+        '#markup' => '<strong>'.t('Your code is : ').$code.'</strong>',
+    );
+
+    $form['id_hidden'] = array(
+        '#type' => 'value',
+        '#value' => $code,
+    );
+
+    $form['mail'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Votre email'),
+        '#size' => 20,
+    );
+
+    $form['code'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Recopier votre code'),
+        '#size' => 20,
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Play'),
+    );
+
+    $form['#attached']['css'][] = array(
+        'data' => '.forms { visibilty: hidden; }',
+        'type' => 'inline',
+    );
+
+    $form['#attributes'] = array('class' => 'forms');
+    return $form;
+}
+
+function dolce_game_form_validate(&$form, &$form_state) {
+    $values = $form_state['values'];
+    if ($values['id_hidden'] != $values['code']) {
+        form_set_error('Code', t('The code is not exact.'));
+    }
+    if (!valid_email_address($values['mail'])) {
+        form_set_error('mail', t('Your email is not valid.'));
+    }
+}
+
+function dolce_game_form_submit(&$form, &$form_state) {
+    $values = $form_state['values'];
+    //
+
+    $timestamp = time();
+    $prov = 'ingame';
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $id = check_plain($values['code']);
+    $mail = check_plain($values['mail']);
+
+    $params = array(
+        'prov' => $prov,
+        'ip' => $ip,
+        'id' => $id,
+        'mail' => $mail,
+        'timestamp' => $timestamp,
+    );
+
+    $result = _dolce_game_insert_data($params);
+    if ($result) {
+        drupal_set_message(t('Thanks for playing ! '));
+    }
+}
+
+function _generateRandomString($length){
+    $characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    $charsLength = strlen($characters) -1;
+    $string = "";
+    for($i=0; $i<$length; $i++){
+        $randNum = mt_rand(0, $charsLength);
+        $string .= $characters[$randNum];
+    }
+    return $string;
+}
+
+function _dolce_game_insert_data($params) {
+    $id = db_insert('dolce_game') // Table name no longer needs {}
+    ->fields(array(
+        'id' => $params['id'],
+        'mail' => $params['mail'],
+        'ip' => $params['ip'],
+        'prov' => $params['prov'],
+        'timestamp' => $params['timestamp'],
+    ))->execute();
+}
+
+function _dolce_game_select_data($params) {
+    $id = db_insert('node') // Table name no longer needs {}
+    ->fields(array(
+        'title' => 'Example',
+        'uid' => 1,
+        'created' => REQUEST_TIME,
+    ))->execute();
+}
+
+function _user_has_participated() {
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $result = db_select('dolce_game', 'dg')->fields('dg', array('ip'))->condition('ip', $ip,'=')
+        ->execute()
+        ->fetchAssoc();
+    if (empty($result)) {
+        return FALSE;
+    }
+    else {
+        return TRUE;
+    }
+}
