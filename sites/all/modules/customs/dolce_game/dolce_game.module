@@ -184,6 +184,7 @@ function _dolce_game_insert_data($params) {
         'prov' => $params['prov'],
         'timestamp' => $params['timestamp'],
     ))->execute();
+    return true;
 }
 
 function _dolce_game_select_data($params) {
@@ -235,7 +236,9 @@ function dolce_game_second_chance($code, $ip)
         }
         echo 'Vous avez déjà partagé le jeu.';
     }
-    echo 'Un problème est survenu';
+    else {
+        echo 'Un problème est survenu';
+    }
     exit;
 }
 
