@@ -41,7 +41,7 @@ function dolce_game_page() {
         $output .= '<img src="/sites/all/modules/customs/dolce_game/game.jpg" /><br />';
         $output .= '<em>'.t("Merci d'avoir participé à ce jeu aujourd'hui, vous pourrez jouer à nouveau demain.").'</em>';
         $output .= '</br >';
-        $output .= '<em>'.t('Doublez vos chance de gagner en partageant le jeu concours sur Facebook').'</em>';
+        $output .= '<em>'.t('Doublez vos chances de gagner en partageant le jeu concours sur Facebook').'</em>';
         $output .= '<br />';
         $output .= '<a class="btn btn-primary fb-share"><i class="fab fa-facebook"></i> Partager</a>';
         $output .= '<br />';
