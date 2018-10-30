@@ -16,7 +16,7 @@
                     method : 'share',
                     href   : 'https://www.dolcevitadog.com/jeu-concours-halloween'
                 },
-            status = '';
+            status = 'Encore plus de chance de gagner sur le Jeu Concours DolceVitaDog';
 
         FB.ui(options, function( response ){
 
@@ -50,10 +50,15 @@
 
     $(document)
         .on('fb-share.success', function( e ) {
-            console.log('success events');
+            $('ajax').url('')
         })
         .on('fb-share.error', function( e ) {
-            console.log('error events');
+            $('#must-share').append('Vous devez partagez la page afin de valider votre participation');
+            $.get( "dolce-game/oZBHC4/127.0.0.1", function( data ) {
+                console.log(data);
+
+            });
+
         });
 
 })(jQuery);

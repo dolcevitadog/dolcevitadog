@@ -19,3 +19,17 @@
 .forms {
     padding: 30px;
 }
+
+.dolce-game-halloween {
+    font-family: "Raleway";
+
+}
+
+.dolce-game-halloween em {
+    font-size : 22px;
+}
+
+#must-share {
+    color: orangered;
+    font-size: 18px;
+}

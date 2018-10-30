@@ -2,8 +2,14 @@
 
 function dolce_game_menu() {
     $items['jeu-concours-halloween'] = array(
-        'title' => t('Participer à notre jeux concours'),
+        'title' => t('Jeux concours à gratter Halloween'),
         'page callback' => 'dolce_game_page',
+        'access arguments' => array('access content'),
+    );
+
+    $items['dolce-game/%/%'] = array(
+        'page callback' => 'dolce_game_second_chance',
+        'page arguments' => array(1, 2),
         'access arguments' => array('access content'),
     );
 
@@ -12,23 +18,38 @@ function dolce_game_menu() {
 
 function dolce_game_page() {
     if (!_user_has_participated()) {
+
         drupal_add_css(drupal_get_path('module', 'dolce_game') . '/dolce_game.css');
         drupal_add_js(drupal_get_path('module', 'dolce_game') . '/scratch.js');
         drupal_add_js(drupal_get_path('module', 'dolce_game') . '/dolce_game3.js');
-        $output = '<div class="box" id="js-container">';
+        $body = variable_get('dolce_game_body');
+        $output = $body;
+        $output .= '<div class="box" id="js-container">';
         $output .= '<canvas class="canvas" id="js-canvas" width="306" height="306"></canvas>';
-        $output .= drupal_render(drupal_get_form('dolce_game_form'));
+        $output .= render(drupal_get_form('dolce_game_form'));
         $output .= '</div>';
     }
     else {
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $params = array(
+          'ip' => $ip,
+        );
+        $ids = _dolce_game_select_data($params);
+        drupal_add_js(array('dolce_game' => drupal_json_encode($ids), 'setting'));
         drupal_add_js(drupal_get_path('module', 'dolce_game') . '/dolce_game3.js');
-        $output = t('Vous avez déjà participé à ce jeu, vous pourrez recommencer demain.');
-        $output .= '<a class="fb-share">Partager</a>';
+        $output = '<div class="dolce-game-halloween">';
+        $output .= '<em>'.t('Vous avez déjà participé à ce jeu aujourd\'hui, vous pourrez jouer à nouveau demain.').'</em>';
+        $output .= '</br >';
+        $output .= '<em>'.t('Doublez vos chance de gagner en partageant le jeu concours sur Facebook').'</em>';
+        $output .= '<br />';
+        $output .= '<a class="btn btn-primary fb-share"><i class="fab fa-facebook"></i> Partager</a>';
+        $output .= '<br />';
+        $output .= '<div id="must-share"></div>';
+        $output .= '</div>';
     }
     //echo $output;
     return $output;
 }
-
 
 function dolce_game_generate_code() {
     $code = _generateRandomString(6);
@@ -51,14 +72,17 @@ function _dolce_game_code_exists($code) {
     return FALSE;
 }
 
-function dolce_game_form($form, &$form_state) {
+function dolce_game_form($form, $form_state) {
 
-    if (!isset($_SESSION['played'])) {
+    $date = date_create();
+    $format = date_format($date, 'dmy');
+    $test = 'dvd_'.$format;
+    if (empty($_SESSION[$test]['played'])) {
         $code = dolce_game_generate_code();
-        $_SESSION['played'] = $code;
+        $_SESSION[$test]['played'] = $code;
     }
     else {
-        $code = $_SESSION['played'];
+        $code = $_SESSION[$test]['played'];
     }
 
     $form['id'] = array(
@@ -154,23 +178,108 @@ function _dolce_game_insert_data($params) {
 }
 
 function _dolce_game_select_data($params) {
-    $id = db_insert('node') // Table name no longer needs {}
-    ->fields(array(
-        'title' => 'Example',
-        'uid' => 1,
-        'created' => REQUEST_TIME,
-    ))->execute();
+    $id = db_select('dolce_game', 'dg')->fields('dg')->condition('ip', $params['ip'],'=')
+        ->condition('id', $params['id'], '=')
+        ->execute()
+        ->fetchAssoc();
+    return $id;
 }
 
 function _user_has_participated() {
+    $timestamp = time();
     $ip = $_SERVER['REMOTE_ADDR'];
-    $result = db_select('dolce_game', 'dg')->fields('dg', array('ip'))->condition('ip', $ip,'=')
+    $result = db_select('dolce_game', 'dg')->fields('dg', array('ip', 'timestamp'))->condition('ip', $ip,'=')
+        ->orderBy('timestamp', 'DESC')
         ->execute()
         ->fetchAssoc();
+
+    $day = new DateTime();
+    $day->setTimestamp($timestamp);
+    $day_format = date_format($day, 'd-m-Y');
     if (empty($result)) {
         return FALSE;
     }
     else {
+        $participating = new DateTime();
+        $participating->setTimestamp($result['timestamp']);
+        $participating_format = date_format($participating, 'd-m-Y');
+        if ($day_format != $participating_format) {
+            return FALSE;
+        }
         return TRUE;
+    }
+}
+
+function dolce_game_second_chance($code, $ip)
+{
+    $params = array(
+        'prov' => 'fb',
+        'ip' => $ip,
+        'id' => $code,
+    );
+    $ids = _dolce_game_select_data($params);
+    $params['mail'] = $ids['mail'];
+    $params['timestamp'] = time();
+    if (!dolce_game_second_chance_exists($code, $ip)) {
+        if (_dolce_game_insert_data($params)) {
+            echo true;
+        }
+        echo false;
+    }
+    echo false;
+    exit;
+}
+
+function dolce_game_second_chance_exists($code, $ip) {
+    $result = db_select('dolce_game', 'dg')->fields('dg', array('ip', 'timestamp'))->condition('ip', $ip,'=')
+        ->condition('id', $code, '=')->condition('prov', 'fb', '=')
+        ->execute()
+        ->fetchAssoc();
+    if (!empty($result)) {
+        return true;
+    }
+    return false;
+}
+/*
+* Implements hook_block_info().
+ */
+function dolce_game_block_info() {
+    $blocks = array();
+    $blocks['dolce_game_welcome'] = array(
+        'info' => t('Dolce Game Welcome'),
+    );
+
+    return $blocks;
+}
+
+/*
+* Implements hook_block_configure().
+ */
+function dolce_game_block_configure($delta='') {
+    $form = array();
+
+    switch($delta) {
+        case 'dolce_game_welcome' :
+            // Text field form element
+            $form['dolce_game_body'] = array(
+                '#type' => 'text_format',
+                '#title' => t('Your welcome message'),
+                '#default_value' => variable_get('dolce_game_body', ''),
+            );
+
+            break;
+    }
+    return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function dolce_game_block_save($delta = '', $edit = array()) {
+    switch($delta) {
+        case 'dolce_game_welcome' :
+            // Saving the WYSIWYG text
+            variable_set('dolce_game_body', $edit['dolce_game_body']['value']);
+            break;
     }
 }
