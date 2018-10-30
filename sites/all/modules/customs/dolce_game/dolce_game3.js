@@ -52,6 +52,7 @@
 
     $(document)
         .on('fb-share.success', function( e ) {
+            var ids = Drupal.settings.dolce_game;
             $.get( 'dolce-game/'+ids.id+'/'+ids.ip, function( data ) {
                 if (data == true) {
                     alert('Merci pour votre partage, votre participation compte désormais double.');
