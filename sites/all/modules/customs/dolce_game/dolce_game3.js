@@ -4,6 +4,7 @@
     $( document ).ready(function() {
 
         var dolce_game = Drupal.settings.dolce_game;
+        var obj = jQuery.parseJSON(dolce_game);
 
         $.getScript('//connect.facebook.net/fr_FR/sdk.js', function(){
             FB.init({
@@ -18,13 +19,13 @@
                     method : 'share',
                     href   : 'https://www.dolcevitadog.com/jeu-concours-halloween'
                 },
-            status = 'Encore plus de chance de gagner sur le Jeu Concours DolceVitaDog';
+            status = '';
 
         FB.ui(options, function( response ){
 
             if (response && !response.error_code) {
                 status = 'success';
-                $.get( 'dolce-game/'+dolce_game.id+'/'+dolce_game.ip, function( data ) {
+                $.get( 'dolce-game/'+obj.id+'/'+obj.ip, function( data ) {
                     if (data == true) {
                         alert('Merci pour votre partage, votre participation compte désormais double.');
                     }
@@ -55,11 +56,11 @@
 
 
     });
-    
+
     $(document)
-        .on('fb-share.success', function( ids ) {
+        .on('fb-share.success', function( e ) {
         })
-        .on('fb-share.error', function( ids ) {
+        .on('fb-share.error', function( e ) {
             alert('Un probleme est survenu');
         });
 
