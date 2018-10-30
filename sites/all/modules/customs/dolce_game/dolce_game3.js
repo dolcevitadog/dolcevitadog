@@ -3,6 +3,8 @@
 
     $( document ).ready(function() {
 
+        var dolce_game = Drupal.settings.dolce_game;
+
         $.getScript('//connect.facebook.net/fr_FR/sdk.js', function(){
             FB.init({
                 appId: '837855276384036', //replace with your app ID
@@ -22,6 +24,12 @@
 
             if (response && !response.error_code) {
                 status = 'success';
+                $.get( 'dolce-game/'+dolce_game.id+'/'+dolce_game.ip, function( data ) {
+                    if (data == true) {
+                        alert('Merci pour votre partage, votre participation compte désormais double.');
+                    }
+
+                });
                 $.event.trigger('fb-share.success');
 
             } else {
@@ -45,24 +53,14 @@
                 });
         });
 
-        var ids = Drupal.settings.dolce_game;
+
     });
-
-
-
+    
     $(document)
-        .on('fb-share.success', function( e ) {
-            var ids = Drupal.settings.dolce_game;
-            $.get( 'dolce-game/'+ids.id+'/'+ids.ip, function( data ) {
-                if (data == true) {
-                    alert('Merci pour votre partage, votre participation compte désormais double.');
-                }
-
-            });
+        .on('fb-share.success', function( ids ) {
         })
-        .on('fb-share.error', function( e ) {
-            alert('Un probleme est apparru');
-
+        .on('fb-share.error', function( ids ) {
+            alert('Un probleme est survenu');
         });
 
 })(jQuery);
