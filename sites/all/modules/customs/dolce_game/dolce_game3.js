@@ -36,28 +36,31 @@
             }
         });
         }
-        console.log("test");
+
         $('.fb-share').on('click', function( e ) {
-            console.log("test");
                 e.preventDefault();
 
                 facebookShare(function( response ) {
                     // simple function callback
-                    console.log(response);
                 });
         });
+
+        var ids = Drupal.settings.dolce_game;
     });
+
+
 
     $(document)
         .on('fb-share.success', function( e ) {
-            $('ajax').url('')
-        })
-        .on('fb-share.error', function( e ) {
-            $('#must-share').append('Vous devez partagez la page afin de valider votre participation');
-            $.get( "dolce-game/oZBHC4/127.0.0.1", function( data ) {
-                console.log(data);
+            $.get( 'dolce-game/'+ids.id+'/'+ids.ip, function( data ) {
+                if (data == true) {
+                    alert('Merci pour votre partage, votre participation compte désormais double.');
+                }
 
             });
+        })
+        .on('fb-share.error', function( e ) {
+            alert('Un probleme est apparru');
 
         });
 
