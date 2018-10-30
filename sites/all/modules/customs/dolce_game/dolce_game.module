@@ -112,7 +112,7 @@ function dolce_game_form($form, $form_state) {
 
     $form['code'] = array(
         '#type' => 'textfield',
-        '#title' => t('Recopier votre code'),
+        '#title' => t('Recopiez votre code'),
         '#size' => 20,
     );
 
