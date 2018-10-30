@@ -232,12 +232,11 @@ function dolce_game_second_chance($code, $ip)
     $params['timestamp'] = time();
     if (!dolce_game_second_chance_exists($code, $ip)) {
         if (_dolce_game_insert_data($params)) {
-            echo 'Merci pour votre partage';
+            echo 'Merci pour votre partage.';
         }
-        echo 'Vous avez déjà partagé le jeu.';
     }
     else {
-        echo 'Un problème est survenu';
+        echo 'Vous avez déjà partagé le jeu.';
     }
     exit;
 }
