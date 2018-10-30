@@ -62,16 +62,19 @@
     function getMouse(e, canvas) {
         var offsetX = 0, offsetY = 0, mx, my;
 
+
         if (canvas.offsetParent !== undefined) {
             do {
                 offsetX += canvas.offsetLeft;
                 offsetY += canvas.offsetTop;
             } while ((canvas = canvas.offsetParent));
         }
-
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+            offsetY -= document.documentElement.scrollTop;
+            offsetX -= document.documentElement.scrollLeft;
+        }
         mx = (e.pageX || e.touches[0].clientX) - offsetX;
         my = (e.pageY || e.touches[0].clientY) - offsetY;
-
         return {x: mx, y: my};
     }
 
