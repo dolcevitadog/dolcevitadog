@@ -34,8 +34,8 @@ function dolce_game_page() {
         $params = array(
           'ip' => $ip,
         );
-        $ids = _dolce_game_select_data($params);
-        drupal_add_js(array('dolce_game' => drupal_json_encode($ids), 'setting'));
+        $ids = _dolce_game_ip_participated($params);
+        drupal_add_js(array('dolce_game' => drupal_json_encode($ids)), 'setting');
         drupal_add_js(drupal_get_path('module', 'dolce_game') . '/dolce_game3.js');
         $output = '<div class="dolce-game-halloween">';
         $output .= '<em>'.t('Vous avez déjà participé à ce jeu aujourd\'hui, vous pourrez jouer à nouveau demain.').'</em>';
@@ -49,6 +49,14 @@ function dolce_game_page() {
     }
     //echo $output;
     return $output;
+}
+
+function _dolce_game_ip_participated($params) {
+    $id = db_select('dolce_game', 'dg')->fields('dg')->condition('ip', $params['ip'],'=')
+        ->orderBy('timestamp', 'DESC')
+        ->execute()
+        ->fetchAssoc();
+    return $id;
 }
 
 function dolce_game_generate_code() {
