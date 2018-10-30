@@ -26,16 +26,14 @@
             if (response && !response.error_code) {
                 status = 'success';
                 $.get( 'dolce-game/'+obj.id+'/'+obj.ip, function( data ) {
-                    if (data == true) {
-                        alert('Merci pour votre partage, votre participation compte désormais double.');
-                    }
-
+                    alert(data);
                 });
                 $.event.trigger('fb-share.success');
 
             } else {
                 status = 'error';
                 $.event.trigger('fb-share.error');
+                alert('Vous devez partager pour valider le vote.')
             }
 
             if(callback && typeof callback === "function") {
@@ -61,7 +59,6 @@
         .on('fb-share.success', function( e ) {
         })
         .on('fb-share.error', function( e ) {
-            alert('Un probleme est survenu');
         });
 
 })(jQuery);
