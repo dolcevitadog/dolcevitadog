@@ -55,8 +55,9 @@ function dolce_game_page()
         $output .= '</div>';
         _dolce_game_add_facebook_image();
         //echo $output;
-        return $output;
+
     }
+    return $output;
 }
 
 function _dolce_game_add_facebook_image() {
@@ -70,6 +71,7 @@ function _dolce_game_add_facebook_image() {
     );
     drupal_add_html_head($element, 'facebook_share_image');
 }
+
 function _dolce_game_ip_participated($params) {
     $id = db_select('dolce_game', 'dg')->fields('dg')->condition('ip', $params['ip'],'=')
         ->orderBy('timestamp', 'DESC')
