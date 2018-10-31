@@ -21,7 +21,8 @@ function dolce_game_menu() {
     return $items;
 }
 
-function dolce_game_page() {
+function dolce_game_page()
+{
     if (!_user_has_participated()) {
 
         drupal_add_css(drupal_get_path('module', 'dolce_game') . '/dolce_game.css');
@@ -33,30 +34,42 @@ function dolce_game_page() {
         $output .= '<canvas class="canvas" id="js-canvas" width="306" height="306"></canvas>';
         $output .= render(drupal_get_form('dolce_game_form'));
         $output .= '</div>';
-    }
-    else {
+        _dolce_game_add_facebook_image();
+    } else {
         $ip = $_SERVER['REMOTE_ADDR'];
         $params = array(
-          'ip' => $ip,
+            'ip' => $ip,
         );
         $ids = _dolce_game_ip_participated($params);
         drupal_add_js(array('dolce_game' => drupal_json_encode($ids)), 'setting');
         drupal_add_js(drupal_get_path('module', 'dolce_game') . '/dolce_game3.js');
         $output = '<div class="dolce-game-halloween">';
         $output .= '<img src="/sites/all/modules/customs/dolce_game/game.jpg" /><br />';
-        $output .= '<em>'.t("Merci d'avoir participé à ce jeu aujourd'hui, vous pourrez jouer à nouveau demain.").'</em>';
+        $output .= '<em>' . t("Merci d'avoir participé à ce jeu aujourd'hui, vous pourrez jouer à nouveau demain.") . '</em>';
         $output .= '</br >';
-        $output .= '<em>'.t('Doublez vos chances de gagner en partageant le jeu concours sur Facebook').'</em>';
+        $output .= '<em>' . t('Doublez vos chances de gagner en partageant le jeu concours sur Facebook') . '</em>';
         $output .= '<br />';
         $output .= '<a class="btn btn-primary fb-share"><i class="fab fa-facebook"></i> Partager</a>';
         $output .= '<br />';
         $output .= '<div id="must-share"></div>';
         $output .= '</div>';
+        _dolce_game_add_facebook_image();
+        //echo $output;
+        return $output;
     }
-    //echo $output;
-    return $output;
 }
 
+function _dolce_game_add_facebook_image() {
+    $img = file_create_url('sites/all/modules/customs/dolce_game/game.jpg');
+    $element = array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+            "property" => "og:image",
+            "content" => $img,
+        ),
+    );
+    drupal_add_html_head($element, 'facebook_share_image');
+}
 function _dolce_game_ip_participated($params) {
     $id = db_select('dolce_game', 'dg')->fields('dg')->condition('ip', $params['ip'],'=')
         ->orderBy('timestamp', 'DESC')
