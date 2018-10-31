@@ -13,6 +13,11 @@ function dolce_game_menu() {
         'access arguments' => array('access content'),
     );
 
+    $items['dolce-game/admin'] = array(
+        'page callback' => 'dolce_game_admin_view',
+        'access arguments' => array('administer site configuration'),
+    );
+
     return $items;
 }
 
@@ -292,5 +297,27 @@ function dolce_game_block_save($delta = '', $edit = array()) {
             // Saving the WYSIWYG text
             variable_set('dolce_game_body', $edit['dolce_game_body']['value']);
             break;
+    }
+}
+
+function dolce_game_admin_view() {
+    $table = "dolce_game";
+    $result = db_select($table, 'dg')->fields('dg')->execute()->fetchAll();
+    if ($result) {
+        $header = array('ID', 'email', 'how', 'ip', 'timestamp');
+        $rows = array();
+        foreach ($result as $key => $value) {
+            $day = new DateTime();
+            $day->setTimestamp($value->timestamp);
+            $day_format = date_format($day, 'd-m-Y');
+            $rows[] = array(
+                $value->id,
+                $value->mail,
+                $value->prov,
+                $value->ip,
+                $day_format,
+            );
+    }
+    return theme('table', array('header' => $header, 'rows' => $rows));
     }
 }
