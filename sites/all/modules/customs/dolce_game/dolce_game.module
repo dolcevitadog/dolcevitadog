@@ -351,9 +351,10 @@ function dolce_game_mail($key, &$message, $params) {
             $message['body'][] = '<img src="https://www.dolcevitadog.com/sites/all/themes/dolce/logo.png" /><br />';
             $message['body'][] = t("Bonjour,<br />");
             $message['body'][] = t("Merci d'avoir participé au jeu Concours Halloween ! <br />");
-            $message['body'][] = t("Afin qu'il n'y ait que des gagnants, nous avons décideé de vous offrir
+            $message['body'][] = t("Afin qu'il n'y ait que des gagnants, nous avons décidé de vous offrir
             un bon de réduction de 5€ valable sur notre boutique jusqu'au 31 décembre 2018.<br /><br />");
-            $message['body'][] = t("Votre code promo : zdPyJvag<br />");
+            $message['body'][] = t("Votre code promo* : zdPyJvag<br />");
+            $message['body'][] = t("* Offre non cumulable avec d'autres réductions<br />");
             $message['body'][] = t("Au plaisir de vous revoir sur notre site.<br /><br />");
             $message['body'][] = t("L'équipe de DolceVitaDog <br />");
             break;
