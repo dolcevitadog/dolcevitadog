@@ -363,7 +363,7 @@ function dolce_game_mail($key, &$message, $params) {
 
 function dolce_game_send_game_email()
 {
-    $handle = fopen(drupal_get_path('module', 'dolce_game') . '/email.csv', "r");
+    $handle = fopen(drupal_get_path('module', 'dolce_game') . '/emails.csv', "r");
     while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
         $num = count($data);
         for ($c = 0; $c < $num; $c++) {
