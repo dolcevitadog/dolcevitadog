@@ -18,6 +18,11 @@ function dolce_game_menu() {
         'access arguments' => array('administer site configuration'),
     );
 
+    $items['dolce-game/send_email'] = array(
+        'page callback' => 'dolce_game_send_game_email',
+        'access arguments' => array('administer site configuration'),
+    );
+
     return $items;
 }
 
@@ -335,4 +340,38 @@ function dolce_game_admin_view() {
     }
     return theme('table', array('header' => $header, 'rows' => $rows));
     }
+}
+
+function dolce_game_mail($key, &$message, $params) {
+    switch ($key) {
+        case 'dolce_game_participant':
+            // Set headers etc
+            $message['to'] = $params['to'];
+            $message['subject'] = t('Jeux concours Halloween, 100% gagnants');
+            $message['body'][] = '<img src="https://www.dolcevitadog.com/sites/all/themes/dolce/logo.png" /><br />';
+            $message['body'][] = t("Bonjour,<br />");
+            $message['body'][] = t("Merci d'avoir participé au jeu Concours Halloween ! <br />");
+            $message['body'][] = t("Afin qu'il n'y ait que des gagnants, nous avons décideé de vous offrir
+            un bon de réduction de 5€ valable sur notre boutique jusqu'au 31 décembre 2018.<br /><br />");
+            $message['body'][] = t("Votre code promo : zdPyJvag<br />");
+            $message['body'][] = t("Au plaisir de vous revoir sur notre site.<br /><br />");
+            $message['body'][] = t("L'équipe de DolceVitaDog <br />");
+            break;
+    }
+}
+
+function dolce_game_send_game_email()
+{
+    $handle = fopen(drupal_get_path('module', 'dolce_game') . '/email.csv', "r");
+    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+        $num = count($data);
+        for ($c = 0; $c < $num; $c++) {
+            //echo $data[$c] . "<br />\n";
+            drupal_mail('dolce_game', 'dolce_game_participant', $data[$c], 'fr',
+                $params = array('to' => $data[$c]), $from = NULL, $send = TRUE);
+
+        }
+    }
+    fclose($handle);
+    return '';
 }
