@@ -51,10 +51,10 @@ function dolce_discount_block_view($delta = '') {
             //$block = module_invoke('jquery_countdown_timer', 'block_view', 'jquery_countdown_timer');
             //$timer = render($block['content']);
             $items = array(
-                commerce_kickstart_block_build_element(t("International Shipping !"), NULL, 'promotional_banner_saving'),
-                t("Profitez de la livraison de nos produits, partout où vous êtes"),
+                commerce_kickstart_block_build_element(t("Semaine du Black Friday !"), NULL, 'promotional_banner_saving'),
+                t("-15% sur toute la boutique"),
                 //$timer,
-                //commerce_kickstart_block_build_element(t('LES LIVRAISONS SONT SUSPENDUES DU VENDREDI 20 au LUNDI 23 JUILLET '), NULL, 'promotional_banner_special_offer'),
+                commerce_kickstart_block_build_element(t('avec le code: BLACKFRIDAY2018'), NULL, 'promotional_banner_special_offer'),
 
             );
             $block['content'] = commerce_kickstart_block_build_element(implode(' ', $items), 'promotional_banner', NULL, 'div');
