@@ -52,7 +52,7 @@ function dolce_discount_block_view($delta = '') {
             //$timer = render($block['content']);
             $items = array(
                 commerce_kickstart_block_build_element(t("Noël approche ..."), NULL, 'promotional_banner_saving'),
-                t("Un lot de surprise arrive à partir du 1er décembre - restez connecté !"),
+                t("Un lot de surprises arrive à partir du 1er décembre - restez connectés !"),
                 //$timer,
                 //commerce_kickstart_block_build_element(t('avec le code: BLACKFRIDAY2018'), NULL, 'promotional_banner_special_offer'),
 
