@@ -160,6 +160,7 @@ function dolce_avent_get_all() {
 function dolce_avent_page() {
 
     $vars = array();
+    _dolce_avent_add_facebook_image();
     return theme('avent', $vars);
 }
 
