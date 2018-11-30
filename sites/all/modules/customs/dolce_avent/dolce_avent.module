@@ -65,6 +65,7 @@ function dolce_avent_scratch($i) {
             $output .= _what_is_the_gift($i);
             $output .= '</div>';
             $output .= '</div>';
+            _dolce_avent_add_facebook_image();
         }
         else {
             $ip = $_SERVER['REMOTE_ADDR'];
