@@ -113,7 +113,6 @@ function _what_is_the_gift($i) {
 }
 
 function _is_the_good_day($i) {
-    return true;
     $now = new DateTime();
     $day = $now->format('d');
     $month = $now->format('m');
@@ -129,7 +128,6 @@ function dolce_avent_get_all() {
     $i = 1;
     $now = new DateTime();
     $day = $now->format('d');
-    $day = 23;
     $month = $now->format('m');
     $all = array();
     while ($i <= 24) {
