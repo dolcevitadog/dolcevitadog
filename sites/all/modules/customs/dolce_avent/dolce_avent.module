@@ -40,7 +40,7 @@ function dolce_avent_admin_view() {
             $day->setTimestamp($value->timestamp);
             $day_format = date_format($day, 'd-m-Y');
             $rows[] = array(
-                $value->id,
+                $value->day,
                 $value->mail,
                 $value->prov,
                 $value->ip,
