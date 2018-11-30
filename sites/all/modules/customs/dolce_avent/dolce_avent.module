@@ -22,7 +22,7 @@ function dolce_avent_menu() {
     );
 
     $items['dolce-avent/admin'] = array(
-        'page callback' => 'dolce_game_admin_view',
+        'page callback' => 'dolce_avent_admin_view',
         'access arguments' => array('administer site configuration'),
     );
 
