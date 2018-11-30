@@ -180,7 +180,7 @@ function dolce_avent_preprocess_avent(&$vars) {
     $now = new DateTime();
     $month = $now->format('m');
     $actif = false;
-    if ($month == 11) {
+    if ($month == 12) {
         $actif = true;
     }
     $vars['actif'] = $actif;
