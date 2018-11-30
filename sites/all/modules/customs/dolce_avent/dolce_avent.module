@@ -1,0 +1,525 @@
+<?php
+function dolce_avent_menu() {
+
+    $items['calendrier-avent'] = array(
+        'title' => t(''),
+        'page callback' => 'dolce_avent_page',
+        'access arguments' => array('access content'),
+    );
+
+
+    $items['dolce-avent/%'] = array(
+        'title' => t(''),
+        'page callback' => 'dolce_avent_scratch',
+        'page arguments' => array(1),
+        'access arguments' => array('access content'),
+    );
+
+    $items['dolce-avent/%/%'] = array(
+        'page callback' => 'dolce_avent_second_chance',
+        'page arguments' => array(1, 2),
+        'access arguments' => array('access content'),
+    );
+
+    return $items;
+}
+
+function dolce_avent_scratch($i) {
+    if (_is_the_good_day($i) && $i<25) {
+        if (!_dolce_avent_user_has_participated(arg(1))) {
+            $output = variable_get('dolce_avent_body');
+
+            drupal_add_css(drupal_get_path('module', 'dolce_avent') . '/dolce_avent.css');
+            drupal_add_js(drupal_get_path('module', 'dolce_avent') . '/scratch.js');
+            drupal_add_js(drupal_get_path('module', 'dolce_avent') . '/dolce_avent.js');
+            $output .= '<div class="box" id="js-container">';
+            $output .= '<canvas class="canvas" id="js-canvas" width="306" height="306"></canvas>';
+            $output .= '<div class="inside">';
+            $output .= _what_is_the_gift($i);
+            $output .= '</div>';
+            $output .= '</div>';
+        }
+        else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+            $params = array(
+                'ip' => $ip,
+            );
+            $ids = _dolce_avent_ip_participated($params);
+            var_dump($ids);
+            drupal_add_js(array('dolce_avent' => drupal_json_encode($ids)), 'setting');
+            drupal_add_js(drupal_get_path('module', 'dolce_avent') . '/dolce_avent.js');
+            $output = '<div class="dolce-avent-played">';
+            $output .= '<img src="/sites/all/modules/customs/dolce_avent/images/facebook.jpg" /><br />';
+            $output .= '<em>' . t("Merci d'avoir participé à ce jeu aujourd'hui, vous pourrez jouer à nouveau demain.") . '</em>';
+            $output .= '</br >';
+            $output .= '<em>' . t('Doublez vos chances de gagner en partageant le calendrier de l\'Avent sur Facebook') . '</em>';
+            $output .= '<br />';
+            $output .= '<a class="btn btn-primary fb-share"><i class="fab fa-facebook"></i> Partager</a>';
+            $output .= '<br />';
+            $output .= '<div id="must-share"></div>';
+            $output .= '</div>';
+            _dolce_game_add_facebook_image();
+            //echo $output;
+        }
+    }
+    else {
+        return '<h2>'.t("Petit malin, on essaye de tricher ?").'</h2>';
+    }
+    return $output;
+}
+
+
+function _what_is_the_gift($i) {
+    $gifts = doce_avent_gifts();
+    $type = $gifts[$i]['type'];
+    switch ($type) {
+        case "code":
+            $output = '<div class="'.$type.'">'.t($gifts[$i]['message']).'<strong>'.$gifts[$i]['code'].'</strong></div>';
+            break;
+        case "annonce":
+            $output = '<div class="'.$type.'">'.t($gifts[$i]['message']).'</div>';
+            break;
+        case "gift":
+            $output = render(drupal_get_form('dolce_avent_form', $gifts[$i]['message']));
+            break;
+    }
+    return $output;
+}
+
+function _is_the_good_day($i) {
+    return true;
+    $now = new DateTime();
+    $day = $now->format('d');
+    $month = $now->format('m');
+    if ($i == $day) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+function dolce_avent_get_all() {
+    $i = 1;
+    $now = new DateTime();
+    $day = $now->format('d');
+    $day = 23;
+    $month = $now->format('m');
+    $all = array();
+    while ($i <= 24) {
+        $class = 'box case';
+        if ($i < $day) {
+            $class .= ' opened';
+            $past = url(drupal_get_path('module', 'dolce_avent').'/images/case_past.jpg', array('absolute' => true, 'language' => ''));
+        }
+        else if ($i == $day) {
+            $class .= ' today';
+        }
+        else {
+            $class .= ' forbid';
+        }
+        $all[$i]['class'] = $class;
+        $all[$i]['past'] = $past;
+        if ($day == $i) {
+            $all[$i]['link'] = url('dolce-avent/'.$i);
+        }
+        $i++;
+        unset($class);
+        unset($node);
+        unset($past);
+    }
+    return $all;
+}
+
+function dolce_avent_page() {
+
+    $vars = array();
+    return theme('avent', $vars);
+}
+
+function dolce_avent_theme($existing, $type, $theme, $path){
+    return array(
+        'avent' => array(
+            'variables' => array('all' => NULL),
+            'template'  => 'avent',
+        )
+    );
+}
+
+function dolce_avent_preprocess_avent(&$vars) {
+    $vars['all'] = dolce_avent_get_all();
+    global $base_url;
+    $vars['base_url'] = $base_url;
+    $papa_noel_url = url(drupal_get_path('module', 'dolce_avent').'/images/noun_87160_cc_blanc.png', array('absolute' => true, 'language' => false));
+    $vars['papanoel_url'] = $papa_noel_url;
+    $now = new DateTime();
+    $month = $now->format('m');
+    $actif = false;
+    if ($month == 11) {
+        $actif = true;
+    }
+    $vars['actif'] = $actif;
+    $vars['logo'] = url(drupal_get_path('module', 'dolce_avent').'/images/dvd_logo_200.png', array('absolute' => true, 'language' => ''));
+
+    drupal_add_css(drupal_get_path('module', 'dolce_avent').'/avent.css');
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function dolce_avent_block_info() {
+    $blocks = array();
+    $blocks['dolce_avent_params'] = array(
+        'info' => t('Parameters block Avent'),
+    );
+
+    $blocks['dolce_avent_welcome'] = array(
+        'info' => t('Dolce Avent Welcome'),
+    );
+
+    return $blocks;
+}
+
+/*
+* Implements hook_block_configure().
+ */
+function dolce_avent_block_configure($delta='') {
+    $form = array();
+
+    switch($delta) {
+        case 'dolce_avent_welcome' :
+            // Text field form element
+            $form['dolce_avent_body'] = array(
+                '#type' => 'text_format',
+                '#title' => t('Your welcome message'),
+                '#default_value' => variable_get('dolce_avent_body', ''),
+            );
+
+            break;
+        case 'dolce_avent_params' :
+            // Text field form element
+            $form['dvd_avent_year'] = array(
+                '#type' => 'textfield',
+                '#title' => t('The year of the calendar'),
+                '#default_value' => variable_get('dvd_avent_year', ''),
+            );
+
+            $form['dvd_avent_welcome'] = array(
+                '#type' => 'textfield',
+                '#title' => t('Welcome message first line'),
+                '#default_value' => variable_get('dvd_avent_welcome', ''),
+            );
+
+            // File selection form element
+            $form['dvd_avent_background'] = array(
+                '#name' => 'block_image',
+                '#type' => 'managed_file',
+                '#title' => t('Choose an Image File'),
+                '#description' => t('Select an Image for the Background Calendar.  Only *.gif, *.png, *.jpg, and *.jpeg images allowed.'),
+                '#default_value' => variable_get('dvd_avent_background', ''),
+                '#upload_location' => 'public://dvd_avent/',
+                '#upload_validators' => array(
+                    'file_validate_extensions' => array('gif png jpg jpeg'),
+                ),
+            );
+
+            $form['dvd_avent_logo'] = array(
+                '#name' => 'block_image',
+                '#type' => 'managed_file',
+                '#title' => t('Choose an Image File'),
+                '#description' => t('Select an Image for the Logo Calendar.  Only *.gif, *.png, *.jpg, and *.jpeg images allowed.'),
+                '#default_value' => variable_get('dvd_avent_logo', ''),
+                '#upload_location' => 'public://dvd_avent/',
+                '#upload_validators' => array(
+                    'file_validate_extensions' => array('gif png jpg jpeg'),
+                ),
+            );
+            break;
+    }
+    return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function dolce_avent_block_save($delta = '', $edit = array())
+{
+    switch ($delta) {
+        case 'dolce_avent_welcome' :
+            // Saving the WYSIWYG text
+            variable_set('dolce_avent_body', $edit['dolce_avent_body']['value']);
+            break;
+    }
+}
+
+function doce_avent_gifts() {
+    return array(
+          1 => array(
+              'type' => 'code',
+              'message' => t('5€ de réduction sur votre commande avec le code : '),
+              'code' => 'PERENOEL',
+          ),
+        2 => array(
+            'type' => 'annonce',
+            'message' => t('Un échantillon de friandise à mâcher 100% naturelle pour toute commande aujourd\'hui !'),
+        ),
+        3 => array(
+            'type' => 'code',
+            'message' => t('10% sur votre commande totale avec le code : '),
+            'code' => 'CHIEN',
+        ),
+        4 => array(
+            'type' => 'code',
+            'message' => t('10% sur réduction sur votre commande à partir de 60€ d\'achat avec le code : '),
+            'code' => 'SAPIN',
+        ),
+        5 => array(
+            'type' => 'annonce',
+            'message' => t('Un échantillon de friandise à mâcher 100% naturelle pour toute commande aujourd\'hui !'),
+        ),
+        6 => array(
+            'type' => 'code',
+            'message' => t('Frais de port offert avec le code: '),
+            'code' => 'GUIRLANDE'
+        ),
+        7 => array(
+            'type' => 'code',
+            'message' => t('5% sur la bibliothèque et les médias avec le code: '),
+            'code' => 'CADEAU'
+        ),
+        8 => array(
+            'type' => 'code',
+            'message' => t('20€ de réduction sur tous les Harnais de Mantrailing avec le code : '),
+            'code' => 'HOHOHO',
+        ),
+        9 => array(
+            'type' => 'code',
+            'message' => t('5€ de réduction sur votre commande avec le code : '),
+            'code' => 'LUTIN',
+        ),
+        10 => array(
+            'type' => 'code',
+            'message' => t('10€ de réduction à partir de 50€ d\'achat avec le code : '),
+            'code' => 'RENNE',
+        ),
+        11 => array(
+            'type' => 'gift',
+            'message' => t('Tentez de gagner notre DVD Mantrailing')
+        ),
+        12 => array(
+            'type' => 'annonce',
+            'message' => t('Un échantillon de friandise à mâcher 100% naturelle pour toute commande aujourd\'hui !'),
+        ),
+        13 => array(
+            'type' => 'code',
+            'message' => t('15% sur votre commande totale avec le code : '),
+            'code' => 'MAGIQUE',
+        ),
+        14 => array(
+            'type' => 'gift',
+            'message' => t('Tentez de gagner une Laisse 3m Haqihana')
+        ),
+        15 => array(
+            'type' => 'code',
+            'message' => t('5€ de réduction sur votre commande avec le code :'),
+            'code' => 'TRAINEAU',
+        ),
+        16 => array(
+            'type' => 'code',
+            'message' => t('10€ de réduction sur votre commande avec le code : '),
+            'code' => 'BONNET',
+        ),
+        17 => array(
+            'type' => 'annonce',
+            'message' => t('Un échantillon de friandise à mâcher 100% naturelle pour toute commande aujourd\'hui !'),
+        ),
+        18 => array(
+            'type' => 'code',
+            'message' => t('Frais de port offert avec le code: '),
+            'code' => 'CHEMINEE'
+        ),
+        19 => array(
+            'type' => 'gift',
+            'message' => t('Tentez de gagner le DVD "A boat Trip with Turid Rugaas"')
+        ),
+        20 => array(
+            'type' => 'code',
+            'message' => t('7€ de réduction sur votre commande avec le code : '),
+            'code' => 'HOTTE',
+        ),
+        21 => array(
+            'type' => 'annonce',
+            'message' => t('Un sachet échantillon de friandises 100% naturelles offert pour toute commande !'),
+        ),
+        22 => array(
+            'type' => 'annonce',
+            'message' => t('Un échantillon de friandise à mâcher 100% naturelle pour toute commande aujourd\'hui !'),
+        ),
+        23 => array(
+            'type' => 'code',
+            'message' => t('12% de réduction sur votre commande avec le code : '),
+            'code' => 'BUCHE',
+        ),
+        24 => array(
+            'type' => 'gift',
+            'message' => t('Tentez de gagner un Harnais Haqihana')
+        ),
+    );
+}
+
+function dolce_avent_form($form, $form_state, $message) {
+
+    $date = date_create();
+    $format = date_format($date, 'dmy');
+    $test = 'dvd_'.$format;
+
+    $form['message'] = array(
+        '#markup' => $message
+    );
+
+    $form['day'] = array(
+        '#type' => 'hidden',
+        '#value' => arg(1),
+    );
+
+    $form['mail'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Votre email'),
+        '#size' => 20,
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Play'),
+    );
+
+    $form['#attached']['css'][] = array(
+        'data' => '.forms { visibilty: hidden; }',
+        'type' => 'inline',
+    );
+
+    $form['#attributes'] = array('class' => 'forms');
+    return $form;
+}
+
+function dolce_avent_form_validate(&$form, &$form_state) {
+    $values = $form_state['values'];
+    if (!is_int(intval($values['day']))) {
+        form_set_error('day', t('Day must be integer'));
+    }
+    if (!valid_email_address($values['mail'])) {
+        form_set_error('mail', t('Your email is not valid.'));
+    }
+}
+
+function dolce_avent_form_submit(&$form, &$form_state) {
+    $values = $form_state['values'];
+    //
+    $now = new DateTime();
+    $day = $now->format("d");
+    $timestamp = time();
+    $prov = 'ingame';
+    $ip = $_SERVER['REMOTE_ADDR'];
+
+    $mail = check_plain($values['mail']);
+
+    $params = array(
+        'day' => $values['day'],
+        'prov' => $prov,
+        'ip' => $ip,
+        'mail' => $mail,
+        'timestamp' => $timestamp,
+    );
+
+    $result = _dolce_avent_insert_data($params);
+    if ($result) {
+        drupal_set_message(t('Thanks for playing ! '));
+    }
+}
+
+function _dolce_avent_insert_data($params) {
+    $id = db_insert('dolce_avent') // Table name no longer needs {}
+    ->fields(array(
+        'day' => $params['day'],
+        'mail' => $params['mail'],
+        'ip' => $params['ip'],
+        'prov' => $params['prov'],
+        'timestamp' => $params['timestamp'],
+    ))->execute();
+    return true;
+}
+
+function _dolce_avent_select_data($params) {
+    $id = db_select('dolce_avent', 'da')->fields('da')->condition('ip', $params['ip'],'=')
+        ->condition('day', $params['day'], '=')
+        ->execute()
+        ->fetchAssoc();
+    return $id;
+}
+
+function _dolce_avent_user_has_participated($day) {
+    $timestamp = time();
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $result = db_select('dolce_avent', 'da')->fields('da', array('ip', 'day'))->condition('ip', $ip,'=')
+        ->condition('day', $day,'=')
+        ->execute()
+        ->fetchAssoc();
+    if (empty($result)) {
+        return FALSE;
+    }
+    else {
+        return TRUE;
+    }
+}
+
+function dolce_avent_second_chance($day, $ip)
+{
+    $params = array(
+        'prov' => 'fb',
+        'ip' => $ip,
+        'day' => $day,
+    );
+    $ids = _dolce_avent_select_data($params);
+    $params['mail'] = $ids['mail'];
+    $params['timestamp'] = time();
+    if (!dolce_avent_second_chance_exists($day, $ip)) {
+        if (_dolce_avent_insert_data($params)) {
+            echo 'Merci pour votre partage.';
+        }
+    }
+    else {
+        echo 'Vous avez déjà partagé le jeu.';
+    }
+    exit;
+}
+
+function dolce_avent_second_chance_exists($day, $ip) {
+    $result = db_select('dolce_avent', 'da')->fields('da', array('ip', 'timestamp'))->condition('ip', $ip,'=')
+        ->condition('day', $day, '=')->condition('prov', 'fb', '=')
+        ->execute()
+        ->fetchAssoc();
+    if (!empty($result)) {
+        return true;
+    }
+    return false;
+}
+
+function _dolce_avent_ip_participated($params) {
+    $id = db_select('dolce_avent', 'da')->fields('da')->condition('ip', $params['ip'],'=')
+        ->orderBy('timestamp', 'DESC')
+        ->execute()
+        ->fetchAssoc();
+    return $id;
+}
+
+function _dolce_avent_add_facebook_image() {
+    $img = file_create_url('sites/all/modules/customs/dolce_avent/images/facebook.jpg');
+    $element = array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+            "property" => "og:image",
+            "content" => $img,
+        ),
+    );
+    drupal_add_html_head($element, 'facebook_share_image');
+}
