@@ -21,7 +21,34 @@ function dolce_avent_menu() {
         'access arguments' => array('access content'),
     );
 
+    $items['dolce-avent/admin'] = array(
+        'page callback' => 'dolce_game_admin_view',
+        'access arguments' => array('administer site configuration'),
+    );
+
     return $items;
+}
+
+function dolce_avent_admin_view() {
+    $table = "dolce_avent";
+    $result = db_select($table, 'da')->fields('da')->execute()->fetchAll();
+    if ($result) {
+        $header = array('day', 'email', 'how', 'ip', 'timestamp');
+        $rows = array();
+        foreach ($result as $key => $value) {
+            $day = new DateTime();
+            $day->setTimestamp($value->timestamp);
+            $day_format = date_format($day, 'd-m-Y');
+            $rows[] = array(
+                $value->id,
+                $value->mail,
+                $value->prov,
+                $value->ip,
+                $day_format,
+            );
+        }
+        return theme('table', array('header' => $header, 'rows' => $rows));
+    }
 }
 
 function dolce_avent_scratch($i) {
