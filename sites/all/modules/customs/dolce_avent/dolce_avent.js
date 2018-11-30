@@ -27,7 +27,7 @@
             if (response && !response.error_code) {
 
                 status = 'success';
-                $.get( 'dolce-avent/'+obj.day+'/'+obj.ip, function( data ) {
+                $.get( '/dolce-avent/'+obj.day+'/'+obj.ip, function( data ) {
                     alert(data);
                 });
                 $.event.trigger('fb-share.success');
