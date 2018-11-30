@@ -72,7 +72,6 @@ function dolce_avent_scratch($i) {
                 'ip' => $ip,
             );
             $ids = _dolce_avent_ip_participated($params);
-            var_dump($ids);
             drupal_add_js(array('dolce_avent' => drupal_json_encode($ids)), 'setting');
             drupal_add_js(drupal_get_path('module', 'dolce_avent') . '/dolce_avent.js');
             $output = '<div class="dolce-avent-played">';
@@ -85,8 +84,7 @@ function dolce_avent_scratch($i) {
             $output .= '<br />';
             $output .= '<div id="must-share"></div>';
             $output .= '</div>';
-            _dolce_game_add_facebook_image();
-            //echo $output;
+            _dolce_avent_add_facebook_image();
         }
     }
     else {
