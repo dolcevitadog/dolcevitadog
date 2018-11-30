@@ -1,0 +1,39 @@
+.box {
+    border: 3px solid #4267b2;
+    position: relative;
+    width: 306px;
+    height: 306px;
+    margin: 0 auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+.canvas {
+    position: absolute;
+    top: 0;
+}
+
+.forms, .inside {
+    padding: 30px;
+}
+
+.inside .code, .inside .annonce {
+    font-size: 28px;
+}
+
+.dolce-game-halloween {
+    font-family: "Raleway";
+
+}
+
+.dolce-game-halloween em {
+    font-size : 22px;
+}
+
+#must-share {
+    color: orangered;
+    font-size: 18px;
+}
