@@ -281,7 +281,7 @@ function doce_avent_gifts() {
     return array(
           1 => array(
               'type' => 'code',
-              'message' => t('5€ de réduction sur votre commande avec le code : '),
+              'message' => t('5€ de réduction sur votre commande aujourd\'hui avec le code : '),
               'code' => 'PERENOEL',
           ),
         2 => array(
@@ -290,12 +290,12 @@ function doce_avent_gifts() {
         ),
         3 => array(
             'type' => 'code',
-            'message' => t('10% sur votre commande totale avec le code : '),
+            'message' => t('10% sur votre commande totale aujourd\'hui avec le code : '),
             'code' => 'CHIEN',
         ),
         4 => array(
             'type' => 'code',
-            'message' => t('10% sur réduction sur votre commande à partir de 60€ d\'achat avec le code : '),
+            'message' => t('10% sur réduction sur votre commande aujourd\'hui à partir de 60€ d\'achat avec le code : '),
             'code' => 'SAPIN',
         ),
         5 => array(
@@ -304,27 +304,27 @@ function doce_avent_gifts() {
         ),
         6 => array(
             'type' => 'code',
-            'message' => t('Frais de port offert avec le code: '),
+            'message' => t('Frais de port offert aujourd\'hui avec le code: '),
             'code' => 'GUIRLANDE'
         ),
         7 => array(
             'type' => 'code',
-            'message' => t('5% sur la bibliothèque et les médias avec le code: '),
+            'message' => t('5% sur la bibliothèque et les médias aujourd\'hui avec le code: '),
             'code' => 'CADEAU'
         ),
         8 => array(
             'type' => 'code',
-            'message' => t('20€ de réduction sur tous les Harnais de Mantrailing avec le code : '),
+            'message' => t('20€ de réduction sur tous les Harnais de Mantrailing aujourd\'hui avec le code : '),
             'code' => 'HOHOHO',
         ),
         9 => array(
             'type' => 'code',
-            'message' => t('5€ de réduction sur votre commande avec le code : '),
+            'message' => t('5€ de réduction sur votre commande aujourd\'hui avec le code : '),
             'code' => 'LUTIN',
         ),
         10 => array(
             'type' => 'code',
-            'message' => t('10€ de réduction à partir de 50€ d\'achat avec le code : '),
+            'message' => t('10€ de réduction aujourd\'hui à partir de 50€ d\'achat avec le code : '),
             'code' => 'RENNE',
         ),
         11 => array(
@@ -337,7 +337,7 @@ function doce_avent_gifts() {
         ),
         13 => array(
             'type' => 'code',
-            'message' => t('15% sur votre commande totale avec le code : '),
+            'message' => t('15% sur votre commande totale aujourd\'hui avec le code : '),
             'code' => 'MAGIQUE',
         ),
         14 => array(
@@ -346,12 +346,12 @@ function doce_avent_gifts() {
         ),
         15 => array(
             'type' => 'code',
-            'message' => t('5€ de réduction sur votre commande avec le code :'),
+            'message' => t('5€ de réduction aujourd\'hui sur votre commande avec le code :'),
             'code' => 'TRAINEAU',
         ),
         16 => array(
             'type' => 'code',
-            'message' => t('10€ de réduction sur votre commande avec le code : '),
+            'message' => t('10€ de réduction aujourd\'hui sur votre commande avec le code : '),
             'code' => 'BONNET',
         ),
         17 => array(
@@ -360,7 +360,7 @@ function doce_avent_gifts() {
         ),
         18 => array(
             'type' => 'code',
-            'message' => t('Frais de port offert avec le code: '),
+            'message' => t('Frais de port offert aujourd\'hui avec le code: '),
             'code' => 'CHEMINEE'
         ),
         19 => array(
@@ -369,7 +369,7 @@ function doce_avent_gifts() {
         ),
         20 => array(
             'type' => 'code',
-            'message' => t('7€ de réduction sur votre commande avec le code : '),
+            'message' => t('7€ de réduction sur votre commande aujourd\'hui avec le code : '),
             'code' => 'HOTTE',
         ),
         21 => array(
@@ -382,7 +382,7 @@ function doce_avent_gifts() {
         ),
         23 => array(
             'type' => 'code',
-            'message' => t('12% de réduction sur votre commande avec le code : '),
+            'message' => t('12% de réduction sur votre commande aujourd\'hui avec le code : '),
             'code' => 'BUCHE',
         ),
         24 => array(

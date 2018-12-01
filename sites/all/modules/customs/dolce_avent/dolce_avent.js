@@ -5,7 +5,6 @@
 
         var dolce_avent = Drupal.settings.dolce_avent;
         var obj = jQuery.parseJSON(dolce_avent);
-        console.log(obj);
 
         $.getScript('//connect.facebook.net/fr_FR/sdk.js', function(){
             FB.init({
@@ -18,7 +17,7 @@
 
                 var options = {
                     method : 'share',
-                    href   : 'https://www.dolcevitadog.com/calendrier-avent'
+                    href   : 'https://www.dolcevitadog.com/fr/calendrier-avent'
                 },
             status = '';
 
