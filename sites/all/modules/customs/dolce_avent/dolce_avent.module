@@ -61,7 +61,7 @@ function dolce_avent_scratch($i) {
             drupal_add_js(drupal_get_path('module', 'dolce_avent') . '/dolce_avent.js');
             $output .= '<div class="box" id="js-container">';
             $output .= '<canvas class="canvas" id="js-canvas" width="306" height="306"></canvas>';
-            $output .= '<div class="inside">';
+            $output .= '<div class="inside" style="visibility: hidden">';
             $output .= _what_is_the_gift($i);
             $output .= '</div>';
             $output .= '</div>';
