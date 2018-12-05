@@ -39,6 +39,7 @@ stylesheets[all][] = css/user.css
 stylesheets[all][] = css/cart.css
 stylesheets[all][] = css/products.css
 stylesheets[all][] = css/category.css
+stylesheets[all][] = css/blocks.css
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Scripts
