@@ -386,8 +386,9 @@ function doce_avent_gifts() {
             'code' => 'BUCHE',
         ),
         24 => array(
-            'type' => 'gift',
-            'message' => t('Tentez de gagner un Harnais Haqihana')
+            'type' => 'code',
+            'message' => t('20% de réduction sur votre commande totale (sauf billeterie) avec le code : '),
+            'code' => 'NOEL2018',
         ),
     );
 }
