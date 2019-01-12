@@ -52,7 +52,7 @@ function dolce_discount_block_view($delta = '') {
             //$timer = render($block['content']);
             $items = array(
                 commerce_kickstart_block_build_element(t("Turid Rugaas en France"), NULL, 'promotional_banner_saving'),
-                l(t("Ne manquez pas l'évènement phare de 2019, prenez votre ticket !"), '/event/seminaire-turid-rugaas-en-france'),
+                l(t("Ne manquez pas l'évènement phare de 2019 et 2020, prenez votre ticket !"), '/event/seminaire-turid-rugaas-en-france-2eme-edition'),
                 //$timer,
                 commerce_kickstart_block_build_element(t('"Early bird price" actuellement'), NULL, 'promotional_banner_special_offer'),
 
