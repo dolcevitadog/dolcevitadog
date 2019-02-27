@@ -39,7 +39,7 @@ function languagefield_field_info() {
 //                             ),
       'default_widget' => 'options_select',
       'default_formatter' => 'language_default',
-      'property_type' => 'token',
+      'property_type' => 'text',
     ),
   );
 }
