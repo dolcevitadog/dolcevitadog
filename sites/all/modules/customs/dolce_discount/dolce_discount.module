@@ -57,6 +57,13 @@ function dolce_discount_block_view($delta = '') {
                 commerce_kickstart_block_build_element(t('"Early bird price" actuellement'), NULL, 'promotional_banner_special_offer'),
 
             );
+            $items = array(
+                commerce_kickstart_block_build_element(t("du 2 au 8 mars, la semaine du Mantrailing"), NULL, 'promotional_banner_saving'),
+                l(t("profitez de -15% sur les Harnais de Mantrailing avec le code promo : SEMAINEMANTRAILING "), '/grossenbacherharness/harnais-mantrailing-v'),
+                //$timer,
+                //commerce_kickstart_block_build_element(t('"code : SEMAINEMANTRAILING'), NULL, 'promotional_banner_special_offer'),
+
+            );
             $block['content'] = commerce_kickstart_block_build_element(implode(' ', $items), 'promotional_banner', NULL, 'div');
             break;
     }
