@@ -86,7 +86,6 @@ module.exports = function (grunt) {
                 var lessPaths = [path.join(librariesPath)];
                 var latestVersion = [].concat(versions).pop();
                 var latestVariables = path.join(latestVersion, 'bootstrap', 'less', 'variables.less');
-                var latestMixins = path.join(latestVersion, 'bootstrap', 'less', 'mixins.less');
                 var themeVariables = path.join(version, library, (library === 'bootstrap' ? 'less' : theme), 'variables.less');
                 var backupVariables = path.join(version, 'bootstrap', 'less', 'variables.less');
                 var fileName = (library === 'bootstrap' ? 'overrides.min.css' : 'overrides-' + theme + '.min.css');
@@ -108,21 +107,8 @@ module.exports = function (grunt) {
                   '@import "' + latestVariables + '"',
                   // Then, override variables with theme.
                   '@import "' + themeVariables + '"',
-                  // Then, import latest bootstrap mixins.
-                  '@import "' + latestMixins + '"',
-                  // Then, import the variable overrides.
-                  '@import "' + path.join('starterkits', 'less', 'less', 'variable-overrides.less') + '"',
                   // Finally, import the base-theme overrides.
-                  '@import "' + path.join('starterkits', 'less', 'less', 'overrides.less') + '"',
-                  // Add some default variables that may not be available.
-                  '@form-group-margin-bottom: 15px',
-                  '@screen-sm-min: @screen-sm',
-                  '@screen-md-min: @screen-md',
-                  '@screen-lg-min: @screen-lg',
-                  '@container-sm: @container-tablet',
-                  '@container-md: @container-desktop',
-                  '@container-large-desktop: (1140px + @grid-gutter-width)',
-                  '@container-lg: @container-large-desktop'
+                  '@import "' + path.join('starterkits', 'less', 'less', 'overrides.less') + '"'
                 ];
                 grunt.log.debug("\noptions: " + JSON.stringify(options, null, 2));
                 grunt.log.debug(imports.join("\n"));
