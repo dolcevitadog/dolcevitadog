@@ -57,7 +57,7 @@ function dolce_discount_block_view($delta = '') {
                 commerce_kickstart_block_build_element(t('"Early bird price" actuellement'), NULL, 'promotional_banner_special_offer'),
 
             );
-
+/*
             $items = array(
                 commerce_kickstart_block_build_element(t("CONGES ANNUEL"), NULL, 'promotional_banner_saving'),
                 t("Les livraisons seront suspendues du 15 au 19 avril 2019"),
@@ -65,7 +65,7 @@ function dolce_discount_block_view($delta = '') {
                 //commerce_kickstart_block_build_element(t('"code : SEMAINEMANTRAILING'), NULL, 'promotional_banner_special_offer'),
 
             );
-
+  */
             $block['content'] = commerce_kickstart_block_build_element(implode(' ', $items), 'promotional_banner', NULL, 'div');
             break;
     }
