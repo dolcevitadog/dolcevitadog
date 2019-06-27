@@ -74,5 +74,11 @@
   <?php print $page_top; ?>
   <?php print $page; ?>
   <?php print $page_bottom; ?>
+  <script>
+      window.replainSettings = { id: 'af3ee820-371a-4c98-a1ba-76e8ff344f3b' };
+      (function(u){var s=document.createElement('script');s.type='text/javascript';s.async=true;s.src=u;
+          var x=document.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);
+      })('https://widget.replain.cc/dist/client.js');
+  </script>
 </body>
 </html>
