@@ -52,7 +52,7 @@ function dolce_discount_block_view($delta = '') {
             //$timer = render($block['content']);
             $items = array(
                 commerce_kickstart_block_build_element(t("Promo été 2019"), NULL, 'promotional_banner_saving'),
-                l(t("-10% sur Harnais et Laisses Haqihana"), '/collection/46'),
+                l(t("-10% sur Harnais et Laisses Haqihana jusqu'au 31 Août"), '/collection/46'),
                 //$timer,
                 commerce_kickstart_block_build_element(t('Code: ETE2019'), NULL, 'promotional_banner_special_offer'),
 
