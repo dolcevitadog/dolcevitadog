@@ -51,10 +51,10 @@ function dolce_discount_block_view($delta = '') {
             //$block = module_invoke('jquery_countdown_timer', 'block_view', 'jquery_countdown_timer');
             //$timer = render($block['content']);
             $items = array(
-                commerce_kickstart_block_build_element(t("Turid Rugaas à nouveau en France"), NULL, 'promotional_banner_saving'),
-                l(t("Nouveau séminaire, nouveau thème, prenez votre ticket !"), '/event/seminaire-turid-rugaas-le-chien-accompli'),
+                commerce_kickstart_block_build_element(t("Promo été 2019"), NULL, 'promotional_banner_saving'),
+                l(t("-10% sur Harnais et Laisses Haqihana"), '/collection/46'),
                 //$timer,
-                commerce_kickstart_block_build_element(t('"Early bird price" actuellement'), NULL, 'promotional_banner_special_offer'),
+                commerce_kickstart_block_build_element(t('Code: ETE2019'), NULL, 'promotional_banner_special_offer'),
 
             );
 /*
