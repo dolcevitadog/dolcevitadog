@@ -1,0 +1,12 @@
+<?php
+/**
+ * @file
+ * Commerce Payment Alter Install and Update hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function commerce_payment_alter_uninstall() {
+  variable_del('commerce_payment_alter');
+}

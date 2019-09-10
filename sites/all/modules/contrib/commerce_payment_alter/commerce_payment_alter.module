@@ -1,0 +1,60 @@
+<?php
+/**
+ * @file
+ * Alter Commerce Payment information.
+ */
+
+require_once 'includes/commerce_payment_alter.helper.inc';
+
+/**
+ * Implements hook_commerce_payment_method_info_alter().
+ */
+function commerce_payment_alter_commerce_payment_method_info_alter(&$payment_methods) {
+  global $language;
+
+  $configuration = _commerce_payment_alter_get_configuration();
+
+  foreach ($payment_methods as $key => &$method) {
+    $display_title_identifier = _commerce_payment_alter_get_identifier(
+      'display_title',
+      $key,
+      $language->language
+    );
+
+    if (isset($configuration['translations'][$display_title_identifier])) {
+      $method['display_title'] = $configuration['translations'][$display_title_identifier];
+    }
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function commerce_payment_alter_menu() {
+  return array(
+    'admin/commerce/config/payment-methods/alter' => array(
+      'title' => 'Alter payment methods',
+      'description' => 'Configuration for altering the payment methods.',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('commerce_payment_alter_admin_form'),
+      'type' => MENU_NORMAL_ITEM,
+      'access arguments' => array('administer payments'),
+      'file' => 'includes/commerce_payment_alter.admin.inc',
+      'file path' => drupal_get_path('module', 'commerce_payment_alter'),
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_help().
+ */
+function commerce_payment_alter_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#commerce_payment_alter':
+      return '<p>' . t('Payment methods of the Commerce Payment module by default have no possibility of overriding the source language of the display title. The <a href="@administration">Commerce Payment Methods administration page</a> provides an interface for changing the display title of each payment method and for each language, including the source language.', array('@administration' => url('admin/commerce/config/payment-methods/alter'))) . '</p>';
+
+    case 'admin/commerce/config/payment-methods/alter':
+      return '<p>' . t('This page provides an interface for changing the display title of each payment method and for each language, including the source language.') . '</p>';
+  }
+}
