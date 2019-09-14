@@ -11,21 +11,13 @@ namespace Stripe;
  * @property string $balance_transaction
  * @property int $created
  * @property string $currency
- * @property string $destination_payment_refund
- * @property StripeObject $metadata
- * @property string $source_refund
+ * @property mixed $metadata
  * @property string $transfer
  *
  * @package Stripe
  */
 class TransferReversal extends ApiResource
 {
-    const OBJECT_NAME = "transfer_reversal";
-
-    use ApiOperations\Update {
-        save as protected _save;
-    }
-
     /**
      * @return string The API URL for this Stripe transfer reversal.
      */
@@ -34,7 +26,7 @@ class TransferReversal extends ApiResource
         $id = $this['id'];
         $transfer = $this['transfer'];
         if (!$id) {
-            throw new Exception\UnexpectedValueException(
+            throw new Error\InvalidRequest(
                 "Could not determine which URL to request: " .
                 "class instance has invalid ID: $id",
                 null
@@ -51,8 +43,6 @@ class TransferReversal extends ApiResource
 
     /**
      * @param array|string|null $opts
-     *
-     * @throws \Stripe\Exception\ApiErrorException if the request fails
      *
      * @return TransferReversal The saved reversal.
      */

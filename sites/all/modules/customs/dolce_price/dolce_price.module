@@ -1,0 +1,50 @@
+<?php
+
+
+/**
+ * Theme callback: display prices in a table.
+ */
+function dolce_price_commerce_price_savings_formatter_formatter($vars) {
+    // Build an array of table rows based on the prices passed in.
+    $rows = array();
+
+    // exit if no prices
+    if (empty($vars['prices'])) {
+        return '';
+    }
+
+    // store prices count
+    $prices_count = count($vars['prices']);
+
+    // extract price direction
+    $price_direction = !empty($vars['price_direction']) ? $vars['price_direction'] : 'unchanged';
+
+    // build rows
+    foreach ($vars['prices'] as $key => $price_element) {
+        $row_data = array();
+        $label = '';
+        // add label
+        if (isset($price_element['#price_label'])) {
+            if (!empty($price_element['#price_label'])) {
+                $label = t('@label:', array('@label' => $price_element['#price_label']));
+            }
+
+            $label = '<label class="price-label">' . $label . '</label> ';
+        }
+
+        // add price
+        $row_data = $label . '<span class="price-amount">' . drupal_render($price_element) . '</span>';
+
+
+        $rows[] = '<span class="commerce-price-savings-formatter-' . $key . '">' . $row_data . '</span>';
+    }
+    return theme('item_list', array('items' => $rows,
+        'attributes' => array(
+            'class' => array(
+                'commerce-price-savings-formatter-prices',
+                'commerce-price-savings-formatter-prices-count-' . $prices_count,
+                'commerce-price-savings-formatter-prices-' . $price_direction,
+            ),
+        ),
+    ));
+}
