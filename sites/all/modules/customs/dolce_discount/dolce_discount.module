@@ -56,14 +56,13 @@ function dolce_discount_block_view($delta = '') {
                 l(t("-15% sur le site (sauf billetterie) avec le code promo BLACKFRIDAY2019"), '/collection/46'),
                 //$timer,
                 commerce_kickstart_block_build_element(t('Code: ETE2019'), NULL, 'promotional_banner_special_offer'),
-
             );
             */
             $items = array(
-                commerce_kickstart_block_build_element(t("SEMAINE BLACKFRIDAY ! Du lundi au vendredi"), NULL, 'promotional_banner_saving'),
-                t("-15% sur toute la boutique (sauf billetterie)"),
+                commerce_kickstart_block_build_element(t("INFO : Les livraisons sont suspendues jusqu'au 26 décembre"), NULL, 'promotional_banner_saving'),
+                t(""),
                 //$timer,
-                commerce_kickstart_block_build_element(t('"code promo : BLACKFRIDAY2019'), NULL, 'promotional_banner_special_offer'),
+                //commerce_kickstart_block_build_element(t('"code promo : BLACKFRIDAY2019'), NULL, 'promotional_banner_special_offer'),
 
             );
             $block['content'] = commerce_kickstart_block_build_element(implode(' ', $items), 'promotional_banner', NULL, 'div');
