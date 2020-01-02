@@ -59,7 +59,7 @@ function dolce_discount_block_view($delta = '') {
             );
             */
             $items = array(
-                commerce_kickstart_block_build_element(t("INFO : Les livraisons sont suspendues jusqu'au 26 décembre"), NULL, 'promotional_banner_saving'),
+                commerce_kickstart_block_build_element(t(variable_get('promotional_banner_body', '')), NULL, 'promotional_banner_saving'),
                 t(""),
                 //$timer,
                 //commerce_kickstart_block_build_element(t('"code promo : BLACKFRIDAY2019'), NULL, 'promotional_banner_special_offer'),
@@ -69,6 +69,38 @@ function dolce_discount_block_view($delta = '') {
             break;
     }
     return $block;
+}
+
+/**
+ * Implements hook_block_configure().
+ */
+function dolce_discount_block_configure($delta='') {
+    $form = array();
+
+    switch($delta) {
+        case 'promotional_banner' :
+            // Text field form element
+            $form['promotional_banner_body'] = array(
+                '#type' => 'text_format',
+                '#title' => t('Enter your text here in WYSIWYG format'),
+                '#default_value' => variable_get('promotional_banner_body', ''),
+            );
+
+            break;
+    }
+    return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function dolce_discount_block_save($delta = '', $edit = array()) {
+    switch($delta) {
+        case 'promotional_banner' :
+            // Saving the WYSIWYG text
+            variable_set('promotional_banner_body', $edit['promotional_banner_body']['value']);
+            break;
+    }
 }
 
 /**
