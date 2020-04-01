@@ -31,3 +31,85 @@ function dolce_cart_add_to_cart_validate($form, &$form_state)
         form_set_error('quantity', '');
     }
 }
+
+function dolce_cart_preprocess_commerce_line_item_summary(&$variables) {
+    if (isset($variables['view'])) {
+        switch ($variables['view']->name) {
+            case 'shopping_cart':
+                unset($variables['quantity']);
+                unset($variables['quantity_label']);
+                break;
+        }
+        if ($variables['quantity_raw'] == 0) {
+            unset($variables['links']);
+        }
+    }
+}
+
+/**
+ * Implements hook_block_info().
+ */
+function dolce_cart_block_info() {
+    $blocks['dolce_cart_shopping_cart'] = array(
+        'info' => t('Dolce - Shopping cart'),
+        'title' => '',
+        'region' => 'header',
+        'cache' => DRUPAL_NO_CACHE,
+    );
+
+    return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function dolce_cart_block_view($delta = '') {
+    switch ($delta) {
+        case 'dolce_cart_shopping_cart':
+            return array(
+                'subject' => t('Dolce - Shopping cart'),
+                'content' => theme(
+                    'dolce_cart_shopping_cart',
+                    array(
+                        'cart' =>_dolce_cart_get_shopping_cart_data()
+                    )
+                ),
+            );
+            break;
+    }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function dolce_cart_theme($existing, $type, $theme, $path) {
+    return array(
+        'dolce_cart_shopping_cart' => array(
+            'template' => 'dolce_cart_shopping_cart',
+            'arguments' => array('cart' => array())
+        )
+    );
+}
+
+/**
+ * Retrieve the current customers lightweight shopping cart data.
+ */
+function _dolce_cart_get_shopping_cart_data() {
+
+    global $user;
+    $data = array();
+    $order = commerce_cart_order_load($user->uid);
+    if ($order) {
+        $quantity = 0;
+        $wrapper = entity_metadata_wrapper('commerce_order', $order);
+        $line_items = $wrapper->commerce_line_items;
+        $data['quantity'] = commerce_line_items_quantity($line_items, commerce_product_line_item_types());
+        $total = commerce_line_items_total($line_items);
+        $data['price'] = commerce_currency_format(round($total['amount']), $total['currency_code']);
+    }
+    else {
+        $data['quantity'] = 0;
+    }
+
+    return $data;
+}

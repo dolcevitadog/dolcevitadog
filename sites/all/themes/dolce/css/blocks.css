@@ -1,1 +1,195 @@
-#block-mailchimp-signup-dolcevitadog-mailchimp{text-align:center;background:#323435;-webkit-border-radius:10px;-moz-border-radius:10px;border-radius:10px}#block-mailchimp-signup-dolcevitadog-mailchimp #mailchimp-signup-subscribe-block-dolcevitadog-mailchimp-form{text-align:center}#block-mailchimp-signup-dolcevitadog-mailchimp #mailchimp-signup-subscribe-block-dolcevitadog-mailchimp-form input{width:320px;margin:10px auto}#block-mailchimp-signup-dolcevitadog-mailchimp #mailchimp-signup-subscribe-block-dolcevitadog-mailchimp-form .form-actions{margin:10px}
+@import url('https://fonts.googleapis.com/css?family=Comfortaa|Covered+By+Your+Grace|Nothing+You+Could+Do');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+/*Fonts*/
+#block-mailchimp-signup-dolcevitadog-mailchimp {
+  text-align: center;
+  background: #323435;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+}
+#block-mailchimp-signup-dolcevitadog-mailchimp #mailchimp-signup-subscribe-block-dolcevitadog-mailchimp-form {
+  text-align: center;
+}
+#block-mailchimp-signup-dolcevitadog-mailchimp #mailchimp-signup-subscribe-block-dolcevitadog-mailchimp-form input {
+  width: 320px;
+  margin: 10px auto;
+}
+#block-mailchimp-signup-dolcevitadog-mailchimp #mailchimp-signup-subscribe-block-dolcevitadog-mailchimp-form .form-actions {
+  margin: 10px;
+}
+#homeslider .bx-wrapper {
+  box-shadow: none;
+  border: none;
+  background: transparent;
+  /* -webkit-box-shadow: 0 0 5px #ccc; */
+  /* box-shadow: 0 0 5px #ccc; */
+  /* border: 5px solid #fff; */
+  /* background: #fff; */
+}
+#homeslider .bx-wrapper ul li img {
+  width: 100% !important;
+}
+#dolcevitadog_services li {
+  padding: 0;
+  display: inline-block;
+  vertical-align: middle;
+  text-align: center;
+}
+#dolcevitadog_services li .services-item {
+  padding: 5px;
+}
+#dolcevitadog_services li .services-item img {
+  height: 45px;
+  display: inline-block;
+  margin-right: 0.6em;
+}
+#dolcevitadog_services li .services-item span {
+  font-weight: bold;
+  display: inline-block;
+  margin-bottom: 0;
+  vertical-align: middle;
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.1;
+  width: 120px;
+}
+.partners-bloc-homepage .bx-wrapper {
+  margin: 0 auto;
+  box-shadow: none;
+  border: 4px solid #f2f2f2;
+  padding: 10px;
+}
+.partners-bloc-homepage .bx-wrapper ul li {
+  padding: 0 5px;
+}
+#products_homepage ul {
+  text-align: center;
+}
+#products_homepage ul li {
+  margin: 10px 0;
+}
+#products_homepage ul li .discount-products-wrapper {
+  position: relative;
+  border: 6px solid #eee;
+  padding: 0;
+  min-height: 380px;
+  transition: border-color 1s, transform 2s ease-in;
+}
+#products_homepage ul li .discount-products-wrapper img {
+  transition: all 500ms ease-in;
+}
+#products_homepage ul li .discount-products-wrapper .promo-wrapper {
+  background: #7f98b3;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px;
+}
+#products_homepage ul li .discount-products-wrapper .field-name-title-field {
+  font-size: 18px;
+  text-align: center;
+  padding: 10px 5px;
+}
+#products_homepage ul li .discount-products-wrapper .field-name-title-field a {
+  color: black;
+}
+#products_homepage ul li .discount-products-wrapper .field-name-commerce-price {
+  border-top: 1px solid #eee;
+  position: absolute;
+  bottom: 0;
+  padding: 5px 0px;
+  width: 100%;
+}
+#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper {
+  text-align: center;
+}
+#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title {
+  font-weight: bold;
+  color: #ffffff;
+  position: absolute;
+  right: 17px;
+  bottom: 150px;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  background: #7f98b3;
+  border-radius: 50%;
+  padding: 0;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .rrp-wrapper {
+  text-align: center;
+  color: #222222;
+}
+#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper {
+  text-align: center;
+}
+#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total {
+  color: #000000;
+  font-size: 16px;
+}
+#products_homepage ul li .discount-products-wrapper:hover {
+  border-color: #7f98b3;
+}
+#products_homepage ul li .discount-products-wrapper:hover img {
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
+  opacity: 0.5;
+}
+#highlight ul li {
+  margin: 10px auto;
+  text-align: center;
+}
+#highlight ul li .highlight-wrapper a {
+  position: relative;
+}
+#highlight ul li .highlight-wrapper .field-name-field-highlight-image {
+  position: relative;
+  width: 240px;
+  margin: 0 auto;
+  border-top: 4px solid #eee;
+  border-left: 4px solid #eee;
+  border-right: 4px solid #eee;
+  overflow: hidden;
+  transition: border-color 1s, transform 2s ease-in;
+}
+#highlight ul li .highlight-wrapper .field-name-field-highlight-image img {
+  margin: 0 auto;
+  transition: all 500ms ease-in;
+}
+#highlight ul li .highlight-wrapper .views-field-title {
+  width: 240px;
+  margin: 0 auto;
+  font-size: 18px;
+  padding: 10px 5px;
+  border-top: 2px solid #eee;
+  border-bottom: 4px solid #eee;
+  border-left: 4px solid #eee;
+  border-right: 4px solid #eee;
+  transition: border-color 1s, transform 2s ease-in;
+}
+#highlight ul li .highlight-wrapper .interview-picto,
+#highlight ul li .highlight-wrapper .information-picto {
+  position: absolute;
+  top: 20px;
+  right: 75px;
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+  background: #7f98b3;
+  border-radius: 50%;
+  padding: 0;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
+  color: white;
+}
+#highlight ul li .highlight-wrapper:hover .field-name-field-highlight-image {
+  border-color: #7f98b3;
+}
+#highlight ul li .highlight-wrapper:hover .views-field-title {
+  border-color: #7f98b3;
+}
+#highlight ul li .highlight-wrapper:hover img {
+  transform: rotate(-10deg) scale(1.2);
+}

@@ -1,50 +1,142 @@
 <?php
 
-
 /**
- * Theme callback: display prices in a table.
+ * Themes a price components table.
+ *
+ * @param $variables
+ *   Includes the 'components' array and original 'price' array as well as display options.
+ * I rebuild the whole theme, because i dont want a table but 3 distincts wrappers to easily place it with CSS
  */
-function dolce_price_commerce_price_savings_formatter_formatter($vars) {
-    // Build an array of table rows based on the prices passed in.
+function dolce_price_commerce_price_rrp_your_price($variables) {
+    drupal_add_css(drupal_get_path('module', 'commerce_extra_price_formatters') . '/theme/your_price.theme.css');
+
+
+    // Build table rows out of the components.
     $rows = array();
 
-    // exit if no prices
-    if (empty($vars['prices'])) {
-        return '';
-    }
+    $web_price = $variables['components']['commerce_price_rrp_your_price']['formatted_price'];
+    $rrp = $variables['components']['base_price']['price']['amount'];
 
-    // store prices count
-    $prices_count = count($vars['prices']);
-
-    // extract price direction
-    $price_direction = !empty($vars['price_direction']) ? $vars['price_direction'] : 'unchanged';
-
-    // build rows
-    foreach ($vars['prices'] as $key => $price_element) {
-        $row_data = array();
-        $label = '';
-        // add label
-        if (isset($price_element['#price_label'])) {
-            if (!empty($price_element['#price_label'])) {
-                $label = t('@label:', array('@label' => $price_element['#price_label']));
+    if ($variables['options']['include_tax_in_rrp'] == TRUE) {
+        foreach ($variables['components'] as $component_name => $component_value) {
+            if (substr($component_name, 0, 3) == 'tax') {
+                $rrp += $component_value['price']['amount'];
             }
-
-            $label = '<label class="price-label">' . $label . '</label> ';
         }
-
-        // add price
-        $row_data = $label . '<span class="price-amount">' . drupal_render($price_element) . '</span>';
-
-
-        $rows[] = '<span class="commerce-price-savings-formatter-' . $key . '">' . $row_data . '</span>';
     }
-    return theme('item_list', array('items' => $rows,
-        'attributes' => array(
-            'class' => array(
-                'commerce-price-savings-formatter-prices',
-                'commerce-price-savings-formatter-prices-count-' . $prices_count,
-                'commerce-price-savings-formatter-prices-' . $price_direction,
+
+    $whole_numbers_only = $variables['options']['whole_numbers_only'];
+
+    if ($whole_numbers_only){
+        $rrp = commerce_extra_price_no_decimal_currency_format($rrp, $variables['components']['base_price']['price']['currency_code']);
+        $web_price = commerce_extra_price_no_decimal_currency_format($variables['components']['commerce_price_rrp_your_price']['price']['amount'], $variables['components']['commerce_price_rrp_your_price']['price']['currency_code']);
+    } else {
+        $rrp = commerce_currency_format($rrp, $variables['components']['base_price']['price']['currency_code']);
+    }
+
+    if (isset($variables['components']['discount']) && $whole_numbers_only){
+        $saving = commerce_extra_price_no_decimal_currency_format(-$variables['components']['discount']['price']['amount'], $variables['components']['discount']['price']['currency_code']);
+    } else if (isset($variables['components']['discount'])) {
+        $saving = commerce_currency_format(-$variables['components']['discount']['price']['amount'], $variables['components']['discount']['price']['currency_code']);
+    }
+
+    $check_for_same_price = $variables['options']['check_for_same_price'];
+
+    /* Adding Stuff */
+
+    $html = '';
+
+    if ($check_for_same_price == 1 && $web_price != $rrp) {
+
+        $html .= '<div class="rrp-wrapper">';
+        if (!empty(check_plain($variables['options']['rrp_label']))) {
+            $html .= '<label class="rrp-title">'.check_plain($variables['options']['rrp_label']).'</label>';
+        }
+        $html .= '<span class="rrp-total">'.$rrp.'</span>';
+        $html .= '</div>';
+        /*
+        $rows[] = array(
+            'data' => array(
+                array(
+                    'data' => check_plain($variables['options']['rrp_label']),
+                    'class' => array('rrp-title'),
+                ),
+                array(
+                    'data' => $rrp,
+                    'class' => array('rrp-total'),
+                ),
             ),
-        ),
-    ));
+        );
+        */
+        $html .= '<div class="webprice-wrapper">';
+        if (!empty(check_plain($variables['options']['offer_label']))) {
+            $html .= '<label class="webprice-title">'.check_plain($variables['options']['offer_label']).'</label>';
+        }
+        $html .= '<span class="webprice-total">'.$web_price.'</span>';
+        $html .= '</div>';
+        /*
+        $rows[] = array(
+            'data' => array(
+                array(
+                    'data' => check_plain($variables['options']['offer_label']),
+                    'class' => array('webprice-title'),
+                ),
+                array(
+                    'data' => $web_price,
+                    'class' => array('webprice-total'),
+                ),
+            ),
+        );
+        */
+
+
+        if ($variables['options']['show_saving'] == 1 && isset($saving)) {
+
+            $html .= '<div class="saving-wrapper">';
+            if (!empty(check_plain($variables['options']['saving_label']))) {
+                $html .= '<label class="saving-title">'.check_plain($variables['options']['saving_label']).'</label>';
+            }
+            $html .= '<span class="saving-title">'.$saving.'</span>';
+            $html .= '</div>';
+            /*
+            $rows[] = array(
+                'data' => array(
+                    array(
+                        'data' => check_plain($variables['options']['saving_label']),
+                        'class' => array('saving-title'),
+                    ),
+                    array(
+                        'data' => $saving,
+                        'class' => array('saving-title'),
+                    ),
+                )
+            );
+            */
+        }
+    }
+
+    else {
+        /*
+        $rows[] = array(
+            'data' => array(
+                array(
+                    'data' => t('Price'),
+                    'class' => array('webprice-title'),
+                ),
+                array(
+                    'data' => $web_price,
+                    'class' => array('webprice-total'),
+                ),
+            ),
+        );
+        */
+        $html .= '<div class="webprice-wrapper">';
+        if (!empty(check_plain($variables['options']['offer_label']))) {
+            $html .= '<label class="webprice-title">'.check_plain($variables['options']['offer_label']).'</label>';
+        }
+        $html .= '<span class="webprice-total">'.$web_price.'</span>';
+        $html .= '</div>';
+    }
+    return $html;
+    return  theme('table', array('rows' => $rows, 'attributes' => array('class' => array('commerce-price-rrp-your-price'))));
 }

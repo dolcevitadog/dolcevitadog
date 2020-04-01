@@ -1,0 +1,95 @@
+<?php
+
+
+/**
+ * Implements hook_block_info().
+ */
+function dolce_user_links_block_info() {
+    $blocks['dolce_user_links'] = array(
+        'info' => t('Dolce - User Links'),
+        'title' => '',
+        'region' => 'header',
+        'cache' => DRUPAL_NO_CACHE,
+    );
+
+    $blocks['dolce_user_logout'] = array(
+        'info' => t('Dolce - User Links logout'),
+        'title' => '',
+        'region' => 'header',
+        'cache' => DRUPAL_NO_CACHE,
+    );
+
+    return $blocks;
+}
+
+/**
+ * Implements hook_block_view().
+ */
+function dolce_user_links_block_view($delta = '') {
+    switch ($delta) {
+        case 'dolce_user_links':
+            return array(
+                'subject' => t('Dolce - User Links'),
+                'content' => theme(
+                    'dolce_user_links',
+                    array(
+                        'links' =>_dolce_user_links_data()
+                    )
+                ),
+            );
+            break;
+        case 'dolce_user_logout':
+            return array(
+                'subject' => t('Dolce - User Links logout'),
+                'content' => _dolce_user_logout_data(),
+            );
+            break;
+            
+    }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function dolce_user_links_theme($existing, $type, $theme, $path) {
+    return array(
+        'dolce_user_links' => array(
+            'template' => 'dolce_user_links',
+            'arguments' => array('links' => array())
+        )
+    );
+}
+
+/**
+ * Retrieve the current customers lightweight shopping cart data.
+ */
+function _dolce_user_links_data() {
+    $links = array();
+    global $user;
+    if (user_is_anonymous()) {
+        $links = array(
+            'class' => 'login',
+            'href' => 'user/login',
+            'title' => t('My account'),
+        );
+    }
+    else {
+        $links = array(
+            'class' => 'login-connected',
+            'href' => 'user',
+            'title' => t('My account'),
+        );
+    }
+
+    return $links;
+}
+
+/**
+ * Retrieve the current disconnected links
+ */
+function _dolce_user_logout_data() {
+    $links = array();
+    global $user;
+    $prefix = '<span class="icon glyphicon glyphicon-log-out"></span> ';
+    return l($prefix.t('Logout'), 'user/logout', array('html' => true, 'attributes' => array('class' => 'dolce-user-logout')));
+}
