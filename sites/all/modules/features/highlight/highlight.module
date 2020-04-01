@@ -1,8 +1,0 @@
-<?php
-
-/**
- * @file
- * Code for the Highlight feature.
- */
-
-include_once 'highlight.features.inc';
