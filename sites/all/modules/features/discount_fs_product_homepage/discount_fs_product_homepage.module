@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the Discount product homepage feature.
+ */
+
+include_once 'discount_fs_product_homepage.features.inc';
