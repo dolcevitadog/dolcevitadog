@@ -1,3 +1,5 @@
+@import "variables.less";
+
 .profile {
   h3 {
     background: #f4f4f4;
@@ -21,6 +23,37 @@
         padding: 0;
         margin: 0;
       }
+    }
+  }
+}
+
+.block-dolce-user-links {
+  display: inline-block;
+  #dolce-user-links-block {
+    position: relative;
+    font-family: @cartfont;
+    font-weight: 400;
+    max-width: 130px;
+    text-align: center;
+    display: inline-block;
+    a, span {
+      display: block;
+      text-decoration: none;
+    }
+    .dolce-user-links {
+      background-image: url('../images/account_anonymous60.png');
+      background-repeat: no-repeat;
+      height: 60px;
+      width: 60px;
+      display: block;
+      margin: auto;
+      margin-bottom: 10px;
+      background-size: contain;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+    .dolce-user-links.login-connected {
+      background-image: url('../images/account_picto_connected60.png');
     }
   }
 }

@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Comfortaa|Covered+By+Your+Grace|Nothing+You+Could+Do');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+/*Fonts*/
 .profile h3 {
   background: #f4f4f4;
   padding: 8px;
@@ -18,4 +21,34 @@
   display: inherit;
   padding: 0;
   margin: 0;
+}
+.block-dolce-user-links {
+  display: inline-block;
+}
+.block-dolce-user-links #dolce-user-links-block {
+  position: relative;
+  font-family: "Comfortaa";
+  font-weight: 400;
+  max-width: 130px;
+  text-align: center;
+  display: inline-block;
+}
+.block-dolce-user-links #dolce-user-links-block a,
+.block-dolce-user-links #dolce-user-links-block span {
+  display: block;
+  text-decoration: none;
+}
+.block-dolce-user-links #dolce-user-links-block .dolce-user-links {
+  background-image: url('../images/account_anonymous60.png');
+  height: 60px;
+  width: 60px;
+  display: block;
+  margin: auto;
+  margin-bottom: 10px;
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
+.block-dolce-user-links #dolce-user-links-block .dolce-user-links.login-connected {
+  background-image: url('../images/account_picto_connected60.png');
 }

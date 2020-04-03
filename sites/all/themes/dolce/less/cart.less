@@ -1,5 +1,56 @@
 @import "variables.less";
 
+.block-dolce-cart {
+  display: inline-block;
+  #dolce-cart {
+    position: relative;
+    font-family: @cartfont;
+    font-weight: 400;
+    max-width: 130px;
+    text-align: center;
+    display: inline-block;
+    a, span {
+      display: block;
+      text-decoration: none;
+    }
+    .dolce-cart-bg {
+      background-image: url('../images/shopping_bag80.png');
+      background-repeat: no-repeat;
+      height: 60px;
+      width: 60px;
+      display: block;
+      margin: auto;
+      margin-bottom: 10px;
+      background-size: contain;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+    .dolce-cart-quantity {
+      position: absolute;
+      top: 5px;
+      left: 35px;
+      -webkit-border-radius: 25px;
+      -moz-border-radius: 25px;
+      border-radius: 45px;
+      background-color: @checkoutheader;
+      font-size: 15px;
+      display: block;
+      padding: 4px 3px;
+      text-align: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 100%;
+      color: white !important;
+      font-weight: bold !important;
+    }
+    .dolce-cart-price {
+      position: absolute;
+      top: 35px;
+      right: 8px;
+    }
+  }
+}
+
 #block-views-shopping-cart-block {
   margin: 0 auto;
   margin-left: 50px; /* LTR */
@@ -124,13 +175,12 @@
       &:first-child {
         padding-left: 10px; /* LTR */
       }
-
       a {
         background-position: 0 100%;
         background-repeat: no-repeat;
         display: block;
         height: 30px;
-        margin: 5px 0px;
+        margin: 5px auto;
         text-indent: -9999px;
         width: 50px;
       }
@@ -151,6 +201,9 @@
       }
       .cheque {
         background-image: url('../images/picto-cheque.png');
+      }
+      .virement {
+        background-image: url('../images/picto-virement.png');
       }
     }
   }

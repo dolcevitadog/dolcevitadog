@@ -15,8 +15,8 @@
  */
 function dolce_preprocess_page(&$vars) {
   // Add information about the number of sidebars.
-  $vars['zone_user_first_classes'] = 'col-md-7 col-lg-7 col-sm-6 col-xs-12';
-  $vars['zone_user_second_classes'] = 'col-md-5 col-lg-5 col-sm-6 col-xs-12';
+  $vars['zone_user_first_classes'] = 'col-md-7 col-lg-7 col-sm-6 col-xs-4';
+  $vars['zone_user_second_classes'] = 'col-md-5 col-lg-5 col-sm-6 col-xs-8';
 
   // Add responsive tables for Cart and Checkout
     $arg = arg();

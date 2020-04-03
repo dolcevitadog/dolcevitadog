@@ -159,3 +159,148 @@ function dolce_preprocess_views_view_field(&$vars) {
 
     $vars['output'] = $vars['field']->advanced_render($vars['row']);
 }
+
+
+/**
+ * Themes a price components table.
+ *
+ * @param $variables
+ *   Includes the 'components' array and original 'price' array as well as display options.
+ * I rebuild the whole theme, because i dont want a table but 3 distincts wrappers to easily place it with CSS
+ */
+function dolce_commerce_price_rrp_your_price($variables) {
+    drupal_add_css(drupal_get_path('module', 'commerce_extra_price_formatters') . '/theme/your_price.theme.css');
+
+
+    // Build table rows out of the components.
+    $rows = array();
+
+    $web_price = $variables['components']['commerce_price_rrp_your_price']['formatted_price'];
+    $rrp = $variables['components']['base_price']['price']['amount'];
+
+    if ($variables['options']['include_tax_in_rrp'] == TRUE) {
+        foreach ($variables['components'] as $component_name => $component_value) {
+            if (substr($component_name, 0, 3) == 'tax') {
+                $rrp += $component_value['price']['amount'];
+            }
+        }
+    }
+
+    $whole_numbers_only = $variables['options']['whole_numbers_only'];
+
+    if ($whole_numbers_only){
+        $rrp = commerce_extra_price_no_decimal_currency_format($rrp, $variables['components']['base_price']['price']['currency_code']);
+        $web_price = commerce_extra_price_no_decimal_currency_format($variables['components']['commerce_price_rrp_your_price']['price']['amount'], $variables['components']['commerce_price_rrp_your_price']['price']['currency_code']);
+    } else {
+        $rrp = commerce_currency_format($rrp, $variables['components']['base_price']['price']['currency_code']);
+    }
+
+    if (isset($variables['components']['discount']) && $whole_numbers_only){
+        $saving = commerce_extra_price_no_decimal_currency_format(-$variables['components']['discount']['price']['amount'], $variables['components']['discount']['price']['currency_code']);
+    } else if (isset($variables['components']['discount'])) {
+        $saving = commerce_currency_format(-$variables['components']['discount']['price']['amount'], $variables['components']['discount']['price']['currency_code']);
+    }
+
+    $check_for_same_price = $variables['options']['check_for_same_price'];
+
+    /* Adding Stuff */
+
+    $html = '';
+
+    if ($check_for_same_price == 1 && $web_price != $rrp) {
+
+        $html .= '<div class="rrp-wrapper">';
+        if (!empty(check_plain($variables['options']['rrp_label']))) {
+            $html .= '<label class="rrp-title">'.check_plain($variables['options']['rrp_label']).'</label>';
+        }
+        $html .= '<span class="rrp-total">'.$rrp.'</span>';
+        $html .= '</div>';
+        /*
+        $rows[] = array(
+            'data' => array(
+                array(
+                    'data' => check_plain($variables['options']['rrp_label']),
+                    'class' => array('rrp-title'),
+                ),
+                array(
+                    'data' => $rrp,
+                    'class' => array('rrp-total'),
+                ),
+            ),
+        );
+        */
+        $html .= '<div class="webprice-wrapper">';
+        if (!empty(check_plain($variables['options']['offer_label']))) {
+            $html .= '<label class="webprice-title">'.check_plain($variables['options']['offer_label']).'</label>';
+        }
+        $html .= '<span class="webprice-total">'.$web_price.'</span>';
+        $html .= '</div>';
+        /*
+        $rows[] = array(
+            'data' => array(
+                array(
+                    'data' => check_plain($variables['options']['offer_label']),
+                    'class' => array('webprice-title'),
+                ),
+                array(
+                    'data' => $web_price,
+                    'class' => array('webprice-total'),
+                ),
+            ),
+        );
+        */
+        $discountrprice = $variables['components']['commerce_price_rrp_your_price']['price']['amount'];
+        $baseprice = $variables['components']['base_price']['price']['amount'];
+        $discount = ($discountrprice - $baseprice);
+        $saving_percentage = ($discount / $baseprice) * 100;
+        $saving_percentage .= '%';
+        if ($variables['options']['show_saving'] == 1 && isset($saving_percentage)) {
+
+            $html .= '<div class="saving-wrapper">';
+            if (!empty(check_plain($variables['options']['saving_label']))) {
+                $html .= '<label class="saving-title">'.check_plain($variables['options']['saving_label']).'</label>';
+            }
+            $html .= '<span class="saving-title">'.$saving_percentage.'</span>';
+            $html .= '</div>';
+            /*
+            $rows[] = array(
+                'data' => array(
+                    array(
+                        'data' => check_plain($variables['options']['saving_label']),
+                        'class' => array('saving-title'),
+                    ),
+                    array(
+                        'data' => $saving,
+                        'class' => array('saving-title'),
+                    ),
+                )
+            );
+            */
+        }
+    }
+
+    else {
+        /*
+        $rows[] = array(
+            'data' => array(
+                array(
+                    'data' => t('Price'),
+                    'class' => array('webprice-title'),
+                ),
+                array(
+                    'data' => $web_price,
+                    'class' => array('webprice-total'),
+                ),
+            ),
+        );
+        */
+        $html .= '<div class="webprice-wrapper">';
+        if (!empty(check_plain($variables['options']['offer_label']))) {
+            $html .= '<label class="webprice-title">'.check_plain($variables['options']['offer_label']).'</label>';
+        }
+        $html .= '<span class="webprice-total">'.$web_price.'</span>';
+        $html .= '</div>';
+    }
+    return $html;
+    return  theme('table', array('rows' => $rows, 'attributes' => array('class' => array('commerce-price-rrp-your-price'))));
+}

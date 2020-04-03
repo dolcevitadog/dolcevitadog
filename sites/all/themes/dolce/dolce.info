@@ -1,6 +1,7 @@
 name = 'DolceVitaDog'
 description = Uses the Bootstrap Framework Less source files and must be compiled (not for beginners).
 core = 7.x
+version = 7.x-1.1
 base theme = bootstrap
 
 
@@ -12,8 +13,8 @@ regions[zone_user]      	= 'Zone User'
 regions[zone_user_first]	= 'Zone User First'
 regions[zone_user_second]	= 'Zone User Second'
 regions[navigation]     	= 'Navigation'
-regions[header]         	= 'Top Bar'
 regions[highlighted]    	= 'Highlighted'
+regions[header]         	= 'Top Bar'
 regions[help]           	= 'Help'
 regions[content]        	= 'Content'
 regions[sidebar_first]  	= 'Primary'
@@ -40,6 +41,7 @@ stylesheets[all][] = css/cart.css
 stylesheets[all][] = css/products.css
 stylesheets[all][] = css/category.css
 stylesheets[all][] = css/blocks.css
+stylesheets[all][] = css/mobile.css
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Scripts
