@@ -1,18 +1,37 @@
 @import url('https://fonts.googleapis.com/css?family=Comfortaa|Covered+By+Your+Grace|Nothing+You+Could+Do');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 /*Fonts*/
-.zone-user-wrapper {
-  background: #7f98b3;
-  width: 100%;
-  position: fixed;
-  z-index: 99;
-  max-height: 40px;
-}
 @media (max-width: 380px) {
   .zone-user-wrapper {
     position: relative;
     max-height: 100%;
   }
+}
+.zone-user-wrapper .region-user-long {
+  text-align: center;
+  padding: 0px;
+}
+.zone-user-wrapper .region-user-first {
+  padding: 0;
+}
+.zone-user-wrapper .region-user-second {
+  padding: 0;
+  padding-top: 20px;
+}
+.zone-user-wrapper .region-user-second div {
+  margin: 0px 10px;
+}
+.zone-user-wrapper .block-dolce-cart,
+.zone-user-wrapper .block-dolce-user-links {
+  float: right;
+}
+.zone-user-wrapper .block-dolce-cart a,
+.zone-user-wrapper .block-dolce-user-links a {
+  color: #000000;
+}
+.zone-user-wrapper .block-dolce-cart a:hover,
+.zone-user-wrapper .block-dolce-user-links a:hover {
+  color: #7f98b3;
 }
 .region-user-first {
   float: left;
@@ -21,7 +40,6 @@
 /* Menu */
 .navbar.container,
 .navbar.container-fluid {
-  padding-top: 46px;
   margin: 0 auto;
 }
 /* Footer */
@@ -58,4 +76,22 @@
     max-width: 300px;
     float: none;
   }
+}
+@media (max-width: 420px) {
+  .nomobile {
+    display: none !important;
+  }
+}
+@media screen and (min-width: 768px) {
+  .jumbotron {
+    padding: 0;
+  }
+}
+.jumbotron {
+  padding: 0;
+  margin-bottom: 0px;
+}
+.highlight-bottom {
+  background: #f2f2f2;
+  padding: 25px 0px 15px 0px;
 }

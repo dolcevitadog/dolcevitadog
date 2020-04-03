@@ -82,7 +82,41 @@
 
 //Override Avent
 #promotional_banner {
+  /* HP blocks: Top advert */
+  background-color: @zoneuserbg;
+  color: #FFFFFF;
+  font-size: 16px;
+  padding: 10px;
+  position: relative;
+  top: 0;
+  text-align: center;
   a {
-    color: #FFFFFF;
+    color: #ffffff;
+  }
+  .promotional_banner_saving {
+    display: block;
+    font-size: 16px;
+    font-weight: 900;
+    line-height: 16px;
+    padding: 0;
+    text-transform: uppercase;
+    width: 100%;
+  }
+  .promotional_banner_special_offer {
+    background-color: #FFFFFF;
+    border: 1px solid #CCC;
+    color: #2698F2;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 4px 12px;
+    position: absolute;
+    top: 10px;
+    right: 10px; /* LTR */
+    text-transform: capitalize;
+  }
+  @media (max-width: 450px) {
+    .promotional_banner_special_offer {
+      position: relative;
+    }
   }
 }

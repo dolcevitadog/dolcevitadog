@@ -1,6 +1,56 @@
 @import url('https://fonts.googleapis.com/css?family=Comfortaa|Covered+By+Your+Grace|Nothing+You+Could+Do');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 /*Fonts*/
+.block-dolce-cart {
+  display: inline-block;
+}
+.block-dolce-cart #dolce-cart {
+  position: relative;
+  font-family: "Comfortaa";
+  font-weight: 400;
+  max-width: 130px;
+  text-align: center;
+  display: inline-block;
+}
+.block-dolce-cart #dolce-cart a,
+.block-dolce-cart #dolce-cart span {
+  display: block;
+  text-decoration: none;
+}
+.block-dolce-cart #dolce-cart .dolce-cart-bg {
+  background-image: url('../images/shopping_bag80.png');
+  height: 60px;
+  width: 60px;
+  display: block;
+  margin: auto;
+  margin-bottom: 10px;
+  background-size: contain;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
+.block-dolce-cart #dolce-cart .dolce-cart-quantity {
+  position: absolute;
+  top: 5px;
+  left: 35px;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 45px;
+  background-color: #557b9d;
+  font-size: 15px;
+  display: block;
+  padding: 4px 3px;
+  text-align: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 100%;
+  color: white !important;
+  font-weight: bold !important;
+}
+.block-dolce-cart #dolce-cart .dolce-cart-price {
+  position: absolute;
+  top: 35px;
+  right: 8px;
+}
 #block-views-shopping-cart-block {
   margin: 0 auto;
   margin-left: 50px;
@@ -134,7 +184,7 @@
   background-repeat: no-repeat;
   display: block;
   height: 30px;
-  margin: 5px 0px;
+  margin: 5px auto;
   text-indent: -9999px;
   width: 50px;
 }
@@ -155,6 +205,9 @@
 }
 #block-menu-menu-payment-methods ul.menu li .cheque {
   background-image: url('../images/picto-cheque.png');
+}
+#block-menu-menu-payment-methods ul.menu li .virement {
+  background-image: url('../images/picto-virement.png');
 }
 /* Add to cart confirmation modal */
 div.messages.commerce-add-to-cart-confirmation {

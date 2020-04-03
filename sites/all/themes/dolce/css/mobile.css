@@ -1,0 +1,17 @@
+@media (max-width: 767px) {
+  #block-logo-block-logo img {
+    width: 80px;
+  }
+  .zone-user-wrapper .region-user-second div {
+    margin: 0;
+  }
+  .zone-user-wrapper .region-user-second .dolce-user-links {
+    height: 40px !important;
+  }
+  .zone-user-wrapper .region-user-second .block-dolce-cart #dolce-cart .dolce-cart-bg {
+    height: 40px !important;
+  }
+  #dolcevitadog_services li .services-item span {
+    text-align: center;
+  }
+}

@@ -1,3 +1,4 @@
+@import "variables.less";
 
 #block-mailchimp-signup-dolcevitadog-mailchimp {
   text-align: center;
@@ -15,4 +16,206 @@
       margin: 10px;
     }
   }
+}
+
+#homeslider {
+  .bx-wrapper {
+    box-shadow: none;
+    border: none;
+    background: transparent;
+    /* -webkit-box-shadow: 0 0 5px #ccc; */
+    /* box-shadow: 0 0 5px #ccc; */
+    /* border: 5px solid #fff; */
+    /* background: #fff; */
+    ul {
+      li {
+        img {
+          width: 100% !important;
+        }
+      }
+    }
+  }
+}
+
+#dolcevitadog_services {
+  li {
+    padding: 0;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    .services-item {
+      padding: 5px;
+      img {
+        height: 45px;
+        display: inline-block;
+        margin-right: 0.6em;
+      }
+      span {
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 0;
+        vertical-align: middle;
+        text-align: left;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.1;
+        width: 120px;
+      }
+    }
+  }
+}
+
+.partners-bloc-homepage {
+  .bx-wrapper {
+    margin: 0 auto;
+    box-shadow: none;
+    border: 4px solid #f2f2f2;
+    padding: 10px;
+    ul {
+      li {
+        padding: 0 5px;
+      }
+    }
+  }
+}
+
+#products_homepage {
+  ul {
+    text-align: center;
+    li {
+      margin: 10px 0;
+
+      .discount-products-wrapper {
+        position: relative;
+        border: 6px solid #eee;
+        padding: 0;
+        min-height: 380px;
+        transition: border-color 1s, transform 2s ease-in;
+        img {
+          transition: all 500ms ease-in;
+        }
+        .promo-wrapper {
+          background: @zoneuserbg;
+          color: white;
+          font-weight: bold;
+          text-align: center;
+          padding: 5px;
+
+        }
+        .field-name-title-field {
+          font-size: 18px;
+          text-align: center;
+          padding: 10px 5px;
+          a {
+            color: black;
+          }
+        }
+        .field-name-commerce-price {
+          border-top: 1px solid #eee;
+          position: absolute;
+          bottom: 0;
+          padding: 5px 0px;
+          width: 100%;
+          .saving-wrapper {
+            text-align: center;
+            .saving-title {
+              font-weight: bold;
+              color: #ffffff;
+              position: absolute;
+              right: 17px;
+              bottom: 150px;
+              height: 50px;
+              width: 50px;
+              line-height: 50px;
+              background: @zoneuserbg;
+              border-radius: 50%;
+              padding: 0;
+              box-shadow: 2px 2px 4px 0 rgba(0,0,0,.2);
+            }
+          }
+          .rrp-wrapper {
+            text-align: center;
+            color: #222222;
+          }
+          .webprice-wrapper {
+            text-align: center;
+            .webprice-total {
+              color: #000000;
+              font-size: 16px;
+            }
+          }
+        }
+      }
+      .discount-products-wrapper:hover {
+        border-color: @zoneuserbg;
+      }
+      .discount-products-wrapper:hover img {
+        -webkit-transform: scale(0.9);
+        transform: scale(0.9);
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+#highlight {
+ ul {
+   li {
+     margin: 10px auto;
+     text-align: center;
+     .highlight-wrapper {
+       a {
+         position: relative;
+       }
+       .field-name-field-highlight-image {
+         position: relative;
+         width: 240px;
+         margin: 0 auto;
+         border-top: 4px solid #eee;
+         border-left: 4px solid #eee;
+         border-right: 4px solid #eee;
+         overflow: hidden;
+         transition: border-color 1s, transform 2s ease-in;
+         img {
+           margin: 0 auto;
+           transition: all 500ms ease-in;
+         }
+       }
+       .views-field-title {
+         width: 240px;
+         margin: 0 auto;
+         font-size: 18px;
+         padding: 10px 5px;
+         border-top: 2px solid #eee;
+         border-bottom: 4px solid #eee;
+         border-left: 4px solid #eee;
+         border-right: 4px solid #eee;
+         transition: border-color 1s, transform 2s ease-in;
+       }
+       .interview-picto, .information-picto {
+         position: absolute;
+         top: 20px;
+         right: 75px;
+         background: @zoneuserbg;
+         height: 30px;
+         width: 30px;
+         line-height: 30px;
+         background: @zoneuserbg;
+         border-radius: 50%;
+         padding: 0;
+         box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, .2);
+         color: white;
+       }
+     }
+     .highlight-wrapper:hover .field-name-field-highlight-image{
+       border-color: @zoneuserbg;
+     }
+     .highlight-wrapper:hover .views-field-title{
+       border-color: @zoneuserbg;
+     }
+     .highlight-wrapper:hover img {
+       transform: rotate(-10deg) scale(1.2);
+     }
+   }
+ }
 }
