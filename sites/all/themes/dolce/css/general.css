@@ -13,6 +13,9 @@ h6 {
   text-align: center;
   margin: 20px 0;
 }
+.main-container .block-title {
+  position: relative;
+}
 .main-container .block-title::after {
   content: "";
   display: inline-block;
