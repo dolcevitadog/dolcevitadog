@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the Dolce Partenaires feature.
+ */
+
+include_once 'dolce_fs_partenaires.features.inc';
