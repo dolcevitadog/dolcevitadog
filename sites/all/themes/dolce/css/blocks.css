@@ -55,6 +55,27 @@
   line-height: 1.1;
   width: 120px;
 }
+.pre-footer #dolcevitadog_services li .services-item {
+  padding: 5px;
+}
+.pre-footer #dolcevitadog_services li .services-item img {
+  height: 60px;
+  display: block;
+  margin: auto;
+}
+.pre-footer #dolcevitadog_services li .services-item span {
+  font-weight: bolder;
+  font-size: 16px;
+  text-align: center;
+  padding: 5px;
+  width: 140px;
+}
+@media (min-width: 768px) and (max-width: 980px) {
+  #dolcevitadog_services li .services-item span {
+    text-align: center;
+    margin-top: 5px;
+  }
+}
 .partners-bloc-homepage .bx-wrapper {
   margin: 0 auto;
   box-shadow: none;
@@ -64,48 +85,92 @@
 .partners-bloc-homepage .bx-wrapper ul li {
   padding: 0 5px;
 }
-#products_homepage ul {
+#products_homepage ul,
+#display_products ul,
+.view-collection-products ul {
   text-align: center;
 }
-#products_homepage ul li {
+#products_homepage ul li,
+#display_products ul li,
+.view-collection-products ul li {
   margin: 10px 0;
 }
-#products_homepage ul li .discount-products-wrapper {
+#products_homepage ul li .discount-products-wrapper,
+#display_products ul li .discount-products-wrapper,
+.view-collection-products ul li .discount-products-wrapper,
+#products_homepage ul li .product-list,
+#display_products ul li .product-list,
+.view-collection-products ul li .product-list {
   position: relative;
   border: 6px solid #eee;
   padding: 0;
-  min-height: 380px;
+  min-height: 420px;
   transition: border-color 1s, transform 2s ease-in;
 }
-#products_homepage ul li .discount-products-wrapper img {
+#products_homepage ul li .discount-products-wrapper img,
+#display_products ul li .discount-products-wrapper img,
+.view-collection-products ul li .discount-products-wrapper img,
+#products_homepage ul li .product-list img,
+#display_products ul li .product-list img,
+.view-collection-products ul li .product-list img {
   transition: all 500ms ease-in;
 }
-#products_homepage ul li .discount-products-wrapper .promo-wrapper {
+#products_homepage ul li .discount-products-wrapper .promo-wrapper,
+#display_products ul li .discount-products-wrapper .promo-wrapper,
+.view-collection-products ul li .discount-products-wrapper .promo-wrapper,
+#products_homepage ul li .product-list .promo-wrapper,
+#display_products ul li .product-list .promo-wrapper,
+.view-collection-products ul li .product-list .promo-wrapper {
   background: #7f98b3;
   color: white;
   font-weight: bold;
   text-align: center;
   padding: 5px;
 }
-#products_homepage ul li .discount-products-wrapper .field-name-title-field {
+#products_homepage ul li .discount-products-wrapper .field-name-title-field,
+#display_products ul li .discount-products-wrapper .field-name-title-field,
+.view-collection-products ul li .discount-products-wrapper .field-name-title-field,
+#products_homepage ul li .product-list .field-name-title-field,
+#display_products ul li .product-list .field-name-title-field,
+.view-collection-products ul li .product-list .field-name-title-field {
   font-size: 18px;
   text-align: center;
   padding: 10px 5px;
 }
-#products_homepage ul li .discount-products-wrapper .field-name-title-field a {
+#products_homepage ul li .discount-products-wrapper .field-name-title-field a,
+#display_products ul li .discount-products-wrapper .field-name-title-field a,
+.view-collection-products ul li .discount-products-wrapper .field-name-title-field a,
+#products_homepage ul li .product-list .field-name-title-field a,
+#display_products ul li .product-list .field-name-title-field a,
+.view-collection-products ul li .product-list .field-name-title-field a {
   color: black;
 }
-#products_homepage ul li .discount-products-wrapper .field-name-commerce-price {
+#products_homepage ul li .discount-products-wrapper .field-name-commerce-price,
+#display_products ul li .discount-products-wrapper .field-name-commerce-price,
+.view-collection-products ul li .discount-products-wrapper .field-name-commerce-price,
+#products_homepage ul li .product-list .field-name-commerce-price,
+#display_products ul li .product-list .field-name-commerce-price,
+.view-collection-products ul li .product-list .field-name-commerce-price {
   border-top: 1px solid #eee;
   position: absolute;
   bottom: 0;
   padding: 5px 0px;
   width: 100%;
 }
-#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper {
+#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper,
+#display_products ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper,
+.view-collection-products ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper,
+#products_homepage ul li .product-list .field-name-commerce-price .saving-wrapper,
+#display_products ul li .product-list .field-name-commerce-price .saving-wrapper,
+.view-collection-products ul li .product-list .field-name-commerce-price .saving-wrapper {
   text-align: center;
 }
-#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title {
+#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
+#display_products ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
+.view-collection-products ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
+#products_homepage ul li .product-list .field-name-commerce-price .saving-wrapper .saving-title,
+#display_products ul li .product-list .field-name-commerce-price .saving-wrapper .saving-title,
+.view-collection-products ul li .product-list .field-name-commerce-price .saving-wrapper .saving-title {
   font-weight: bold;
   color: #ffffff;
   position: absolute;
@@ -119,21 +184,46 @@
   padding: 0;
   box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.2);
 }
-#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .rrp-wrapper {
+#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .rrp-wrapper,
+#display_products ul li .discount-products-wrapper .field-name-commerce-price .rrp-wrapper,
+.view-collection-products ul li .discount-products-wrapper .field-name-commerce-price .rrp-wrapper,
+#products_homepage ul li .product-list .field-name-commerce-price .rrp-wrapper,
+#display_products ul li .product-list .field-name-commerce-price .rrp-wrapper,
+.view-collection-products ul li .product-list .field-name-commerce-price .rrp-wrapper {
   text-align: center;
   color: #222222;
 }
-#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper {
+#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper,
+#display_products ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper,
+.view-collection-products ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper,
+#products_homepage ul li .product-list .field-name-commerce-price .webprice-wrapper,
+#display_products ul li .product-list .field-name-commerce-price .webprice-wrapper,
+.view-collection-products ul li .product-list .field-name-commerce-price .webprice-wrapper {
   text-align: center;
 }
-#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total {
+#products_homepage ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
+#display_products ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
+.view-collection-products ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
+#products_homepage ul li .product-list .field-name-commerce-price .webprice-wrapper .webprice-total,
+#display_products ul li .product-list .field-name-commerce-price .webprice-wrapper .webprice-total,
+.view-collection-products ul li .product-list .field-name-commerce-price .webprice-wrapper .webprice-total {
   color: #000000;
   font-size: 16px;
 }
-#products_homepage ul li .discount-products-wrapper:hover {
+#products_homepage ul li .discount-products-wrapper:hover,
+#display_products ul li .discount-products-wrapper:hover,
+.view-collection-products ul li .discount-products-wrapper:hover,
+#products_homepage ul li .product-list:hover,
+#display_products ul li .product-list:hover,
+.view-collection-products ul li .product-list:hover {
   border-color: #7f98b3;
 }
-#products_homepage ul li .discount-products-wrapper:hover img {
+#products_homepage ul li .discount-products-wrapper:hover img,
+#display_products ul li .discount-products-wrapper:hover img,
+.view-collection-products ul li .discount-products-wrapper:hover img,
+#products_homepage ul li .product-list:hover img,
+#display_products ul li .product-list:hover img,
+.view-collection-products ul li .product-list:hover img {
   -webkit-transform: scale(0.9);
   transform: scale(0.9);
   opacity: 0.5;

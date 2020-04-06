@@ -65,6 +65,41 @@
   }
 }
 
+.pre-footer {
+  #dolcevitadog_services {
+    li {
+      .services-item {
+        padding: 5px;
+        img {
+          height: 60px;
+          display: block;
+          margin: auto;
+        }
+        span {
+          font-weight: bolder;
+          font-size: 16px;
+          text-align: center;
+          padding: 5px;
+          width: 140px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 980px) {
+  #dolcevitadog_services {
+    li {
+      .services-item {
+        span {
+          text-align: center;
+          margin-top: 5px;
+        }
+      }
+    }
+  }
+}
+
 .partners-bloc-homepage {
   .bx-wrapper {
     margin: 0 auto;
@@ -79,17 +114,17 @@
   }
 }
 
-#products_homepage {
+#products_homepage, #display_products, .view-collection-products {
   ul {
     text-align: center;
     li {
       margin: 10px 0;
 
-      .discount-products-wrapper {
+      .discount-products-wrapper, .product-list {
         position: relative;
         border: 6px solid #eee;
         padding: 0;
-        min-height: 380px;
+        min-height: 420px;
         transition: border-color 1s, transform 2s ease-in;
         img {
           transition: all 500ms ease-in;
@@ -146,10 +181,10 @@
           }
         }
       }
-      .discount-products-wrapper:hover {
+      .discount-products-wrapper:hover, .product-list:hover {
         border-color: @zoneuserbg;
       }
-      .discount-products-wrapper:hover img {
+      .discount-products-wrapper:hover img, .product-list:hover img {
         -webkit-transform: scale(0.9);
         transform: scale(0.9);
         opacity: 0.5;

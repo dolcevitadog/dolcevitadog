@@ -22,6 +22,113 @@
   padding: 0;
   margin: 0;
 }
+#user-login,
+#user-register-form,
+#user-pass {
+  max-width: 640px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #1a1a1a;
+  text-align: center;
+}
+#user-login #user_login_form,
+#user-register-form #user_login_form,
+#user-pass #user_login_form,
+#user-login #user_register_form,
+#user-register-form #user_register_form,
+#user-pass #user_register_form,
+#user-login #user_pass_form,
+#user-register-form #user_pass_form,
+#user-pass #user_pass_form {
+  border: none;
+  padding-bottom: 10px;
+}
+#user-login #user_login_form .form-type-password-confirm,
+#user-register-form #user_login_form .form-type-password-confirm,
+#user-pass #user_login_form .form-type-password-confirm,
+#user-login #user_register_form .form-type-password-confirm,
+#user-register-form #user_register_form .form-type-password-confirm,
+#user-pass #user_register_form .form-type-password-confirm,
+#user-login #user_pass_form .form-type-password-confirm,
+#user-register-form #user_pass_form .form-type-password-confirm,
+#user-pass #user_pass_form .form-type-password-confirm,
+#user-login #user_login_form .form-type-password,
+#user-register-form #user_login_form .form-type-password,
+#user-pass #user_login_form .form-type-password,
+#user-login #user_register_form .form-type-password,
+#user-register-form #user_register_form .form-type-password,
+#user-pass #user_register_form .form-type-password,
+#user-login #user_pass_form .form-type-password,
+#user-register-form #user_pass_form .form-type-password,
+#user-pass #user_pass_form .form-type-password {
+  float: none;
+  margin: auto;
+  max-width: 240px;
+  width: 100%;
+}
+#user-login #user_login_form .form-type-password-confirm .help-block,
+#user-register-form #user_login_form .form-type-password-confirm .help-block,
+#user-pass #user_login_form .form-type-password-confirm .help-block,
+#user-login #user_register_form .form-type-password-confirm .help-block,
+#user-register-form #user_register_form .form-type-password-confirm .help-block,
+#user-pass #user_register_form .form-type-password-confirm .help-block,
+#user-login #user_pass_form .form-type-password-confirm .help-block,
+#user-register-form #user_pass_form .form-type-password-confirm .help-block,
+#user-pass #user_pass_form .form-type-password-confirm .help-block,
+#user-login #user_login_form .form-type-password .help-block,
+#user-register-form #user_login_form .form-type-password .help-block,
+#user-pass #user_login_form .form-type-password .help-block,
+#user-login #user_register_form .form-type-password .help-block,
+#user-register-form #user_register_form .form-type-password .help-block,
+#user-pass #user_register_form .form-type-password .help-block,
+#user-login #user_pass_form .form-type-password .help-block,
+#user-register-form #user_pass_form .form-type-password .help-block,
+#user-pass #user_pass_form .form-type-password .help-block {
+  position: inherit;
+  border: none;
+  padding: 0;
+}
+#user-login #user_login_form .form-type-password-confirm .help-block ul,
+#user-register-form #user_login_form .form-type-password-confirm .help-block ul,
+#user-pass #user_login_form .form-type-password-confirm .help-block ul,
+#user-login #user_register_form .form-type-password-confirm .help-block ul,
+#user-register-form #user_register_form .form-type-password-confirm .help-block ul,
+#user-pass #user_register_form .form-type-password-confirm .help-block ul,
+#user-login #user_pass_form .form-type-password-confirm .help-block ul,
+#user-register-form #user_pass_form .form-type-password-confirm .help-block ul,
+#user-pass #user_pass_form .form-type-password-confirm .help-block ul,
+#user-login #user_login_form .form-type-password .help-block ul,
+#user-register-form #user_login_form .form-type-password .help-block ul,
+#user-pass #user_login_form .form-type-password .help-block ul,
+#user-login #user_register_form .form-type-password .help-block ul,
+#user-register-form #user_register_form .form-type-password .help-block ul,
+#user-pass #user_register_form .form-type-password .help-block ul,
+#user-login #user_pass_form .form-type-password .help-block ul,
+#user-register-form #user_pass_form .form-type-password .help-block ul,
+#user-pass #user_pass_form .form-type-password .help-block ul {
+  text-align: left;
+  max-width: 240px;
+  margin: 0 auto;
+}
+#user-login .create-account h2,
+#user-register-form .create-account h2,
+#user-pass .create-account h2 {
+  border-top: 1mm ridge rgba(173, 185, 202, 0.6);
+  margin: 10px auto;
+  padding: 20px 0;
+}
+#user-login input.form-text,
+#user-register-form input.form-text,
+#user-pass input.form-text {
+  max-width: 240px;
+  margin: 5px auto;
+}
+#user-login .captcha,
+#user-register-form .captcha,
+#user-pass .captcha {
+  display: inline-block;
+  margin: 10px auto;
+}
 .block-dolce-user-links {
   display: inline-block;
 }
@@ -51,4 +158,50 @@
 }
 .block-dolce-user-links #dolce-user-links-block .dolce-user-links.login-connected {
   background-image: url('../images/account_picto_connected60.png');
+}
+#block-dolce-user-links-dolce-user-links-profile.block-dolce-user-links {
+  display: block;
+}
+#block-dolce-user-links-dolce-user-links-profile.block-dolce-user-links #dolce-user-links-inside .dolce-user-links-inside-item .dolce-user-links-inside-link-wrapper {
+  border: 1px solid #1a1a1a;
+  padding: 15px;
+  margin: 10px 0px;
+}
+#block-dolce-user-links-dolce-user-links-profile.block-dolce-user-links #dolce-user-links-inside .dolce-user-links-inside-item .dolce-user-links-inside-link-wrapper a {
+  color: black;
+  text-decoration: none;
+}
+#block-dolce-user-links-dolce-user-links-profile.block-dolce-user-links #dolce-user-links-inside .dolce-user-links-inside-item .dolce-user-links-inside-link-wrapper a .dolce-user-links-inside-icon {
+  display: block;
+  margin: auto;
+  text-align: center;
+  padding: 15px 15px 0px 15px;
+}
+#block-dolce-user-links-dolce-user-links-profile.block-dolce-user-links #dolce-user-links-inside .dolce-user-links-inside-item .dolce-user-links-inside-link-wrapper a .dolce-user-links-inside-title {
+  padding: 15px 15px 15px 15px;
+  display: block;
+  font-size: 16px;
+  text-align: center;
+}
+#block-dolce-user-links-dolce-user-links-profile.block-dolce-user-links #dolce-user-links-inside .dolce-user-links-inside-item .dolce-user-links-inside-link-wrapper a:hover .dolce-user-links-inside-icon {
+  color: #557b9d;
+}
+#block-dolce-user-links-dolce-user-links-logout.block-dolce-user-links {
+  width: 220px;
+  display: block;
+  margin: 10px auto;
+}
+#block-dolce-user-links-dolce-user-links-logout.block-dolce-user-links .dolce-user-links-logout-wrapper {
+  background: black;
+  padding: 10px;
+  display: block;
+  margin: auto;
+}
+#block-dolce-user-links-dolce-user-links-logout.block-dolce-user-links a.dolce-user-logout {
+  color: white;
+  line-height: 20px;
+  font-size: 20px;
+  margin: auto;
+  text-align: center;
+  display: block;
 }

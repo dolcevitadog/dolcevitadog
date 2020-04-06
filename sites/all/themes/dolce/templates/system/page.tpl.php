@@ -150,6 +150,13 @@
     <?php endif; ?>
   </div>
 </div>
+<?php if (!empty($page['pre_footer'])): ?>
+<div class="pre-footer">
+     <div class="container">
+        <?php print render($page['pre_footer']); ?>
+     </div>
+</div>
+<?php endif; ?>
 <?php if (!empty($page['footer'])): ?>
     <footer class="footer-wrapper">
         <?php if (!empty($page['footer'])): ?>
