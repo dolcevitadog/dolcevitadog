@@ -304,3 +304,12 @@ function dolce_commerce_price_rrp_your_price($variables) {
     return $html;
     return  theme('table', array('rows' => $rows, 'attributes' => array('class' => array('commerce-price-rrp-your-price'))));
 }
+
+/* Implement preprocess_node */
+function dolce_preprocess_node(&$vars)
+{
+    $view_mode = $vars['view_mode'];
+    $content_type = $vars['type'];
+    $vars['theme_hook_suggestions'][] = 'node__' . $view_mode;
+    $vars['theme_hook_suggestions'][] = 'node__' . $view_mode . '_' . $content_type;
+}

@@ -11,6 +11,12 @@
   .zone-user-wrapper .region-user-second .block-dolce-cart #dolce-cart .dolce-cart-bg {
     height: 40px !important;
   }
+  .zone-user-wrapper .region-user-second .block-dolce-cart #dolce-cart .dolce-cart-quantity {
+    left: 35px;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
   #dolcevitadog_services li .services-item span {
     text-align: center;
   }
