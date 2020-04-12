@@ -24,7 +24,7 @@
                     </div>
                     <div class="modal-body">
                         Votre récompense : Le code promo PAQUESR5EX vous permettra de bénéficier des frais de port offerts sur votre commande jusqu'au 14 avril 2020.
-                        Deux autres oeufs offrent une plus grosse récompense ! Alors chercher bien et ayez l'oeil.
+                        Deux autres oeufs offrent une plus grosse récompense ! Alors cherchez bien et ayez l'oeil.
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
