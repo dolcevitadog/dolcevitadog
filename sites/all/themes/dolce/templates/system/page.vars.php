@@ -18,13 +18,11 @@ function dolce_preprocess_page(&$vars) {
   $vars['zone_user_first_classes'] = 'col-md-7 col-lg-7 col-sm-6 col-xs-4';
   $vars['zone_user_second_classes'] = 'col-md-5 col-lg-5 col-sm-6 col-xs-8';
 
-  // Add responsive tables for Cart and Checkout
-    $arg = arg();
-    if (($arg[0] == 'cart') || ($arg[0] == 'checkout')) {
-        drupal_add_css(drupal_get_path('theme', 'dolce') . '/css/responsive_table.css');
-        drupal_add_js(drupal_get_path('theme', 'dolce') . '/js/ngtables/ng_responsive_tables.js');
-        drupal_add_js(drupal_get_path('theme', 'dolce') . '/js/responsive_cart.js');
-    }
+  // Add responsive tables for everytable
+    drupal_add_css(drupal_get_path('theme', 'dolce') . '/css/responsive_table.css');
+    drupal_add_js(drupal_get_path('theme', 'dolce') . '/js/ngtables/ng_responsive_tables.js');
+    drupal_add_js(drupal_get_path('theme', 'dolce') . '/js/responsive_cart.js');
+
 
 }
 

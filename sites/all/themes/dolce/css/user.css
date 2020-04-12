@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Comfortaa|Covered+By+Your+Grace|Nothing+You+Could+Do');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 /*Fonts*/
+@font-face {
+  font-family: "JandaQuickNote";
+  src: url("../fonts/JandaQuickNote.ttf") format("truetype");
+}
 .profile h3 {
   background: #f4f4f4;
   padding: 8px;
@@ -22,9 +26,19 @@
   padding: 0;
   margin: 0;
 }
+#commerce-addressbook-customer-profile-form {
+  max-width: 640px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #1a1a1a;
+}
+#commerce-addressbook-customer-profile-form #edit-actions {
+  text-align: center;
+}
 #user-login,
 #user-register-form,
-#user-pass {
+#user-pass,
+#user-profile-form {
   max-width: 640px;
   margin: 20px auto;
   padding: 20px;
@@ -34,33 +48,54 @@
 #user-login #user_login_form,
 #user-register-form #user_login_form,
 #user-pass #user_login_form,
+#user-profile-form #user_login_form,
 #user-login #user_register_form,
 #user-register-form #user_register_form,
 #user-pass #user_register_form,
+#user-profile-form #user_register_form,
 #user-login #user_pass_form,
 #user-register-form #user_pass_form,
-#user-pass #user_pass_form {
+#user-pass #user_pass_form,
+#user-profile-form #user_pass_form,
+#user-login #edit-account,
+#user-register-form #edit-account,
+#user-pass #edit-account,
+#user-profile-form #edit-account {
   border: none;
   padding-bottom: 10px;
 }
 #user-login #user_login_form .form-type-password-confirm,
 #user-register-form #user_login_form .form-type-password-confirm,
 #user-pass #user_login_form .form-type-password-confirm,
+#user-profile-form #user_login_form .form-type-password-confirm,
 #user-login #user_register_form .form-type-password-confirm,
 #user-register-form #user_register_form .form-type-password-confirm,
 #user-pass #user_register_form .form-type-password-confirm,
+#user-profile-form #user_register_form .form-type-password-confirm,
 #user-login #user_pass_form .form-type-password-confirm,
 #user-register-form #user_pass_form .form-type-password-confirm,
 #user-pass #user_pass_form .form-type-password-confirm,
+#user-profile-form #user_pass_form .form-type-password-confirm,
+#user-login #edit-account .form-type-password-confirm,
+#user-register-form #edit-account .form-type-password-confirm,
+#user-pass #edit-account .form-type-password-confirm,
+#user-profile-form #edit-account .form-type-password-confirm,
 #user-login #user_login_form .form-type-password,
 #user-register-form #user_login_form .form-type-password,
 #user-pass #user_login_form .form-type-password,
+#user-profile-form #user_login_form .form-type-password,
 #user-login #user_register_form .form-type-password,
 #user-register-form #user_register_form .form-type-password,
 #user-pass #user_register_form .form-type-password,
+#user-profile-form #user_register_form .form-type-password,
 #user-login #user_pass_form .form-type-password,
 #user-register-form #user_pass_form .form-type-password,
-#user-pass #user_pass_form .form-type-password {
+#user-pass #user_pass_form .form-type-password,
+#user-profile-form #user_pass_form .form-type-password,
+#user-login #edit-account .form-type-password,
+#user-register-form #edit-account .form-type-password,
+#user-pass #edit-account .form-type-password,
+#user-profile-form #edit-account .form-type-password {
   float: none;
   margin: auto;
   max-width: 240px;
@@ -69,21 +104,35 @@
 #user-login #user_login_form .form-type-password-confirm .help-block,
 #user-register-form #user_login_form .form-type-password-confirm .help-block,
 #user-pass #user_login_form .form-type-password-confirm .help-block,
+#user-profile-form #user_login_form .form-type-password-confirm .help-block,
 #user-login #user_register_form .form-type-password-confirm .help-block,
 #user-register-form #user_register_form .form-type-password-confirm .help-block,
 #user-pass #user_register_form .form-type-password-confirm .help-block,
+#user-profile-form #user_register_form .form-type-password-confirm .help-block,
 #user-login #user_pass_form .form-type-password-confirm .help-block,
 #user-register-form #user_pass_form .form-type-password-confirm .help-block,
 #user-pass #user_pass_form .form-type-password-confirm .help-block,
+#user-profile-form #user_pass_form .form-type-password-confirm .help-block,
+#user-login #edit-account .form-type-password-confirm .help-block,
+#user-register-form #edit-account .form-type-password-confirm .help-block,
+#user-pass #edit-account .form-type-password-confirm .help-block,
+#user-profile-form #edit-account .form-type-password-confirm .help-block,
 #user-login #user_login_form .form-type-password .help-block,
 #user-register-form #user_login_form .form-type-password .help-block,
 #user-pass #user_login_form .form-type-password .help-block,
+#user-profile-form #user_login_form .form-type-password .help-block,
 #user-login #user_register_form .form-type-password .help-block,
 #user-register-form #user_register_form .form-type-password .help-block,
 #user-pass #user_register_form .form-type-password .help-block,
+#user-profile-form #user_register_form .form-type-password .help-block,
 #user-login #user_pass_form .form-type-password .help-block,
 #user-register-form #user_pass_form .form-type-password .help-block,
-#user-pass #user_pass_form .form-type-password .help-block {
+#user-pass #user_pass_form .form-type-password .help-block,
+#user-profile-form #user_pass_form .form-type-password .help-block,
+#user-login #edit-account .form-type-password .help-block,
+#user-register-form #edit-account .form-type-password .help-block,
+#user-pass #edit-account .form-type-password .help-block,
+#user-profile-form #edit-account .form-type-password .help-block {
   position: inherit;
   border: none;
   padding: 0;
@@ -91,41 +140,58 @@
 #user-login #user_login_form .form-type-password-confirm .help-block ul,
 #user-register-form #user_login_form .form-type-password-confirm .help-block ul,
 #user-pass #user_login_form .form-type-password-confirm .help-block ul,
+#user-profile-form #user_login_form .form-type-password-confirm .help-block ul,
 #user-login #user_register_form .form-type-password-confirm .help-block ul,
 #user-register-form #user_register_form .form-type-password-confirm .help-block ul,
 #user-pass #user_register_form .form-type-password-confirm .help-block ul,
+#user-profile-form #user_register_form .form-type-password-confirm .help-block ul,
 #user-login #user_pass_form .form-type-password-confirm .help-block ul,
 #user-register-form #user_pass_form .form-type-password-confirm .help-block ul,
 #user-pass #user_pass_form .form-type-password-confirm .help-block ul,
+#user-profile-form #user_pass_form .form-type-password-confirm .help-block ul,
+#user-login #edit-account .form-type-password-confirm .help-block ul,
+#user-register-form #edit-account .form-type-password-confirm .help-block ul,
+#user-pass #edit-account .form-type-password-confirm .help-block ul,
+#user-profile-form #edit-account .form-type-password-confirm .help-block ul,
 #user-login #user_login_form .form-type-password .help-block ul,
 #user-register-form #user_login_form .form-type-password .help-block ul,
 #user-pass #user_login_form .form-type-password .help-block ul,
+#user-profile-form #user_login_form .form-type-password .help-block ul,
 #user-login #user_register_form .form-type-password .help-block ul,
 #user-register-form #user_register_form .form-type-password .help-block ul,
 #user-pass #user_register_form .form-type-password .help-block ul,
+#user-profile-form #user_register_form .form-type-password .help-block ul,
 #user-login #user_pass_form .form-type-password .help-block ul,
 #user-register-form #user_pass_form .form-type-password .help-block ul,
-#user-pass #user_pass_form .form-type-password .help-block ul {
+#user-pass #user_pass_form .form-type-password .help-block ul,
+#user-profile-form #user_pass_form .form-type-password .help-block ul,
+#user-login #edit-account .form-type-password .help-block ul,
+#user-register-form #edit-account .form-type-password .help-block ul,
+#user-pass #edit-account .form-type-password .help-block ul,
+#user-profile-form #edit-account .form-type-password .help-block ul {
   text-align: left;
   max-width: 240px;
   margin: 0 auto;
 }
 #user-login .create-account h2,
 #user-register-form .create-account h2,
-#user-pass .create-account h2 {
+#user-pass .create-account h2,
+#user-profile-form .create-account h2 {
   border-top: 1mm ridge rgba(173, 185, 202, 0.6);
   margin: 10px auto;
   padding: 20px 0;
 }
 #user-login input.form-text,
 #user-register-form input.form-text,
-#user-pass input.form-text {
+#user-pass input.form-text,
+#user-profile-form input.form-text {
   max-width: 240px;
   margin: 5px auto;
 }
 #user-login .captcha,
 #user-register-form .captcha,
-#user-pass .captcha {
+#user-pass .captcha,
+#user-profile-form .captcha {
   display: inline-block;
   margin: 10px auto;
 }
@@ -186,22 +252,93 @@
 #block-dolce-user-links-dolce-user-links-profile.block-dolce-user-links #dolce-user-links-inside .dolce-user-links-inside-item .dolce-user-links-inside-link-wrapper a:hover .dolce-user-links-inside-icon {
   color: #557b9d;
 }
-#block-dolce-user-links-dolce-user-links-logout.block-dolce-user-links {
-  width: 220px;
+#block-dolce-user-links-dolce-user-links-logout.block-dolce-user-links,
+#block-dolce-user-links-dolce-user-links-goback-account.block-dolce-user-links {
+  max-width: 220px;
   display: block;
-  margin: 10px auto;
+  margin: 5px auto;
 }
-#block-dolce-user-links-dolce-user-links-logout.block-dolce-user-links .dolce-user-links-logout-wrapper {
+#block-dolce-user-links-dolce-user-links-logout.block-dolce-user-links .dolce-user-links-logout-wrapper,
+#block-dolce-user-links-dolce-user-links-goback-account.block-dolce-user-links .dolce-user-links-logout-wrapper,
+#block-dolce-user-links-dolce-user-links-logout.block-dolce-user-links .dolce-user-links-profile-wrapper,
+#block-dolce-user-links-dolce-user-links-goback-account.block-dolce-user-links .dolce-user-links-profile-wrapper {
   background: black;
   padding: 10px;
   display: block;
   margin: auto;
 }
-#block-dolce-user-links-dolce-user-links-logout.block-dolce-user-links a.dolce-user-logout {
+#block-dolce-user-links-dolce-user-links-logout.block-dolce-user-links a.dolce-user-logout,
+#block-dolce-user-links-dolce-user-links-goback-account.block-dolce-user-links a.dolce-user-logout,
+#block-dolce-user-links-dolce-user-links-logout.block-dolce-user-links a.dolce-user-profile,
+#block-dolce-user-links-dolce-user-links-goback-account.block-dolce-user-links a.dolce-user-profile {
   color: white;
   line-height: 20px;
   font-size: 20px;
   margin: auto;
   text-align: center;
   display: block;
+}
+#block-dolce-user-links-dolce-user-links-goback-account.block-dolce-user-links {
+  max-width: 290px;
+}
+#commerce_backoffice_user_orders .view-empty {
+  padding: 25px;
+  border: 1px solid black;
+  text-align: center;
+}
+.page-user-addressbook .action-links {
+  text-align: center;
+}
+.page-user-addressbook .commerce-addressbook-links-wrapper {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+}
+.page-user-addressbook .commerce-addressbook-links-wrapper .commerce-addressbook-billing-link-wrapper,
+.page-user-addressbook .commerce-addressbook-links-wrapper .commerce-addressbook-shipping-link-wrapper,
+.page-user-addressbook .commerce-addressbook-links-wrapper .commerce-addressbook-create-link {
+  display: inline-block;
+  max-width: 260px;
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+}
+.page-user-addressbook .commerce-addressbook-links-wrapper .commerce-addressbook-billing-link-wrapper .commerce-addressbook-link,
+.page-user-addressbook .commerce-addressbook-links-wrapper .commerce-addressbook-shipping-link-wrapper .commerce-addressbook-link,
+.page-user-addressbook .commerce-addressbook-links-wrapper .commerce-addressbook-create-link .commerce-addressbook-link {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  font-size: 14px;
+  text-decoration: none;
+  color: black;
+}
+.page-user-addressbook .commerce-addressbook-links-wrapper .commerce-addressbook-billing-link-wrapper .commerce-addressbook-link i,
+.page-user-addressbook .commerce-addressbook-links-wrapper .commerce-addressbook-shipping-link-wrapper .commerce-addressbook-link i,
+.page-user-addressbook .commerce-addressbook-links-wrapper .commerce-addressbook-create-link .commerce-addressbook-link i {
+  margin-right: 10px;
+}
+.page-user-addressbook .commerce-addressbook-links-wrapper .commerce-addressbook-billing-link-wrapper .commerce-addressbook-link:hover i,
+.page-user-addressbook .commerce-addressbook-links-wrapper .commerce-addressbook-shipping-link-wrapper .commerce-addressbook-link:hover i,
+.page-user-addressbook .commerce-addressbook-links-wrapper .commerce-addressbook-create-link .commerce-addressbook-link:hover i {
+  color: #557b9d;
+}
+.page-user-addressbook #commerce-addressbook,
+.page-user-addressbook #commerce-addressbook-profile-options-delete-form {
+  max-width: 640px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #1a1a1a;
+  text-align: center;
+}
+.page-user-addressbook #commerce-addressbook .views-field-rendered-entity,
+.page-user-addressbook #commerce-addressbook-profile-options-delete-form .views-field-rendered-entity {
+  margin: 10px 0px;
+  box-shadow: 1px 1px 4px 1px #ccc;
+  display: inline-block;
+  padding: 10px;
+}
+.page-user-addressbook #commerce-addressbook .commerce-addressbook-others ul,
+.page-user-addressbook #commerce-addressbook-profile-options-delete-form .commerce-addressbook-others ul {
+  display: inline-block;
 }

@@ -142,6 +142,7 @@ function commerce_addressbook_profile_options_default($account, $customer_profil
   }
 }
 
+
 /**
  * Page callback for path /user/%user/addressbook.
  *
@@ -166,7 +167,7 @@ function commerce_addressbook_page($account) {
  * Embeds a view that shows the current default profile, and a view that shows
  * all other profiles of the same type.
  */
-function commerce_addressbook_profile_page($account, $profile_type) {
+/*function commerce_addressbook_profile_page($account, $profile_type) {
   $output = '';
   $arguments = array($account->uid, $profile_type);
   $defaults_view = commerce_addressbook_retrieve_view('commerce_addressbook_defaults', 'default', $arguments);
@@ -185,6 +186,55 @@ function commerce_addressbook_profile_page($account, $profile_type) {
     return $output;
   }
 }
+*/
+function commerce_addressbook_profile_page($account, $profile_type) {
+
+    $content = array();
+    $args = arg();
+    global $user;
+    $uid = $user->uid;
+    if (empty($args[3])) {
+        $create_link = 'billing';
+    }
+    else {
+        $create_link = $args[3];
+    }
+    $content['billing-link'] = l('<i class="fas fa-2x fa-money-bill"></i> '. t('Billing information'),  'user/'.$uid.'/addressbook/billing', array('html' => true, 'attributes' => array('class' => array('commerce-addressbook-link commerce-addressbook-billing'))));
+
+    $content['shipping-link'] = l('<i class="fas fa-2x fa-shipping-fast"></i> '. t('Shipping information'),  'user/'.$uid.'/addressbook/shipping', array('html' => true, 'attributes' => array('class' => array('commerce-addressbook-link commerce-addressbook-shippinh'))));
+
+    $content['create-link'] = l('<i class="fa fa-2x fa-plus"></i> '. t('Add an address'),  'user/'.$uid.'/addressbook/'.$create_link.'/create', array('html' => true, 'attributes' => array('class' => array('commerce-addressbook-link commerce-addressbook-create'))));
+
+
+    $content['title'] = t('Billing address');
+    $content['title_default'] = t('Billing address by default');
+    $content['title_list'] = t('My others billing addresses');
+    if (!empty($args[3])) {
+        if ($args[3] == 'shipping') {
+            $content['title'] = t('Shipping address');
+            $content['title_default'] = t('Shipping address by default');
+            $content['title_list'] = t('My others shipping addresses');
+        }
+    }
+  $output = '';
+  $arguments = array($account->uid, $profile_type);
+  $defaults_view = commerce_addressbook_retrieve_view('commerce_addressbook_defaults', 'default', $arguments);
+  $list_view = commerce_addressbook_retrieve_view('commerce_addressbook', 'default', $arguments);
+  if (!empty($defaults_view->result)) {
+    $content['default_address'] = '<div id="commerce-addressbook-' . $profile_type . '-default">' . $defaults_view->render() . '</div>';
+  }
+  if (!empty($list_view->result)) {
+      $content['all_addresses'] = '<div id="commerce-addressbook-' . $profile_type . '-list">' . $list_view->render() . '</div>';
+  }
+  if (empty($content['default_address'])) {
+      $content['empty'] = '<div class="addressbook-nodata">' . t('Your @profile_type address book is currently empty.',
+      array('@profile_type' => commerce_customer_profile_type_get_name($profile_type))) . '</div>';
+  }
+
+  return theme('commerce_addressbook_profile_view', $content);
+}
+
+
 
 /**
  * Sets the breadcrumb for address book forms.

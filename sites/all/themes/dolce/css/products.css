@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Comfortaa|Covered+By+Your+Grace|Nothing+You+Could+Do');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 /*Fonts*/
+@font-face {
+  font-family: "JandaQuickNote";
+  src: url("../fonts/JandaQuickNote.ttf") format("truetype");
+}
 /*Attributes colors */
 .form-item-attributes-field-color .form-item.form-item-attributes-field-color {
   float: left;
@@ -36,13 +40,13 @@
 }
 .node-product-type .commerce-product-field-title-field {
   clear: both;
-  font-family: "Nothing you could do";
+  font-family: "JandaQuickNote";
   font-size: 24px;
   font-weight: 700;
 }
 .node-product-type .commerce-product-sku {
   color: #b1b1b1;
-  font-family: "Nothing you could do";
+  font-family: "JandaQuickNote";
   font-size: 13px;
   font-weight: 400;
 }
@@ -50,7 +54,7 @@
   font-weight: normal;
 }
 .node-product-type .field-name-commerce-price {
-  font-family: "Nothing you could do";
+  font-family: "JandaQuickNote";
   font-size: 30px;
   font-weight: 700;
   margin-bottom: 20px;
@@ -82,7 +86,7 @@
 .node-product-type .field-name-body .read-less,
 .node-product-type .field-name-body .read-more a,
 .node-product-type .field-name-body .read-less a {
-  font-family: "Nothing you could do";
+  font-family: "JandaQuickNote";
   font-size: 14px;
   font-weight: 400;
 }
@@ -203,7 +207,7 @@
   background-repeat: no-repeat;
   border: 0;
   color: #ffffff;
-  font-family: "Nothing you could do";
+  font-family: "JandaQuickNote";
   font-size: 17px;
   font-weight: 400;
   margin-top: 40px;

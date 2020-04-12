@@ -1,6 +1,10 @@
 @import url('https://fonts.googleapis.com/css?family=Comfortaa|Covered+By+Your+Grace|Nothing+You+Could+Do');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 /*Fonts*/
+@font-face {
+  font-family: "JandaQuickNote";
+  src: url("../fonts/JandaQuickNote.ttf") format("truetype");
+}
 @media (max-width: 380px) {
   .zone-user-wrapper {
     position: relative;
