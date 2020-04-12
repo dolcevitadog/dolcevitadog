@@ -281,3 +281,25 @@ div#payment-details {
     border-bottom: 5px solid @zoneuserbg;
   }
 }
+
+.node-product-type {
+
+      a img.easter {
+        transition: all ease 1s;
+        //animation: bounce 0.35s ease infinite alternate;
+      }
+      a img.easter-fun {
+        animation: bounce 0.35s ease infinite alternate;
+      }
+      a:hover img.easter {
+        transform: rotate(35deg) scale(1.5)
+      }
+  @keyframes bounce {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-20px);
+    }
+  }
+}
