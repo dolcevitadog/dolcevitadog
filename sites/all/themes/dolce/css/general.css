@@ -1,13 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Comfortaa|Covered+By+Your+Grace|Nothing+You+Could+Do');
 @import url('https://fonts.googleapis.com/css?family=Raleway');
 /*Fonts*/
+@font-face {
+  font-family: "JandaQuickNote";
+  src: url("../fonts/JandaQuickNote.ttf") format("truetype");
+}
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: "Nothing you could do";
+  font-family: "JandaQuickNote";
   font-weight: 700;
   letter-spacing: 0;
   text-align: center;
@@ -281,4 +285,21 @@ div#payment-details {
 }
 .tooltip.bottom .tooltip-arrow {
   border-bottom: 5px solid #7f98b3;
+}
+.node-product-type a img.easter {
+  transition: all ease 1s;
+}
+.node-product-type a img.easter-fun {
+  animation: bounce 0.35s ease infinite alternate;
+}
+.node-product-type a:hover img.easter {
+  transform: rotate(35deg) scale(1.5);
+}
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-20px);
+  }
 }
