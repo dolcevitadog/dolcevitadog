@@ -166,7 +166,8 @@ function _dolce_user_links_addressbook_data() {
  */
 function _dolce_user_links_profile_data() {
     global $user;
-    $uid = $user->uid;
+    $args = arg();
+    $uid = $args[1];
     global $language;
     $profile = array(
         'infos' => array(
@@ -189,18 +190,6 @@ function _dolce_user_links_profile_data() {
         ),
     );
     return $profile;
-}
-
-/**
- * Implements template_preprocess_views_view().
- */
-function dolce_user_links_preprocess_views_view(&$vars)
-{
-    switch ($vars['name']) {
-        case 'commerce_backoffice_user_orders';
-            $vars['header'] = _dolce_user_user_profile_data();
-            break;
-    }
 }
 
 function _dolce_user_user_profile_data() {
