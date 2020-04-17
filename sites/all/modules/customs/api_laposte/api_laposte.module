@@ -1,5 +1,6 @@
 <?php
 
+module_load_include('inc', 'api_laposte', 'api_laposte.webservices');
 /**
  * Implements hook_menu().
  */
@@ -9,34 +10,178 @@ function api_laposte_menu()
         'title' => t('API Laposte confguration'),
         'page callback' => 'drupal_get_form',
         'page arguments' => array('api_lapost_config_form'),
-        'access arguments' => array('access content'),
+        'access arguments' => array('administer site configuration'),
     );
+
+    $items['admin/config/api-laposte/test/%'] = array(
+        'title' => t('API Laposte test'),
+        'page callback' => 'api_laposte_config_config_test',
+        'page arguments' => array(4),
+        'access arguments' => array('administer site configuration'),
+    );
+
+    $items['user/%/orders/%/suivi/%'] = array(
+        'title' => t('Follow my package'),
+        'page callback' => 'api_laposte_show_events',
+        'page arguments' => array(1,3,5),
+        'access arguments' => array('use laposte webservice'),
+    );
+
 
     return $items;
 }
 
+/**
+ * Implements hook_permission().
+ */
+function api_laposte_permission() {
+    return array(
+        'use laposte webservice' => array(
+            'title' => t('Use LaPoste webservice'),
+            'description' => t('Permission to display information about package'),
+        ),
+    );
+}
+
+/**
+ * Implements hook_form().
+ */
 function api_lapost_config_form($form, $form_state) {
-    $form['api_laposte_x_okapi_key'] = array(
-        '#title' => 'X-Okapi-Key',
+    $form['api_laposte_x_okapi_production_key'] = array(
+        '#title' => 'Production X-Okapi-Key',
         '#type' => 'textfield',
         '#size' => 75,
-        '#default_value' => variable_get('api_laposte_x_okapi_key'),
+        '#default_value' => variable_get('api_laposte_x_okapi_production_key'),
     );
+
+    $form['api_laposte_x_okapi_sandbox_key'] = array(
+        '#title' => 'Sandbox X-Okapi-Key ',
+        '#type' => 'textfield',
+        '#size' => 75,
+        '#default_value' => variable_get('api_laposte_x_okapi_sandbox_key'),
+    );
+
+    $form['api_laposte_status'] = array(
+        '#title' => t('Status of application'),
+        '#type' => 'select',
+        '#options' => array(
+          'production' => t('Production'),
+            'sandbox' => t('Sandbox'),
+        ),
+        '#default_value' => variable_get('api_laposte_status'),
+    );
+
+
 
     return system_settings_form($form);
 }
 
-function api_laposte_get_info($number, $type) {
-    $info = api_laposte_message(api_laposte_call($number));
-    return $info;
+function api_laposte_config_config_test($id) {
+    $response = api_laposte_call_ws($id);
+    return $response;
 }
 
-function api_laposte_call($number) {
-    $data = exec('curl https://api.laposte.fr/suivi/v1/'.$number.' -H "X-Okapi-Key: '.variable_get('api_laposte_x_okapi_key').'"');
-    $data = json_decode($data);
-    return $data;
+/* Retrieve Laposte Images Status */
+function api_laposte_get_image($code, $country) {
+    switch ($code) {
+        case 'DI1':
+            $image = 'DI1.png';
+            if ($country != NULL) {
+                $image = 'DI1_INT.png';
+            }
+            break;
+        case 'MD2':
+            $image = 'MD2.png';
+            if ($country != NULL) {
+                $image = 'MD2_INT.png';
+            }
+            break;
+        case 'ET1':
+            $image = 'ET1.png';
+            if ($country != NULL) {
+                $image = 'ET1_INT.png';
+            }
+            break;
+        case 'ET3':
+            $image = 'ET3.png';
+            if ($country != NULL) {
+                $image = 'ET3_INT.png';
+            }
+            break;
+        case 'EP1':
+            $image = 'EP1.png';
+            if ($country != NULL) {
+                $image = 'EP1_INT.png';
+            }
+            break;
+        case 'PC1':
+            $image = 'PC1.png';
+            break;
+        case 'DR1':
+            $image = 'DR1.png';
+            break;
+    }
+    return $image;
 }
 
-function api_laposte_message($data) {
-    return $data->message;
+function api_laposte_theme() {
+    return array(
+        'api_laposte_events' => array(
+            'template' => 'api-laposte-events',
+            'arguments' => array('variables' => array())
+        ),
+    );
+}
+
+function api_laposte_show_events($uid, $order_id, $id) {
+    $variables = array();
+    $response = api_laposte_call_ws($id);
+    $return_code = api_laposte_get_returnCode($response);
+    switch ($return_code) {
+        case 200:
+            $variables['product_type'] = api_laposte_get_product_type($response);
+            $variables['tracking_id'] = $response->shipment->idShip;
+            $country = api_laposte_get_country_arrival($response);
+            $getEvents = api_laposte_get_events($response);
+            $events = api_laposte_get_array_events($getEvents, $response, $country);
+            $variables['events'] = $events;
+            break;
+        default:
+            $variables['emptyText'] = t('Informations not available');
+    }
+    return theme('api_laposte_events', $variables);
+}
+
+function api_laposte_get_array_events($datas, $response, $country) {
+    $eventsArray = array();
+    $events = $datas;
+    $count = count($events);
+    $i = 1;
+    foreach ($events as $event) {
+        if ($i == 1) {
+            $key = 'first';
+        } elseif ($i % $count == 0) {
+            $key = 'last';
+        } else {
+            $key = 'inside';
+        }
+        $image = api_laposte_get_image($event->code, $country);
+        $imageUrl = drupal_get_path('module', 'api_laposte') . '/images/' . $image;
+        $date = new DateTime($event->date);
+        if (!array_key_exists($event->code, $eventsArray)) {
+            $eventsArray[$event->code] = array(
+                'text' => $event->label,
+                'date' => $date->format('d/m/Y'),
+                'class' => 'api-laposte-' . $key,
+                'imageUrl' => $imageUrl,
+            );
+        }
+        $i++;
+    }
+    return $eventsArray;
+}
+
+function api_laposte_get_tracking_url($id, $order_id, $order_uid) {
+    global $language;
+    return l(t('Follow my shipment'), '/user/'.$order_uid.'/orders/'.$order_id.'/suivi/'.$id, array('language' => $language, 'attributes' => array('class' => array('api-laposte-link'))));
 }
