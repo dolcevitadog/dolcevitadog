@@ -40,6 +40,7 @@ stylesheets[all][] = css/cart.css
 stylesheets[all][] = css/products.css
 stylesheets[all][] = css/category.css
 stylesheets[all][] = css/blocks.css
+stylesheets[all][] = css/laposte.css
 stylesheets[all][] = css/mobile.css
 
 ;;;;;;;;;;;;;;;;;;;;;

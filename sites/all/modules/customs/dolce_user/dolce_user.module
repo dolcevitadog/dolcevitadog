@@ -54,4 +54,14 @@ function dolce_user_form_alter(&$form, &$form_state, $form_id) {
             );
         }
     }
+    /* On n'affiche pas la selection de la langue dans le edit profile, le site n'étant qu'en anglais */
+    if (drupal_multilingual()) {
+        if ($form_id == 'user_register_form' || ($form_id == 'user_profile_form' && $form['#user_category'] == 'account')) {
+            if (count(element_children($form['locale'])) > 1) {
+                $form['locale']['language']['#access'] = FALSE;
+            } else {
+                $form['locale']['#access'] = FALSE;
+            }
+        }
+    }
 }

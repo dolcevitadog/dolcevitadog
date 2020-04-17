@@ -617,3 +617,22 @@ function commerce_addressbook_retrieve_view($view_id, $display_id, $arguments, $
   // Return the view.
   return $view;
 }
+
+/** HACK
+ * Ajout d'un system de template pour customiser le page adressbook'
+ * Module plus maintenu du coup OK, pourrait être proposé en patch
+ */
+
+/*
+ * Implementation of hook_theme().
+ */
+function commerce_addressbook_theme($existing, $type, $theme, $path){
+    return array(
+        'commerce_addressbook_profile_view' => array(
+            'arguments' => array('content' => array()),
+            'template' => 'commerce_addressbook_profile',
+            'variables' => array('content' => array()),
+        )
+    );
+}
+

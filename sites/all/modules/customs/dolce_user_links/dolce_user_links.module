@@ -12,11 +12,24 @@ function dolce_user_links_block_info() {
         'cache' => DRUPAL_NO_CACHE,
     );
 
-    $blocks['dolce_user_logout'] = array(
+    $blocks['dolce_user_links_logout'] = array(
         'info' => t('Dolce - User Links logout'),
         'title' => '',
-        'region' => 'header',
-        'cache' => DRUPAL_NO_CACHE,
+    );
+
+    $blocks['dolce_user_links_addressbook'] = array(
+        'info' => t('Dolce - User Links Addressbook'),
+        'title' => '',
+    );
+
+    $blocks['dolce_user_links_profile'] = array(
+        'info' => t('Dolce - User Links Profile'),
+        'title' => '',
+    );
+
+    $blocks['dolce_user_links_goback_account'] = array(
+        'info' => t('Dolce - User Links Goback account'),
+        'title' => '',
     );
 
     return $blocks;
@@ -26,6 +39,8 @@ function dolce_user_links_block_info() {
  * Implements hook_block_view().
  */
 function dolce_user_links_block_view($delta = '') {
+    global $user;
+    $uid = $user->uid;
     switch ($delta) {
         case 'dolce_user_links':
             return array(
@@ -38,13 +53,35 @@ function dolce_user_links_block_view($delta = '') {
                 ),
             );
             break;
-        case 'dolce_user_logout':
+        case 'dolce_user_links_logout':
             return array(
                 'subject' => t('Dolce - User Links logout'),
                 'content' => _dolce_user_logout_data(),
             );
             break;
-            
+        case 'dolce_user_links_addressbook':
+            return array(
+                'subject' => t('Dolce - User Links Addressbook'),
+                'content' => _dolce_user_links_addressbook_data(),
+            );
+            break;
+        case 'dolce_user_links_goback_account':
+            return array(
+                'subject' => t('Dolce - User Links Gobackaccount'),
+                'content' => _dolce_user_user_profile_data(),
+            );
+            break;
+        case 'dolce_user_links_profile':
+            return array(
+                'subject' => t('Dolce - User Links Profile'),
+                'content' => theme(
+                    'dolce_user_links_inside',
+                    array(
+                        'data' => _dolce_user_links_profile_data(),
+                    )
+                ),
+            );
+            break;
     }
 }
 
@@ -56,7 +93,11 @@ function dolce_user_links_theme($existing, $type, $theme, $path) {
         'dolce_user_links' => array(
             'template' => 'dolce_user_links',
             'arguments' => array('links' => array())
-        )
+        ),
+        'dolce_user_links_inside' => array(
+            'template' => 'dolce_user_links_inside',
+            'arguments' => array('data' => array())
+        ),
     );
 }
 
@@ -90,6 +131,73 @@ function _dolce_user_links_data() {
 function _dolce_user_logout_data() {
     $links = array();
     global $user;
-    $prefix = '<span class="icon glyphicon glyphicon-log-out"></span> ';
-    return l($prefix.t('Logout'), 'user/logout', array('html' => true, 'attributes' => array('class' => 'dolce-user-logout')));
+    $html = '<div class="dolce-user-links-logout-wrapper">';
+    $prefix = '<i class="fas fa-sign-out-alt"></i> ';
+    $html .= l($prefix.t('Logout'), 'user/logout', array('html' => true, 'attributes' => array('class' => 'dolce-user-logout')));
+    $html .= '</div>';
+    return $html;
+}
+
+/**
+ * Retrieve the current disconnected links
+ */
+function _dolce_user_links_addressbook_data() {
+    global $user;
+    $uid = $user->uid;
+
+    $html = '<div class="dolce-user-links-addressbook-wrapper">';
+
+    $prefix = '<i class="fas fa-money-bill"></i> ';
+
+    $html .= l($prefix. t('Billing information'),  'user/'.$uid.'/addressbook/billing', array('html' => true, 'attributes' => array('class' => array('dolce-user-links-addressbook-billing'))));
+
+    $prefix = '<i class="fas fa-shipping-fast"></i> ';
+    $html .= l($prefix. t('Shipping information'),  'user/'.$uid.'/addressbook/billing', array('html' => true, 'attributes' => array('class' => array('dolce-user-links-addressbook-billing'))));
+
+
+    $html .= '</div>';
+
+    return $html;
+}
+
+
+/**
+ * Retrieve the current customers links in the profile
+ */
+function _dolce_user_links_profile_data() {
+    global $user;
+    $args = arg();
+    $uid = $args[1];
+    global $language;
+    $profile = array(
+        'infos' => array(
+          'link' => url("user/$uid/edit", array('absolute' => TRUE, 'language' => $language)),
+          'icon' => 'far fa-4x fa-user-circle',
+          'class' => 'informations',
+          'text' => t('My informations'),
+        ),
+        'addresses' => array(
+        'link' => url("user/$uid/addressbook", array('absolute' => TRUE, 'language' => $language)),
+        'icon' => 'far fa-4x fa-address-book',
+        'class' => 'addresses',
+        'text' => t('My addresses'),
+        ),
+        'orders' => array(
+        'link' => url("user/$uid/orders", array('absolute' => TRUE, 'language' => $language)),
+        'icon' => 'fas fa-4x fa-file-invoice',
+        'class' => 'orders',
+        'text' => t('My orders'),
+        ),
+    );
+    return $profile;
+}
+
+function _dolce_user_user_profile_data() {
+    $links = array();
+    global $user;
+    $html = '<div class="dolce-user-links-profile-wrapper">';
+    $prefix = '<i class="far fa-user-circle"></i> ';
+    $html .= l($prefix.t('Go back to my account'), 'user', array('html' => true, 'attributes' => array('class' => 'dolce-user-profile')));
+    $html .= '</div>';
+    return $html;
 }

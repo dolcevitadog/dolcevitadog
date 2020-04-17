@@ -26,14 +26,23 @@
     }
   }
 }
+#commerce-addressbook-customer-profile-form {
+  max-width: 640px;
+  margin: 20px auto;
+  padding: 20px;
+  border: 1px solid #1a1a1a;
+  #edit-actions {
+    text-align: center;
+  }
+}
 
-#user-login, #user-register-form, #user-pass {
+#user-login, #user-register-form, #user-pass, #user-profile-form {
   max-width: 640px;
   margin: 20px auto;
   padding: 20px;
   border: 1px solid #1a1a1a;
   text-align: center;
-  #user_login_form, #user_register_form, #user_pass_form {
+  #user_login_form, #user_register_form, #user_pass_form, #edit-account {
     border: none;
     padding-bottom: 10px;
     .form-type-password-confirm, .form-type-password {
@@ -136,22 +145,88 @@
   }
 }
 
-#block-dolce-user-links-dolce-user-links-logout.block-dolce-user-links {
-  width: 220px;
+#block-dolce-user-links-dolce-user-links-logout.block-dolce-user-links, #block-dolce-user-links-dolce-user-links-goback-account.block-dolce-user-links  {
+  max-width: 220px;
   display: block;
-  margin: 10px auto;
-  .dolce-user-links-logout-wrapper {
+  margin: 5px auto;
+  .dolce-user-links-logout-wrapper, .dolce-user-links-profile-wrapper {
     background: black;
     padding: 10px;
     display: block;
     margin: auto;
   }
-  a.dolce-user-logout {
+  a.dolce-user-logout, a.dolce-user-profile {
     color: white;
     line-height: 20px;
     font-size: 20px;
     margin: auto;
     text-align: center;
     display: block;
+  }
+}
+#block-dolce-user-links-dolce-user-links-goback-account.block-dolce-user-links {
+  max-width: 290px;
+}
+
+#commerce_backoffice_user_orders {
+  .view-empty {
+    padding: 25px;
+    border: 1px solid black;
+    text-align: center;
+  }
+}
+
+.page-user-addressbook {
+  .action-links {
+    text-align: center;
+  }
+
+  .commerce-addressbook-links-wrapper {
+    max-width: 640px;
+    margin: 0 auto;
+    text-align: center;
+    .commerce-addressbook-billing-link-wrapper, .commerce-addressbook-shipping-link-wrapper, .commerce-addressbook-create-link {
+      display: inline-block;
+      max-width: 260px;
+      border: 1px solid black;
+      padding: 10px;
+      margin: 10px;
+      .commerce-addressbook-link {
+        display: flex;
+        align-items: center;
+        text-align: center;
+        font-size: 14px;
+        text-decoration: none;
+        color: black;
+        i {
+          margin-right: 10px;
+        }
+      }
+      .commerce-addressbook-link:hover {
+        i {
+          color: @checkoutheader;
+        }
+      }
+    }
+  }
+  #commerce-addressbook, #commerce-addressbook-profile-options-delete-form {
+    max-width: 640px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #1a1a1a;
+    text-align: center;
+    .views-field-rendered-entity {
+      margin: 10px 0px;
+      box-shadow: 1px 1px 4px 1px #ccc;
+      display: inline-block;
+      padding: 10px;
+    }
+    .commerce-addressbook-default {
+    }
+    .commerce-addressbook-others {
+      ul {
+        display: inline-block;
+      }
+    }
   }
 }
