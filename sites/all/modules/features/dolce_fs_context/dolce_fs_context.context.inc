@@ -246,6 +246,9 @@ function dolce_fs_context_context_default_contexts() {
       'values' => array(
         'user/*' => 'user/*',
         '~user' => '~user',
+        '~user/login' => '~user/login',
+        '~user/password' => '~user/password',
+        '~user/register' => '~user/register',
       ),
     ),
   );
