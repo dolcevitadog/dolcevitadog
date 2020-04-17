@@ -1,0 +1,43 @@
+#laposte-following {
+  max-width: 640px;
+  border: 1px solid #1a1a1a;
+  text-align: center;
+  margin: 0 auto;
+  padding: 15px;
+}
+#laposte-following .laposte-header {
+  margin-bottom: 25px;
+  padding-bottom: 25px;
+  border-bottom: 2px solid #dfb853;
+}
+#laposte-following .laposte-header .laposte-product-type {
+  font-weight: bold;
+  font-size: 20px;
+}
+#laposte-following .laposte-header .laposte-product-id {
+  font-weight: bold;
+  font-size: 20px;
+}
+#laposte-following .laposte-event {
+  border: 1px solid #dfb853;
+  width: 300px;
+  max-height: 320px;
+  margin: 10px auto;
+  position: relative;
+  text-align: center;
+}
+#laposte-following .laposte-event .laposte-event-date {
+  font-weight: bold;
+  display: block;
+}
+#laposte-following .laposte-event .laposte-event-text {
+  display: block;
+  padding: 5px;
+}
+#laposte-following .api-laposte-first,
+#laposte-following .api-laposte-inside {
+  height: 50px;
+  width: 4px;
+  margin: 0 auto;
+  border-right: 6px dotted #ccc;
+}
