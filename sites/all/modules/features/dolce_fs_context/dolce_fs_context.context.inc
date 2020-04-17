@@ -193,6 +193,12 @@ function dolce_fs_context_context_default_contexts() {
           'region' => 'navigation',
           'weight' => '-10',
         ),
+        'views-dolcevitadog_services-block' => array(
+          'module' => 'views',
+          'delta' => 'dolcevitadog_services-block',
+          'region' => 'pre_footer',
+          'weight' => '-10',
+        ),
         'mailchimp_signup-dolcevitadog_mailchimp' => array(
           'module' => 'mailchimp_signup',
           'delta' => 'dolcevitadog_mailchimp',
@@ -232,9 +238,43 @@ function dolce_fs_context_context_default_contexts() {
   $context = new stdClass();
   $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
   $context->api_version = 3;
+  $context->name = 'user_inside';
+  $context->description = 'Affiche page user a l\'exception de l\'accueil Profile';
+  $context->tag = 'User';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'user/*' => 'user/*',
+        '~user' => '~user',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'dolce_user_links-dolce_user_links_goback_account' => array(
+          'module' => 'dolce_user_links',
+          'delta' => 'dolce_user_links_goback_account',
+          'region' => 'content',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 1;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Affiche page user a l\'exception de l\'accueil Profile');
+  t('User');
+  $export['user_inside'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
   $context->name = 'user_profile';
   $context->description = 'Afficher sur la page profil utilisateur';
-  $context->tag = 'user';
+  $context->tag = 'User';
   $context->conditions = array(
     'user_page' => array(
       'values' => array(
@@ -248,11 +288,17 @@ function dolce_fs_context_context_default_contexts() {
   $context->reactions = array(
     'block' => array(
       'blocks' => array(
-        'dolce_user_links-dolce_user_logout' => array(
+        'dolce_user_links-dolce_user_links_profile' => array(
           'module' => 'dolce_user_links',
-          'delta' => 'dolce_user_logout',
+          'delta' => 'dolce_user_links_profile',
           'region' => 'content',
-          'weight' => '-10',
+          'weight' => '-7',
+        ),
+        'dolce_user_links-dolce_user_links_logout' => array(
+          'module' => 'dolce_user_links',
+          'delta' => 'dolce_user_links_logout',
+          'region' => 'content',
+          'weight' => '-6',
         ),
       ),
     ),
@@ -262,8 +308,40 @@ function dolce_fs_context_context_default_contexts() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Afficher sur la page profil utilisateur');
-  t('user');
+  t('User');
   $export['user_profile'] = $context;
+
+  $context = new stdClass();
+  $context->disabled = FALSE; /* Edit this to true to make a default context disabled initially */
+  $context->api_version = 3;
+  $context->name = 'user_profile_addressbook';
+  $context->description = '';
+  $context->tag = 'User';
+  $context->conditions = array(
+    'path' => array(
+      'values' => array(
+        'user/*/addressbook/*' => 'user/*/addressbook/*',
+      ),
+    ),
+  );
+  $context->reactions = array(
+    'block' => array(
+      'blocks' => array(
+        'dolce_user_links-dolce_user_links_addressbook' => array(
+          'module' => 'dolce_user_links',
+          'delta' => 'dolce_user_links_addressbook',
+          'region' => 'header',
+          'weight' => '-10',
+        ),
+      ),
+    ),
+  );
+  $context->condition_mode = 0;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('User');
+  $export['user_profile_addressbook'] = $context;
 
   return $export;
 }
