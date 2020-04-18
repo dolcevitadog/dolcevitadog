@@ -94,13 +94,13 @@ function _commerce_billy_mail_send_order_invoice($order) {
     if (module_exists('i18n_variable')) {
 // If i18n_variable module is used:
 // Get the text variables directly and not from the cache, because the language might not match the current $language here.
-      $subject = i18n_variable_get('commerce_billy_mail_subject', $language->language, '');
+      $subject = i18n_variable_get('commerce_billy_mail_subject', $language->language, NULL);
       // i18n_variable_get returns nothing if the realm is not set -.-
       if (is_null($subject)) {
         // Default variable get.
         $subject = variable_get('commerce_billy_mail_subject', '');
       }
-      $body = i18n_variable_get('commerce_billy_mail_body', $language->language, ''); //body text in HTML format
+      $body = i18n_variable_get('commerce_billy_mail_body', $language->language, NULL); //body text in HTML format
       // i18n_variable_get returns nothing if the realm is not set -.-
       if (is_null($body)) {
         // Default variable get.
