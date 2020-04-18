@@ -6,9 +6,8 @@ dependencies[] = commerce_billy_mail
 
 configure = admin/commerce/config/billy-invoice/attachment
 
-; Information added by Drupal.org packaging script on 2017-05-29
-version = "7.x-1.0-beta7"
+; Information added by Drupal.org packaging script on 2019-08-19
+version = "7.x-1.0-beta8"
 core = "7.x"
 project = "commerce_billy_mail"
-datestamp = "1496067793"
-
+datestamp = "1566230899"
