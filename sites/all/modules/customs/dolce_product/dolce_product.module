@@ -105,3 +105,32 @@ function dolce_product_commerce_order_view($order, $view_mode) {
         $payment = !empty($payments) ? array_shift($payments) : NULL;
     }
 }
+
+/**
+ * Implements hook_commerce_cart_add_to_cart_form_alter().
+ */
+function dolce_product_form_alter(&$form, &$form_state) {
+    $form_id = $form['#form_id'];
+    if (strpos($form_id, 'commerce_cart_add_to_cart_form_') === 0) {
+        dolce_product_change_quantity($form, $form_state);
+    }
+}
+
+/*
+* Permet de changer le input en select pour la quantite
+ * Definir une quantite par defaut si il existe un argument pour forcer l'utilisation des "Faux Bundle"
+ * Definir une quantite basé sur le stock réel
+*/
+function dolce_product_change_quantity(&$form, &$form_state) {
+    if (isset($form['quantity']) && ($form['quantity']['#type'] == 'textfield')) {
+        $form['quantity']['#type'] = 'select';
+        $product = $form_state['default_product'];
+        if (isset($product->commerce_stock) && !empty($product->commerce_stock['und'][0]['value'])) {
+            $max_stock = intval($product->commerce_stock['und'][0]['value']);
+            $form['quantity']['#options'] = drupal_map_assoc(range(1,$max_stock));
+        }
+        else {
+            $form['quantity']['#options'] = drupal_map_assoc(range(1,10));
+        }
+    }
+}
