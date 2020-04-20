@@ -47,13 +47,6 @@ function dolce_user_form_alter(&$form, &$form_state, $form_id) {
     if ($form_id == 'commerce_ajax_cart_form') {
         $form['empty']['#default_value'] = t('There is no product in your cart');
     }
-    if ($form_id == 'commerce_addressbook_customer_profile_form') {
-        if (!user_has_role(3)) {
-            $form['commerce_customer_address']['und']['0']['country']['#options'] = array(
-                'FR' => t("France"),
-            );
-        }
-    }
     /* On n'affiche pas la selection de la langue dans le edit profile, le site n'étant qu'en anglais */
     if (drupal_multilingual()) {
         if ($form_id == 'user_register_form' || ($form_id == 'user_profile_form' && $form['#user_category'] == 'account')) {
