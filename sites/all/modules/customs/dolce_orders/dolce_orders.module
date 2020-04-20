@@ -1,0 +1,80 @@
+<?php
+
+/**
+ * Implements hook_cron().
+ */
+function dolce_orders_cron() {
+    dolce_orders_in_delivry_to_completed();
+}
+
+/**
+ * Implements hook_menu().
+ */
+function dolce_orders_menu()
+{
+    $items['orders/changestatus/test'] = array(
+        'title' => '',
+        'page callback' => 'dolce_orders_in_delivry_to_completed',
+        'access arguments' => array('administer site configuration'),
+    );
+    return $items;
+}
+
+/* Retrieve all orders by status */
+function dolce_orders_get_orders_by_sattus($status) {
+    $result = db_select('commerce_order', 'co')
+        ->fields('co')
+        ->condition('status', $status,'=')
+        ->execute()
+        ->fetchAll();
+
+    return $result;
+}
+
+/* Change automotically all orders in status in_delivry to completed if shipment is terminated */
+function dolce_orders_in_delivry_to_completed() {
+    $state = 'in_delivery';
+    $shipping_numbers = array();
+    $orders = dolce_orders_get_orders_by_sattus($state);
+    /* A cause du SMTP, besoin absolu de delayer 5 commandes par 5 commande, Cron lancé toutes les heures */
+    $i = 0;
+    foreach ($orders as $order) {
+        if ($i < 5) {
+            $entity = commerce_order_load($order->order_id);
+            if (dolce_orders_shipping_finished($entity)) {
+                dolce_orders_change_state($entity, 'completed');
+                $i++;
+            }
+        }
+        else {
+            break;
+        }
+    }
+    return '';
+}
+
+/* Check with the shipping number if order is delivered */
+function dolce_orders_shipping_finished($entity) {
+    $shipping_number = dolce_orders_get_shipping_number($entity);
+    if (!empty($shipping_number)) {
+        if (module_exists('api_laposte')) {
+            if (api_laposte_delivery_complete($shipping_number)) {
+                return TRUE;
+            }
+        }
+    }
+}
+
+/* Change the order state to finished if the shipping package is delivered */
+function dolce_orders_change_state($entity, $state) {
+    commerce_order_status_update($entity, $state, $skip_save = FALSE, $revision = TRUE, $log = '');
+}
+
+/* Helper function to get the shipping value */
+function dolce_orders_get_shipping_number($entity) {
+    $shipping_item = field_get_items('commerce_order', $entity, 'field_shipping_number');
+    if (!empty($shipping_item)) {
+        return $shipping_item[0]['value'];
+    }
+    return NULL;
+}
