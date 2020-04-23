@@ -1,4 +1,4 @@
-<div<?php print $attributes; ?>>
+<article<?php print $attributes; ?>>
     <?php print $user_picture; ?>
     <?php print render($title_prefix); ?>
     <?php if (!$page && $title): ?>
@@ -12,24 +12,14 @@
             <?php print $submitted; ?>
         </footer>
     <?php endif; ?>
-
     <div<?php print $content_attributes; ?>>
-        <div class="product-list">TOTO
+        <div class="product-list">
             <?php
             // We hide the comments and links now so that we can render them later.
             hide($content['comments']);
             hide($content['links']);
-
             print render($content);
             ?>
         </div>
     </div>
-
-    <div class="clearfix">
-        <?php if (!empty($content['links'])): ?>
-            <nav class="links node-links clearfix"><?php print render($content['links']); ?></nav>
-        <?php endif; ?>
-
-        <?php print render($content['comments']); ?>
-    </div>
-</div>
+</article>
