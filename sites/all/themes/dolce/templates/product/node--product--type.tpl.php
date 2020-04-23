@@ -13,26 +13,6 @@
     <div class="col-lg-6 col-sm-6 col-xs-12 col-md-6">
         <?php print render($content['product:field_images']); ?>
         <?php print render($content['field_gallery']); ?>
-        <?php if ($node->nid == 63): ?>
-        <a data-toggle="modal" data-target="#myModal"><img class="easter" src="/sites/all/themes/dolce/images/egg3.png" width="30px" /></a>
-        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Bravo vous avez trouvé le 1er oeuf ! </h4>
-                    </div>
-                    <div class="modal-body">
-                        Votre récompense : Le code promo PAQUESR5EX vous permettra de bénéficier des frais de port offerts sur votre commande jusqu'au 14 avril 2020.
-                        Deux autres oeufs offrent une plus grosse récompense ! Alors cherchez bien et ayez l'oeil.
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php endif; ?>
     </div>
     <div class="col-lg-6 col-sm-6 col-xs-12 col-md-6">
         <div<?php print $content_attributes; ?>>
