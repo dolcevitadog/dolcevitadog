@@ -204,3 +204,40 @@ function dolce_product_get_coupon_in_order($entity) {
     }
     return null;
 }
+
+function dolce_product_field_display_alter(&$display, $context) {
+
+    if ($context['entity_type'] == 'commerce_product' && $context['view_mode'] != 'product_in_cart') {
+        if ($context['field']['field_name'] == 'commerce_price') {
+            foreach ($context['instance']['display'] as $key => $value) {
+                $display['type'] = 'commerce_price_rrp_your_price';
+                $display['module'] = 'commerce_extra_price_formatters';
+                $display['settings'] = dolce_product_rrp_field_settings();
+            }
+        }
+    }
+}
+
+function dolce_product_rrp_field_settings() {
+    return array(
+        'calculation' => TRUE,
+        'check_for_same_price' => 1,
+        'show_saving' => 1,
+        'include_tax_in_rrp' => 1,
+        'rrp_label' => '',
+        'offer_label' => '',
+        'saving_label' => '',
+        'whole_numbers_only' => 0,
+        'custom_link_to_entity' => 0,
+        'custom_prefix' => '',
+        'custom_suffix' => '',
+        'custom_reverse' => 0,
+        'custom_trim' => 0,
+        'custom_strtolower' => 0,
+        'custom_strtoupper' => 0,
+        'custom_ucfirst' => 0,
+        'custom_ucwords' => 0,
+        'custom_strip_tags' => 0,
+        'custom_strip_preserve' => '',
+    );
+}
