@@ -67,6 +67,7 @@ function dolce_product_views_pre_view(&$view, &$display_id, &$args)
                 $nid = $product->display_context['entity_id'];
                 $args = array($nid, $color_tid);
             }
+            break;
     }
 }
 
@@ -114,6 +115,22 @@ function dolce_product_form_alter(&$form, &$form_state) {
     if (strpos($form_id, 'commerce_cart_add_to_cart_form_') === 0) {
         dolce_product_change_quantity($form, $form_state);
     }
+    else if ($form_id == 'views_form_commerce_cart_form_default') {
+        /* Le but ici est d'afficher à l'utilisateur qu'il a utilisé un coupon code et de le rappeler dans le pannier */
+        global $user;
+        $order_id = commerce_cart_order_id($user->uid);
+        $order = commerce_order_load($order_id);
+        $codes = dolce_product_get_coupon_in_order($order);
+
+        if ($codes) {
+            $text = t('You use the coupon code(s) : ') . implode(',', $codes);
+            $form['test'] = array(
+                '#type' => 'markup',
+                '#markup' => $text,
+                '#weight' => 99,
+            );
+        }
+    }
 }
 
 /*
@@ -133,4 +150,57 @@ function dolce_product_change_quantity(&$form, &$form_state) {
             $form['quantity']['#options'] = drupal_map_assoc(range(1,10));
         }
     }
+}
+
+/* Implements hook_commerce_price_formatted_components_alter */
+function dolce_product_commerce_price_formatted_components_alter(&$components, $price, $entity) {
+
+    unset($components['base_price']);
+    $args = arg();
+
+    $totalAmountDiscount = dolce_product_get_total_amount_discount($components);
+    if ($args[4] != 'pdf-invoice') { // Pas de ca dans la facture
+        if ($totalAmountDiscount) {
+            $components['saving'] = array(
+                'title' => t('You save'),
+                'price' => array(
+                    'amount' => abs($totalAmountDiscount),
+                    'currency_code' => 'EUR',
+                    'data' => array(),
+                ),
+                'weight' => NULL,
+            );
+        }
+    }
+}
+
+
+function dolce_product_get_total_amount_discount(&$components) {
+    $total = 0;
+    foreach ($components as $key => $component){
+        if (strpos($key, 'discount') === 0) {
+            $total += $component['price']['amount'];
+            unset($components[$key]);
+        }
+    }
+    if ($total != 0) {
+        return $total;
+    }
+    else {
+        return NULL;
+    }
+}
+
+/* Recupere le code coupon dans une order */
+function dolce_product_get_coupon_in_order($entity) {
+    $coupons = field_get_items('commerce_order', $entity, 'commerce_coupons');
+    $codes = array();
+    foreach ($coupons as $key => $coupon) {
+        $promo = commerce_coupon_load($coupon['target_id']);
+        $codes[] = $promo->code;
+    }
+    if (!empty($codes)) {
+        return $codes;
+    }
+    return null;
 }

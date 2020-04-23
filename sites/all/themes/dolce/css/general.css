@@ -286,6 +286,21 @@ div#payment-details {
 .tooltip.bottom .tooltip-arrow {
   border-bottom: 5px solid #7f98b3;
 }
+/* Price wrapper */
+.webprice-wrapper .webprice-total {
+  color: #111111;
+}
+.rrp-wrapper {
+  margin-right: 10px;
+}
+.node-product-type .webprice-wrapper,
+.node-product-type .rrp-wrapper {
+  display: inline-block;
+}
+.component-type-commerce-price-formatted-amount {
+  font-weight: bold;
+  font-size: 16px;
+}
 .node-product-type a img.easter {
   transition: all ease 1s;
 }
