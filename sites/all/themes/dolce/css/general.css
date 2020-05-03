@@ -288,11 +288,15 @@ div#payment-details {
   border-bottom: 5px solid #7f98b3;
 }
 /* Price wrapper */
+.webprice-wrapper {
+  font-weight: bold;
+}
 .webprice-wrapper .webprice-total {
   color: #111111;
 }
-.rrp-wrapper {
-  margin-right: 10px;
+.rrp-total {
+  color: gray;
+  text-decoration: line-through;
 }
 .node-product-type .webprice-wrapper,
 .node-product-type .rrp-wrapper {
