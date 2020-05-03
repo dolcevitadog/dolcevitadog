@@ -53,7 +53,8 @@ function dolce_se_theme($existing, $type, $theme, $path) {
  */
 function dolce_se_get_estimated_date() {
     $args = arg();
-   $country =  _dolce_se_get_contry_by_order_id($args[1]);
+    $country =  _dolce_se_get_contry_by_order_id($args[1]);
+
  $date = new DateTime();
  $day = $date->format('l');
  if ($country != 'FR') {
@@ -61,12 +62,23 @@ function dolce_se_get_estimated_date() {
  }
  $delay = add_days($country, $day);
  $date->add(new DateInterval('P'.$delay.'D'));
- $estimated_date = $date->format('d M Y');
+    setlocale (LC_TIME, 'fr_FR.utf8','fra');
+    $format = 'd M Y';
+    $estimated_date = _dolce_se_dateToFrench($date, $format);
 
  return array(
      'delivery_date' => $estimated_date,
      'dolce-se-text' => variable_get('dolce_se_text', '')
  );
+}
+
+function _dolce_se_dateToFrench($date, $format)
+{
+    $english_days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
+    $french_days = array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche');
+    $english_months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
+    $french_months = array('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
+    return str_replace($english_months, $french_months, str_replace($english_days, $french_days, $date->format($format) ) );
 }
 
 /* Temps de livraison selon le code pays */
