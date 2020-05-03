@@ -90,7 +90,7 @@
     display: block;
   }
 }
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .node-product-type .achats .field-type-commerce-product-reference form.commerce-add-to-cart .form-submit {
     font-size: 20px;
   }
@@ -99,7 +99,7 @@
     display: block;
   }
   .node-product-type .achats .field-type-commerce-product-reference .form-item-quantity label {
-    width: 20% !important;
+    width: 30% !important;
   }
 }
 .node-product-type .header-product .field {

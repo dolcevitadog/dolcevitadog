@@ -218,10 +218,17 @@ div.messages.commerce-add-to-cart-confirmation {
       font-family: @textfont;
       color: @zoneuserbg;
       font-size: 20px;
-      width: 80%;
+      width: 100%;
+      float: none;
     }
     .view-content {
+      width: 100%;
+      .views-row {
+        width: 50%;
+        margin: 0 auto;
+      }
       .content {
+
         .field-name-field-images {
           float: left;
           margin-right: 10px;
@@ -231,14 +238,24 @@ div.messages.commerce-add-to-cart-confirmation {
         .commerce-product-sku, .field-name-field-hh-color, .field-name-field-hl-size, .field-name-field-hh-size,
         .field-name-commerce-price, .views-field-quantity, .field-name-title-field {
           color: #878380;
-          font-size: 12px;
+          font-size: 15px;
           margin-right: 20px;
           margin-left: 120px;
+          .commerce-product-sku-label, .field-label, .views-label {
+            font-weight: normal;
+            font-size: 15px !important;
+          }
+        }
+        .field {
+         .field-label {
+           font-weight: normal;
+           font-size: 15px !important;
+         }
         }
       }
       .views-field-quantity {
         color: #878380;
-        font-size: 12px;
+        font-size: 15px;
         margin-right: 20px;
         margin-left: 120px;
       }
@@ -253,18 +270,38 @@ div.messages.commerce-add-to-cart-confirmation {
     }
     .button-wrapper {
       background: #f7f7f7;
+      padding: 10px 30px;
+      position: inherit;
+      width: 100%;
       .button.checkout {
         background: #557b9d;
         font-family: @cartfont;
+        width: 60%;
+        margin: 5px auto;
       }
       .button.continue {
         font-family: @cartfont;
         background-color: #a3a3a3;
+        width: 60%;
+        margin: 5px auto;
       }
     }
   }
 }
 
+@media (max-width: 768px) {
+  div.messages.commerce-add-to-cart-confirmation {
+    width: 80%;
+    .message-inner {
+      .button.checkout {
+        width: 100%;
+      }
+      .button.continue {
+        width: 100%;
+      }
+    }
+  }
+}
 /* Cart pane before checkout */
 .view-commerce-cart-form {
   .entity-commerce-product {
