@@ -74,7 +74,7 @@
  */
 ?>
 <div id="zone-user" class="zone-user-wrapper">
-    <div class="hidden-xs nomobile region-user-long <?php print $zone_user_long_classes; ?>">
+    <div class="hidden-xs nomobile region-user-long">
         <?php print render($page['zone_user']); ?>
     </div>
     <div class="region-user-splitted">
@@ -117,7 +117,15 @@
 
     <?php if (!empty($page['sidebar_first'])): ?>
       <aside class="col-sm-3" role="complementary">
-        <?php print render($page['sidebar_first']); ?>
+          <!-- Default switch -->
+          <div id="toggle-informations" class="material-switch">
+              <span class="title-toggle"><?php print t('Show filters'); ?></span>
+              <input id="checkbox-toggle" name="someSwitchOption001" type="checkbox"/>
+              <label for="checkbox-toggle" class="label-primary"></label>
+          </div>
+          <div id="facetapi-filters">
+            <?php print render($page['sidebar_first']); ?>
+          </div>
       </aside>  <!-- /#sidebar-first -->
     <?php endif; ?>
 

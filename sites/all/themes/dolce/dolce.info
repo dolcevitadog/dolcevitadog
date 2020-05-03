@@ -28,9 +28,12 @@ regions[footer_bottom]      = 'Footer Bottom'
 ;; Stylesheets
 ;;;;;;;;;;;;;;;;;;;;;
 
+stylesheets[all][] = css/bootstrap.min.css
+stylesheets[all][] = css/bootswatch.css
 stylesheets[all][] = css/style.css
 stylesheets[all][] = css/container.css
 stylesheets[all][] = css/general.css
+stylesheets[all][] = css/switch.css
 stylesheets[all][] = css/menu.css
 stylesheets[all][] = css/homepage.css
 stylesheets[all][] = css/products.css
@@ -42,6 +45,7 @@ stylesheets[all][] = css/category.css
 stylesheets[all][] = css/blocks.css
 stylesheets[all][] = css/laposte.css
 stylesheets[all][] = css/mobile.css
+
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; Scripts

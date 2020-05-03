@@ -156,7 +156,6 @@ function dolce_bootstrap_colorize_text_alter(&$texts) {
 }
 
 function dolce_preprocess_views_view_field(&$vars) {
-
     $vars['output'] = $vars['field']->advanced_render($vars['row']);
 }
 
@@ -215,40 +214,12 @@ function dolce_commerce_price_rrp_your_price($variables) {
         }
         $html .= '<span class="rrp-total">'.$rrp.'</span>';
         $html .= '</div>';
-        /*
-        $rows[] = array(
-            'data' => array(
-                array(
-                    'data' => check_plain($variables['options']['rrp_label']),
-                    'class' => array('rrp-title'),
-                ),
-                array(
-                    'data' => $rrp,
-                    'class' => array('rrp-total'),
-                ),
-            ),
-        );
-        */
         $html .= '<div class="webprice-wrapper">';
         if (!empty(check_plain($variables['options']['offer_label']))) {
             $html .= '<label class="webprice-title">'.check_plain($variables['options']['offer_label']).'</label>';
         }
         $html .= '<span class="webprice-total">'.$web_price.'</span>';
         $html .= '</div>';
-        /*
-        $rows[] = array(
-            'data' => array(
-                array(
-                    'data' => check_plain($variables['options']['offer_label']),
-                    'class' => array('webprice-title'),
-                ),
-                array(
-                    'data' => $web_price,
-                    'class' => array('webprice-total'),
-                ),
-            ),
-        );
-        */
         $discountrprice = $variables['components']['commerce_price_rrp_your_price']['price']['amount'];
         $baseprice = $variables['components']['base_price']['price']['amount'];
         $discount = ($discountrprice - $baseprice);
@@ -262,38 +233,10 @@ function dolce_commerce_price_rrp_your_price($variables) {
             }
             $html .= '<span class="saving-title">'.$saving_percentage.'</span>';
             $html .= '</div>';
-            /*
-            $rows[] = array(
-                'data' => array(
-                    array(
-                        'data' => check_plain($variables['options']['saving_label']),
-                        'class' => array('saving-title'),
-                    ),
-                    array(
-                        'data' => $saving,
-                        'class' => array('saving-title'),
-                    ),
-                )
-            );
-            */
         }
     }
 
     else {
-        /*
-        $rows[] = array(
-            'data' => array(
-                array(
-                    'data' => t('Price'),
-                    'class' => array('webprice-title'),
-                ),
-                array(
-                    'data' => $web_price,
-                    'class' => array('webprice-total'),
-                ),
-            ),
-        );
-        */
         $html .= '<div class="webprice-wrapper">';
         if (!empty(check_plain($variables['options']['offer_label']))) {
             $html .= '<label class="webprice-title">'.check_plain($variables['options']['offer_label']).'</label>';
@@ -302,7 +245,6 @@ function dolce_commerce_price_rrp_your_price($variables) {
         $html .= '</div>';
     }
     return $html;
-    return  theme('table', array('rows' => $rows, 'attributes' => array('class' => array('commerce-price-rrp-your-price'))));
 }
 
 /* Implement preprocess_node */
@@ -312,4 +254,21 @@ function dolce_preprocess_node(&$vars)
     $content_type = $vars['type'];
     $vars['theme_hook_suggestions'][] = 'node__' . $view_mode;
     $vars['theme_hook_suggestions'][] = 'node__' . $view_mode . '_' . $content_type;
+}
+
+
+/**
+ * Returns HTML for the deactivation widget.
+ *
+ * @param $variables
+ *   An associative array containing the keys 'text', 'path', and 'options'. See
+ *   the l() function for information about these variables.
+ *
+ * @see l()
+ * @see theme_facetapi_link_active()
+ *
+ * @ingroup themable
+ */
+function dolce_facetapi_deactivate_widget($variables) {
+    return '<i class="far fa-minus-square"></i> ';
 }
