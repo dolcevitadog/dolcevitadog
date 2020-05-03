@@ -50,7 +50,7 @@ function dolce_orders_in_delivry_to_completed() {
             break;
         }
     }
-    return '';
+    return TRUE;
 }
 
 /* Check with the shipping number if order is delivered */
@@ -77,4 +77,15 @@ function dolce_orders_get_shipping_number($entity) {
         return $shipping_item[0]['value'];
     }
     return NULL;
+}
+
+/**
+ * Implements hook_commerce_order_presave().
+ */
+function dolce_orders_commerce_order_presave($order) {
+    if ($order->status != $order->original->status) {
+        if ($order->status == 'in_delivery') {
+            $order->data['in_delivery_date'] = time();
+        }
+    }
 }
