@@ -1,0 +1,8 @@
+name = Dolce Billy PDF
+description = Altering Commerce Billy process to have a nice PDF Bill
+core = 7.x
+version = 7.x-1.0
+package = Dolce
+
+dependencies[] = commerce_billy
+dependencies[] = commerce_billy_pdf
