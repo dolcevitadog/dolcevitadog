@@ -1,15 +1,21 @@
 <?php
 
-/* Appel au WS de LaPoste */
-function api_laposte_call_ws($number) {
+/**
+ * @param $id : Shippment ID
+ * @return object : Data returned by the WS
+ * Appel au WS de LaPoste
+ */
+function api_laposte_call_ws($id) {
     //On recupere la cle OKAPI (prod ou sandbox)
     $key = api_laposte_get_key();
-    $response = exec('curl https://api.laposte.fr/suivi/v2/idships/'.$number.' -H "Accept: application/json" -H "X-Okapi-Key: '.$key.'"');
+    $response = exec('curl https://api.laposte.fr/suivi/v2/idships/'.$id.' -H "Accept: application/json" -H "X-Okapi-Key: '.$key.'"');
     $data = json_decode($response);
     return $data;
 }
 
-/* Helper function to get API key depending of the status of the application */
+/**
+ * @return String : Get API Key depending of the state of the application (sandbox or production)
+ */
 function api_laposte_get_key() {
     $status = variable_get('api_laposte_status', 'sandbox');
     switch ($status) {
@@ -24,7 +30,10 @@ function api_laposte_get_key() {
     return $key;
 }
 
-/* Check if the delivery is complete */
+/**
+ * @param $id : Number tracking id
+ * @return bool : Check if the delivery is complete
+ */
 function api_laposte_delivery_complete($id) {
     $response = api_laposte_call_ws($id);
     if (api_laposte_get_returnCode($response) == 200) {
@@ -37,7 +46,11 @@ function api_laposte_delivery_complete($id) {
     return FALSE;
 }
 
-/* Fonction tres moche, en attente mail laposte concernant l'API */
+/**
+ * @param $response
+ * @return : country Code or NULL
+ * Fonction tres moche, en attente mail laposte concernant l'API
+ */
 function api_laposte_get_country_arrival($response) {
     $returnCode = api_laposte_get_returnCode($response);
     if ($returnCode == '200') {
@@ -52,15 +65,26 @@ function api_laposte_get_country_arrival($response) {
     return NULL;
 }
 
+/**
+ * @param $response
+ * @return mixed : Retourne le type de produit LaPoste utilisé (lettre, colis, ...)
+ */
 function api_laposte_get_product_type($response) {
     return $response->shipment->product;
 }
 
-/* Get return Code from the WS */
+/**
+ * @param $response
+ * @return mixed : Return Code from the WS
+ */
 function api_laposte_get_returnCode($response) {
     return $response->returnCode;
 }
 
+/**
+ * @param $response
+ * @return mixed : Return all the events about a package
+ */
 function api_laposte_get_events($response) {
     return $response->shipment->event;
 }
