@@ -222,7 +222,15 @@ div.messages.commerce-add-to-cart-confirmation .message-inner .added-product-tit
   font-family: "Raleway";
   color: #7f98b3;
   font-size: 20px;
-  width: 80%;
+  width: 100%;
+  float: none;
+}
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content {
+  width: 100%;
+}
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .views-row {
+  width: 50%;
+  margin: 0 auto;
 }
 div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-images {
   float: left;
@@ -238,13 +246,41 @@ div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .con
 div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .views-field-quantity,
 div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-title-field {
   color: #878380;
-  font-size: 12px;
+  font-size: 15px;
   margin-right: 20px;
   margin-left: 120px;
 }
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .commerce-product-sku .commerce-product-sku-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hh-color .commerce-product-sku-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hl-size .commerce-product-sku-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hh-size .commerce-product-sku-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-commerce-price .commerce-product-sku-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .views-field-quantity .commerce-product-sku-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-title-field .commerce-product-sku-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .commerce-product-sku .field-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hh-color .field-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hl-size .field-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hh-size .field-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-commerce-price .field-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .views-field-quantity .field-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-title-field .field-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .commerce-product-sku .views-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hh-color .views-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hl-size .views-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-field-hh-size .views-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-commerce-price .views-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .views-field-quantity .views-label,
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field-name-title-field .views-label {
+  font-weight: normal;
+  font-size: 15px !important;
+}
+div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .content .field .field-label {
+  font-weight: normal;
+  font-size: 15px !important;
+}
 div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .views-field-quantity {
   color: #878380;
-  font-size: 12px;
+  font-size: 15px;
   margin-right: 20px;
   margin-left: 120px;
 }
@@ -258,14 +294,32 @@ div.messages.commerce-add-to-cart-confirmation .message-inner .view-content .vie
 }
 div.messages.commerce-add-to-cart-confirmation .message-inner .button-wrapper {
   background: #f7f7f7;
+  padding: 10px 30px;
+  position: inherit;
+  width: 100%;
 }
 div.messages.commerce-add-to-cart-confirmation .message-inner .button-wrapper .button.checkout {
   background: #557b9d;
   font-family: "Comfortaa";
+  width: 60%;
+  margin: 5px auto;
 }
 div.messages.commerce-add-to-cart-confirmation .message-inner .button-wrapper .button.continue {
   font-family: "Comfortaa";
   background-color: #a3a3a3;
+  width: 60%;
+  margin: 5px auto;
+}
+@media (max-width: 768px) {
+  div.messages.commerce-add-to-cart-confirmation {
+    width: 80%;
+  }
+  div.messages.commerce-add-to-cart-confirmation .message-inner .button.checkout {
+    width: 100%;
+  }
+  div.messages.commerce-add-to-cart-confirmation .message-inner .button.continue {
+    width: 100%;
+  }
 }
 /* Cart pane before checkout */
 .view-commerce-cart-form .entity-commerce-product .field-name-field-images {
