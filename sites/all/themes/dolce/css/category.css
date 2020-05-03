@@ -5,7 +5,10 @@
   font-family: "JandaQuickNote";
   src: url("../fonts/JandaQuickNote.ttf") format("truetype");
 }
-.view-collection-products ul li {
+.view-collection-products .item-list {
+  clear: both;
+}
+.view-collection-products .item-list ul li {
   list-style: none;
 }
 .view-collection-products .view-header {
