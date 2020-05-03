@@ -35,7 +35,7 @@
 .block-dolce-cart #dolce-cart .dolce-cart-quantity {
   position: absolute;
   top: 5px;
-  left: 45px;
+  left: 50px;
   -webkit-border-radius: 25px;
   -moz-border-radius: 25px;
   border-radius: 45px;
@@ -448,4 +448,14 @@ ol.inline.commerce-checkout-progress li a {
     max-width: 50px;
     display: inline-block;
   }
+}
+.views-field-edit-quantity input,
+.form-item-quantity input {
+  display: inline-block;
+  width: 55px !important;
+}
+.views-field-edit-quantity .form-item-quantity,
+.form-item-quantity .form-item-quantity {
+  display: flex;
+  align-items: center;
 }

@@ -195,6 +195,14 @@
   display: inline-block;
   margin: 10px auto;
 }
+#user-login .g-recaptcha,
+#user-register-form .g-recaptcha,
+#user-pass .g-recaptcha,
+#user-profile-form .g-recaptcha {
+  margin: 0 auto;
+  display: inline-block;
+  text-align: center;
+}
 .block-dolce-user-links {
   display: inline-block;
 }
@@ -341,4 +349,26 @@
 .page-user-addressbook #commerce-addressbook .commerce-addressbook-others ul,
 .page-user-addressbook #commerce-addressbook-profile-options-delete-form .commerce-addressbook-others ul {
   display: inline-block;
+}
+#dolce-userpoints .dolce-userpoints-empty {
+  text-align: center;
+  font-size: 18px;
+  padding: 10px;
+}
+#dolce-userpoints .dolce-userpoints-points-wrapper {
+  width: 200px;
+  height: 100px;
+  margin: 15px auto;
+  border: 1px solid #e7e7e7;
+  padding: 10px;
+  color: white;
+  background: #7f98b3;
+  text-align: center;
+}
+#dolce-userpoints .dolce-userpoints-points-wrapper .dolce-userpoints-points {
+  font-size: 30px;
+  font-weight: 700;
+}
+#dolce-userpoints .dolce-userpoints-points-wrapper .dolce-userpoints-points-text {
+  font-size: 24px;
 }

@@ -25,33 +25,161 @@
   border-color: #7f98b3;
 }
 .field-name-field-gallery .field-item {
-  display: inline-block;
-  box-shadow: 1px 1px 1px;
-  margin: 0 10px;
+  margin: 0 auto;
+  width: 220px;
+}
+.field-name-field-gallery .field-slideshow-wrapper {
+  position: relative;
+}
+.field-name-field-gallery .field-slideshow-wrapper .field-slideshow-controls .prev {
+  position: absolute;
+  top: 75px;
+  left: -25px;
+}
+.field-name-field-gallery .field-slideshow-wrapper .field-slideshow-controls .next {
+  position: absolute;
+  top: 75px;
+  right: -25px;
+}
+.field-name-field-images .field-item.odd {
+  background: white;
 }
 .field-name-field-images .field-item {
-  background: #F7F7F7;
+  background: #f7f7f7;
 }
 .field-name-field-images .field-item img {
   margin: 0 auto;
+  background: #F7F7F7;
+}
+/* PRODUCT DISPLAY */
+/*
+@media (max-width: 768px) {
+  .node-product-type {
+    .informations {
+      #toggle-informations {
+        display: block;
+        margin: 0 auto;
+        width: auto;
+      }
+      #informations-inside {
+        display: none;
+      }
+    }
+  }
+}
+@media (min-width: 768px) {
+  .node-product-type {
+    .informations {
+      #toggle-informations {
+        display: none !important;
+
+      }
+      #informations-inside {
+        display: block !important;
+      }
+    }
+  }
+}
+*/
+@media (max-width: 1024px) {
+  .node-product-type .achats .field-type-commerce-product-reference form.commerce-add-to-cart .form-submit {
+    font-size: 16px;
+  }
+  .node-product-type .achats .field-type-commerce-product-reference form.commerce-add-to-cart label {
+    width: 100%;
+    display: block;
+  }
+}
+@media (max-width: 768px) {
+  .node-product-type .achats .field-type-commerce-product-reference form.commerce-add-to-cart .form-submit {
+    font-size: 20px;
+  }
+  .node-product-type .achats .field-type-commerce-product-reference form.commerce-add-to-cart label {
+    width: 100%;
+    display: block;
+  }
+  .node-product-type .achats .field-type-commerce-product-reference .form-item-quantity label {
+    width: 20% !important;
+  }
+}
+.node-product-type .header-product .field {
+  display: inline-block;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-right: 40px;
+}
+.node-product-type .header-product .field .field-label {
+  color: #557b9d;
+  display: inline-block;
+}
+.node-product-type .header-product .field .field-items {
+  color: black;
+  display: inline-block;
+}
+.node-product-type .header-product .commerce-product-extra-field-sku {
+  display: inline-block;
+  font-size: 20px;
+  margin-bottom: 10px;
+  margin-right: 40px;
+}
+.node-product-type .header-product .commerce-product-extra-field-sku .commerce-product-sku {
+  color: black;
+}
+.node-product-type .header-product .commerce-product-extra-field-sku .commerce-product-sku .commerce-product-sku-label {
+  font-weight: normal;
+  color: #557b9d;
+}
+.node-product-type .header-product .commerce-product-field-title-field .field-item {
+  clear: both;
+  font-family: "JandaQuickNote";
+  font-size: 28px;
+  font-weight: 700;
+}
+.node-product-type .visuel {
+  margin-bottom: 20px;
+}
+.node-product-type .visuel .field-item {
+  margin-bottom: 10px;
+}
+.node-product-type .informations,
+.node-product-type .achats {
+  padding: 15px 15px;
+  margin-bottom: 20px;
+  list-style: none;
+  background-color: #f5f5f5;
+}
+.node-product-type .informations .field .field-label,
+.node-product-type .achats .field .field-label,
+.node-product-type .informations .field label,
+.node-product-type .achats .field label {
+  font-size: 18px;
+  color: #557b9d;
+  display: inline-block;
+}
+.node-product-type .informations .field-name-commerce-price,
+.node-product-type .achats .field-name-commerce-price {
+  text-align: center;
+}
+.node-product-type .informations .field-name-commerce-price .saving-wrapper,
+.node-product-type .achats .field-name-commerce-price .saving-wrapper {
+  position: absolute;
+  top: -27px;
+}
+.node-product-type .informations .field-name-commerce-price .webprice-wrapper,
+.node-product-type .achats .field-name-commerce-price .webprice-wrapper {
+  margin-right: 20px;
+}
+.node-product-type .field-type-youtube .field-item {
+  margin-bottom: 15px;
 }
 .node-product-type .field-name-field-gallery {
   margin-top: 15px;
 }
-.node-product-type .commerce-product-field-title-field {
-  clear: both;
-  font-family: "JandaQuickNote";
-  font-size: 24px;
-  font-weight: 700;
+.node-product-type .field-name-field-product-brochure {
+  margin-bottom: 15px;
 }
-.node-product-type .commerce-product-sku {
-  color: #b1b1b1;
-  font-family: "JandaQuickNote";
-  font-size: 13px;
-  font-weight: 400;
-}
-.node-product-type .commerce-product-sku .commerce-product-sku-label {
-  font-weight: normal;
+.node-product-type .field-name-field-product-brochure .field-items {
+  display: inline-block;
 }
 .node-product-type .field-name-commerce-price {
   font-family: "JandaQuickNote";
@@ -86,7 +214,6 @@
 .node-product-type .field-name-body .read-less,
 .node-product-type .field-name-body .read-more a,
 .node-product-type .field-name-body .read-less a {
-  font-family: "JandaQuickNote";
   font-size: 14px;
   font-weight: 400;
 }
@@ -117,13 +244,7 @@
   background-image: url('../images/btn_read_less.png');
 }
 .node-product-type .field-type-commerce-product-reference {
-  background: url('../images/bg_product_attributes_bottom.png') center bottom no-repeat;
   margin-bottom: 15px;
-  padding-bottom: 50px;
-}
-.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart {
-  background: url('../images/bg_product_attributes_top.png') center top no-repeat;
-  padding-top: 40px;
 }
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .form-control {
   width: auto;
@@ -202,17 +323,17 @@
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .form-submit {
   background-color: #7f98b3;
   background-image: url('../images/bg_shopping_bag.png');
-  background-position: 90% 50%;
+  background-position: 96% 30%;
   /* LTR */
   background-repeat: no-repeat;
   border: 0;
   color: #ffffff;
   font-family: "JandaQuickNote";
-  font-size: 17px;
+  font-size: 20px;
   font-weight: 400;
   margin-top: 40px;
-  margin-left: 5px;
-  /* LTR */
+  margin: 20px auto;
+  display: block;
   padding: 5px 50px 5px 10px;
   /* LTR */
 }

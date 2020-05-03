@@ -9,6 +9,11 @@ h1, h2, h3, h4, h5, h6 {
   margin: 20px 0;
 }
 
+a {
+  color: @checkoutheader;
+  text-decoration: none;
+}
+
 .main-container {
   .block-title {
     position: relative;
@@ -24,10 +29,6 @@ h1, h2, h3, h4, h5, h6 {
     left: 50%;
     margin-left: -50px;
   }
-}
-
-body {
-  font-family: @textfont;
 }
 
 .jumbotron {
@@ -332,4 +333,130 @@ div#payment-details {
       transform: translateY(-20px);
     }
   }
+}
+
+.well {
+  min-height: 20px;
+  padding: 20px 4px;
+  margin-bottom: 20px;
+  background-color: #f5f5f5;
+  border: none;
+  border-radius: 0px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+  box-shadow: none;
+}
+
+.main-container {
+  .region-sidebar-first {
+
+    .block {
+      padding: 10px 0px;
+      border-bottom: 1px solid #e7e7e7;
+      margin-bottom: 10px;
+      h2.block-title {
+        margin-bottom: 10px;
+        border: none;
+      }
+      .block-title::after {
+        content: none;
+      }
+
+      .facetapi-facetapi-checkbox-links {
+        padding-left: 15px;
+        li {
+          margin: 5px 0px;
+          label {
+          }
+          a {
+            padding-left: 5px;
+            color: black;
+          }
+        }
+      }
+
+      .search-api-ranges-widget {
+        padding-left: 10px;
+        .text-range {
+          text-align: center;
+        }
+        .range-box-left, .range-box-right {
+          width: 49%;
+          margin: 5px auto;
+          text-align: center;
+          display: inline-block;
+        }
+        #edit-range-to {
+          text-align: right;
+        }
+        .range-submit {
+          text-align: center;
+        }
+        .range-slider-box {
+          width: 80%;
+          margin: 0 auto;
+        }
+        .ui-slider-handle {
+          background: #eee;
+          border-radius: 50%;
+          border-color: #222;
+        }
+      }
+    }
+  }
+}
+
+#toggle-facetapi, #toggle-informations {
+  width: 52%;
+  margin: 10px auto;
+  display: none;
+}
+
+.title-toggle {
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+@media (max-width: 768px)
+  {
+    #toggle-facetapi, #toggle-informations {
+      display: block;
+  }
+  #facetapi-filters, #informations-inside {
+    display: none;
+  }
+}
+
+@media (min-width: 768px)
+{
+  #toggle-facetapi, #toggle-informations {
+    display: none !important;
+  }
+  #facetapi-filters, #informations-inside {
+    display: block !important;
+  }
+}
+
+
+#shipping-form {
+  padding: 15px 0;
+  .delivery-date {
+    font-size: 16px;
+  }
+  .dolce-se-text {
+    margin: 10px;
+
+  }
+}
+
+table.taille {
+  th {
+    text-align: center;
+  }
+  tbody {
+    text-align: center;
+    td.race {
+      width: 42%;
+    }
+  }
+
 }
