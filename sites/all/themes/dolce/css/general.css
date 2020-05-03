@@ -436,3 +436,6 @@ table.taille tbody {
 table.taille tbody td.race {
   width: 42%;
 }
+a.size-chart {
+  font-size: 20px;
+}
