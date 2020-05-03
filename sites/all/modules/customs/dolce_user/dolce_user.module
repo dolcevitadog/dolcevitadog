@@ -19,7 +19,6 @@ function dolce_user_module_implements_alter(&$implementations, $hook) {
  * Implements hook_form_alter().
  */
 function dolce_user_form_alter(&$form, &$form_state, $form_id) {
-
     if ($form_id == 'user_login') {
         $form['name']['#prefix']  = '<div id="' . $form_id . '_form">';
         $form['name']['#prefix'] .= '<h1>' . t('Login') . '</h1>';
@@ -56,5 +55,29 @@ function dolce_user_form_alter(&$form, &$form_state, $form_id) {
                 $form['locale']['#access'] = FALSE;
             }
         }
+    }
+    if ($form_id == 'commerce_checkout_form_review') {
+        foreach ($form['commerce_payment']['payment_method']['#options'] as $key => $value) {
+            if (strpos($key, 'commerce_stripe') === 0) {
+                $form['commerce_payment']['payment_method']['#options'][$key] = '<i class="fab fa-cc-visa"></i> '. $value;
+            }
+            else if (strpos($key, 'bank_transfer') === 0) {
+                $form['commerce_payment']['payment_method']['#options'][$key] = '<i class="fas fa-euro-sign"></i> '. $value;
+            }
+            else if (strpos($key, 'commerce_userpoints') === 0) {
+                $form['commerce_payment']['payment_method']['#options'][$key] = '<i class="fas fa-coins"></i> '. $value;
+            }
+        }
+    }
+}
+
+/**
+ * Implements hook_field_widget_form_alter().
+ */
+function dolce_user_field_widget_form_alter(&$element, $form_state, $context) {
+
+    if(!empty($element['#addressfield'])) {
+        $element['country']['#weight'] = 100;
+        $element['phone_block']['phone_number']['phone_number']['#required'] = TRUE;
     }
 }
