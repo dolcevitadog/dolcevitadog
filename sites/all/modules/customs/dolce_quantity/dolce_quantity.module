@@ -1,0 +1,131 @@
+<?php
+/**
+ * @file
+ *   Contains Commerce Quantity Plus-Minus module's functionality.
+ */
+
+define('dolce_quantity_INCREASE', 1);
+define('dolce_quantity_DECREASE', -1);
+
+/**
+ * Implements hook_form_alter().
+ * Adds additional theme wrappers for add to cart's quantity textfields.
+ */
+function dolce_quantity_form_alter(&$form, &$form_state, $form_id) {
+  // Add to cart form from field api
+  $str = 'commerce_cart_add_to_cart_form_';
+  if (drupal_substr($form_id, 0, drupal_strlen($str)) == $str) {
+    if (isset($form['quantity']) && $form['quantity']['#type'] == 'textfield') {
+      $form['#attached']['js'][] = drupal_get_path('module', 'dolce_quantity') . '/dolce_quantity.js';
+      $form['#attached']['css'][] = drupal_get_path('module', 'dolce_quantity') . '/dolce_quantity.css';
+        $product = $form_state['default_product'];
+        if (isset($product->commerce_stock) && !empty($product->commerce_stock['und'][0]['value'])) {
+            $max_stock = intval($product->commerce_stock['und'][0]['value']);
+            $my_settings = array(
+                'maxStock' => $max_stock,
+            );
+            drupal_add_js(array('dolce_quantity' => $my_settings), 'setting');
+        }
+
+      $form['quantity']['#theme_wrappers'] = array('quantity_plusminus_wrapper', 'form_element');
+    }
+  }
+
+  // Quantity fields from views
+  if ($form_id == 'views_form_commerce_cart_form_default') {
+    if (isset($form['edit_quantity'])) {
+      $form['#attached']['js'][] = drupal_get_path('module', 'dolce_quantity') . '/dolce_quantity.js';
+      $form['#attached']['css'][] = drupal_get_path('module', 'dolce_quantity') . '/dolce_quantity.css';
+      foreach ($form['edit_quantity'] as $key => $value) {
+        if (is_numeric($key) && drupal_substr($key, 0, 1) != '#' && is_array($value)) {
+          $form['edit_quantity'][$key]['#theme_wrappers'] = array('quantity_plusminus_wrapper', 'form_element');
+        }
+      }
+    }
+  }
+
+}
+
+/**
+ * Implements hook_theme().
+ */
+function dolce_quantity_theme($existing, $type, $theme, $path) {
+  return array(
+    'quantity_plusminus_wrapper' => array(
+      'render element' => 'form',
+    ),
+    'quantity_plusminus_link' => array(
+      'variables' => array('way' => NULL, 'quantity' => NULL, 'quantity_input_element' => NULL),
+    ),
+  );
+}
+
+/**
+ * Returns HTML for quantity textfield having links wrapping the textfield.
+ */
+function theme_quantity_plusminus_wrapper($variables) {
+    $line_item = $variables['form']['#line_item_id'];
+  $decrease = theme('quantity_plusminus_link', array('way' => dolce_quantity_DECREASE, 'quantity' => $variables['form']['#value'], 'quantity_input_element' => $variables['form']['#id'], 'line_item' => $line_item));
+  $increase = theme('quantity_plusminus_link', array('way' => dolce_quantity_INCREASE, 'quantity' => $variables['form']['#value'], 'quantity_input_element' => $variables['form']['#id'], 'line_item' => $line_item));
+  return $decrease . $variables['form']['#children'] . $increase;
+}
+
+/**
+ * Returns HTML for link which increases/decreases quantity value.
+ */
+function theme_quantity_plusminus_link($variables) {
+    if ($variables['line_item']) {
+        $maxStock = _get_max_stock_lineitem($variables['line_item']);
+        //krumo($maxStock);
+    }
+  switch ($variables['way']) {
+    case dolce_quantity_DECREASE:
+        if (module_exists('fontawesome')) {
+            $text = '<i class="fas fa-minus-circle"></i>';
+        }
+        else {
+            $text = '-';
+        }
+      $class = 'commerce-quantity-plusminus-link-decrease';
+      $js_callback = "Drupal.dolce_quantity('#" . $variables['quantity_input_element'] . "', " . $variables['way'] . ", " . $maxStock . ")";
+      break;
+    case dolce_quantity_INCREASE:
+        if (module_exists('fontawesome')) {
+            $text = '<i class="fas fa-plus-circle"></i>';
+        }
+        else {
+            $text = '+';
+        }
+      $class = 'commerce-quantity-plusminus-link-increase';
+      $js_callback = "Drupal.dolce_quantity('#" . $variables['quantity_input_element'] . "', " . $variables['way'] . ", " . $maxStock . ")";
+      break;
+  }
+  if ($variables['quantity'] <= 1) {
+    $class .= ' commerce-quantity-plusminus-link-disabled';
+  }
+  $options = array(
+    'attributes' => array('class' => 'button', 'onclick' => $js_callback . '; return false;'),
+    'html' => TRUE,
+  );
+  $element = array(
+    '#theme' => 'link',
+    '#text' => $text,
+    '#path' => current_path(),
+    '#options' => $options,
+    '#prefix' => '<span class="commerce-quantity-plusminus-link ' . $class . '">',
+    '#suffix' => '</span>',
+  );
+  return render($element);
+}
+
+function _get_max_stock_lineitem($line_item) {
+
+    $item = commerce_line_item_load($line_item);
+    $product = commerce_product_load($item->commerce_product['und']['0']['product_id']);
+
+    if (isset($product->commerce_stock) && !empty($product->commerce_stock['und'][0]['value'])) {
+        $max_stock = intval($product->commerce_stock['und'][0]['value']);
+        return $max_stock;
+    }
+    return NULL;
+}

@@ -1,0 +1,106 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function dolce_se_menu()
+{
+    $items['admin/config/dolce-se'] = array(
+        'title' => t('Configure Shipment estimation'),
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('dolce_se_configure_form'),
+        'access arguments' => array('administer site configuration'),
+    );
+
+    return $items;
+}
+
+function dolce_se_configure_form($form, $form_state)
+{
+    $form['dolce_se_text'] = array(
+        '#type' => 'textarea',
+        '#title' => t('Suffix text'),
+        '#default_value' => variable_get('dolce_se_text', ''),
+    );
+
+    return system_settings_form($form);
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function dolce_se_form_alter(&$form, &$form_state, $form_id) {
+    switch ($form_id) {
+        case 'commerce_checkout_form_shipping':
+
+            $form['commerce_shipping']['dolce-se']['#markup'] = theme('dolce_se_theme', array('content' => dolce_se_get_estimated_date()));
+            $form['commerce_shipping']['dolce-se']['#weight'] = 1;
+    }
+}
+
+function dolce_se_theme($existing, $type, $theme, $path) {
+    $items['dolce_se_theme'] = array(
+        'template' => 'dolce_se_shipping_form',
+        'arguments' => array('content' => array())
+    );
+
+    return $items;
+}
+
+/**
+ * @return array
+ * Calcule la date estimative de livraison
+ */
+function dolce_se_get_estimated_date() {
+    $args = arg();
+   $country =  _dolce_se_get_contry_by_order_id($args[1]);
+ $date = new DateTime();
+ $day = $date->format('l');
+ if ($country != 'FR') {
+     $country = 'OTHER';
+ }
+ $delay = add_days($country, $day);
+ $date->add(new DateInterval('P'.$delay.'D'));
+ $estimated_date = $date->format('d M Y');
+
+ return array(
+     'delivery_date' => $estimated_date,
+     'dolce-se-text' => variable_get('dolce_se_text', '')
+ );
+}
+
+/* Temps de livraison selon le code pays */
+function add_days($countryCode, $day) {
+    $array =  array(
+        'FR' => array(
+            'Monday' => 4,
+            'Tuesday' => 4,
+            'Wednesday' => 5,
+            'Thursday' => 5,
+            'Friday' => 5,
+            'Saturday' => 5,
+            'Sunday' => 5,
+        ),
+        'OTHER' => array(
+            'Monday' => 7,
+            'Tuesday' => 7,
+            'Wednesday' => 7,
+            'Thursday' => 7,
+            'Friday' => 8,
+            'Saturday' => 8,
+            'Sunday' => 7,
+        ),
+    );
+    return $array[$countryCode][$day];
+}
+
+/* Retourne le country code de l'adresse de livraison pour une commande */
+function _dolce_se_get_contry_by_order_id($order_id) {
+    $order = commerce_order_load($order_id);
+    $profile = commerce_customer_profile_load($order->commerce_customer_shipping['und']['0']['profile_id']);
+    $country = $profile->commerce_customer_address['und']['0']['country'];
+    if (!empty($country)) {
+        return $country;
+    }
+    return NULL;
+}

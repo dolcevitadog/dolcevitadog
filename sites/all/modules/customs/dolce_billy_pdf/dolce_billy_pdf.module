@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * Implements hook_commerce_order_view().
+ */
+/**** ICI on surcharge le commerce_order_view pour pouvoir afficher de nouvelles données dans la facture *****/
+function dolce_billy_pdf_commerce_order_view($order, $view_mode) {
+    if ($view_mode == "pdf" || $view_mode == 'canceled') {
+        if (!empty($order->data['in_delivery_date'])) {
+            $order->content['in_delivery_date'] = array(
+                '#markup' => date('d.m.Y', $order->data['in_delivery_date']),
+            );
+        }
+        $order->content['created_date'] = array(
+            '#markup' => date('d.m.Y', $order->created)
+        );
+        $order->content['order_number'] = array(
+            '#markup' => $order->order_number,
+        );
+        $order->content['order_id'] = array(
+            '#markup' => $order->order_id,
+        );
+    }
+}

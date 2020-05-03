@@ -1,0 +1,5 @@
+name        = Dolce Shipping estimation
+description	= Give an approximate date of shipping when customer orders products
+package		= Dolce
+core        = 7.x
+version     = 7.x-1.0

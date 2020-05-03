@@ -71,8 +71,6 @@ function api_lapost_config_form($form, $form_state) {
         '#default_value' => variable_get('api_laposte_status'),
     );
 
-
-
     return system_settings_form($form);
 }
 
@@ -81,7 +79,13 @@ function api_laposte_config_config_test($id) {
     return $response;
 }
 
-/* Retrieve Laposte Images Status */
+/**
+ * @param $code
+ * @param $country
+ * @return string
+ * Les images et les status sont differentes entre une distribution en France et à l'étranger. Il faut utiliser des
+ * immages differentes selon les codes retours
+ */
 function api_laposte_get_image($code, $country) {
     switch ($code) {
         case 'DI1':
@@ -119,6 +123,12 @@ function api_laposte_get_image($code, $country) {
             break;
         case 'DR1':
             $image = 'DR1.png';
+            break;
+        case 'AG1':
+            $image = 'AG1.png';
+            if ($country != NULL) {
+                $image = 'ET3_INT.png';
+            }
             break;
     }
     return $image;
