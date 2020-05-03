@@ -1,21 +1,30 @@
 <?php
 
-/*
-function dolce_product_node_view($node) {
-	$view = views_get_view('suggested_product');
-	$args = array(16, 10);
-	$view->set_arguments($args);
-	$view->set_display('block');
-	$view->execute();
-	if (empty($view->result)) {
-		$args = array(16);
-		$view->set_arguments($args);
-		$view->execute();
-	}
-	return $view->render();
-}
-*/
+function dolce_product_menu() {
+    $items['admin/config/dolce-product/ui-spinner'] = array(
+        'title' => t('Configure UI Spinner Quantity'),
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('dolce_product_configure_ui_spinner_form'),
+        'access arguments' => array('administer site configuration'),
+    );
 
+    return $items;
+}
+
+
+function dolce_product_configure_ui_spinner_form($form, &$form_state) {
+    $form['commerce_kickstart_product_ui_spinner_disable'] = array(
+        '#type' => 'checkbox',
+        '#title' => t('Activate spinner for quantity item'),
+        '#default_value' => variable_get('commerce_kickstart_product_ui_spinner_disable', 0),
+        '#size' => 2,
+        '#maxlength' => 2,
+    );
+
+    return system_settings_form($form);
+}
+
+/**** ICI On cherche les produits associés ayant la meme couleur ****/
 function _dolce_product_get_minimal_related($nid, $color_tid) {
 	$view = views_get_view('suggested_product');
 	$args = array($nid, $color_tid);
@@ -44,6 +53,7 @@ function dolce_product_commerce_cart_attributes_refresh_alter(&$commands, $form,
   $commands[] = ajax_command_replace('#suggested_product', '<div id="suggested_product">' . $view_output . '</div>');
 }
 
+/* On retourne le Taxonomy ID de la couleur */
 function dolce_product_get_haqihana_color($product) {
 	if (!empty($product->field_hh_color)) {
 		return $product->field_hh_color['und']['0']['tid'];
@@ -112,10 +122,7 @@ function dolce_product_commerce_order_view($order, $view_mode) {
  */
 function dolce_product_form_alter(&$form, &$form_state) {
     $form_id = $form['#form_id'];
-    if (strpos($form_id, 'commerce_cart_add_to_cart_form_') === 0) {
-        dolce_product_change_quantity($form, $form_state);
-    }
-    else if ($form_id == 'views_form_commerce_cart_form_default') {
+    if ($form_id == 'views_form_commerce_cart_form_default') {
         /* Le but ici est d'afficher à l'utilisateur qu'il a utilisé un coupon code et de le rappeler dans le pannier */
         global $user;
         $order_id = commerce_cart_order_id($user->uid);
@@ -124,7 +131,7 @@ function dolce_product_form_alter(&$form, &$form_state) {
 
         if ($codes) {
             $text = t('You use the coupon code(s) : ') . implode(',', $codes);
-            $form['test'] = array(
+            $form['coupon-code'] = array(
                 '#type' => 'markup',
                 '#markup' => $text,
                 '#weight' => 99,
@@ -133,28 +140,13 @@ function dolce_product_form_alter(&$form, &$form_state) {
     }
 }
 
-/*
-* Permet de changer le input en select pour la quantite
- * Definir une quantite par defaut si il existe un argument pour forcer l'utilisation des "Faux Bundle"
- * Definir une quantite basé sur le stock réel
-*/
-function dolce_product_change_quantity(&$form, &$form_state) {
-    if (isset($form['quantity']) && ($form['quantity']['#type'] == 'textfield')) {
-        $form['quantity']['#type'] = 'select';
-        $product = $form_state['default_product'];
-        if (isset($product->commerce_stock) && !empty($product->commerce_stock['und'][0]['value'])) {
-            $max_stock = intval($product->commerce_stock['und'][0]['value']);
-            $form['quantity']['#options'] = drupal_map_assoc(range(1,$max_stock));
-        }
-        else {
-            $form['quantity']['#options'] = drupal_map_assoc(range(1,10));
-        }
-    }
-}
-
-/* Implements hook_commerce_price_formatted_components_alter */
+/**
+ * @param $components
+ * @param $price
+ * @param $entity
+ * Display if the customer saved money. No need now to display the Base price. The discount is displayed on the line item
+ */
 function dolce_product_commerce_price_formatted_components_alter(&$components, $price, $entity) {
-
     unset($components['base_price']);
     $args = arg();
 
@@ -174,7 +166,11 @@ function dolce_product_commerce_price_formatted_components_alter(&$components, $
     }
 }
 
-
+/**
+ * Count the amount of discount
+ * @param $components
+ * @return int|null :
+ */
 function dolce_product_get_total_amount_discount(&$components) {
     $total = 0;
     foreach ($components as $key => $component){
@@ -195,12 +191,14 @@ function dolce_product_get_total_amount_discount(&$components) {
 function dolce_product_get_coupon_in_order($entity) {
     $coupons = field_get_items('commerce_order', $entity, 'commerce_coupons');
     $codes = array();
-    foreach ($coupons as $key => $coupon) {
-        $promo = commerce_coupon_load($coupon['target_id']);
-        $codes[] = $promo->code;
-    }
-    if (!empty($codes)) {
-        return $codes;
+    if (!empty($coupons)) {
+        foreach ($coupons as $key => $coupon) {
+            $promo = commerce_coupon_load($coupon['target_id']);
+            $codes[] = $promo->code;
+        }
+        if (!empty($codes)) {
+            return $codes;
+        }
     }
     return null;
 }
@@ -240,4 +238,16 @@ function dolce_product_rrp_field_settings() {
         'custom_strip_tags' => 0,
         'custom_strip_preserve' => '',
     );
+}
+
+/**
+ * @param $vars
+ * Get the value of the field to display it in a modal
+ */
+function dolce_product_preprocess_node(&$vars) {
+    switch ($vars['type']) {
+        case 'haqihana_harness':
+            $hh_informations = field_view_field('node', $vars['node'], 'field_hh_informations');
+            $vars['hh_informations'] = $hh_informations;
+    }
 }
