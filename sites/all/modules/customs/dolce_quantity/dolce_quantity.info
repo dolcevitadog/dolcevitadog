@@ -1,0 +1,6 @@
+name        = Dolce Quantity
+description	= Wraps quantity fields with - and + links to decrease or increase quantity.
+package			= Dolce
+core        = 7.x
+
+dependencies[] = commerce_cart
