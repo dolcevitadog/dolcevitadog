@@ -1,11 +1,5 @@
 <?php
 
-function dolce_cart_preprocess_node(&$vars) {
-    drupal_add_library('system', 'ui.spinner');
-    drupal_add_js(libraries_get_path('jquery.expander') . '/jquery.expander.js');
-    drupal_add_js(drupal_get_path('module', 'dolce_cart').'/dolce_cart.js');
-}
-
 /**
  * Implements hook_form_alter().
  */
@@ -13,13 +7,13 @@ function dolce_cart_form_alter(&$form, &$form_state, $form_id)
 {
     if (strstr($form_id, 'commerce_cart_add_to_cart_form')) {
         $form['#attached']['library'][] = array('commerce_kickstart_product_ui', 'jquery_expander');
-        $node = menu_get_object();
-
+        /***** AJOUTE LE TABLEAU DES TAILLES SI L'ATTRIBUT TAILLE EXISTE ******/
         if (isset($form['attributes']['field_hh_size'])) {
             $node = menu_get_object();
             $field_hh_informations = $node->field_hh_informations['und'][0]['value'];
-            $form['attributes']['field_hh_size']['#suffix'] = '<a href="" data-html="true" data-toggle="popover" title="'.t('Size chart').'" 
-            data-content="'.$field_hh_informations.'" data-placement="bottom">'.t('<i class="fa fa-table"></i> Size chart').'</a>';
+            $form['attributes']['field_hh_size']['#suffix'] = '<a type="button" data-toggle="modal" data-target=".size-chart"
+><i class="fa fa-table"></i> ' . t('Size chart') . '</a>';
+
         }
         $form['#validate'][] = 'dolce_cart_add_to_cart_validate';
     }
@@ -29,20 +23,6 @@ function dolce_cart_add_to_cart_validate($form, &$form_state)
 {
     if (form_get_errors()) {
         form_set_error('quantity', '');
-    }
-}
-
-function dolce_cart_preprocess_commerce_line_item_summary(&$variables) {
-    if (isset($variables['view'])) {
-        switch ($variables['view']->name) {
-            case 'shopping_cart':
-                unset($variables['quantity']);
-                unset($variables['quantity_label']);
-                break;
-        }
-        if ($variables['quantity_raw'] == 0) {
-            unset($variables['links']);
-        }
     }
 }
 
@@ -59,6 +39,8 @@ function dolce_cart_block_info() {
 
     return $blocks;
 }
+
+/********* SHOPPING CART BLOCK *********/
 
 /**
  * Implements hook_block_view().
