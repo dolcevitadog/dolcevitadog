@@ -411,6 +411,9 @@ div#payment-details {
   #informations-inside {
     display: none;
   }
+  .field-name-commerce-order-total .commerce-price-formatted-components {
+    width: 100%;
+  }
 }
 @media (min-width: 768px) {
   #toggle-facetapi,
