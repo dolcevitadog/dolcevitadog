@@ -19,9 +19,9 @@ function dolce_preprocess_page(&$vars) {
   $vars['zone_user_second_classes'] = 'col-md-5 col-lg-5 col-sm-6 col-xs-8';
 
   // Add responsive tables for everytable
-    drupal_add_css(drupal_get_path('theme', 'dolce') . '/css/responsive_table.css');
-    drupal_add_js(drupal_get_path('theme', 'dolce') . '/js/ngtables/ng_responsive_tables.js');
-    drupal_add_js(drupal_get_path('theme', 'dolce') . '/js/responsive_cart.js');
+    drupal_add_css(drupal_get_path('theme', 'dolce') . '/js/stacktable/stacktable.css');
+    drupal_add_js(drupal_get_path('theme', 'dolce') . '/js/stacktable/stacktable.js');
+    drupal_add_js(drupal_get_path('theme', 'dolce') . '/js/responsivetable.js');
 
 
 }
