@@ -5,7 +5,7 @@ namespace Mailchimp\Tests;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Mailchimp library test cases.
+ * MailChimp library test cases.
  *
  * @package Mailchimp\Tests
  */
@@ -27,7 +27,7 @@ class MailchimpTest extends TestCase {
    */
   public function testVersion() {
     $mc = new Mailchimp();
-    $this->assertEquals($mc::VERSION, '2.0.0');
+    $this->assertEquals($mc::VERSION, '1.0.8');
     $this->assertEquals(json_decode(file_get_contents('composer.json'))->version, $mc::VERSION);
   }
 
