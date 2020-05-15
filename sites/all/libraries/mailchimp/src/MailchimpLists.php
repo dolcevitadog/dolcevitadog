@@ -29,7 +29,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Gets a Mailchimp list.
+   * Gets a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -92,7 +92,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Gets merge fields associated with a Mailchimp list.
+   * Gets merge fields associated with a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -112,7 +112,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Add merge field associated with a Mailchimp list.
+   * Add merge field associated with a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -141,7 +141,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Gets information about all members of a Mailchimp list.
+   * Gets information about all members of a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -161,7 +161,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Gets information about a member of a Mailchimp list.
+   * Gets information about a member of a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -184,7 +184,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Gets information about a member of a Mailchimp list.
+   * Gets information about a member of a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -210,7 +210,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Gets activity related to a member of a Mailchimp list.
+   * Gets activity related to a member of a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -233,7 +233,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Adds a new member to a Mailchimp list.
+   * Adds a new member to a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -261,7 +261,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Removes a member from a Mailchimp list.
+   * Removes a member from a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -282,7 +282,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Updates a member of a Mailchimp list.
+   * Updates a member of a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -307,7 +307,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Adds a new or update an existing member of a Mailchimp list.
+   * Adds a new or update an existing member of a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -336,7 +336,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Gets information about segments associated with a Mailchimp list.
+   * Gets information about segments associated with a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -356,7 +356,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Gets a Mailchimp list segment.
+   * Gets a MailChimp list segment.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -379,7 +379,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Adds a new segment to a Mailchimp list.
+   * Adds a new segment to a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
@@ -407,7 +407,7 @@ class MailchimpLists extends Mailchimp {
   }
 
   /**
-   * Updates a segment associated with a Mailchimp list.
+   * Updates a segment associated with a MailChimp list.
    *
    * @param string $list_id
    *   The ID of the list.
