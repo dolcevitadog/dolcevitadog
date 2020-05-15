@@ -13,7 +13,7 @@ function template_preprocess_bxslider_views_slideshow_main_frame(&$vars) {
   _bxslider_views_slideshow_add_js($vars['settings'], 'views-slideshow-bxslider-images-' . $vars['id']);
 
   $vars['classes_array'][] = 'bxslider';
-  $rendered_rows = '';
+  $rendered_rows = array();
   $current_row = 0;
   foreach ($vars['rows'] as $count => $item) {
     // Replace the width and height with zero. for fix.
