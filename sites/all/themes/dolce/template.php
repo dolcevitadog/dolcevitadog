@@ -223,7 +223,7 @@ function dolce_commerce_price_rrp_your_price($variables) {
         $discountrprice = $variables['components']['commerce_price_rrp_your_price']['price']['amount'];
         $baseprice = $variables['components']['base_price']['price']['amount'];
         $discount = ($discountrprice - $baseprice);
-        $saving_percentage = ($discount / $baseprice) * 100;
+        $saving_percentage = floor(($discount / $baseprice) * 100);
         $saving_percentage .= '%';
         if ($variables['options']['show_saving'] == 1 && isset($saving_percentage)) {
 
