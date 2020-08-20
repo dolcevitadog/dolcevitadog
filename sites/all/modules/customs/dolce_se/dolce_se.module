@@ -85,22 +85,22 @@ function _dolce_se_dateToFrench($date, $format)
 function add_days($countryCode, $day) {
     $array =  array(
         'FR' => array(
-            'Monday' => 7,
-            'Tuesday' => 7,
-            'Wednesday' => 7,
-            'Thursday' => 7,
-            'Friday' => 8,
-            'Saturday' => 8,
-            'Sunday' => 7,
+            'Monday' => 4,
+            'Tuesday' => 4,
+            'Wednesday' => 4,
+            'Thursday' => 4,
+            'Friday' => 5,
+            'Saturday' => 5,
+            'Sunday' => 4,
         ),
         'OTHER' => array(
-            'Monday' => 9,
-            'Tuesday' => 9,
-            'Wednesday' => 9,
-            'Thursday' => 9,
-            'Friday' => 10,
-            'Saturday' => 10,
-            'Sunday' => 9,
+            'Monday' => 6,
+            'Tuesday' => 6,
+            'Wednesday' => 6,
+            'Thursday' => 6,
+            'Friday' => 8,
+            'Saturday' => 8,
+            'Sunday' => 6,
         ),
     );
     return $array[$countryCode][$day];
