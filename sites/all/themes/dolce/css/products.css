@@ -276,12 +276,19 @@
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .form-item.form-item-attributes-field-color,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .form-item.form-item-attributes-field-color,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .form-item.form-item-attributes-field-color,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-lead-color .form-item.form-item-attributes-field-color,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .form-item.form-item-attributes-field-hh-color,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .form-item.form-item-attributes-field-hh-color,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .form-item.form-item-attributes-field-hh-color,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-lead-color .form-item.form-item-attributes-field-hh-color,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .form-item-attributes-field-games-color,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .form-item-attributes-field-games-color,
-.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .form-item-attributes-field-games-color {
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .form-item-attributes-field-games-color,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-lead-color .form-item-attributes-field-games-color,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .form-item-attributes-field-lead-color,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .form-item-attributes-field-lead-color,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .form-item-attributes-field-lead-color,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-lead-color .form-item-attributes-field-lead-color {
   float: left;
   /* LTR */
   margin-right: 5px;
@@ -291,29 +298,39 @@
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .form-item.form-item-attributes-field-color label,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .form-item.form-item-attributes-field-color label,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .form-item.form-item-attributes-field-color label,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-lead-color .form-item.form-item-attributes-field-color label,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .form-item.form-item-attributes-field-hh-color label,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .form-item.form-item-attributes-field-hh-color label,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .form-item.form-item-attributes-field-hh-color label,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-lead-color .form-item.form-item-attributes-field-hh-color label,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .form-item-attributes-field-games-color label,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .form-item-attributes-field-games-color label,
-.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .form-item-attributes-field-games-color label {
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .form-item-attributes-field-games-color label,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-lead-color .form-item-attributes-field-games-color label,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .form-item-attributes-field-lead-color label,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .form-item-attributes-field-lead-color label,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .form-item-attributes-field-lead-color label,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-lead-color .form-item-attributes-field-lead-color label {
   display: none;
 }
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .commerce-fancy-attributes-color,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .commerce-fancy-attributes-color,
-.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .commerce-fancy-attributes-color {
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .commerce-fancy-attributes-color,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-lead-color .commerce-fancy-attributes-color {
   height: 20px;
   width: 20px;
 }
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .description .field,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .description .field,
-.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .description .field {
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .description .field,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-lead-color .description .field {
   border: 1px solid #CBCDCC;
   padding: 3px;
 }
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item-attributes-field-color .description-selected .field,
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-hh-color .description-selected .field,
-.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .description-selected .field {
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-games-color .description-selected .field,
+.node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .attribute-widgets .form-item.form-item-attributes-field-lead-color .description-selected .field {
   border-color: #494949;
 }
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart label {
