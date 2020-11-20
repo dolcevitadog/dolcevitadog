@@ -8,7 +8,6 @@
 use Stripe\Refund;
 use Stripe\Stripe;
 use Stripe\Charge;
-use Stripe\PaymentIntent;
 
 /**
  * Form callback for processing refunds.
@@ -35,17 +34,20 @@ function commerce_stripe_pi_refund_form($form, &$form_state, $order, $transactio
   // Make sure we can load the original charge object.
   try {
     Stripe::setApiKey(trim($payment_method['settings']['secret_key']));
-    $charge = Charge::retrieve($transaction->remote_id);
-    $form_state['stripe_pi_charge'] = $charge;
+    $payment_intent = \Stripe\PaymentIntent::retrieve($transaction->remote_id);
+    $form_state['stripe_pi_payment_intent'] = $payment_intent;
   }
   catch (Exception $e) {
     drupal_set_message(t('The original transaction could not be loaded. The error was: @error', array('@error' => $e->getMessage())), 'error');
     return $form;
   }
-
+    /**
+     * @var \Stripe\Charge $charge
+     */
+    $charge = $payment_intent->charges->data[0];
   // Calculate the amount left available for a refund.
   $amount_refunded = !empty($charge->amount_refunded) ? $charge->amount_refunded : 0;
-  $remaining = $charge->amount - $amount_refunded;
+  $remaining = $payment_intent->amount - $amount_refunded;
 
   $form['amount'] = array(
     '#type' => 'textfield',
@@ -91,9 +93,15 @@ function commerce_stripe_pi_refund_form_validate($form, &$form_state) {
   $transaction = $form_state['transaction'];
   $amount = commerce_currency_decimal_to_amount($form_state['values']['amount'], $transaction->currency_code);
 
+  /**
+   * @var \Stripe\Charge $charge
+   */
+  //Charge from Payment intent.
+  $charge = $form_state['stripe_pi_payment_intent']->charges->data[0];
+
   // Calculate the amount left available for a refund.
-  $amount_refunded = !empty($form_state['stripe_pi_charge']->amount_refunded) ? $form_state['stripe_pi_charge']->amount_refunded : 0;
-  $remaining = $form_state['stripe_pi_charge']->amount - $amount_refunded;
+  $amount_refunded = !empty($charge->amount_refunded) ? $charge->amount_refunded : 0;
+  $remaining = $form_state['stripe_pi_payment_intent']->amount - $amount_refunded;
 
   // Make sure the refund amount is valid and available.
   if ($amount <= 0 || $amount > $remaining || !is_numeric($amount)) {
@@ -115,10 +123,10 @@ function commerce_stripe_pi_refund_form_submit($form, &$form_state) {
     drupal_set_message(t('Cannot load the Stripe PHP library'), 'error');
     return FALSE;
   }
-
+  $payment_intent = $form_state['stripe_pi_payment_intent'];
   // Create the refund object.
   $data = array(
-    'charge' => $transaction->remote_id,
+    'charge' => $payment_intent->charges->data[0]->id,
     'amount' => commerce_currency_decimal_to_amount($form_state['values']['amount'], $transaction->currency_code),
     'reason' => $form_state['values']['reason'],
   );
@@ -145,7 +153,7 @@ function commerce_stripe_pi_refund_form_submit($form, &$form_state) {
       // Create the new commerce payment transation and set appropriate values.
       $refund_transaction = commerce_payment_transaction_new($transaction->payment_method, $order->order_id);
       $refund_transaction->instance_id = $payment_method['instance_id'];
-      $refund_transaction->payload[REQUEST_TIME] = print_r($payload, TRUE);
+      $refund_transaction->payload[REQUEST_TIME] = json_encode($payload);
       $refund_transaction->status = COMMERCE_PAYMENT_STATUS_SUCCESS;
       $refund_transaction->remote_id = $refund->id;
       $refund_transaction->message = t('Refund issued.');
@@ -263,45 +271,15 @@ function commerce_stripe_pi_capture_form_validate($form, &$form_state) {
 function commerce_stripe_pi_capture_form_submit($form, &$form_state) {
   $transaction = $form_state['transaction'];
 
-  $dec_amount = number_format($form_state['values']['amount'], 2, '.', '');
-
   if (!commerce_stripe_pi_load_library()) {
     drupal_set_message(t('Error capturing payment. Please contact shop admin to proceed.'), 'error');
+    watchdog('commerce_stripe_pi', 'Error capturing payment from admin : @transaction', array(
+      '@transaction' => print_r($transaction, TRUE),
+    ), WATCHDOG_ERROR);
     drupal_goto('admin/commerce/orders/' . $form_state['order']->order_id . '/payment');
   }
 
-  // Set the amount that is to be captured. This amount has already been
-  // validated, but needs to be converted to cents for Stripe.
-  $capture_amount = commerce_currency_decimal_to_amount($dec_amount, $transaction->currency_code);
-
-  $cparams = array(
-    'amount_to_capture' => $capture_amount,
-  );
-
-  try {
-    $paymentIntent = PaymentIntent::retrieve($transaction->remote_id);
-
-    $response = $paymentIntent->capture($cparams);
-
-    $transaction->payload[REQUEST_TIME] = $response->__toJSON();
-    $transaction->remote_status = commerce_stripe_pi_get_remote_status(NULL, $transaction, 'capture');
-    $transaction->message .= '<br />' . t('Captured: @date', array('@date' => format_date(REQUEST_TIME, 'short')));
-    $transaction->message .= '<br />' . t('Captured Amount: @amount', array('@amount' => $dec_amount));
-    $transaction->status = COMMERCE_PAYMENT_STATUS_SUCCESS;
-    $transaction->amount = $capture_amount;
-    commerce_payment_transaction_save($transaction);
-  }
-  catch (Exception $e) {
-    drupal_set_message(t('We received the following error when trying to capture the transaction.'), 'error');
-    drupal_set_message(check_plain($e->getMessage()), 'error');
-    watchdog('commerce_stripe_pi', 'Following error received when processing card for capture @stripe_pi_error.', array('@stripe_pi_error' => $e->getMessage()), WATCHDOG_NOTICE);
-
-    $transaction->payload[REQUEST_TIME] = $e->json_body;
-    $transaction->message = t('Capture processing error: @stripe_pi_error', array('@stripe_pi_error' => $e->getMessage()));
-    $transaction->status = COMMERCE_PAYMENT_STATUS_FAILURE;
-    $transaction->remote_status = 'FAILED';
-    commerce_payment_transaction_save($transaction);
-  }
+  commerce_stripe_pi_capture($transaction, $form_state['values']['amount'], TRUE);
 
   $form_state['redirect'] = 'admin/commerce/orders/' . $form_state['order']->order_id . '/payment';
 }
