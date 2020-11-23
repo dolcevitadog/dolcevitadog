@@ -44,9 +44,15 @@ function dolce_checkout_form() {
     );
 
     $form['dolce_checkout_presentation'] = array(
-        '#title' => t('Product to show if not in cart'),
+        '#title' => t('Title of the modal'),
         '#type' => 'textarea',
         '#default_value' => variable_get('dolce_checkout_presentation', '')
+    );
+
+    $form['dolce_checkout_image_style'] = array(
+        '#title' => t('Image style for product'),
+        '#type' => 'textfield',
+        '#default_value' => variable_get('dolce_checkout_image_style', '')
     );
 
     $form['dolce_checkout_status'] = array(
@@ -132,7 +138,8 @@ function dolce_checkout_display_product() {
     $product = commerce_product_load($product_id);
     $render = $product->title;
     $image1 = $product->field_images['und'][0]['uri'];
-    $image = theme('image_style', array('style_name' => 'catalog', 'path' => $image1));
+    $image_style = variable_get('dolce_checkout_image_style', 'medium');
+    $image = theme('image_style', array('style_name' => $image_style, 'path' => $image1));
     $render .= $image;
     return $render;
 }

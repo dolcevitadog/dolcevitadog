@@ -9,8 +9,8 @@
                 <?php print $content['product']; ?>
             </div>
             <div class="modal-footer">
-                <a href="<?php print $content['path_product']; ?>" type="button" class="btn btn-primary"><?php print t("Ca m'interesse ! On y va ! "); ?></a>
-                <button type="button" class="btn btn-default" data-dismiss="modal"><?php print t('No thanks'); ?></button>
+                <a href="<?php print $content['path_product']; ?>" type="button" class="btn btn-primary"><?php print t("Ca m'interesse !"); ?></a>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><?php print t('Non merci'); ?></button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
