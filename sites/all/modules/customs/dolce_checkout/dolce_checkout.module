@@ -1,0 +1,138 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function dolce_checkout_menu()
+{
+    $items['admin/config/drupal-checkout'] = array(
+        'title' => t('Configuration of Dolce Checkout Module'),
+        'page callback' => 'drupal_get_form',
+        'page arguments'=> array('dolce_checkout_form'),
+        'access arguments' => array('administer site configuration'),
+    );
+    $items['ajax/remote-dolce-checkout'] = array(
+        'title' => 'Data',
+        'page callback' => 'dolce_checkout_remote_ajax',
+        'access arguments' => array('access content'),
+        'type' => MENU_CALLBACK,
+    );
+
+    return $items;
+}
+
+/* Check if the product is already in the cart for displaying or not the modal */
+function check_if_product_is_in_cart() {
+    global $user;
+    $order = commerce_cart_order_load($user->uid);
+    $wrapper = entity_metadata_wrapper('commerce_order', $order);
+    $cursor = false;
+    foreach ($wrapper->commerce_line_items as $delta => $line_item_wrapper) {
+        $product_id = $line_item_wrapper->commerce_product->value()->product_id;
+        if($product_id == variable_get('dolce_checkout_product_id', '')){
+            $cursor = true;
+        }
+    }
+    return $cursor;
+}
+
+function dolce_checkout_form() {
+    $form['dolce_checkout_product_id'] = array(
+        '#title' => t('Product to show if not in cart'),
+        '#type' => 'textfield',
+        '#default_value' => variable_get('dolce_checkout_product_id', '')
+    );
+
+    $form['dolce_checkout_presentation'] = array(
+        '#title' => t('Product to show if not in cart'),
+        '#type' => 'textarea',
+        '#default_value' => variable_get('dolce_checkout_presentation', '')
+    );
+
+    $form['dolce_checkout_status'] = array(
+        '#title' => t('Mdule ON/OFF'),
+        '#type' => 'checkbox',
+        '#default_value' => variable_get('dolce_checkout_status', '')
+    );
+    return system_settings_form($form);
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function dolce_checkout_form_alter(&$form, &$form_state, $form_id)
+{
+    switch ($form_id) {
+        case 'views_form_commerce_cart_form_default':
+            if (variable_get('dolce_checkout_status') == 1) {
+                if ((!check_if_product_is_in_cart() && ($_SESSION['modalproduct'] == false))) {
+                    $form['dolce_checkout_markup'] = array(
+                        '#markup' => dolce_checkout_html(),
+                    );
+                }
+            }
+            drupal_add_js(drupal_get_path('module', 'dolce_checkout').'/dolce_checkout_ajax.js');
+    }
+
+}
+
+/* Find the product display and retur the path for user */
+function dolce_checkout_find_product_display($product_id) {
+    $product = commerce_product_load($product_id);
+    $wrapper = entity_metadata_wrapper('commerce_product', $product);
+    $nodes   = $wrapper->field_product_node->value();
+    $path = drupal_get_path_alias("node/".$nodes[0]->nid);
+    return $path;
+}
+
+/*  Ajax Callback */
+function dolce_checkout_remote_ajax() {
+    global $user;
+    $data = array();
+    if ($_SESSION['modalproduct'] == false) {
+        $data['exist'] = check_if_product_is_in_cart();
+        $data['html'] = dolce_checkout_html();
+    }
+    else {
+        $data['exist'] = 3;
+    }
+    drupal_json_output($data);
+    $_SESSION['modalproduct'] = true;
+    exit;
+}
+
+/*  Implement hook_theme */
+function dolce_checkout_theme($existing, $type, $theme, $path) {
+    $items['dolce_checkout_theme'] = array(
+        'template' => 'dolce_checkout_modal',
+        'arguments' => array('content' => array())
+    );
+
+    return $items;
+}
+
+/* Generate HTML for the modal */
+function dolce_checkout_html(){
+
+    $pid = variable_get('dolce_checkout_product_id', '');
+    $variables = array(
+        'content' => array(
+        'title'  => variable_get('dolce_checkout_presentation', ''),
+        'path_product' => dolce_checkout_find_product_display($pid),
+        'product' => dolce_checkout_display_product(),
+        ),
+    );
+    $html = theme('dolce_checkout_theme', $variables);
+    return $html;
+}
+
+/*  Special Render for the product in the Modal */
+function dolce_checkout_display_product() {
+    $product_id = variable_get('dolce_checkout_product_id', '');
+    $product = commerce_product_load($product_id);
+    $render = $product->title;
+    $image1 = $product->field_images['und'][0]['uri'];
+    $image = theme('image_style', array('style_name' => 'catalog', 'path' => $image1));
+    $render .= $image;
+    return $render;
+}
