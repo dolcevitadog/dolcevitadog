@@ -1,0 +1,5 @@
+name = Dolce Checkout
+description = Suggest Product after clicking on Checkout Button
+core = 7.x
+version = 7.x-1.0
+package = Dolce
