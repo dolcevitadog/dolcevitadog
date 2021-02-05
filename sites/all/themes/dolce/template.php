@@ -272,3 +272,95 @@ function dolce_preprocess_node(&$vars)
 function dolce_facetapi_deactivate_widget($variables) {
     return '<i class="far fa-minus-square"></i> ';
 }
+
+/**
+ * Theme function for shoutbox posts.
+ *
+ * @param shout
+ *   The shout to be themed.
+ * @param links
+ *   Links of possible actions that can be performed on this shout
+ *   by the current user.
+ */
+function dolce_shoutbox_post($variables) {
+  $shout = $variables['shout'];
+  $links = $variables['links'];
+  global $user;
+  $img_links = '';
+  // Gather moderation links.
+  if ($links) {
+    foreach ($links as $link) {
+      $link_html = '<img src="' . $link['img'] . '"  width="' . $link['img_width'] . '" height="' . $link['img_height'] . '" title="' . $link['title'] . '" alt="' . $link['title'] . '" class="shoutbox-imglink"/>';
+      $link_url = 'shout/' . $shout->shout_id . '/' . $link['action'];
+      $img_links = l($link_html, $link_url, array(
+          'html' => TRUE,
+          'query' => array('destination' => drupal_get_path_alias($_GET['q']))
+        )) . $img_links;
+    }
+  }
+
+  // Generate user name with link.
+  $user_name = shoutbox_get_user_link($shout);
+  $user_name = strip_tags($user_name);
+  //$user_name = dolce_even_get_user_name($user);
+  // Generate title attribute.
+  $title = t('Posted !date at !time by !name', array(
+    '!date' => format_date($shout->created, 'custom', 'd/m/y'),
+    '!time' => format_date($shout->created, 'custom', 'H:i'),
+    '!name' => $shout->nick
+  ));
+
+  // Add to the shout classes.
+  $shout_classes = array();
+  $shout_classes[] = 'shoutbox-msg';
+
+  // Check for moderation.
+  $approval_message = NULL;
+  if ($shout->moderate == 1) {
+    $shout_classes[] = 'shoutbox-unpublished';
+    $approval_message = '&nbsp;<span id="shoutbox-wait-aprroval">(' . t('This ' . DEFAULTSHOUTSINGULAR . ' is waiting for approval by a moderator.') . ')</span>';
+  }
+
+  // Check for specific user class.
+  $user_classes = array();
+  $user_classes[] = 'shoutbox-user-name';
+  if ($shout->uid == $user->uid) {
+    $user_classes[] = 'shoutbox-current-user-name';
+  }
+  elseif ($shout->uid == 0) {
+    $user_classes[] = 'shoutbox-anonymous-user';
+  }
+
+  // Build the post.
+  $post = '';
+  $post .= '<div class="' . implode(' ', $shout_classes) . '" title="' . $title . '">';
+  //$post .= '<div class="shoutbox-admin-links">' . $img_links . '</div>';
+  $post .= '<span class="' . implode(' ', $user_classes) . '">' . $user_name . '</span>:&nbsp;';
+  $post .= '<span class="shoutbox-shout">' . $shout->shout . $approval_message . '</span>';
+  $post .= '<span class="shoutbox-msg-time">';
+  $format = variable_get('shoutbox_time_format', 'ago');
+  switch ($format) {
+    case 'ago':
+      $post .= t('!interval ago', array('!interval' => format_interval(REQUEST_TIME - $shout->created)));
+      break;
+    case 'small':
+    case 'medium':
+    case 'large':
+      $post .= format_date($shout->created, $format);
+      break;
+  }
+  $post .= '</span>';
+  $post .= '</div>' . "\n";
+
+  return $post;
+}
+
+/**
+ * Theme the link on the bottom of the block pointing to the shout page.
+ *
+ * @param $page_path
+ *     Path to the shout page.
+ */
+function dolce_shoutbox_block_page_link($variables) {
+  return '';
+}
