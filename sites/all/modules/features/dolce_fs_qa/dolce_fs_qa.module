@@ -1,0 +1,8 @@
+<?php
+
+/**
+ * @file
+ * Code for the dolce_fs_qa feature.
+ */
+
+include_once 'dolce_fs_qa.features.inc';
