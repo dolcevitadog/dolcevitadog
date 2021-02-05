@@ -1,0 +1,87 @@
+#event {
+  border: 2px solid #0d3349;
+  border: 2px solid #7e8c94;
+}
+#event .btn-primary {
+  background: #557b9d;
+  border-color: #0d3349;
+}
+#event .btn-primary:hover {
+  background-color: #1967be;
+  border-color: #1862b5;
+}
+#event .qa-wrapper,
+#event .zoom-wrapper,
+#event .shoutbox-wrapper {
+  margin: 10px 0;
+  padding: 10px 0;
+  text-align: center;
+}
+#event .video-responsive {
+  overflow: hidden;
+  padding-bottom: 56.25%;
+  position: relative;
+  height: 0;
+}
+#event .video-responsive iframe {
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+}
+#event .qa-wrapper form label {
+  display: none;
+}
+#event .qa-wrapper form #name,
+#event .qa-wrapper form #questions {
+  width: 40%;
+  margin: 0 auto;
+}
+#event .qa-wrapper .qa-message {
+  margin: 10px;
+  font-size: 16px;
+}
+#event .zoom-wrapper {
+  background: #557b9d;
+  color: #ffffff;
+  padding: 10px 0;
+}
+#event .zoom-wrapper .zoom {
+  font-size: 18px;
+}
+#event .shoutbox-wrapper .shoutbox {
+  text-align: left;
+}
+#event .shoutbox-wrapper .shoutbox .panel {
+  border: none;
+}
+#event .shoutbox-wrapper .shoutbox #shoutbox-body {
+  border-top: 1px solid #d2d2d2;
+  overflow-y: auto;
+  height: 400px;
+}
+#event .shoutbox-wrapper .shoutbox #shoutbox-body .table {
+  margin: 0;
+}
+#event .shoutbox-wrapper .shoutbox #shoutbox-body table.table > tbody > tr > td {
+  border-top: none;
+}
+#event .shoutbox-wrapper .shoutbox #shoutbox-body table tr {
+  border: none;
+}
+#event .shoutbox-wrapper .shoutbox #shoutbox-body table tr td {
+  border: none;
+}
+#event .shoutbox-wrapper .shoutbox #shoutbox-body span.shoutbox-current-user-name,
+#event .shoutbox-wrapper .shoutbox #shoutbox-body span.shoutbox-current-user-name a,
+#event .shoutbox-wrapper .shoutbox #shoutbox-body span.shoutbox-current-user-name a:visited {
+  color: #da760c;
+}
+#event .shoutbox-wrapper .shoutbox #shoutbox-add-form .form-submit {
+  float: right;
+  margin: 0;
+}
+#event .shoutbox-wrapper .shoutbox #edit-nick {
+  display: none;
+}
