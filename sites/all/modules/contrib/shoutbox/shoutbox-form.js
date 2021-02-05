@@ -66,11 +66,7 @@
 
                 // Move to end of shoutbox
                 var elem = document.getElementById('shoutbox-body');
-                console.log(elem.scrollHeight);
-                  console.log(elem.scrollTop);
                 elem.scrollTop = elem.scrollHeight;
-                console.log(elem.scrollHeight);
-                console.log(elem.scrollTop);
             }
         }
     };
@@ -121,8 +117,6 @@
         // Move to end of shoutbox
         var elem = document.getElementById('shoutbox-body');
         elem.scrollTop = elem.scrollHeight;
-        $('#shoutbox-body').scrollTop(elem.scrollHeight+50);
-        console.log(elem.scrollTop);
     }
 
     /**
