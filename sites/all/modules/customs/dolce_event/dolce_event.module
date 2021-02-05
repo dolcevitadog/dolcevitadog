@@ -1,0 +1,326 @@
+ <?php
+
+/** Implement of hook_menu **/
+function dolce_event_menu() {
+
+  $items['admin/config/event/configure'] = array(
+    'title' => t('Administer configuration form for Event'),
+    'page callback' => array('drupal_get_form'),
+    'page arguments' => array('dolce_event_form'),
+    'access arguments' => array('administer site configuration'),
+  );
+
+  $items['event/turid-rugaas-2021'] = array(
+    'title' => t('Turid Rugaas Online - The complete Dog'),
+    'page callback' => array('dolce_event_page'),
+    'access arguments' => array('access dolce event'),
+  );
+
+  $items['event/ajax/get_time/%/%'] = array(
+    'title' => t('Get time'),
+    'page callback' => array('dolce_event_ajax_get_time'),
+    'page arguments' => array(3,4),
+    'access arguments' => array('access dolce event'),
+  );
+
+  $items['event/ajax/is_time'] = array(
+    'title' => t('Is time'),
+    'page callback' => array('dolce_event_is_time_for_video'),
+    'access arguments' => array('access dolce event'),
+  );
+
+  return $items;
+}
+
+function dolce_event_ajax_get_time($hour, $min) {
+  if (!empty($hour) && !empty($min)) {
+    $start_time = "$hour:$min";
+    $start_time_obj = DateTime::createFromFormat('H:i', $start_time);
+    $now_obj = new DateTime();
+    $interval = $now_obj->getTimestamp() - $start_time_obj->getTimestamp();
+    drupal_json_output($interval);
+  }
+  else {
+    return false;
+  }
+}
+
+function dolce_event_is_time_for_video() {
+  $video = dolce_event_get_video_links();
+  if (!empty($video)) {
+    drupal_json_output(true);
+  }
+  else {
+    drupal_json_output(false);
+  }
+}
+
+/** Implement of hook_permission **/
+function dolce_event_permission() {
+  return array(
+    'access dolce event' => array(
+      'title' => t('Access dolce event'),
+      'description' => t('Permit to user to access to the online seminar'),
+    ),
+  );
+}
+
+function dolce_event_page() {
+  $data = dolce_event_generate_data();
+  drupal_add_css(drupal_get_path('module', 'dolce_event').'/css/dolce_event.css');
+  if ($data['trailer_mode'] == 0) {
+    drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event.js');
+    drupal_add_js('https://player.vimeo.com/api/player.js', 'external');
+    drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event_player.js');
+    drupal_add_js(array('dolce_event' => array('schedule' => dolce_event_get_schedule_hour_min($data['video']))), array('type' => 'setting'));
+  }
+  return theme('dolce_event_general', array('data' => $data));
+}
+
+function dolce_event_get_schedule_hour_min($video) {
+  $time = explode(':', $video['time']['from']);
+  return array(
+    'hour' => $time[0],
+    'min' => $time[1],
+  );
+}
+
+function dolce_event_generate_data() {
+  $zoom = variable_get('dolce_event_zoom_public', '');
+  $banner = dolce_event_generate_banner();
+  $video = dolce_event_get_video_links();
+  $player = dolce_event_generate_player($video);
+  $qa = drupal_get_form('dolce_event_qa_form');
+  $block = module_invoke('shoutbox', 'block_view', 'shoutbox');
+  $shoutbox = $block['content'];
+  $trailer_mode = variable_get('dolce_event_trailer', '1');
+  return array(
+    'zoom' => $zoom,
+    'video' => $video,
+    'banner' => $banner,
+    'player' => $player,
+    'qa' => $qa,
+    'shoutbox' => $shoutbox,
+    'trailer_mode' => $trailer_mode,
+  );
+}
+
+function dolce_event_generate_player($video) {
+  if (!empty($video)) {
+    $html = '<iframe src="';
+    $html .= $video['link'];
+    $html .= '?autoplay=1&muted=1&background=0&loop=0&transparent=1" width="640" height="360" autoplay="1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
+    $html .= '<div style="position: relative">';
+    $html .= '<button class="btn btn-success" data-vimeo="unmute"><i class="fas fa-3x fa-volume-up"></i>&nbsp;</button>';
+    $html .= '</div>';
+    return $html;
+  }
+  else {
+    $path = drupal_get_path('module', 'dolce_event').'/banners/wait_banner.jpg';
+    $variables = array(
+        'path' => $path,
+        'alt' => t('Your video will be available soon'),
+        'title' => t('Your video will be available soon'),
+        'width' => '100%',
+        'height' => '100%',
+        'attributes' => array('class' => 'img-responsive', 'id' => 'player-empty'),
+        );
+    $img = theme('image', $variables);
+    return $img;
+  }
+}
+
+function dolce_event_get_video_links() {
+  $time_data = dolce_event_get_timedate();
+  $videos = dolce_event_video_scheduler($time_data['day']);
+  foreach ($videos as $key => $video) {
+    $actual = DateTime::createFromFormat('H:i', $time_data['hour']);
+    $from = DateTime::createFromFormat('H:i', $video['time']['from']);
+    $to = DateTime::createFromFormat('H:i', $video['time']['to']);
+    if ($actual >= $from && $actual <= $to)
+    {
+       return $video;
+    }
+  }
+}
+
+function dolce_event_get_timedate() {
+  $date = new DateTime();
+  $hour = $date->format('H:i');
+  $day = $date->format('d');
+  return array(
+    'day' => $day,
+    'hour' => $hour,
+  );
+}
+
+function dolce_event_form() {
+
+  $form['dolce_event_zoom_public'] = array(
+    '#title' => t('Public Zoom link'),
+    '#type' => 'textfield',
+    '#default_value' => variable_get('dolce_event_zoom_public', ''),
+  );
+
+  $form['dolce_event_trailer'] = array(
+    '#title' => t('Trailer Mode'),
+    '#type' => 'select',
+    '#options' => array(0 => t('No'), 1 => t('Yes')),
+    '#default_value' => variable_get('dolce_event_trailer', '1'),
+  );
+
+  $form['dolce_event_seminar_day'] = array(
+    '#title' => t('Day of the Seminar'),
+    '#type' => 'select',
+    '#options' => array(20 => '20', 21 => '21'),
+    '#default_value' => variable_get('dolce_event_seminar_day', ''),
+  );
+
+  return system_settings_form($form);
+}
+
+function dolce_event_video_scheduler($day) {
+    $videos = array(
+      '20' => array(
+          '1' => array(
+            'link' => 'https://player.vimeo.com/video/506586821',
+            'day' => 20,
+            'time' => array(
+              'from' => '00:10',
+              'to' => '01:50',
+            ),
+          ),
+          '2' => array(
+            'link' => 'https://player.vimeo.com/video/480262629',
+            'day' => 20,
+            'time' => array(
+              'from' => '23:50',
+              'to' => '23:59',
+            ),
+          ),
+        ),
+      '21' => array(
+
+      ),
+    );
+    $day = variable_get('dolce_event_seminar_day', '1');
+    return $videos[$day];
+}
+
+/**
+ * Implements hook_theme().
+ */
+function dolce_event_theme($existing, $type, $theme, $path) {
+    return array(
+        'dolce_event_general' => array(
+            'template' => 'dolce_event_general',
+            'arguments' => array('data' => array())
+        ),
+    );
+}
+
+
+function dolce_event_generate_banner() {
+  $date = new DateTime();
+  $hour = $date->format('H');
+  /*TEST */
+  $hour = 17;
+  $banner_name = (variable_get('dolce_event_trailer') == 1 ? 'banner_trailer.jpg' : 'banner_'.$hour.'.jpg');
+  $alt_title = (variable_get('dolce_event_trailer') == 1 ? t('Seminar Turid Rugaas - The complete Dog') : t('Exclusive Discount, hour per hour'));
+  $path = drupal_get_path('module', 'dolce_event').'/banners/'.$banner_name;
+  $variables = array(
+      'path' => $path,
+      'alt' => $alt_title,
+      'title' => $alt_title,
+      'width' => '100%',
+      'height' => '100%',
+      'attributes' => array('class' => 'banner-event-image', 'id' => 'banner-event'),
+      );
+  $img = theme('image', $variables);
+  return $img;
+}
+
+function dolce_event_qa_form($form, &$form_state){
+ $form_state['values'] = array();
+
+ $form['box-container'] = array(
+   '#prefix' => '<div id="box">',
+ );
+
+ $form['message'] = array(
+   '#markup' => NULL,
+ );
+
+ $form['name'] = array(
+     '#type'         => 'textfield',
+     '#required'     => true,
+     '#title' => t('Your name'),
+     '#attributes' => array('id' => 'name', 'placeholder'=> t('Your name')),
+ );
+
+ $form['questions'] = array(
+   '#type'         => 'textarea',
+   '#required'     => true,
+   '#title' => t('Your question'),
+   '#attributes' => array('id' => 'questions', 'placeholder'=> t('Your question')),
+   '#resizable' => false,
+  );
+
+ $form['submit'] = array(
+     '#type'         => 'submit',
+     '#value'        => '<i class="fas fa-pencil-alt"></i> '. t("Ask your question"),
+     '#ajax' => array(
+       'callback' => 'ajax_submit_callback',
+       'wrapper' => 'box',
+     ),
+     '#attributes' => array('class' => array('btn btn-primary')),
+     '#suffix' => '</div>',
+ );
+ return $form;
+}
+
+function ajax_submit_callback($form, $form_state) {
+    $name = check_plain($form_state['values']['name']);
+    $questions = check_plain($form_state['values']['questions']);
+    if (!empty($name) && !empty($questions)) {
+      $entity = entity_create('qa', array('type' =>'qa'));
+      $entity->field_qa_name = array(LANGUAGE_NONE => array(0 => array('value' => $name)));
+      $entity->field_qa_questions = array(LANGUAGE_NONE => array(0 => array('value' => $questions)));
+      $entity->save();
+      //On definit le form qui sera ajouté
+      $element = $form;
+      if (isset($entity->id)) {
+        $element['message']['#markup'] = '<div class="qa-message">.'. '<i class="far fa-thumbs-up"></i>' . t('Thank you'). ' ' . $form_state['values']['name'].' ! '. t('Your question has been received and might be ask during the Q&A Session') . '</div>';
+        $element['name']['#value'] = array();
+        $element['questions']['#value'] = array();
+      }
+      else {
+        $element['message']['#markup'] = t('An error occured during saving your questions');
+      }
+      return $element;
+    }
+}
+
+function dolce_even_get_user_name($user) {
+  $default_pid = commerce_addressbook_get_default_profile_id($user->uid, 'billing');
+  $profiles = commerce_customer_profile_load($default_pid);
+  $first_name = $profiles->commerce_customer_address[LANGUAGE_NONE]['0']['first_name'];
+  $last_name = $profiles->commerce_customer_address[LANGUAGE_NONE]['0']['last_name'];
+  if (!empty($first_name) && !empty($last_name)) {
+    $name = $profiles->commerce_customer_address[LANGUAGE_NONE]['0']['first_name'] . ' ' . $profiles->commerce_customer_address[LANGUAGE_NONE]['0']['last_name'];
+  }
+  else {
+    $name = $user->name;
+  }
+  return $name;
+}
+
+function dolce_event_shoutbox($op, &$shout, &$a1 = NULL, $form_state = NULL) {
+  switch ($op) {
+    case 'form':
+      // Alter the shoutbox add form.
+      $a1['wrapper']['nick_submit_area']['submit']['#value'] = t('Barks !') . ' <i class="fab fa-discourse"></i>';
+      $a1['wrapper']['nick_submit_area']['submit']['#attributes'] = array('class' => array('btn btn-primary'));
+      break;
+  }
+}
