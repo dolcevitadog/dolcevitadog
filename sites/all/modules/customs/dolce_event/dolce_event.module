@@ -10,6 +10,13 @@ function dolce_event_menu() {
     'access arguments' => array('administer site configuration'),
   );
 
+  $items['admin/config/event/role'] = array(
+    'title' => t('Imports Emails Role'),
+    'page callback' => array('drupal_get_form'),
+    'page arguments' => array('dolce_event_give_role_form'),
+    'access arguments' => array('administer site configuration'),
+  );
+
   $items['event/turid-rugaas-2021'] = array(
     'title' => t('Turid Rugaas Online - The complete Dog'),
     'page callback' => array('dolce_event_page'),
@@ -109,9 +116,9 @@ function dolce_event_generate_player($video) {
   if (!empty($video)) {
     $html = '<iframe src="';
     $html .= $video['link'];
-    $html .= '?autoplay=1&muted=1&background=0&loop=0&transparent=1" width="640" height="360" autoplay="1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen></iframe>';
-    $html .= '<div style="position: relative">';
-    $html .= '<button class="btn btn-success" data-vimeo="unmute"><i class="fas fa-3x fa-volume-up"></i>&nbsp;</button>';
+    $html .= '?autoplay=1&muted=1&background=0&loop=0&playsinline=1" width="640" height="360" autoplay="1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" webkit-playsinline playsinline allowfullscreen></iframe>';
+    $html .= '<div id="overlay"></div><div class="center-div">';
+    $html .= '<button class="interract btn btn-success" data-vimeo="unmute"><i class="fas fa-3x fa-volume-up"></i>&nbsp;</button>';
     $html .= '</div>';
     return $html;
   }
@@ -186,8 +193,8 @@ function dolce_event_video_scheduler($day) {
             'link' => 'https://player.vimeo.com/video/506586821',
             'day' => 20,
             'time' => array(
-              'from' => '00:10',
-              'to' => '01:50',
+              'from' => '12:31',
+              'to' => '12:50',
             ),
           ),
           '2' => array(
@@ -323,4 +330,49 @@ function dolce_event_shoutbox($op, &$shout, &$a1 = NULL, $form_state = NULL) {
       $a1['wrapper']['nick_submit_area']['submit']['#attributes'] = array('class' => array('btn btn-primary'));
       break;
   }
+}
+
+function dolce_event_give_role_form($form, &$form_state) {
+  $form['dolce_event_emails'] = array(
+    '#type'         => 'textarea',
+    '#required'     => true,
+    '#title' => t('The mails'),
+  );
+
+  $form['pid_role'] = array(
+    '#type'         => 'textfield',
+    '#required'     => true,
+    '#title' => t('The PID ROLE'),
+  );
+
+  $form['submit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Import')
+
+  );
+
+  return $form;
+}
+
+function dolce_event_give_role_form_submit($form, &$form_state) {
+  $data = $form_state['values']['dolce_event_emails'];
+  $pid = $form_state['values']['pid_role'];
+  $emails = explode(PHP_EOL, $data);
+  foreach ($emails as $key => $email) {
+    _attribute_event_role($pid, $email);
+  }
+
+  return $form;
+}
+
+function _attribute_event_role($pid, $email) {
+  $person = user_load_by_mail($email);
+  if (is_object($person)) {
+    drupal_set_message(t('Tout se passe bien pour @email', array('@email' => $email)), 'status');
+    user_multiple_role_edit(array($person->uid), 'add_role', $pid);
+  }
+  else {
+    drupal_set_message(t('The email @email is not an account on the website', array('@email' => $email)), 'error');
+  }
+  unset($person);
 }
