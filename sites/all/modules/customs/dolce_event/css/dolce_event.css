@@ -1,3 +1,6 @@
+::-webkit-media-control-panel {
+  display: none !important;
+}
 #event {
   border: 2px solid #0d3349;
   border: 2px solid #7e8c94;
@@ -29,6 +32,22 @@
   height: 100%;
   width: 100%;
   position: absolute;
+}
+#event .video-responsive #overlay {
+  background: rgba(254, 254, 254, 0.8);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  -webkit-filter: blur(0px);
+  height: 100vh;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+#event .video-responsive .center-div {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 10;
 }
 #event .qa-wrapper form label {
   display: none;
