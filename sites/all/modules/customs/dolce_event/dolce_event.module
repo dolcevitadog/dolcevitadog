@@ -23,6 +23,12 @@ function dolce_event_menu() {
     'access arguments' => array('access dolce event'),
   );
 
+  $items['event/F4v7j4s3'] = array(
+    'title' => t('REPEAT - Turid Rugaas Online - The complete Dog'),
+    'page callback' => array('dolce_event_repeat_page'),
+    'access arguments' => array('access rehearsal dolce event'),
+  );
+
   $items['event/ajax/get_time/%/%'] = array(
     'title' => t('Get time'),
     'page callback' => array('dolce_event_ajax_get_time'),
@@ -69,11 +75,16 @@ function dolce_event_permission() {
       'title' => t('Access dolce event'),
       'description' => t('Permit to user to access to the online seminar'),
     ),
+    'access rehearsal dolce event' => array(
+      'title' => t('Access Rehearsal dolce event'),
+      'description' => t('Permit to user to access to the online seminar'),
+    ),
   );
 }
 
-function dolce_event_page() {
+function dolce_event_repeat_page() {
   $data = dolce_event_generate_data();
+  $data['trailer_mode'] = 0;
   drupal_add_css(drupal_get_path('module', 'dolce_event').'/css/dolce_event.css');
   if ($data['trailer_mode'] == 0) {
     drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event.js');
@@ -90,6 +101,18 @@ function dolce_event_get_schedule_hour_min($video) {
     'hour' => $time[0],
     'min' => $time[1],
   );
+}
+
+function dolce_event_page() {
+  $data = dolce_event_generate_data();
+  drupal_add_css(drupal_get_path('module', 'dolce_event').'/css/dolce_event.css');
+  if ($data['trailer_mode'] == 0) {
+    drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event.js');
+    drupal_add_js('https://player.vimeo.com/api/player.js', 'external');
+    drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event_player.js');
+    drupal_add_js(array('dolce_event' => array('schedule' => dolce_event_get_schedule_hour_min($data['video']))), array('type' => 'setting'));
+  }
+  return theme('dolce_event_general', array('data' => $data));
 }
 
 function dolce_event_generate_data() {
