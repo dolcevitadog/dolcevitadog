@@ -8,7 +8,6 @@
        id: video.video.vid,
        url: video.video.link,
        width: '1024px',
-       quality: '720p',
        controls: false,
        muted: true,
        autoplay: true,
