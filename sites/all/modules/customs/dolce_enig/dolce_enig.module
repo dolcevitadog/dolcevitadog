@@ -1,0 +1,141 @@
+  <?php
+
+  function dolce_enig_form($form, &$form_state) {
+
+    $form['box-container'] = array(
+      '#prefix' => '<div id="enigma">',
+    );
+
+    $form['message'] = array(
+      '#markup' => NULL,
+    );
+
+    for ($i=1;$i<=6;$i++) {
+      $form['letter'.$i] = array(
+        '#type' => 'textfield',
+        '#size' => 1,
+        '#title' => NULL,
+        '#maxlength' => 1,
+        '#required' => TRUE,
+        '#attributes' => array('placeholder' => t('_')),
+      );
+    }
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => '<i class="fas fa-trophy"></i> '. t("Check if you win"),
+        '#ajax' => array(
+          'callback' => 'dolce_enig_ajax_submit_callback',
+          'wrapper' => 'enigma',
+        ),
+        '#attributes' => array('class' => array('btn btn-primary')),
+        '#suffix' => '</div>',
+    );
+
+    $form['#attached']['css'][] = drupal_get_path('module', 'dolce_enig').'/css/dolce_enig.css';
+
+    return $form;
+  }
+
+
+  function dolce_enig_ajax_submit_callback($form, &$form_state) {
+      global $user;
+      $nextone = '';
+
+      $correct = array(
+        'letter1' => 's',
+        'letter2' => 'n',
+        'letter3' => 'o',
+        'letter4' => 'o',
+        'letter5' => 'p',
+        'letter6' => 'y',
+      );
+      for ($i=1; $i<=6; $i++) {
+        $letter = strtolower(trim($form_state['values']['letter'.$i]));
+        if ($letter == $correct['letter'.$i]) {
+          $answer = true;
+        }
+        else {
+          $answer = false;
+          break;
+        }
+      }
+      if ($answer == true) {
+         $already_winner = variable_get('dolce_enig_winner', NULL);
+         if (!empty($already_winner)) {
+           $message = t('Well done ! But someone has been quicker than you !');
+         }
+         else {
+           variable_set('dolce_enig_winner', $user->uid);
+           $message = t('<i class="fas fa-trophy"></i> Well done ! You are the winner of the game! You will be contacted very soon by our team!');
+         }
+         $nextone = t('You can access to the next game here: ').l('anothergame', 'anothergame');
+      }
+      else {
+        $message = t('Oops ! You can try again :) ');
+      }
+
+      $element = $form;
+      $element['message']['#markup'] = '<div id="messages">'.$message.$nextone.'</div>';
+      return $element;
+
+  }
+
+  /**
+   * Implements hook_block_info().
+   */
+
+  function dolce_enig_block_info() {
+      $blocks['dolce_enigma_paw'] = array(
+          'info' => t('Dolce - Paw Enigma'),
+          'title' => '',
+          'cache' => DRUPAL_NO_CACHE,
+      );
+      return $blocks;
+  }
+
+  /**
+   * Implements hook_block_view().
+   */
+
+  function dolce_enig_block_view($delta = '') {
+    switch ($delta) {
+      case 'dolce_enigma_paw':
+          return array(
+              'subject' => t('Dolce - Paw Enigma'),
+              'content' => array(
+                '#markup' => theme('dolce_enig_paw', array('data' => array('imgClue' => _get_img_clue()))),
+                '#attached' => array(
+                  'css' => array(
+                  drupal_get_path('module','dolce_enig').'/css/dolce_enig.css',
+                ),
+              ),
+            ),
+          );
+          break;
+    }
+  }
+
+  function dolce_enig_theme($existing, $type, $theme, $path) {
+       return array(
+           'dolce_enig_paw' => array(
+               'template' => 'dolce_enig_paw',
+               'arguments' => array('data' => array())
+           ),
+       );
+   }
+
+   function _get_img_clue() {
+     $alt_title = t('You find a clue ! ');
+     $path = drupal_get_path('module', 'dolce_enig').'/img/clue0.png';
+     $variables = array(
+         'path' => $path,
+         'alt' => $alt_title,
+         'title' => $alt_title,
+         'width' => '50%',
+         'height' => '50%',
+         'attributes' => array('class' => 'img-enigma-clue'),
+         );
+     $img = theme('image', $variables);
+     return $img;
+   }

@@ -1,6 +1,5 @@
 (function ($) {
     $(document).ready(function() {
-
       function reloadNewVideo () {
         $.ajax({
          url : '/event/ajax/is_time', // La ressource ciblée

@@ -1,0 +1,30 @@
+#enigma {
+  text-align: center;
+}
+#enigma .form-type-textfield {
+  display: inline-block;
+}
+#enigma .form-type-textfield input.form-text {
+  display: inline-block;
+  height: 4em;
+  font-size: 20px;
+}
+#enigma .form-type-textfield input.form-text::placeholder {
+  position: relative;
+  top: 12px;
+  font-size: 2em;
+}
+#enigma button.form-submit {
+  margin: 10px auto;
+  display: block;
+}
+#block-enig-paw {
+  text-align: center;
+  margin: 20px 0px;
+}
+#block-enig-paw .clue {
+  color: #4a4946;
+}
+#block-enig-paw .img-enigma-clue {
+  display: inline-block !important;
+}

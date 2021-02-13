@@ -20,20 +20,40 @@
   padding: 10px 0;
   text-align: center;
 }
-#event .video-responsive {
+#event #video #controls {
+  margin: 5px;
+  text-align: center;
+}
+#event #video #controls #fr-caption i {
+  background: linear-gradient(to right, #ffffff, #0000ff, #ffffff, #ffffff, #ff0000, #ffffff);
+  line-height: 0.7 !important;
+}
+#event #video #controls #no-caption i {
+  background: linear-gradient(to right, #797979, #797979);
+  line-height: 0.7 !important;
+}
+#event #video #controls #fr-caption,
+#event #video #controls #no-caption,
+#event #video #controls #mute,
+#event #video #controls #unmute {
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px;
+}
+#event #video .video-responsive {
   overflow: hidden;
   padding-bottom: 56.25%;
   position: relative;
   height: 0;
 }
-#event .video-responsive iframe {
+#event #video .video-responsive iframe {
   left: 0;
   top: 0;
   height: 100%;
   width: 100%;
   position: absolute;
 }
-#event .video-responsive #overlay {
+#event #video .video-responsive #overlay {
   background: rgba(254, 254, 254, 0.8);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
@@ -43,7 +63,7 @@
   position: relative;
   z-index: 1;
 }
-#event .video-responsive .center-div {
+#event #video .video-responsive .center-div {
   position: absolute;
   left: 50%;
   top: 50%;

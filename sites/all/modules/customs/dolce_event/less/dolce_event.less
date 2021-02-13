@@ -1,10 +1,10 @@
 ::-webkit-media-control-panel {
-   display:none !important;
+  display:none !important;
 }
 
 #event {
-    border: 2px solid #0d3349;
-    border: 2px solid #7e8c94;
+  border: 2px solid #0d3349;
+  border: 2px solid #7e8c94;
   .btn-primary {
     background: #557b9d;
     border-color: #0d3349;
@@ -15,36 +15,53 @@
   }
 
   .qa-wrapper, .zoom-wrapper, .shoutbox-wrapper, {
-    //border: 2px solid #0d3349;
-    //border: 2px solid #7e8c94;
     margin: 10px 0;
     padding: 10px 0;
     text-align: center;
   }
-  .video-responsive {
-    //border: 2px solid #0d3349;
-    //border: 2px solid #7e8c94;
-    overflow:hidden;
-    padding-bottom:56.25%;
-    position:relative;
-    height:0;
-
-    iframe { left:0; top:0; height:100%; width:100%; position:absolute;}
-    #overlay {
-      background: rgba(254, 254, 254, 0.8); // Make sure this color has an opacity of less than 1
-      backdrop-filter: blur(8px); // This be the blur
-      -webkit-backdrop-filter: blur(8px);
-      -webkit-filter: blur(0px);
-      height: 100vh;
-    	width: 100%;
-      position: relative;
-      z-index: 1;
+  #video {
+    #controls {
+      margin: 5px;
+      text-align: center;
+      #fr-caption i {
+        background: linear-gradient(to right, white, blue, white, white, red, white);
+        line-height: 0.7 !important;
+      }
+      #no-caption i {
+        background: linear-gradient(to right, #797979, #797979);
+        line-height: 0.7 !important;
+      }
+      #fr-caption, #no-caption, #mute, #unmute {
+        cursor: pointer;
+        display: inline-block;
+        margin: 5px;
+      }
     }
-    .center-div {
-      position: absolute;
-     left: 50%;
-     top: 50%;
-     z-index: 10;
+    .video-responsive {
+      //border: 2px solid #0d3349;
+      //border: 2px solid #7e8c94;
+      overflow:hidden;
+      padding-bottom:56.25%;
+      position:relative;
+      height:0;
+
+      iframe { left:0; top:0; height:100%; width:100%; position:absolute;}
+      #overlay {
+        background: rgba(254, 254, 254, 0.8); // Make sure this color has an opacity of less than 1
+        backdrop-filter: blur(8px); // This be the blur
+        -webkit-backdrop-filter: blur(8px);
+        -webkit-filter: blur(0px);
+        height: 100vh;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+      }
+      .center-div {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        z-index: 10;
+      }
     }
   }
   .qa-wrapper {
@@ -69,9 +86,9 @@
     .zoom {
       font-size: 18px;
     }
-   }
+  }
 
-   .shoutbox-wrapper {
+  .shoutbox-wrapper {
     .shoutbox {
       text-align: left;
       .panel {
@@ -97,7 +114,7 @@
           }
         }
         span.shoutbox-current-user-name, span.shoutbox-current-user-name a, span.shoutbox-current-user-name a:visited {
-            color: #da760c;
+          color: #da760c;
         }
       }
       #shoutbox-add-form {
@@ -110,5 +127,5 @@
         display: none;
       }
     }
-   }
+  }
 }
