@@ -5,20 +5,12 @@
       var video = Drupal.settings.dolce_event;
       //Vimeo SDK Options
       var options = {
+       width: '1024px',
        id: video.video.vid,
        url: video.video.link,
-       width: '1024px',
-       controls: false,
-       muted: true,
-       autoplay: true,
      }
       //Initialisation of player
       var player = new Vimeo.Player('vid-sdk', options);
-      //Player is ready, sync of the video and play
-      player.ready().then(function() {
-        setSyncVideo(schedule);
-        player.play();
-      });
       //Get subtitles and hide the other buttons
       player.getTextTracks().then(function(tracks) {
         $(tracks).each(function(index, track) {
@@ -34,10 +26,6 @@
       });
       //Video is muted at start, need to hide the muted button
       $('#unmute').hide();
-      //Reload the page when the video is ending
-      player.on('ended', function(data) {
-        document.location.reload();
-      });
       // Behaviours when subtitles buttons are clicked
       $('#no-caption').on('click', function(){
         $(this).hide();
@@ -53,33 +41,14 @@
       });
       // Behaviours when mute/unmute buttons are clicked
       $('#mute').on('click', function() {
-          player.setMuted(false);
+          player.setMuted(true);
           $(this).hide();
           $('#unmute').show();
       });
       $('#unmute').on('click', function() {
-          player.setMuted(true);
+          player.setMuted(false);
           $(this).hide();
           $('#mute').show();
       });
-      //Important function for synchronise video in real time
-      function setSyncVideo (schedule) {
-        $.ajax({
-          url : '/event/ajax/get_time/'+schedule.hour+'/'+schedule.min, // La ressource ciblée
-          type : 'POST', // Le type de la requête HTTP.
-          success : function(response, statut){ // success est toujours en place, bien sûr !
-            if (response > 0) {
-              player.getDuration().then(function(duration) {
-                if (response <= duration) {
-                  player.setCurrentTime(response);
-                }
-                else {
-                  //player.setCurrentTime(duration-0.5);
-                }
-              });
-            }
-          },
-        });
-      }
     });
   })(jQuery);
