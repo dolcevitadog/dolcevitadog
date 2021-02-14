@@ -244,6 +244,15 @@
   function dolce_event_video_scheduler($day) {
       $videos = array(
         '20' => array(
+          '0' => array(
+            'link' => 'https://player.vimeo.com/video/511230842',
+            'vid' => 511230842,
+            'day' => 20,
+            'time' => array(
+              'from' => '08:50',
+              'to' => '08:59',
+            ),
+          ),
             '1' => array(
               'link' => 'https://player.vimeo.com/video/511230842',
               'vid' => 511230842,
@@ -286,8 +295,8 @@
               'day' => 20,
               'vid' => 512042344,
               'time' => array(
-                'from' => '22:30',
-                'to' => '23:59',
+                'from' => '22:50',
+                'to' => '22:59',
               ),
             ),
               '6' => array(
