@@ -273,13 +273,33 @@
 
             ),
             '4' => array(
-              'link' => 'https://vimeo.com/511230842',
+              'link' => 'https://player.vimeo.com/video/511230842',
+              'vid' => 511230842,
               'day' => 20,
               'time' => array(
-                'from' => '16:00',
-                'to' => '17:05',
+                'from' => '19:30',
+                'to' => '21:34',
               ),
-           ),
+            ),
+            '5' => array(
+              'link' => 'https://player.vimeo.com/video/512042344',
+              'day' => 20,
+              'vid' => 512042344,
+              'time' => array(
+                'from' => '22:00',
+                'to' => '23:48',
+              ),
+            ),
+              '6' => array(
+                'link' => 'https://player.vimeo.com/video/511274771',
+                'day' => 20,
+                'vid' => 511274771,
+                'time' => array(
+                  'from' => '14:00',
+                  'to' => '15:05',
+                ),
+
+            ),
           ),
         '21' => array(
 
