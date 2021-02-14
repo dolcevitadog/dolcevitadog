@@ -13,8 +13,8 @@
         <div id="controls">
         <div id="fr-caption"><i class="fas fa-4x fa-closed-captioning"></i></div>
         <div id="no-caption"><i class="fas fa-4x fa-closed-captioning"></i></div>
-          <div id="mute"><i class="fas fa-4x fa-volume-up"></i></div>
-          <div id="unmute"><i class="fas fa-4x fa-volume-mute"></i></div>
+          <div id="mute"><i class="fas fa-4x fa-volume-mute"></i></div>
+          <div id="unmute"><i class="fas fa-4x fa-volume-up"></i></div>
         </div>
       </div>
     <?php else: ?>
