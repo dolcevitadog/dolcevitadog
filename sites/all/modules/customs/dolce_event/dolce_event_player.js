@@ -33,7 +33,15 @@
         });
       });
       //Video is muted at start, need to hide the muted button
-      $('#unmute').hide();
+      player.getVolume().then(function(volume) {
+        if (volume > 0) {
+          $('#unmute').hide();
+        }
+        else {
+          $('#mute').hide();
+        }
+      });
+
       //Reload the page when the video is ending
       player.on('ended', function(data) {
         document.location.reload();
