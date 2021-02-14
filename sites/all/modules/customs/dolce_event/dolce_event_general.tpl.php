@@ -17,7 +17,6 @@
           <div id="unmute"><i class="fas fa-4x fa-volume-mute"></i></div>
         </div>
       </div>
-
     <?php else: ?>
       <?php if ($data['video']): ?>
         <div id="video">

@@ -90,7 +90,7 @@
       drupal_add_js(drupal_get_path('module', 'dolce_enig').'/js/dolce_enig.js');
       drupal_add_js('https://player.vimeo.com/api/player.js', 'external');
       if (!empty($data['video'])) {
-        drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event_player.js');
+        drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event_player_trailer.js');
         $my_settings = array(
         'schedule' => dolce_event_get_schedule_hour_min($data['video']),
         'video' => $data['video'],
@@ -99,15 +99,7 @@
      }
      $data['trailer_mode'] = 0;
     return theme('dolce_event_general', array('data' => $data));
-  }
-
-  function dolce_event_get_schedule_hour_min($video) {
-    $time = explode(':', $video['time']['from']);
-    return array(
-      'hour' => $time[0],
-      'min' => $time[1],
-    );
-  }
+}
 
   function dolce_event_page() {
     $data = dolce_event_generate_data();
@@ -168,6 +160,14 @@
       'no_video' => $no_video,
       'enig_paw' => $enig_paw,
       'game_is_on' => $game_is_on,
+    );
+  }
+
+  function dolce_event_get_schedule_hour_min($video) {
+    $time = explode(':', $video['time']['from']);
+    return array(
+      'hour' => $time[0],
+      'min' => $time[1],
     );
   }
 
@@ -270,7 +270,16 @@
                   'from' => '14:00',
                   'to' => '15:05',
                 ),
+
             ),
+            '4' => array(
+              'link' => 'https://vimeo.com/511230842',
+              'day' => 20,
+              'time' => array(
+                'from' => '16:00',
+                'to' => '17:05',
+              ),
+           ),
           ),
         '21' => array(
 
@@ -287,6 +296,10 @@
       return array(
           'dolce_event_general' => array(
               'template' => 'dolce_event_general',
+              'arguments' => array('data' => array())
+          ),
+          'dolce_event_general_trailer' => array(
+              'template' => 'dolce_event_general_trailer',
               'arguments' => array('data' => array())
           ),
       );
@@ -363,7 +376,7 @@
         //On definit le form qui sera ajouté
         $element = $form;
         if (isset($entity->id)) {
-          $element['message']['#markup'] = '<div class="qa-message">.'. '<i class="far fa-thumbs-up"></i>' . t('Thank you'). ' ' . $form_state['values']['name'].' ! '. t('Your question has been received and might be ask during the Q&A Session') . '</div>';
+          $element['message']['#markup'] = '<div class="qa-message">.'. '<i class="far fa-thumbs-up"></i>' . t('Thank you'). ' ' . $form_state['values']['name'].' ! '. t('Your question has been received and might be asked during the Q&A Session') . '</div>';
           $element['name']['#value'] = array();
           $element['questions']['#value'] = array();
         }
