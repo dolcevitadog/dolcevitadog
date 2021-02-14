@@ -5,7 +5,7 @@
       var video = Drupal.settings.dolce_event;
       //Vimeo SDK Options
       var options = {
-       id: video.video.vid,
+       //id: video.video.vid,
        url: video.video.link,
        width: '1024px',
        controls: false,
@@ -14,16 +14,9 @@
      }
       //Initialisation of player
       var player = new Vimeo.Player('vid-sdk', options);
+      $('#unmute').hide();
       //Player is ready, sync of the video and play
       player.ready().then(function() {
-        player.getVolume().then(function(volume) {
-          if (volume > 0) {
-            $('#mute').hide();
-          }
-          else {
-            $('#unmute').hide();
-          }
-        });
         setSyncVideo(schedule);
         player.play();
       });

@@ -8,20 +8,10 @@
        width: '1024px',
        id: video.video.vid,
        url: video.video.link,
+       muted: true,
      }
       //Initialisation of player
       var player = new Vimeo.Player('vid-sdk', options);
-      player.ready().then(function() {
-        player.getVolume().then(function(volume) {
-          if (volume > 0) {
-            $('#mute').hide();
-          }
-          else {
-            console.log('muted');
-            $('#unmute').hide();
-          }
-        });
-      });
 
       //Get subtitles and hide the other buttons
       player.getTextTracks().then(function(tracks) {
@@ -50,6 +40,7 @@
         $('#no-caption').show();
       });
       // Behaviours when mute/unmute buttons are clicked
+      $('#unmute').hide();
       $('#mute').on('click', function() {
           player.setMuted(false);
           $(this).hide();
