@@ -90,7 +90,7 @@
       drupal_add_js(drupal_get_path('module', 'dolce_enig').'/js/dolce_enig.js');
       drupal_add_js('https://player.vimeo.com/api/player.js', 'external');
       if (!empty($data['video'])) {
-        drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event_player_trailer.js');
+        drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event_player.js');
         $my_settings = array(
         'schedule' => dolce_event_get_schedule_hour_min($data['video']),
         'video' => $data['video'],
@@ -277,8 +277,8 @@
               'vid' => 511230842,
               'day' => 20,
               'time' => array(
-                'from' => '19:30',
-                'to' => '21:34',
+                'from' => '20:00',
+                'to' => '22:04',
               ),
             ),
             '5' => array(
@@ -286,8 +286,8 @@
               'day' => 20,
               'vid' => 512042344,
               'time' => array(
-                'from' => '22:00',
-                'to' => '23:48',
+                'from' => '22:30',
+                'to' => '23:59',
               ),
             ),
               '6' => array(
