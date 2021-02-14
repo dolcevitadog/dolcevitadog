@@ -35,10 +35,10 @@
       //Video is muted at start, need to hide the muted button
       player.getVolume().then(function(volume) {
         if (volume > 0) {
-          $('#unmute').hide();
+          $('#mute').hide();
         }
         else {
-          $('#mute').hide();
+          $('#unmute').hide();
         }
       });
 
@@ -61,12 +61,12 @@
       });
       // Behaviours when mute/unmute buttons are clicked
       $('#mute').on('click', function() {
-          player.setMuted(false);
+          player.setMuted(true);
           $(this).hide();
           $('#unmute').show();
       });
       $('#unmute').on('click', function() {
-          player.setMuted(true);
+          player.setMuted(false);
           $(this).hide();
           $('#mute').show();
       });
