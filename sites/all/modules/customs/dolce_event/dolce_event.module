@@ -97,6 +97,7 @@
        );
        drupal_add_js(array('dolce_event' => $my_settings), array('type' => 'setting'));
      }
+     $data['trailer_mode'] = 0;
     return theme('dolce_event_general', array('data' => $data));
   }
 
