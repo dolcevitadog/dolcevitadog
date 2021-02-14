@@ -11,6 +11,18 @@
      }
       //Initialisation of player
       var player = new Vimeo.Player('vid-sdk', options);
+      player.ready().then(function() {
+        player.getVolume().then(function(volume) {
+          if (volume > 0) {
+            $('#mute').hide();
+          }
+          else {
+            console.log('muted');
+            $('#unmute').hide();
+          }
+        });
+      });
+
       //Get subtitles and hide the other buttons
       player.getTextTracks().then(function(tracks) {
         $(tracks).each(function(index, track) {
@@ -23,16 +35,6 @@
             $('#no-caption').show();
           }
         });
-      });
-      //Video is muted at start, need to hide the muted button
-      player.getVolume().then(function(volume) {
-        console.log(volume);
-        if (volume > 0) {
-          $('#unmute').hide();
-        }
-        else {
-          $('#mute').hide();
-        }
       });
       // Behaviours when subtitles buttons are clicked
       $('#no-caption').on('click', function(){
