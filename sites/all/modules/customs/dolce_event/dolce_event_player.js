@@ -55,12 +55,12 @@
       });
       // Behaviours when mute/unmute buttons are clicked
       $('#mute').on('click', function() {
-          player.setMuted(true);
+          player.setMuted(false);
           $(this).hide();
           $('#unmute').show();
       });
       $('#unmute').on('click', function() {
-          player.setMuted(false);
+          player.setMuted(true);
           $(this).hide();
           $('#mute').show();
       });
