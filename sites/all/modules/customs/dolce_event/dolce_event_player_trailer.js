@@ -25,7 +25,15 @@
         });
       });
       //Video is muted at start, need to hide the muted button
-      $('#unmute').hide();
+      player.getVolume().then(function(volume) {
+        console.log(volume);
+        if (volume > 0) {
+          $('#unmute').hide();
+        }
+        else {
+          $('#mute').hide();
+        }
+      });
       // Behaviours when subtitles buttons are clicked
       $('#no-caption').on('click', function(){
         $(this).hide();
@@ -41,12 +49,12 @@
       });
       // Behaviours when mute/unmute buttons are clicked
       $('#mute').on('click', function() {
-          player.setMuted(true);
+          player.setMuted(false);
           $(this).hide();
           $('#unmute').show();
       });
       $('#unmute').on('click', function() {
-          player.setMuted(false);
+          player.setMuted(true);
           $(this).hide();
           $('#mute').show();
       });
