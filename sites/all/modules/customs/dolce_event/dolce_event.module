@@ -245,8 +245,8 @@
       $videos = array(
         '20' => array(
           '0' => array(
-            'link' => 'https://player.vimeo.com/video/511230842',
-            'vid' => 511230842,
+            'link' => 'https://player.vimeo.com/video/512293657',
+            'vid' => 512293657,
             'day' => 20,
             'time' => array(
               'from' => '08:50',
@@ -291,18 +291,18 @@
               ),
             ),
             '5' => array(
-              'link' => 'https://player.vimeo.com/video/512042344',
+              'link' => 'https://player.vimeo.com/video/512293657',
               'day' => 20,
-              'vid' => 512042344,
+              'vid' => 512293657,
               'time' => array(
-                'from' => '22:50',
-                'to' => '22:59',
+                'from' => '22:55',
+                'to' => '23:05',
               ),
             ),
               '6' => array(
-                'link' => 'https://player.vimeo.com/video/511274771',
+                'link' => 'https://player.vimeo.com/video/512293657',
                 'day' => 20,
-                'vid' => 511274771,
+                'vid' => 512293657,
                 'time' => array(
                   'from' => '14:00',
                   'to' => '15:05',
