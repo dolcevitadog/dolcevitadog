@@ -16,6 +16,14 @@
       var player = new Vimeo.Player('vid-sdk', options);
       //Player is ready, sync of the video and play
       player.ready().then(function() {
+        player.getVolume().then(function(volume) {
+          if (volume > 0) {
+            $('#mute').hide();
+          }
+          else {
+            $('#unmute').hide();
+          }
+        });
         setSyncVideo(schedule);
         player.play();
       });
@@ -33,14 +41,7 @@
         });
       });
       //Video is muted at start, need to hide the muted button
-      player.getVolume().then(function(volume) {
-        if (volume > 0) {
-          $('#mute').hide();
-        }
-        else {
-          $('#unmute').hide();
-        }
-      });
+
 
       //Reload the page when the video is ending
       player.on('ended', function(data) {
