@@ -434,7 +434,7 @@
     switch ($op) {
       case 'form':
         // Alter the shoutbox add form.
-        $a1['wrapper']['nick_submit_area']['submit']['#value'] = t('Barks !') . ' <i class="fab fa-discourse"></i>';
+        $a1['wrapper']['nick_submit_area']['submit']['#value'] = t('Shout !') . ' <i class="fab fa-discourse"></i>';
         $a1['wrapper']['nick_submit_area']['submit']['#attributes'] = array('class' => array('btn btn-primary'));
         break;
     }

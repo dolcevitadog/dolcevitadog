@@ -334,7 +334,9 @@ function dolce_shoutbox_post($variables) {
   // Build the post.
   $post = '';
   $post .= '<div class="' . implode(' ', $shout_classes) . '" title="' . $title . '">';
-  //$post .= '<div class="shoutbox-admin-links">' . $img_links . '</div>';
+  if (user_access('administer site configuration')) {
+    $post .= '<div class="shoutbox-admin-links">' . $img_links . '</div>';
+  }
   $post .= '<span class="' . implode(' ', $user_classes) . '">' . $user_name . '</span>:&nbsp;';
   $post .= '<span class="shoutbox-shout">' . $shout->shout . $approval_message . '</span>';
   $post .= '<span class="shoutbox-msg-time">';
