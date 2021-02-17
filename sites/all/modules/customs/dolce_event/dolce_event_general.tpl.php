@@ -1,5 +1,5 @@
 <?php global $user;
-dpm($data);
+//dpm($data);
 ?>
 
 <div id="event">
