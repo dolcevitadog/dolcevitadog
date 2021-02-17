@@ -1,6 +1,9 @@
 ::-webkit-media-control-panel {
   display: none !important;
 }
+.center-block {
+  float: none;
+}
 #event {
   border: 2px solid #0d3349;
   border: 2px solid #7e8c94;
@@ -123,4 +126,11 @@
 }
 #event .shoutbox-wrapper .shoutbox #edit-nick {
   display: none;
+}
+#event .dolce-book-wrapper {
+  margin: 0 auto;
+  text-align: center;
+}
+#event .dolce-book-wrapper img {
+  display: inline-block;
 }

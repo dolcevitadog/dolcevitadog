@@ -18,6 +18,10 @@
   margin: 10px auto;
   display: block;
 }
+#enigma img {
+  display: inline-block;
+  width: auto;
+}
 #block-enig-paw {
   text-align: center;
   margin: 20px 0px;
