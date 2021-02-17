@@ -1,4 +1,6 @@
-<?php global $user; ?>
+<?php global $user;
+dpm($data);
+?>
 
 <div id="event">
   <div class="banner">
@@ -109,5 +111,15 @@
           <?php print render($data['enig_paw']); ?>
         <?php endif; ?>
       <?php endif; ?>
+      <div class="partners-wrapper">
+        <h2>
+          <?php print t('They are partners, what about you ?'); ?>
+          <i class="far fa-handshake"></i>
+        </h2>
+
+        <div class="partners">
+          <?php print $data['partners']; ?>
+        </div>
+      </div>
     <?php endif; ?>
   </div>

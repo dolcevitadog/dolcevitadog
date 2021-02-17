@@ -145,6 +145,7 @@ function dolce_event_generate_data() {
   $shoutbox = $block_shoutbox['content'];
   $block_enig_paw = module_invoke('dolce_enig', 'block_view', 'dolce_enigma_paw');
   $enig_paw = $block_enig_paw['content'];
+  $partner_block = views_embed_view('partners', $display_id = 'block_3');
   $trailer_mode = variable_get('dolce_event_trailer', '1');
   $game_is_on = variable_get('dolce_event_game_on', '1');
   $game = drupal_get_form('dolce_enig_form');
@@ -162,6 +163,7 @@ function dolce_event_generate_data() {
     'enig_paw' => $enig_paw,
     'game_is_on' => $game_is_on,
     'book' => $book,
+    'partners' => $partner_block,
   );
 }
 
@@ -280,8 +282,8 @@ function dolce_event_video_scheduler($day) {
         'vid' => 512293657,
         'day' => 20,
         'time' => array(
-          'from' => '17:20',
-          'to' => '17:28',
+          'from' => '08:48',
+          'to' => '08:57',
         ),
       ),
       '1' => array(
@@ -289,8 +291,8 @@ function dolce_event_video_scheduler($day) {
         'vid' => 511230842,
         'day' => 20,
         'time' => array(
-          'from' => '17:32',
-          'to' => '18:25',
+          'from' => '09:00',
+          'to' => '11:04',
         ),
       ),
       '2' => array(
@@ -298,8 +300,8 @@ function dolce_event_video_scheduler($day) {
         'day' => 20,
         'vid' => 512042344,
         'time' => array(
-          'from' => '18:30',
-          'to' => '19:48',
+          'from' => '11:30',
+          'to' => '12:48',
         ),
       ),
       '3' => array(
@@ -310,39 +312,45 @@ function dolce_event_video_scheduler($day) {
           'from' => '14:00',
           'to' => '15:05',
         ),
-
-      ),
-      '4' => array(
-        'link' => 'https://player.vimeo.com/video/511230842',
-        'vid' => 511230842,
-        'day' => 20,
-        'time' => array(
-          'from' => '20:00',
-          'to' => '22:04',
-        ),
-      ),
-      '5' => array(
-        'link' => 'https://player.vimeo.com/video/512293657',
-        'day' => 20,
-        'vid' => 512293657,
-        'time' => array(
-          'from' => '22:55',
-          'to' => '23:05',
-        ),
-      ),
-      '6' => array(
-        'link' => 'https://player.vimeo.com/video/512293657',
-        'day' => 20,
-        'vid' => 512293657,
-        'time' => array(
-          'from' => '14:00',
-          'to' => '15:05',
-        ),
-
       ),
     ),
     '21' => array(
-
+      '0' => array(
+        'link' => 'https://player.vimeo.com/video/512293657',
+        'vid' => 512293657,
+        'day' => 20,
+        'time' => array(
+          'from' => '08:48',
+          'to' => '08:57',
+        ),
+      ),
+      '1' => array(
+        'link' => 'https://player.vimeo.com/video/513496313',
+        'vid' => 513496313,
+        'day' => 21,
+        'time' => array(
+          'from' => '09:00',
+          'to' => '10:53',
+        ),
+      ),
+      '2' => array(
+        'link' => 'https://player.vimeo.com/video/512293657',
+        'day' => 21,
+        'vid' => 512293657,
+        'time' => array(
+          'from' => '11:20',
+          'to' => '12:41',
+        ),
+      ),
+      '3' => array(
+        'link' => 'https://player.vimeo.com/video/513503762',
+        'day' => 21,
+        'vid' => 513503762,
+        'time' => array(
+          'from' => '14:00',
+          'to' => '15:11',
+        ),
+      ),
     ),
   );
   $day = variable_get('dolce_event_seminar_day', '1');
@@ -396,7 +404,7 @@ function dolce_event_qa_form($form, &$form_state){
   $form['message'] = array(
     '#markup' => NULL,
   );
-  
+
   $form['name'] = array(
     '#type'         => 'textfield',
     '#required'     => true,

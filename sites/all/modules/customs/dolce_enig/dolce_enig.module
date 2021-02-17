@@ -91,7 +91,7 @@ function dolce_enig_ajax_submit_callback($form, &$form_state) {
       $message = t('Well done ! But someone has been quicker than you !'). ' ';
       //Pas de lot de consolation pour le jour 2
       if ($day == 20) {
-        $nextone = t('You can ask for your gift here: ').l(t('Fill the form'), '/node/158', array('external' => TRUE));
+        $nextone = t('You can ask for your gift here: ').l(t('Fill the form'), '/node/158', array('attributes' => array('target' => '_blank')));
       }
     }
     else {
