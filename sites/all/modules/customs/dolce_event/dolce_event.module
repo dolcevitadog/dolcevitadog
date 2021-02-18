@@ -314,6 +314,7 @@ function dolce_event_video_scheduler($day) {
         ),
       ),
     ),
+    /*
     '21' => array(
       '0' => array(
         'link' => 'https://player.vimeo.com/video/513626927',
@@ -351,7 +352,26 @@ function dolce_event_video_scheduler($day) {
           'to' => '15:11',
         ),
       ),
-    ),
+    ),*/
+    '21' => array(
+      '0' => array(
+        'link' => 'https://player.vimeo.com/video/513626927',
+        'vid' => 513626927,
+        'day' => 21,
+        'time' => array(
+          'from' => '09:05',
+          'to' => '09:14',
+        ),
+      ),
+      '1' => array(
+        'link' => 'https://player.vimeo.com/video/513496313',
+        'vid' => 513496313,
+        'day' => 21,
+        'time' => array(
+          'from' => '09:16',
+          'to' => '10:53',
+        ),
+      ),
   );
   $day = variable_get('dolce_event_seminar_day', '1');
   return $videos[$day];
