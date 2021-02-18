@@ -84,6 +84,7 @@ function dolce_event_permission() {
 
 function dolce_event_repeat_page() {
   $data = dolce_event_generate_data();
+  dsm($data);
   drupal_add_css(drupal_get_path('module', 'dolce_event').'/css/dolce_event.css');
   drupal_add_css(drupal_get_path('module', 'dolce_enig').'/css/dolce_enig.css');
   drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event.js');
@@ -359,8 +360,8 @@ function dolce_event_video_scheduler($day) {
         'vid' => 513626927,
         'day' => 21,
         'time' => array(
-          'from' => '09:05',
-          'to' => '09:14',
+          'from' => '09:12',
+          'to' => '09:19',
         ),
       ),
       '1' => array(
@@ -368,10 +369,11 @@ function dolce_event_video_scheduler($day) {
         'vid' => 513496313,
         'day' => 21,
         'time' => array(
-          'from' => '09:16',
+          'from' => '09:21',
           'to' => '10:53',
         ),
       ),
+    ),
   );
   $day = variable_get('dolce_event_seminar_day', '1');
   return $videos[$day];
