@@ -316,9 +316,9 @@ function dolce_event_video_scheduler($day) {
     ),
     '21' => array(
       '0' => array(
-        'link' => 'https://player.vimeo.com/video/512293657',
-        'vid' => 512293657,
-        'day' => 20,
+        'link' => 'https://player.vimeo.com/video/513626927',
+        'vid' => 513626927,
+        'day' => 21,
         'time' => array(
           'from' => '08:48',
           'to' => '08:57',
