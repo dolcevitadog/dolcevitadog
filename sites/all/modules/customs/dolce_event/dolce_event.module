@@ -103,7 +103,6 @@ function dolce_event_repeat_page() {
 
 function dolce_event_page() {
   $data = dolce_event_generate_data();
-  dpr($data);
   drupal_add_css(drupal_get_path('module', 'dolce_event').'/css/dolce_event.css');
   drupal_add_css(drupal_get_path('module', 'dolce_enig').'/css/dolce_enig.css');
   if ($data['trailer_mode'] == 0) {
