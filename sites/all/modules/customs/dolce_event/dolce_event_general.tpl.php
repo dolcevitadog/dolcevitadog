@@ -21,7 +21,6 @@
     </div>
   <?php else: ?>
     <?php if ($data['video']): ?>
-      <?php dsm($data); ?>
       <div id="video">
         <div class="video-responsive">
           <div id="vid-sdk"></div>
