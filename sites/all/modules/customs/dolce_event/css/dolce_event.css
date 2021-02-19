@@ -4,6 +4,15 @@
 .center-block {
   float: none;
 }
+.change-language {
+  font-size: '16px';
+  font-weight: bold;
+  margin: 5px 0;
+  text-align: center;
+}
+.change-language .flag {
+  line-height: 12px;
+}
 #event {
   border: 2px solid #0d3349;
   border: 2px solid #7e8c94;
@@ -22,6 +31,9 @@
   margin: 10px 0;
   padding: 10px 0;
   text-align: center;
+}
+#event #promotionnal {
+  margin: 20px 0;
 }
 #event #video #controls {
   margin: 5px;
@@ -91,6 +103,9 @@
 }
 #event .zoom-wrapper .zoom {
   font-size: 18px;
+}
+#event .zoom-wrapper .zoom a {
+  color: #ffffff;
 }
 #event .shoutbox-wrapper .shoutbox {
   text-align: left;

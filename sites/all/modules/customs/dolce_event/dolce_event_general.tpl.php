@@ -1,25 +1,13 @@
-<?php global $user;
+<?php global $user; global $language;
 //dpm($data);
 ?>
-
+<div class="change-language">
+  <?php print $data['change_language']; ?>
+</div>
 <div id="event">
   <div class="banner">
     <?php print $data['banner']; ?>
   </div>
-  <?php if ($data['trailer_mode'] == 1 && $user->uid != 1): ?>
-    <div id="video">
-      <div class="video-responsive">
-        <div id="vid-sdk">
-        </div>
-      </div>
-      <div id="controls">
-        <div id="fr-caption"><i class="fas fa-4x fa-closed-captioning"></i></div>
-        <div id="no-caption"><i class="fas fa-4x fa-closed-captioning"></i></div>
-        <div id="mute"><i class="fas fa-4x fa-volume-mute"></i></div>
-        <div id="unmute"><i class="fas fa-4x fa-volume-up"></i></div>
-      </div>
-    </div>
-  <?php else: ?>
     <?php if ($data['video']): ?>
       <div id="video">
         <div class="video-responsive">
@@ -57,7 +45,7 @@
         </h2>
         <div class="zoom">
           <?php print t('Zoom link to access the public room : '); ?>
-          <?php print $data['zoom']; ?>
+          <?php print l($data['zoom'], $data['zoom']); ?>
         </div>
       </div>
     <?php endif; ?>
@@ -95,6 +83,17 @@
           </div>
         </div>
       </div>
+      <div id="promotionnal">
+        <div class="row">
+        <?php foreach ($data['video_promo'] as $promo): ?>
+          <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="video-responsive">
+              <div id="<?php print $promo['id']; ?>"></div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+        </div>
+      </div>
       <?php if ($data['game_is_on']): ?>
         <?php if($data['game']): ?>
           <div class="dolce-enigma-wrapper">
@@ -121,5 +120,4 @@
           <?php print $data['partners']; ?>
         </div>
       </div>
-    <?php endif; ?>
   </div>
