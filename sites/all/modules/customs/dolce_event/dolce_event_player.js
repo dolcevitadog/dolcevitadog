@@ -3,6 +3,7 @@
       //Variable Declaration
       var schedule = Drupal.settings.dolce_event.schedule;
       var video = Drupal.settings.dolce_event;
+      var video_promo = Drupal.settings.dolce_event.video_promo;
       //Vimeo SDK Options
       var options = {
        //id: video.video.vid,
@@ -11,6 +12,7 @@
        controls: false,
        muted: true,
        autoplay: true,
+       autopause: false,
      }
       //Initialisation of player
       var player = new Vimeo.Player('vid-sdk', options);
@@ -64,6 +66,20 @@
           $(this).hide();
           $('#mute').show();
       });
+
+      $(video_promo).each(function(index, promo) {
+        var optionsPromo = {
+         //id: video.video.vid,
+         url: promo.link,
+         width: '100%',
+         responsive: true,
+         controls: true,
+         fullscrenn: false,
+         autopause: false,
+       }
+        var promoPlayer = new Vimeo.Player(promo.id, optionsPromo);
+      });
+
       //Important function for synchronise video in real time
       function setSyncVideo (schedule) {
         $.ajax({

@@ -104,6 +104,7 @@ function dolce_event_repeat_page() {
 
 function dolce_event_page() {
   $data = dolce_event_generate_data();
+  drupal_add_css(drupal_get_path('module', 'dolce_event').'/flags/flags.css');
   drupal_add_css(drupal_get_path('module', 'dolce_event').'/css/dolce_event.css');
   drupal_add_css(drupal_get_path('module', 'dolce_enig').'/css/dolce_enig.css');
   if ($data['trailer_mode'] == 0) {
@@ -115,6 +116,7 @@ function dolce_event_page() {
       $my_settings = array(
         'schedule' => dolce_event_get_schedule_hour_min($data['video']),
         'video' => $data['video'],
+        'video_promo' => $data['video_promo'],
       );
       drupal_add_js(array('dolce_event' => $my_settings), array('type' => 'setting'));
     }
@@ -129,6 +131,7 @@ function dolce_event_page() {
       drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event_player_trailer.js');
       $my_settings = array(
         'video' => $data['video'],
+        'video_promo' => $data['video_promo'],
       );
       drupal_add_js(array('dolce_event' => $my_settings), array('type' => 'setting'));
     }
@@ -151,6 +154,8 @@ function dolce_event_generate_data() {
   $game_is_on = variable_get('dolce_event_game_on', '1');
   $game = drupal_get_form('dolce_enig_form');
   $book = dolce_event_get_book_data();
+  $video_promo = dolce_event_promotionnal_video();
+  $change_language = dolce_event_change_language();
   return array(
     'zoom' => $zoom,
     'video' => $video,
@@ -165,7 +170,20 @@ function dolce_event_generate_data() {
     'game_is_on' => $game_is_on,
     'book' => $book,
     'partners' => $partner_block,
+    'video_promo' => $video_promo,
+    'change_language' => $change_language,
   );
+}
+
+function dolce_event_change_language() {
+  global $language;
+  if ($language->language == 'fr') {
+    $change_language = t("I don't speak French, let's go to the page in ").l('<div class="flag flag-gb">&nbsp</div>', '/en/event/turid-rugaas-2021', array('external' => true, 'html' => true));
+  }
+  else {
+    $change_language = t("I don't speak English, let's go to the page in ").l('<div class="flag flag-fr">&nbsp</div>', '/fr/event/turid-rugaas-2021', array('external' => true, 'html' => true));
+  }
+  return $change_language;
 }
 
 function dolce_event_get_schedule_hour_min($video) {
@@ -262,6 +280,22 @@ function dolce_event_form() {
     '#options' => array(0 => t('No'), 1 => t('Yes')),
   );
 
+  $winner1 = variable_get('dolce_enig_winner_20');
+  if (!empty($winner1)) {
+    $winner1 = user_load($winner1);
+    $form['dolce_event_gagnant1'] = array(
+      '#markup' => 'GAGANT JOURNEE 1 : ' . l($winner1->name, 'user/'.$winner1->uid),
+    );
+  }
+  $winner2 = variable_get('dolce_enig_winner_21');
+  if (!empty($winner2)) {
+    $winner2 = user_load($winner2);
+    $form['dolce_event_gagnant2'] = array(
+      '#markup' => 'GAGANT JOURNEE 2 : ' . l($winner2->name, 'user/'.$winner2->uid),
+    );
+  }
+
+
   $form['#submit'][] = 'dolce_event_form_submit';
 
   return system_settings_form($form);
@@ -315,7 +349,6 @@ function dolce_event_video_scheduler($day) {
         ),
       ),
     ),
-    /*
     '21' => array(
       '0' => array(
         'link' => 'https://player.vimeo.com/video/513626927',
@@ -323,7 +356,7 @@ function dolce_event_video_scheduler($day) {
         'day' => 21,
         'time' => array(
           'from' => '08:48',
-          'to' => '08:57',
+          'to' => '08:56',
         ),
       ),
       '1' => array(
@@ -332,7 +365,7 @@ function dolce_event_video_scheduler($day) {
         'day' => 21,
         'time' => array(
           'from' => '09:00',
-          'to' => '10:53',
+          'to' => '10:52',
         ),
       ),
       '2' => array(
@@ -341,7 +374,7 @@ function dolce_event_video_scheduler($day) {
         'vid' => 512293657,
         'time' => array(
           'from' => '11:20',
-          'to' => '12:41',
+          'to' => '12:39',
         ),
       ),
       '3' => array(
@@ -350,27 +383,7 @@ function dolce_event_video_scheduler($day) {
         'vid' => 513503762,
         'time' => array(
           'from' => '14:00',
-          'to' => '15:11',
-        ),
-      ),
-    ),*/
-    '21' => array(
-      '0' => array(
-        'link' => 'https://player.vimeo.com/video/513626927',
-        'vid' => 513626927,
-        'day' => 21,
-        'time' => array(
-          'from' => '09:12',
-          'to' => '09:19',
-        ),
-      ),
-      '1' => array(
-        'link' => 'https://player.vimeo.com/video/513496313',
-        'vid' => 513496313,
-        'day' => 21,
-        'time' => array(
-          'from' => '09:21',
-          'to' => '10:53',
+          'to' => '15:09',
         ),
       ),
     ),
@@ -395,15 +408,44 @@ function dolce_event_theme($existing, $type, $theme, $path) {
   );
 }
 
+function dolce_event_promotionnal_video() {
+  $videos = array(
+    '0' => array(
+      //Haqihana
+      'link' => 'https://player.vimeo.com/video/514017716',
+      'vid' => 514017716,
+      'id' => 'vid-promo-1'
+    ),
+    //Mantrailing
+    '1' => array(
+      'link' => 'https://player.vimeo.com/video/514017310',
+      'vid' => 514017310,
+      'id' => 'vid-promo-2'
+    ),
+    /*
+    '2' => array(
+    'link' => 'https://player.vimeo.com/video/512293657',
+    'vid' => 512293657,
+    'id' => 'vid-promo-3'
+  ),
+  */
+);
+
+return $videos;
+}
 
 function dolce_event_generate_banner() {
   $date = new DateTime();
   $hour = $date->format('H');
-  /*TEST */
-  $hour = 17;
-  $banner_name = (variable_get('dolce_event_trailer') == 1 ? 'banner_trailer.jpg' : 'banner_'.$hour.'.jpg');
+  $day = variable_get('dolce_event_seminar_day');
+  global $language;
+  $lang = $language->language;
+  $banner_name = (variable_get('dolce_event_trailer') == 1 ? 'banner_trailer.jpg' : 'banner_'.$lang.'_'.$day.'_'.$hour.'.jpg');
+  if ($hour < 9 || $hour > 17) {
+    $banner_name = 'banner_'.$lang.'_0.jpg';
+  }
   $alt_title = (variable_get('dolce_event_trailer') == 1 ? t('Seminar Turid Rugaas - The complete Dog') : t('Exclusive Discount, hour per hour'));
-  $path = drupal_get_path('module', 'dolce_event').'/banners/'.$banner_name;
+  $path = drupal_get_path('module', 'dolce_event').'/banners/'.$day.'/'.$banner_name;
   $variables = array(
     'path' => $path,
     'alt' => $alt_title,
