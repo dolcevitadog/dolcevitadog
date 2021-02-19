@@ -121,6 +121,13 @@ function dolce_event_page() {
       );
       drupal_add_js(array('dolce_event' => $my_settings), array('type' => 'setting'));
     }
+    else {
+      drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event_player_no_video.js');
+      $my_settings = array(
+        'video_promo' => $data['video_promo'],
+      );
+      drupal_add_js(array('dolce_event' => $my_settings), array('type' => 'setting'));
+    }
   }
   else {
     $data['video'] = array(
@@ -389,6 +396,47 @@ function dolce_event_video_scheduler($day) {
       ),
     ),
   );
+  $videos = array(
+    '20' => array(
+      '0' => array(
+        'link' => 'https://player.vimeo.com/video/512293657',
+        'vid' => 512293657,
+        'day' => 20,
+        'time' => array(
+          'from' => '21:15',
+          'to' => '21:23',
+        ),
+      ),
+      '1' => array(
+        'link' => 'https://player.vimeo.com/video/511230842',
+        'vid' => 511230842,
+        'day' => 20,
+        'time' => array(
+          'from' => '21:27',
+          'to' => '23:02',
+        ),
+      ),
+    ),
+    '21' => array(
+      '0' => array(
+        'link' => 'https://player.vimeo.com/video/513626927',
+        'vid' => 513626927,
+        'day' => 21,
+        'time' => array(
+          'from' => '21:32',
+          'to' => '21:40',
+        ),
+      ),
+      '1' => array(
+        'link' => 'https://player.vimeo.com/video/513496313',
+        'vid' => 513496313,
+        'day' => 21,
+        'time' => array(
+          'from' => '21:44',
+          'to' => '23:05',
+        ),
+      ),
+  );
   $day = variable_get('dolce_event_seminar_day', '1');
   return $videos[$day];
 }
@@ -423,16 +471,14 @@ function dolce_event_promotionnal_video() {
       'vid' => 514017310,
       'id' => 'vid-promo-2'
     ),
-    /*
     '2' => array(
-    'link' => 'https://player.vimeo.com/video/512293657',
-    'vid' => 512293657,
+    'link' => 'https://player.vimeo.com/video/514360608',
+    'vid' => 514360608,
     'id' => 'vid-promo-3'
-  ),
-  */
-);
-
-return $videos;
+    ),
+  );
+  shuffle($videos);
+  return array_slice($videos, 0, 2);
 }
 
 function dolce_event_generate_banner() {
@@ -442,7 +488,7 @@ function dolce_event_generate_banner() {
   global $language;
   $lang = $language->language;
   $banner_name = (variable_get('dolce_event_trailer') == 1 ? 'banner_trailer.jpg' : 'banner_'.$lang.'_'.$day.'_'.$hour.'.jpg');
-  if ($hour < 9 || $hour > 17) {
+  if ($hour < 9 || $hour > 16) {
     $banner_name = 'banner_'.$lang.'_0.jpg';
   }
   $alt_title = (variable_get('dolce_event_trailer') == 1 ? t('Seminar Turid Rugaas - The complete Dog') : t('Exclusive Discount, hour per hour'));
