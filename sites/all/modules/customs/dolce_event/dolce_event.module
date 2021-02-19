@@ -84,21 +84,38 @@ function dolce_event_permission() {
 
 function dolce_event_repeat_page() {
   $data = dolce_event_generate_data();
-  dsm($data);
+  drupal_add_css(drupal_get_path('module', 'dolce_event').'/flags/flags.css');
   drupal_add_css(drupal_get_path('module', 'dolce_event').'/css/dolce_event.css');
   drupal_add_css(drupal_get_path('module', 'dolce_enig').'/css/dolce_enig.css');
-  drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event.js');
-  drupal_add_js(drupal_get_path('module', 'dolce_enig').'/js/dolce_enig.js');
-  drupal_add_js('https://player.vimeo.com/api/player.js', 'external');
-  if (!empty($data['video'])) {
-    drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event_player.js');
-    $my_settings = array(
-      'schedule' => dolce_event_get_schedule_hour_min($data['video']),
-      'video' => $data['video'],
-    );
-    drupal_add_js(array('dolce_event' => $my_settings), array('type' => 'setting'));
+  if ($data['trailer_mode'] == 0) {
+    drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event.js');
+    drupal_add_js(drupal_get_path('module', 'dolce_enig').'/js/dolce_enig.js');
+    drupal_add_js('https://player.vimeo.com/api/player.js', 'external');
+    if (!empty($data['video'])) {
+      drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event_player.js');
+      $my_settings = array(
+        'schedule' => dolce_event_get_schedule_hour_min($data['video']),
+        'video' => $data['video'],
+        'video_promo' => $data['video_promo'],
+      );
+      drupal_add_js(array('dolce_event' => $my_settings), array('type' => 'setting'));
+    }
   }
-  $data['trailer_mode'] = 0;
+  else {
+    $data['video'] = array(
+      'vid' => 509011349,
+      'link' => 'https://vimeo.com/509011349',
+    );
+    if (!empty($data['video'])) {
+      drupal_add_js('https://player.vimeo.com/api/player.js', 'external');
+      drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event_player_trailer.js');
+      $my_settings = array(
+        'video' => $data['video'],
+        'video_promo' => $data['video_promo'],
+      );
+      drupal_add_js(array('dolce_event' => $my_settings), array('type' => 'setting'));
+    }
+  }
   return theme('dolce_event_general', array('data' => $data));
 }
 
