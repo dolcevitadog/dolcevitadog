@@ -436,6 +436,7 @@ function dolce_event_video_scheduler($day) {
           'to' => '23:05',
         ),
       ),
+    ),
   );
   $day = variable_get('dolce_event_seminar_day', '1');
   return $videos[$day];
