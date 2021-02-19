@@ -328,7 +328,7 @@ function dolce_event_video_scheduler($day) {
         'day' => 20,
         'time' => array(
           'from' => '09:00',
-          'to' => '11:04',
+          'to' => '11:02',
         ),
       ),
       '2' => array(
@@ -337,7 +337,7 @@ function dolce_event_video_scheduler($day) {
         'vid' => 512042344,
         'time' => array(
           'from' => '11:30',
-          'to' => '12:48',
+          'to' => '12:46',
         ),
       ),
       '3' => array(
@@ -346,7 +346,7 @@ function dolce_event_video_scheduler($day) {
         'vid' => 511274771,
         'time' => array(
           'from' => '14:00',
-          'to' => '15:05',
+          'to' => '15:03',
         ),
       ),
     ),
@@ -366,13 +366,13 @@ function dolce_event_video_scheduler($day) {
         'day' => 21,
         'time' => array(
           'from' => '09:00',
-          'to' => '10:52',
+          'to' => '10:51',
         ),
       ),
       '2' => array(
-        'link' => 'https://player.vimeo.com/video/512293657',
+        'link' => 'https://player.vimeo.com/video/513623706',
         'day' => 21,
-        'vid' => 512293657,
+        'vid' => 513623706,
         'time' => array(
           'from' => '11:20',
           'to' => '12:39',
