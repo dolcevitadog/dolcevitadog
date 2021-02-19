@@ -182,7 +182,7 @@ function dolce_event_change_language() {
     $change_language = t("I don't speak French, let's go to the page in ").l('<div class="flag flag-gb">&nbsp</div>', '/en/event/turid-rugaas-2021', array('external' => true, 'html' => true));
   }
   else {
-    $change_language = t("I don't speak English, let's go to the page in ").l('<div class="flag flag-fr">&nbsp</div>', '/fr/event/turid-rugaas-2021', array('external' => true, 'html' => true));
+    $change_language = t("Je ne parle pas Anglais, allons sur la page en ").l('<div class="flag flag-fr">&nbsp</div>', '/fr/event/turid-rugaas-2021', array('external' => true, 'html' => true));
   }
   return $change_language;
 }
