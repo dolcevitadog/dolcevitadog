@@ -335,7 +335,7 @@ function dolce_event_video_scheduler($day) {
         'day' => 20,
         'time' => array(
           'from' => '09:00',
-          'to' => '11:02',
+          'to' => '11:00',
         ),
       ),
       '2' => array(
