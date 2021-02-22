@@ -36,5 +36,8 @@
     $(document).bind("contextmenu",function() {
       return false;
     });
+    $('iframe').bind("contextmenu",function() {
+      return false;
+    });
   });
 })(jQuery);

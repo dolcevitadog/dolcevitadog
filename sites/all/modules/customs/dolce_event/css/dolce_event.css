@@ -35,6 +35,9 @@
 #event #promotionnal {
   margin: 20px 0;
 }
+#event .margin10-col {
+  margin: 10px 0px;
+}
 #event #video #controls {
   margin: 5px;
   text-align: center;
