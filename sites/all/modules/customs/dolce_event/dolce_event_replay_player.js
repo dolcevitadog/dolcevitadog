@@ -3,11 +3,12 @@
     //Variable Declaration
     var videos = Drupal.settings.dolce_event.videos;
     var replay = Drupal.settings.dolce_event.replay;
+    console.log(replay);
     var video_20 = Drupal.settings.dolce_event.videos.day_20;
     var video_21 = Drupal.settings.dolce_event.videos.day_21;
     var video_promo = Drupal.settings.dolce_event.video_promo;
     //Vimeo SDK Options
-    if ($(replay) == 1) {
+    if (replay == 1) {
       $(video_20).each(function(index, video) {
         var options = {
           width: '100%',
