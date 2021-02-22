@@ -1,0 +1,98 @@
+<?php
+
+/**
+ * @file
+ * The 'Force Logout' module.
+ */
+
+/**
+ * Implements hook_help().
+ */
+function force_logout_help($path, $arg) {
+
+  switch ($path) {
+    case 'admin/config/development/force_logout':
+      return '<p>' . t('This is the settings form of force logout module.') . '</p>';
+
+    case 'admin/help#force_logout':
+      $output = '';
+      $output .= '<p>' . t('The force logout module provides a quick way to prevent any user who does not have the bypass force logout permission from login. And sign out if he is already logged-in.') . '</p>';
+      return $output;
+  }
+
+}
+
+/**
+ * Implements hook_permission().
+ */
+function force_logout_permission() {
+
+  return array(
+    'administer force logout' => array(
+      'title' => t('Administer force logout'),
+    ),
+    'bypass force logout' => array(
+      'title' => t('Bypass force logout'),
+    ),
+  );
+
+}
+
+/**
+ * Implements hook_menu().
+ */
+function force_logout_menu() {
+
+  $items = array();
+  $items['admin/config/development/force_logout'] = array(
+    'title' => 'Force logout',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('force_logout_admin'),
+    'access arguments' => array('administer force logout'),
+    'file' => 'include/force_logout.form.inc',
+  );
+  return $items;
+
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function force_logout_form_user_login_alter(&$form, &$form_state, $form_id) {
+
+  // Add force logout submit handler.
+  $form['#submit'][] = 'force_logout_login_submit';
+
+}
+
+/**
+ * Submit handler of login form. To check and force logout.
+ */
+function force_logout_login_submit(&$form, &$form_state) {
+
+  if ((variable_get('force_logout_status', 0) == 1) && (!user_access('bypass force logout'))) {
+    form_set_error('password', check_plain(variable_get('force_logout_login_message', t('Sorry you can not login now, please try to login again in the next a few hours.'))));
+  }
+
+}
+
+/**
+ * Implements hook_init().
+ */
+function force_logout_init() {
+
+  global $user;
+
+  // Check if the force logout enabled.
+  // And this logged-in user does not have access to bypass force logout.
+  if ((variable_get('force_logout_status', 0) == 1) && (!user_access('bypass force logout')) && isset($user->uid) && ($user->uid > 0)) {
+    watchdog('force_logout', 'Force logout: @user_id', array('@user_id' => $user->uid));
+
+    module_invoke_all('user_logout', $user);
+
+    // Destroy the current session, and reset $user to the anonymous user.
+    session_destroy();
+    drupal_goto('user');
+  }
+
+}

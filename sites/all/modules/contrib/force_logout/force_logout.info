@@ -1,0 +1,13 @@
+name = Force Logout
+description = Allow admin to force logout all users and prevent login for some users.
+core = "7.x"
+package = Administration
+
+configure = admin/config/development/force_logout
+
+; Information added by Drupal.org packaging script on 2017-05-04
+version = "7.x-1.1"
+core = "7.x"
+project = "force_logout"
+datestamp = "1493878988"
+
