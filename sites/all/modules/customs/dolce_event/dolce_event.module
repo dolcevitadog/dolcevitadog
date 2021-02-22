@@ -179,6 +179,18 @@ function dolce_event_generate_replay_data() {
   $change_language = dolce_event_change_language();
   $video_promo = dolce_event_promotionnal_video(3);
   $replay = variable_get('dolce_event_replay', '0');
+  $disclaimer = t("<h3>Thank you for reviewing the replay of the seminar. It will be available until Sunday, February 27th, 23h59.</h3>
+
+  We remind you that the videos are the property of Turid Rugaas and DolceVitaDog.com. We take the liberty to remind you of ''the General Terms and Conditions of Sale'' that you have accepted :
+  <br />
+  <i>
+  Article 19: Videos (VOD) and Online Events
+  Online events are governed by the DADVSI law and under the Intellectual Property Code. (Articles 331-5 and 335-3-1 of the Intellectual Property Code).
+  The customer commits to a strictly private use. In the case of piracy, illegal broadcasting, or downloading of the video in any form whatsoever.
+  Article 323-1 of the penal code punishes 'the fact of accessing or remaining fraudulently, in all or part of an automated processing system'.
+  The penalty is 2 years imprisonment and a fine of 30000€. This can be increased to 3 years of imprisonment and 45000€ fine when it results
+  'either the deletion or modification of data contained in the system, or an alteration of the operation of this system'.</i>");
+
   return array(
     'videos' => $video,
     'banner' => $banner,
@@ -189,6 +201,7 @@ function dolce_event_generate_replay_data() {
     'video_promo' => $video_promo,
     'change_language' => $change_language,
     'replay' => $replay,
+    'disclaimer' => $disclaimer,
   );
 }
 
