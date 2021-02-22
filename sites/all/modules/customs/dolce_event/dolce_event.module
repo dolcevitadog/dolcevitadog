@@ -23,6 +23,12 @@ function dolce_event_menu() {
     'access arguments' => array('administer site configuration'),
   );
 
+  $items['event/turid-rugaas-2021-replay'] = array(
+    'title' => t('Replay Turid Rugaas Online - The complete Dog'),
+    'page callback' => array('dolce_event_replay_page'),
+    'access arguments' => array('access rehearsal dolce event'),
+  );
+
   $items['event/F4v7j4s3'] = array(
     'title' => t('REPEAT - Turid Rugaas Online - The complete Dog'),
     'page callback' => array('dolce_event_repeat_page'),
@@ -147,6 +153,44 @@ function dolce_event_page() {
   return theme('dolce_event_general', array('data' => $data));
 }
 
+function dolce_event_replay_page() {
+  $data = dolce_event_generate_replay_data();
+  drupal_add_css(drupal_get_path('module', 'dolce_event').'/flags/flags.css');
+  drupal_add_css(drupal_get_path('module', 'dolce_event').'/css/dolce_event.css');
+  drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event.js');
+  drupal_add_js('https://player.vimeo.com/api/player.js', 'external');
+  drupal_add_js(drupal_get_path('module', 'dolce_event').'/dolce_event_replay_player.js');
+  $my_settings = array(
+    'videos' => $data['videos'],
+    'video_promo' => $data['video_promo'],
+  );
+  drupal_add_js(array('dolce_event' => $my_settings), array('type' => 'setting'));
+  return theme('dolce_event_replay', array('data' => $data));
+}
+
+function dolce_event_generate_replay_data() {
+  $banner = dolce_event_generate_banner();
+  $video = dolce_event_video_scheduler('all');
+  $block_shoutbox = module_invoke('shoutbox', 'block_view', 'shoutbox');
+  $shoutbox = $block_shoutbox['content'];
+  $partner_block = views_embed_view('partners', $display_id = 'block_3');
+  $book = dolce_event_get_book_data();
+  $change_language = dolce_event_change_language();
+  $video_promo = dolce_event_promotionnal_video(3);
+  $replay = variable_get('dolce_event_replay', '0');
+  return array(
+    'videos' => $video,
+    'banner' => $banner,
+    'shoutbox' => $shoutbox,
+    'no_video' => $no_video,
+    'book' => $book,
+    'partners' => $partner_block,
+    'video_promo' => $video_promo,
+    'change_language' => $change_language,
+    'replay' => $replay,
+  );
+}
+
 function dolce_event_generate_data() {
   $zoom = variable_get('dolce_event_zoom_public', '');
   $banner = dolce_event_generate_banner();
@@ -185,11 +229,12 @@ function dolce_event_generate_data() {
 
 function dolce_event_change_language() {
   global $language;
+  $current = current_path();
   if ($language->language == 'fr') {
-    $change_language = t("I don't speak French, let's go to the page in ").l('<div class="flag flag-gb">&nbsp</div>', '/en/event/turid-rugaas-2021', array('external' => true, 'html' => true));
+    $change_language = t("I don't speak French, let's go to the page in ").l('<div class="flag flag-gb">&nbsp</div>', '/en/'.$current, array('external' => true, 'html' => true));
   }
   else {
-    $change_language = t("Je ne parle pas Anglais, allons sur la page en ").l('<div class="flag flag-fr">&nbsp</div>', '/fr/event/turid-rugaas-2021', array('external' => true, 'html' => true));
+    $change_language = t("Je ne parle pas Anglais, allons sur la page en ").l('<div class="flag flag-fr">&nbsp</div>', '/fr/'.$current, array('external' => true, 'html' => true));
   }
   return $change_language;
 }
@@ -288,6 +333,13 @@ function dolce_event_form() {
     '#options' => array(0 => t('No'), 1 => t('Yes')),
   );
 
+  $form['dolce_event_replay'] = array(
+    '#title' => t('Replay is On'),
+    '#type' => 'select',
+    '#options' => array(0 => t('No'), 1 => t('Yes')),
+    '#default_value' => variable_get('dolce_event_replay', '0'),
+  );
+
   $winner1 = variable_get('dolce_enig_winner_20');
   if (!empty($winner1)) {
     $winner1 = user_load($winner1);
@@ -317,12 +369,13 @@ function dolce_event_form_submit(&$form, &$form_state) {
   }
 }
 
-function dolce_event_video_scheduler($day) {
+function dolce_event_video_scheduler($all) {
   $videos = array(
-    '20' => array(
+    'day_20' => array(
       '0' => array(
         'link' => 'https://player.vimeo.com/video/512293657',
         'vid' => 512293657,
+        'id' => 'vid-512293657',
         'day' => 20,
         'time' => array(
           'from' => '08:48',
@@ -332,6 +385,7 @@ function dolce_event_video_scheduler($day) {
       '1' => array(
         'link' => 'https://player.vimeo.com/video/511230842',
         'vid' => 511230842,
+        'id' => 'vid-511230842',
         'day' => 20,
         'time' => array(
           'from' => '09:00',
@@ -342,6 +396,7 @@ function dolce_event_video_scheduler($day) {
         'link' => 'https://player.vimeo.com/video/512042344',
         'day' => 20,
         'vid' => 512042344,
+        'id' => 'vid-512042344',
         'time' => array(
           'from' => '11:30',
           'to' => '12:46',
@@ -351,16 +406,18 @@ function dolce_event_video_scheduler($day) {
         'link' => 'https://player.vimeo.com/video/511274771',
         'day' => 20,
         'vid' => 511274771,
+        'id' => 'vid-511274771',
         'time' => array(
           'from' => '14:00',
           'to' => '15:03',
         ),
       ),
     ),
-    '21' => array(
+    'day_21' => array(
       '0' => array(
         'link' => 'https://player.vimeo.com/video/513626927',
         'vid' => 513626927,
+        'id' => 'vid-513626927',
         'day' => 21,
         'time' => array(
           'from' => '08:48',
@@ -370,6 +427,7 @@ function dolce_event_video_scheduler($day) {
       '1' => array(
         'link' => 'https://player.vimeo.com/video/513496313',
         'vid' => 513496313,
+        'id' => 'vid-513496313',
         'day' => 21,
         'time' => array(
           'from' => '09:00',
@@ -380,6 +438,7 @@ function dolce_event_video_scheduler($day) {
         'link' => 'https://player.vimeo.com/video/513623706',
         'day' => 21,
         'vid' => 513623706,
+        'id' => 'vid-513623706',
         'time' => array(
           'from' => '11:20',
           'to' => '12:39',
@@ -389,6 +448,7 @@ function dolce_event_video_scheduler($day) {
         'link' => 'https://player.vimeo.com/video/513503762',
         'day' => 21,
         'vid' => 513503762,
+        'id' => 'vid-513503762',
         'time' => array(
           'from' => '14:00',
           'to' => '15:09',
@@ -397,7 +457,10 @@ function dolce_event_video_scheduler($day) {
     ),
   );
   $day = variable_get('dolce_event_seminar_day', '1');
-  return $videos[$day];
+  if ($all == 'all') {
+    return $videos;
+  }
+  return $videos['day_'.$day];
 }
 
 /**
@@ -413,10 +476,14 @@ function dolce_event_theme($existing, $type, $theme, $path) {
       'template' => 'dolce_event_general_trailer',
       'arguments' => array('data' => array())
     ),
+    'dolce_event_replay' => array(
+      'template' => 'dolce_event_replay',
+      'arguments' => array('data' => array())
+    ),
   );
 }
 
-function dolce_event_promotionnal_video() {
+function dolce_event_promotionnal_video($num) {
   $videos = array(
     '0' => array(
       //Haqihana
@@ -437,7 +504,7 @@ function dolce_event_promotionnal_video() {
     ),
   );
   shuffle($videos);
-  return array_slice($videos, 0, 2);
+  return array_slice($videos, 0, $num);
 }
 
 function dolce_event_generate_banner() {
