@@ -29,17 +29,7 @@
   <?php else: ?>
     <h2><?php print t('Replay is over, thanks for watching the seminar'); ?></h2>
   <?php endif; ?>
-  <div id="promotionnal">
-    <div class="row">
-      <?php foreach ($data['video_promo'] as $promo): ?>
-        <div class="margin10-col col-lg-6 col-md-6 col-sm-6 col-xs-12">
-          <div class="video-responsive">
-            <div id="<?php print $promo['id']; ?>"></div>
-          </div>
-        </div>
-      <?php endforeach; ?>
-    </div>
-  </div>
+
   <?php if($data['shoutbox']): ?>
     <div class="shoutbox-wrapper">
       <h2>
@@ -51,6 +41,17 @@
       </div>
     </div>
   <?php endif; ?>
+  <div id="promotionnal">
+    <div class="row">
+      <?php foreach ($data['video_promo'] as $promo): ?>
+        <div class="margin10-col col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <div class="video-responsive">
+            <div id="<?php print $promo['id']; ?>"></div>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    </div>
+  </div>
   <div class="center-block dolce-book-wrapper">
     <h2>
       <?php print t('Audio sample'); ?>
