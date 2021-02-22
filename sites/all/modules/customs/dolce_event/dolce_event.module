@@ -179,7 +179,7 @@ function dolce_event_generate_replay_data() {
   $change_language = dolce_event_change_language();
   $video_promo = dolce_event_promotionnal_video(3);
   $replay = variable_get('dolce_event_replay', '0');
-  $disclaimer = t("<h3>Thank you for reviewing the replay of the seminar. It will be available until Sunday, February 27th, 23h59.</h3>
+  $disclaimer = t("<h3>Thank you for reviewing the replay of the seminar. It will be available until Sunday, February 27th, 11:59pm CET.</h3>
 
   We remind you that the videos are the property of Turid Rugaas and DolceVitaDog.com. We take the liberty to remind you of ''the General Terms and Conditions of Sale'' that you have accepted :
   <br />
