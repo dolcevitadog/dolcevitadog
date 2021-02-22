@@ -100,4 +100,21 @@
         <?php print $data['partners']; ?>
       </div>
     </div>
+    <div class="clue-modal modal fade" tabindex="-1" role="dialog">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title"><?php echo t('Advertising'); ?></h4>
+          </div>
+          <div class="modal-body">
+            <?php print $data['disclaimer']; ?>
+          </div>
+          <div class="modal-footer">
+            <button id="reject" type="button" class="btn btn-default" ><?php print t('Reject'); ?></button>
+            <button id="accept" type="button" class="btn btn-primary" data-dismiss="modal"><?php print t('Accept'); ?></button>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>

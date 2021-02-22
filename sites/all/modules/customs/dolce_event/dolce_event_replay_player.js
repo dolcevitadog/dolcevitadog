@@ -1,9 +1,20 @@
 (function ($) {
   $(document).ready(function() {
     //Variable Declaration
+    $(document).ready(function() {
+      $('.clue-modal').modal();
+    });
+
+    $('.clue-modal').on('show.bs.modal', function (event) {
+      $('#accept').on('click', function(){
+        $(this).modal('hide');
+      });
+      $('#reject').on('click', function(){
+        window.location.href = 'https://www.dolcevitadog.com';
+      });
+    });
     var videos = Drupal.settings.dolce_event.videos;
     var replay = Drupal.settings.dolce_event.replay;
-    console.log(replay);
     var video_20 = Drupal.settings.dolce_event.videos.day_20;
     var video_21 = Drupal.settings.dolce_event.videos.day_21;
     var video_promo = Drupal.settings.dolce_event.video_promo;
