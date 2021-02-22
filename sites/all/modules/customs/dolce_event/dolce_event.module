@@ -163,6 +163,7 @@ function dolce_event_replay_page() {
   $my_settings = array(
     'videos' => $data['videos'],
     'video_promo' => $data['video_promo'],
+    'replay' => $data['replay'],
   );
   drupal_add_js(array('dolce_event' => $my_settings), array('type' => 'setting'));
   return theme('dolce_event_replay', array('data' => $data));
