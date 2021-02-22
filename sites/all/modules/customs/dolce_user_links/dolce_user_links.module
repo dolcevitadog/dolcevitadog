@@ -192,7 +192,7 @@ function _dolce_user_links_profile_data() {
     );
       if (user_access('access dolce event')) {
         $profile['events'] = array(
-          'link' => url("event/turid-rugaas-2021", array('absolute' => TRUE, 'language' => $language)),
+          'link' => url("event/turid-rugaas-2021-replay", array('absolute' => TRUE, 'language' => $language)),
           'icon' => 'fa fa-4x fa-film',
           'class' => 'events',
           'text' => t('Turid Rugaas Seminar'),
