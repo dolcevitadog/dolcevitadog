@@ -12,6 +12,9 @@
       $('#reject').on('click', function(){
         window.location.href = 'https://www.dolcevitadog.com';
       });
+      $('.close').on('click', function(){
+        window.location.href = 'https://www.dolcevitadog.com';
+      });
     });
     var videos = Drupal.settings.dolce_event.videos;
     var replay = Drupal.settings.dolce_event.replay;
