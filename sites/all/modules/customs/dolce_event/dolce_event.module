@@ -26,7 +26,7 @@ function dolce_event_menu() {
   $items['event/turid-rugaas-2021-replay'] = array(
     'title' => t('Replay Turid Rugaas Online - The complete Dog'),
     'page callback' => array('dolce_event_replay_page'),
-    'access arguments' => array('access rehearsal dolce event'),
+    'access arguments' => array('access dolce event'),
   );
 
   $items['event/F4v7j4s3'] = array(
