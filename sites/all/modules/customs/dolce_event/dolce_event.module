@@ -20,7 +20,7 @@ function dolce_event_menu() {
   $items['event/dolcevitadog-symposium'] = array(
     'title' => t('DolceVitaDog Symposium'),
     'page callback' => array('dolce_event_page'),
-    'access arguments' => array('administer site configuration'),
+    'access arguments' => array('access dolce event'),
   );
 
   /*
@@ -509,6 +509,10 @@ function dolce_event_theme($existing, $type, $theme, $path) {
       'template' => 'dolce_event_replay',
       'arguments' => array('data' => array())
     ),
+    'dolce_event_audio_sample' => array(
+      'template' => 'dolce_event_audio_sample',
+      'arguments' => array('data' => array())
+    ),
   );
 }
 
@@ -703,3 +707,7 @@ function dolce_event_shoutbox($op, &$shout, &$a1 = NULL, $form_state = NULL) {
     }
     unset($person);
   }
+
+function dolce_event_audio_sample() {
+
+}
