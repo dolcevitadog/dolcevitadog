@@ -17,18 +17,19 @@ function dolce_event_menu() {
     'access arguments' => array('administer site configuration'),
   );
 
-  $items['event/turid-rugaas-2021'] = array(
-    'title' => t('Turid Rugaas Online - The complete Dog'),
+  $items['event/dolcevitadog-symposium'] = array(
+    'title' => t('DolceVitaDog Symposium'),
     'page callback' => array('dolce_event_page'),
     'access arguments' => array('administer site configuration'),
   );
 
+  /*
   $items['event/turid-rugaas-2021-replay'] = array(
     'title' => t('Replay Turid Rugaas Online - The complete Dog'),
     'page callback' => array('dolce_event_replay_page'),
     'access arguments' => array('access dolce event'),
   );
-
+  */
   $items['event/F4v7j4s3'] = array(
     'title' => t('REPEAT - Turid Rugaas Online - The complete Dog'),
     'page callback' => array('dolce_event_repeat_page'),
@@ -109,6 +110,7 @@ function dolce_event_repeat_page() {
   return theme('dolce_event_general', array('data' => $data));
 }
 
+
 function dolce_event_page() {
   $data = dolce_event_generate_data();
   drupal_add_css(drupal_get_path('module', 'dolce_event').'/flags/flags.css');
@@ -137,8 +139,8 @@ function dolce_event_page() {
   }
   else {
     $data['video'] = array(
-      'vid' => 509011349,
-      'link' => 'https://vimeo.com/509011349',
+      'vid' => 520377110,
+      'link' => 'https://vimeo.com/520377110',
     );
     if (!empty($data['video'])) {
       drupal_add_js('https://player.vimeo.com/api/player.js', 'external');
@@ -220,8 +222,14 @@ function dolce_event_generate_data() {
   $game_is_on = variable_get('dolce_event_game_on', '1');
   $game = drupal_get_form('dolce_enig_form');
   $book = dolce_event_get_book_data();
-  $video_promo = dolce_event_promotionnal_video();
+  $video_promo = dolce_event_promotionnal_video('all');
   $change_language = dolce_event_change_language();
+  $on_off = array(
+    'dolce_event_qa_on' => variable_get('dolce_event_qa_on', '1'),
+    'dolce_event_game_on' => variable_get('dolce_event_game_on', '1'),
+    'dolce_event_promotionnal_video_on' => variable_get('dolce_event_promotionnal_video_on', '1'),
+  );
+
   return array(
     'zoom' => $zoom,
     'video' => $video,
@@ -233,11 +241,11 @@ function dolce_event_generate_data() {
     'game' => $game,
     'no_video' => $no_video,
     'enig_paw' => $enig_paw,
-    'game_is_on' => $game_is_on,
     'book' => $book,
     'partners' => $partner_block,
     'video_promo' => $video_promo,
     'change_language' => $change_language,
+    'on_off' => $on_off
   );
 }
 
@@ -327,11 +335,18 @@ function dolce_event_form() {
     '#default_value' => variable_get('dolce_event_game_on', '1'),
   );
 
-  $form['dolce_event_symposium'] = array(
-    '#title' => t('DolceVitDog Symposium is on'),
+  $form['dolce_event_qa_on'] = array(
+    '#title' => t('Q/A is on'),
     '#type' => 'select',
     '#options' => array(0 => t('No'), 1 => t('Yes')),
-    '#default_value' => variable_get('dolce_event_symposium', '1'),
+    '#default_value' => variable_get('dolce_event_qa_on', '1'),
+  );
+
+  $form['dolce_event_promotionnal_video_on'] = array(
+    '#title' => t('Promotionnal Videos is on'),
+    '#type' => 'select',
+    '#options' => array(0 => t('No'), 1 => t('Yes')),
+    '#default_value' => variable_get('dolce_event_promotionnal_video_on', '1'),
   );
 
   $form['dolce_event_seminar_day'] = array(
@@ -527,9 +542,9 @@ function dolce_event_generate_banner() {
   $day = variable_get('dolce_event_seminar_day');
   global $language;
   $lang = $language->language;
-  $banner_name = (variable_get('dolce_event_trailer') == 1 ? 'banner_trailer.jpg' : 'banner_'.$lang.'_'.$day.'_'.$hour.'.jpg');
+  $banner_name = (variable_get('dolce_event_trailer') == '1' ? 'banner_trailer.jpg' : 'banner_'.$lang.'_'.$day.'_'.$hour.'.jpg');
   if ($hour < 9 || $hour > 16) {
-    $banner_name = 'banner_'.$lang.'_0.jpg';
+    $banner_name = variable_get('dolce_event_trailer') == '1' ? 'banner_trailer.jpg' : 'banner_'.$lang.'_0.jpg';
   }
   $alt_title = (variable_get('dolce_event_trailer') == 1 ? t('Seminar Turid Rugaas - The complete Dog') : t('Exclusive Discount, hour per hour'));
   $path = drupal_get_path('module', 'dolce_event').'/banners/'.$day.'/'.$banner_name;
@@ -561,6 +576,21 @@ function dolce_event_qa_form($form, &$form_state){
     '#required'     => true,
     '#title' => t('Your name'),
     '#attributes' => array('id' => 'name', 'placeholder'=> t('Your name')),
+  );
+
+  $form['subject'] = array(
+    '#type'         => 'select',
+    '#required'     => true,
+    '#title' => t('Your question concern'),
+    '#options' => array(
+        'turid' => t('Turid Rugaas - Fears and Phobias'),
+        'budzinski' => t('C&A Budzinski - At the heart of the walk'),
+        'marina' => t('Marina Gates Flemming - Ethics and our dogs'),
+        'carole' => t('Carole Dupuis - Activities for our dogs'),
+        'pauline' => t('Pauline Magin - Give freedom to our dogs'),
+    ),
+    '#attributes' => array('id' => 'subject'),
+    '#resizable' => false,
   );
 
   $form['questions'] = array(
@@ -655,11 +685,10 @@ function dolce_event_shoutbox($op, &$shout, &$a1 = NULL, $form_state = NULL) {
   function dolce_event_give_role_form_submit($form, &$form_state) {
     $data = $form_state['values']['dolce_event_emails'];
     $pid = $form_state['values']['pid_role'];
-    $emails = explode(PHP_EOL, $data);
+    $emails = preg_split('/\r\n|\n|\r/', $data);
     foreach ($emails as $key => $email) {
       _attribute_event_role($pid, $email);
     }
-
     return $form;
   }
 

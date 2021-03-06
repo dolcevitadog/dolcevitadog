@@ -91,7 +91,8 @@
   display: none;
 }
 #event .qa-wrapper form #name,
-#event .qa-wrapper form #questions {
+#event .qa-wrapper form #questions,
+#event .qa-wrapper form #subject {
   width: 40%;
   margin: 0 auto;
 }
