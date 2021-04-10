@@ -6,6 +6,30 @@
  */
 
 /**
+ * Implements hook_rules_event_info().
+ */
+ function commerce_stock_notifications_rules_event_info() {
+  $events = array();
+
+  $events['commerce_stock_notifications_submit'] = array(
+    'label' => t('A User wants to be notified'),
+    'group' => t('Commerce Stock Notifications'),
+    'variables' => array(
+      'email' => array(
+        'label' => t('Email address'),
+        'type' => 'text',
+      ),
+      'commerce_product' => array(
+        'label' => t('Commerce Product'),
+        'type' => 'commerce_product'
+      ),
+    ),
+  );
+
+  return $events;
+}
+
+/**
  * Implements hook_rules_action_info().
  */
 function commerce_stock_notifications_rules_action_info() {

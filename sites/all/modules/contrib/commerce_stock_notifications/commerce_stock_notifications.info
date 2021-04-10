@@ -10,9 +10,8 @@ dependencies[] = commerce_ss
 dependencies[] = commerce_stock
 dependencies[] = rules
 
-; Information added by Drupal.org packaging script on 2014-07-08
-version = "7.x-1.1"
+; Information added by Drupal.org packaging script on 2020-06-09
+version = "7.x-1.2"
 core = "7.x"
 project = "commerce_stock_notifications"
-datestamp = "1404834529"
-
+datestamp = "1591701550"
