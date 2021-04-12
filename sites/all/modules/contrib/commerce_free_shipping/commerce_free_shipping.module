@@ -185,7 +185,8 @@ function commerce_free_shipping_rate_callback($shipping_service, $order) {
         }
         $message_rate = commerce_currency_format($limit_rate, $order_currency_code);
         $message = variable_get($base . '_free_shipping_gift_message');
-        $message = str_replace('%rate', $message_rate, $message);
+        //$message = str_replace('%rate', $message_rate, $message);
+        $message = t($message, array('%rate' => $message_rate));
         drupal_set_message(filter_xss($message, array('b', 'strong', 'i', 'u', 'em', 'a')), 'status', FALSE);
       }
     }
@@ -211,7 +212,8 @@ function commerce_free_shipping_rate_callback($shipping_service, $order) {
       }
       $message_rate = commerce_currency_format($message_rate, $order_currency_code);
       $message = variable_get($base . '_free_shipping_reject_message');
-      $message = str_replace('%rate', $message_rate, $message);
+      $message = t($message, array('%rate' => $message_rate));
+      //$message = str_replace('%rate', $message_rate, $message);
       drupal_set_message(filter_xss($message, array('b', 'strong', 'i', 'u', 'em', 'a')), 'status', FALSE);
     }
   }
