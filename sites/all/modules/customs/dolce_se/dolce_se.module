@@ -63,7 +63,7 @@ function dolce_se_get_estimated_date() {
  $delay = add_days($country, $day);
  $date->add(new DateInterval('P'.$delay.'D'));
     setlocale (LC_TIME, 'fr_FR.utf8','fra');
-    $format = 'd M Y';
+    $format = 'd F Y';
     $estimated_date = _dolce_se_dateToFrench($date, $format);
 
  return array(
@@ -75,7 +75,7 @@ function dolce_se_get_estimated_date() {
 function _dolce_se_dateToFrench($date, $format)
 {
     $english_days = array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday');
-    $french_days = array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi', 'dimanche');
+    $french_days = array('Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche');
     $english_months = array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December');
     $french_months = array('janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre');
     return str_replace($english_months, $french_months, str_replace($english_days, $french_days, $date->format($format) ) );
@@ -103,6 +103,26 @@ function add_days($countryCode, $day) {
             'Sunday' => 7,
         ),
     );
+  $array =  array(
+    'FR' => array(
+      'Monday' => 10,
+      'Tuesday' => 10,
+      'Wednesday' => 10,
+      'Thursday' => 10,
+      'Friday' => 10,
+      'Saturday' => 10,
+      'Sunday' => 10,
+    ),
+    'OTHER' => array(
+      'Monday' => 12,
+      'Tuesday' => 12,
+      'Wednesday' => 12,
+      'Thursday' => 12,
+      'Friday' => 12,
+      'Saturday' => 12,
+      'Sunday' => 12,
+    ),
+  );
     return $array[$countryCode][$day];
 }
 
