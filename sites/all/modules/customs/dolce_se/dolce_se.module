@@ -103,26 +103,6 @@ function add_days($countryCode, $day) {
             'Sunday' => 7,
         ),
     );
-  $array =  array(
-    'FR' => array(
-      'Monday' => 10,
-      'Tuesday' => 10,
-      'Wednesday' => 10,
-      'Thursday' => 10,
-      'Friday' => 10,
-      'Saturday' => 10,
-      'Sunday' => 10,
-    ),
-    'OTHER' => array(
-      'Monday' => 12,
-      'Tuesday' => 12,
-      'Wednesday' => 12,
-      'Thursday' => 12,
-      'Friday' => 12,
-      'Saturday' => 12,
-      'Sunday' => 12,
-    ),
-  );
     return $array[$countryCode][$day];
 }
 
