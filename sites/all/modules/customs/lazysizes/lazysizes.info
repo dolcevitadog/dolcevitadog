@@ -1,0 +1,5 @@
+name = LazySizes
+description = Replace all Images with LazySizes images
+core = 7.x
+version = 7.x-1.0
+package = Dolce
