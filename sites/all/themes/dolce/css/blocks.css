@@ -19,6 +19,9 @@
 #block-mailchimp-signup-dolcevitadog-mailchimp #mailchimp-signup-subscribe-block-dolcevitadog-mailchimp-form .form-actions {
   margin: 10px;
 }
+#homeslider {
+  max-height: 400px;
+}
 #homeslider .bx-wrapper {
   box-shadow: none;
   border: none;
@@ -90,14 +93,16 @@
 #display_products ul,
 .view-collection-products ul,
 #suggested_product ul,
-#other_products ul {
+#other_products ul,
+#snack ul {
   text-align: center;
 }
 #products_homepage ul li,
 #display_products ul li,
 .view-collection-products ul li,
 #suggested_product ul li,
-#other_products ul li {
+#other_products ul li,
+#snack ul li {
   margin: 10px 0;
 }
 #products_homepage ul li .discount-products-wrapper,
@@ -105,16 +110,25 @@
 .view-collection-products ul li .discount-products-wrapper,
 #suggested_product ul li .discount-products-wrapper,
 #other_products ul li .discount-products-wrapper,
+#snack ul li .discount-products-wrapper,
 #products_homepage ul li .product-list,
 #display_products ul li .product-list,
 .view-collection-products ul li .product-list,
 #suggested_product ul li .product-list,
 #other_products ul li .product-list,
+#snack ul li .product-list,
 #products_homepage ul li .suggested-products-wrapper,
 #display_products ul li .suggested-products-wrapper,
 .view-collection-products ul li .suggested-products-wrapper,
 #suggested_product ul li .suggested-products-wrapper,
-#other_products ul li .suggested-products-wrapper {
+#other_products ul li .suggested-products-wrapper,
+#snack ul li .suggested-products-wrapper,
+#products_homepage ul li .snack-product-wrapper,
+#display_products ul li .snack-product-wrapper,
+.view-collection-products ul li .snack-product-wrapper,
+#suggested_product ul li .snack-product-wrapper,
+#other_products ul li .snack-product-wrapper,
+#snack ul li .snack-product-wrapper {
   position: relative;
   border: 6px solid #eee;
   padding: 0;
@@ -126,16 +140,25 @@
 .view-collection-products ul li .discount-products-wrapper img,
 #suggested_product ul li .discount-products-wrapper img,
 #other_products ul li .discount-products-wrapper img,
+#snack ul li .discount-products-wrapper img,
 #products_homepage ul li .product-list img,
 #display_products ul li .product-list img,
 .view-collection-products ul li .product-list img,
 #suggested_product ul li .product-list img,
 #other_products ul li .product-list img,
+#snack ul li .product-list img,
 #products_homepage ul li .suggested-products-wrapper img,
 #display_products ul li .suggested-products-wrapper img,
 .view-collection-products ul li .suggested-products-wrapper img,
 #suggested_product ul li .suggested-products-wrapper img,
-#other_products ul li .suggested-products-wrapper img {
+#other_products ul li .suggested-products-wrapper img,
+#snack ul li .suggested-products-wrapper img,
+#products_homepage ul li .snack-product-wrapper img,
+#display_products ul li .snack-product-wrapper img,
+.view-collection-products ul li .snack-product-wrapper img,
+#suggested_product ul li .snack-product-wrapper img,
+#other_products ul li .snack-product-wrapper img,
+#snack ul li .snack-product-wrapper img {
   transition: all 500ms ease-in;
 }
 #products_homepage ul li .discount-products-wrapper .promo-wrapper,
@@ -143,16 +166,25 @@
 .view-collection-products ul li .discount-products-wrapper .promo-wrapper,
 #suggested_product ul li .discount-products-wrapper .promo-wrapper,
 #other_products ul li .discount-products-wrapper .promo-wrapper,
+#snack ul li .discount-products-wrapper .promo-wrapper,
 #products_homepage ul li .product-list .promo-wrapper,
 #display_products ul li .product-list .promo-wrapper,
 .view-collection-products ul li .product-list .promo-wrapper,
 #suggested_product ul li .product-list .promo-wrapper,
 #other_products ul li .product-list .promo-wrapper,
+#snack ul li .product-list .promo-wrapper,
 #products_homepage ul li .suggested-products-wrapper .promo-wrapper,
 #display_products ul li .suggested-products-wrapper .promo-wrapper,
 .view-collection-products ul li .suggested-products-wrapper .promo-wrapper,
 #suggested_product ul li .suggested-products-wrapper .promo-wrapper,
-#other_products ul li .suggested-products-wrapper .promo-wrapper {
+#other_products ul li .suggested-products-wrapper .promo-wrapper,
+#snack ul li .suggested-products-wrapper .promo-wrapper,
+#products_homepage ul li .snack-product-wrapper .promo-wrapper,
+#display_products ul li .snack-product-wrapper .promo-wrapper,
+.view-collection-products ul li .snack-product-wrapper .promo-wrapper,
+#suggested_product ul li .snack-product-wrapper .promo-wrapper,
+#other_products ul li .snack-product-wrapper .promo-wrapper,
+#snack ul li .snack-product-wrapper .promo-wrapper {
   background: #7f98b3;
   color: white;
   font-weight: bold;
@@ -164,16 +196,49 @@
 .view-collection-products ul li .discount-products-wrapper .field-name-title-field,
 #suggested_product ul li .discount-products-wrapper .field-name-title-field,
 #other_products ul li .discount-products-wrapper .field-name-title-field,
+#snack ul li .discount-products-wrapper .field-name-title-field,
 #products_homepage ul li .product-list .field-name-title-field,
 #display_products ul li .product-list .field-name-title-field,
 .view-collection-products ul li .product-list .field-name-title-field,
 #suggested_product ul li .product-list .field-name-title-field,
 #other_products ul li .product-list .field-name-title-field,
+#snack ul li .product-list .field-name-title-field,
 #products_homepage ul li .suggested-products-wrapper .field-name-title-field,
 #display_products ul li .suggested-products-wrapper .field-name-title-field,
 .view-collection-products ul li .suggested-products-wrapper .field-name-title-field,
 #suggested_product ul li .suggested-products-wrapper .field-name-title-field,
-#other_products ul li .suggested-products-wrapper .field-name-title-field {
+#other_products ul li .suggested-products-wrapper .field-name-title-field,
+#snack ul li .suggested-products-wrapper .field-name-title-field,
+#products_homepage ul li .snack-product-wrapper .field-name-title-field,
+#display_products ul li .snack-product-wrapper .field-name-title-field,
+.view-collection-products ul li .snack-product-wrapper .field-name-title-field,
+#suggested_product ul li .snack-product-wrapper .field-name-title-field,
+#other_products ul li .snack-product-wrapper .field-name-title-field,
+#snack ul li .snack-product-wrapper .field-name-title-field,
+#products_homepage ul li .discount-products-wrapper .views-field-title,
+#display_products ul li .discount-products-wrapper .views-field-title,
+.view-collection-products ul li .discount-products-wrapper .views-field-title,
+#suggested_product ul li .discount-products-wrapper .views-field-title,
+#other_products ul li .discount-products-wrapper .views-field-title,
+#snack ul li .discount-products-wrapper .views-field-title,
+#products_homepage ul li .product-list .views-field-title,
+#display_products ul li .product-list .views-field-title,
+.view-collection-products ul li .product-list .views-field-title,
+#suggested_product ul li .product-list .views-field-title,
+#other_products ul li .product-list .views-field-title,
+#snack ul li .product-list .views-field-title,
+#products_homepage ul li .suggested-products-wrapper .views-field-title,
+#display_products ul li .suggested-products-wrapper .views-field-title,
+.view-collection-products ul li .suggested-products-wrapper .views-field-title,
+#suggested_product ul li .suggested-products-wrapper .views-field-title,
+#other_products ul li .suggested-products-wrapper .views-field-title,
+#snack ul li .suggested-products-wrapper .views-field-title,
+#products_homepage ul li .snack-product-wrapper .views-field-title,
+#display_products ul li .snack-product-wrapper .views-field-title,
+.view-collection-products ul li .snack-product-wrapper .views-field-title,
+#suggested_product ul li .snack-product-wrapper .views-field-title,
+#other_products ul li .snack-product-wrapper .views-field-title,
+#snack ul li .snack-product-wrapper .views-field-title {
   font-size: 18px;
   text-align: center;
   padding: 10px 5px;
@@ -183,16 +248,25 @@
 .view-collection-products ul li .discount-products-wrapper .field-name-commerce-price,
 #suggested_product ul li .discount-products-wrapper .field-name-commerce-price,
 #other_products ul li .discount-products-wrapper .field-name-commerce-price,
+#snack ul li .discount-products-wrapper .field-name-commerce-price,
 #products_homepage ul li .product-list .field-name-commerce-price,
 #display_products ul li .product-list .field-name-commerce-price,
 .view-collection-products ul li .product-list .field-name-commerce-price,
 #suggested_product ul li .product-list .field-name-commerce-price,
 #other_products ul li .product-list .field-name-commerce-price,
+#snack ul li .product-list .field-name-commerce-price,
 #products_homepage ul li .suggested-products-wrapper .field-name-commerce-price,
 #display_products ul li .suggested-products-wrapper .field-name-commerce-price,
 .view-collection-products ul li .suggested-products-wrapper .field-name-commerce-price,
 #suggested_product ul li .suggested-products-wrapper .field-name-commerce-price,
-#other_products ul li .suggested-products-wrapper .field-name-commerce-price {
+#other_products ul li .suggested-products-wrapper .field-name-commerce-price,
+#snack ul li .suggested-products-wrapper .field-name-commerce-price,
+#products_homepage ul li .snack-product-wrapper .field-name-commerce-price,
+#display_products ul li .snack-product-wrapper .field-name-commerce-price,
+.view-collection-products ul li .snack-product-wrapper .field-name-commerce-price,
+#suggested_product ul li .snack-product-wrapper .field-name-commerce-price,
+#other_products ul li .snack-product-wrapper .field-name-commerce-price,
+#snack ul li .snack-product-wrapper .field-name-commerce-price {
   border-top: 1px solid #eee;
   position: absolute;
   bottom: 0;
@@ -204,16 +278,25 @@
 .view-collection-products ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper,
 #suggested_product ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper,
 #other_products ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper,
+#snack ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper,
 #products_homepage ul li .product-list .field-name-commerce-price .saving-wrapper,
 #display_products ul li .product-list .field-name-commerce-price .saving-wrapper,
 .view-collection-products ul li .product-list .field-name-commerce-price .saving-wrapper,
 #suggested_product ul li .product-list .field-name-commerce-price .saving-wrapper,
 #other_products ul li .product-list .field-name-commerce-price .saving-wrapper,
+#snack ul li .product-list .field-name-commerce-price .saving-wrapper,
 #products_homepage ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper,
 #display_products ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper,
 .view-collection-products ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper,
 #suggested_product ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper,
-#other_products ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper {
+#other_products ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper,
+#snack ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper,
+#products_homepage ul li .snack-product-wrapper .field-name-commerce-price .saving-wrapper,
+#display_products ul li .snack-product-wrapper .field-name-commerce-price .saving-wrapper,
+.view-collection-products ul li .snack-product-wrapper .field-name-commerce-price .saving-wrapper,
+#suggested_product ul li .snack-product-wrapper .field-name-commerce-price .saving-wrapper,
+#other_products ul li .snack-product-wrapper .field-name-commerce-price .saving-wrapper,
+#snack ul li .snack-product-wrapper .field-name-commerce-price .saving-wrapper {
   text-align: center;
 }
 #products_homepage ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
@@ -221,16 +304,25 @@
 .view-collection-products ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
 #suggested_product ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
 #other_products ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
+#snack ul li .discount-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
 #products_homepage ul li .product-list .field-name-commerce-price .saving-wrapper .saving-title,
 #display_products ul li .product-list .field-name-commerce-price .saving-wrapper .saving-title,
 .view-collection-products ul li .product-list .field-name-commerce-price .saving-wrapper .saving-title,
 #suggested_product ul li .product-list .field-name-commerce-price .saving-wrapper .saving-title,
 #other_products ul li .product-list .field-name-commerce-price .saving-wrapper .saving-title,
+#snack ul li .product-list .field-name-commerce-price .saving-wrapper .saving-title,
 #products_homepage ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
 #display_products ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
 .view-collection-products ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
 #suggested_product ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
-#other_products ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title {
+#other_products ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
+#snack ul li .suggested-products-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
+#products_homepage ul li .snack-product-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
+#display_products ul li .snack-product-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
+.view-collection-products ul li .snack-product-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
+#suggested_product ul li .snack-product-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
+#other_products ul li .snack-product-wrapper .field-name-commerce-price .saving-wrapper .saving-title,
+#snack ul li .snack-product-wrapper .field-name-commerce-price .saving-wrapper .saving-title {
   font-weight: bold;
   color: #ffffff;
   position: absolute;
@@ -249,16 +341,25 @@
 .view-collection-products ul li .discount-products-wrapper .field-name-commerce-price .rrp-wrapper,
 #suggested_product ul li .discount-products-wrapper .field-name-commerce-price .rrp-wrapper,
 #other_products ul li .discount-products-wrapper .field-name-commerce-price .rrp-wrapper,
+#snack ul li .discount-products-wrapper .field-name-commerce-price .rrp-wrapper,
 #products_homepage ul li .product-list .field-name-commerce-price .rrp-wrapper,
 #display_products ul li .product-list .field-name-commerce-price .rrp-wrapper,
 .view-collection-products ul li .product-list .field-name-commerce-price .rrp-wrapper,
 #suggested_product ul li .product-list .field-name-commerce-price .rrp-wrapper,
 #other_products ul li .product-list .field-name-commerce-price .rrp-wrapper,
+#snack ul li .product-list .field-name-commerce-price .rrp-wrapper,
 #products_homepage ul li .suggested-products-wrapper .field-name-commerce-price .rrp-wrapper,
 #display_products ul li .suggested-products-wrapper .field-name-commerce-price .rrp-wrapper,
 .view-collection-products ul li .suggested-products-wrapper .field-name-commerce-price .rrp-wrapper,
 #suggested_product ul li .suggested-products-wrapper .field-name-commerce-price .rrp-wrapper,
-#other_products ul li .suggested-products-wrapper .field-name-commerce-price .rrp-wrapper {
+#other_products ul li .suggested-products-wrapper .field-name-commerce-price .rrp-wrapper,
+#snack ul li .suggested-products-wrapper .field-name-commerce-price .rrp-wrapper,
+#products_homepage ul li .snack-product-wrapper .field-name-commerce-price .rrp-wrapper,
+#display_products ul li .snack-product-wrapper .field-name-commerce-price .rrp-wrapper,
+.view-collection-products ul li .snack-product-wrapper .field-name-commerce-price .rrp-wrapper,
+#suggested_product ul li .snack-product-wrapper .field-name-commerce-price .rrp-wrapper,
+#other_products ul li .snack-product-wrapper .field-name-commerce-price .rrp-wrapper,
+#snack ul li .snack-product-wrapper .field-name-commerce-price .rrp-wrapper {
   text-align: center;
   color: #222222;
 }
@@ -267,16 +368,25 @@
 .view-collection-products ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper,
 #suggested_product ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper,
 #other_products ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper,
+#snack ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper,
 #products_homepage ul li .product-list .field-name-commerce-price .webprice-wrapper,
 #display_products ul li .product-list .field-name-commerce-price .webprice-wrapper,
 .view-collection-products ul li .product-list .field-name-commerce-price .webprice-wrapper,
 #suggested_product ul li .product-list .field-name-commerce-price .webprice-wrapper,
 #other_products ul li .product-list .field-name-commerce-price .webprice-wrapper,
+#snack ul li .product-list .field-name-commerce-price .webprice-wrapper,
 #products_homepage ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper,
 #display_products ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper,
 .view-collection-products ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper,
 #suggested_product ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper,
-#other_products ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper {
+#other_products ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper,
+#snack ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper,
+#products_homepage ul li .snack-product-wrapper .field-name-commerce-price .webprice-wrapper,
+#display_products ul li .snack-product-wrapper .field-name-commerce-price .webprice-wrapper,
+.view-collection-products ul li .snack-product-wrapper .field-name-commerce-price .webprice-wrapper,
+#suggested_product ul li .snack-product-wrapper .field-name-commerce-price .webprice-wrapper,
+#other_products ul li .snack-product-wrapper .field-name-commerce-price .webprice-wrapper,
+#snack ul li .snack-product-wrapper .field-name-commerce-price .webprice-wrapper {
   text-align: center;
 }
 #products_homepage ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
@@ -284,16 +394,25 @@
 .view-collection-products ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
 #suggested_product ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
 #other_products ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
+#snack ul li .discount-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
 #products_homepage ul li .product-list .field-name-commerce-price .webprice-wrapper .webprice-total,
 #display_products ul li .product-list .field-name-commerce-price .webprice-wrapper .webprice-total,
 .view-collection-products ul li .product-list .field-name-commerce-price .webprice-wrapper .webprice-total,
 #suggested_product ul li .product-list .field-name-commerce-price .webprice-wrapper .webprice-total,
 #other_products ul li .product-list .field-name-commerce-price .webprice-wrapper .webprice-total,
+#snack ul li .product-list .field-name-commerce-price .webprice-wrapper .webprice-total,
 #products_homepage ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
 #display_products ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
 .view-collection-products ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
 #suggested_product ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
-#other_products ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total {
+#other_products ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
+#snack ul li .suggested-products-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
+#products_homepage ul li .snack-product-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
+#display_products ul li .snack-product-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
+.view-collection-products ul li .snack-product-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
+#suggested_product ul li .snack-product-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
+#other_products ul li .snack-product-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total,
+#snack ul li .snack-product-wrapper .field-name-commerce-price .webprice-wrapper .webprice-total {
   color: #000000;
   font-size: 16px;
 }
@@ -302,16 +421,25 @@
 .view-collection-products ul li .discount-products-wrapper:hover,
 #suggested_product ul li .discount-products-wrapper:hover,
 #other_products ul li .discount-products-wrapper:hover,
+#snack ul li .discount-products-wrapper:hover,
 #products_homepage ul li .product-list:hover,
 #display_products ul li .product-list:hover,
 .view-collection-products ul li .product-list:hover,
 #suggested_product ul li .product-list:hover,
 #other_products ul li .product-list:hover,
+#snack ul li .product-list:hover,
 #products_homepage ul li .suggested-products-wrapper:hover,
 #display_products ul li .suggested-products-wrapper:hover,
 .view-collection-products ul li .suggested-products-wrapper:hover,
 #suggested_product ul li .suggested-products-wrapper:hover,
-#other_products ul li .suggested-products-wrapper:hover {
+#other_products ul li .suggested-products-wrapper:hover,
+#snack ul li .suggested-products-wrapper:hover,
+#products_homepage ul li .snack-product-wrapper:hover,
+#display_products ul li .snack-product-wrapper:hover,
+.view-collection-products ul li .snack-product-wrapper:hover,
+#suggested_product ul li .snack-product-wrapper:hover,
+#other_products ul li .snack-product-wrapper:hover,
+#snack ul li .snack-product-wrapper:hover {
   border-color: #7f98b3;
 }
 #products_homepage ul li .discount-products-wrapper:hover img,
@@ -319,16 +447,25 @@
 .view-collection-products ul li .discount-products-wrapper:hover img,
 #suggested_product ul li .discount-products-wrapper:hover img,
 #other_products ul li .discount-products-wrapper:hover img,
+#snack ul li .discount-products-wrapper:hover img,
 #products_homepage ul li .product-list:hover img,
 #display_products ul li .product-list:hover img,
 .view-collection-products ul li .product-list:hover img,
 #suggested_product ul li .product-list:hover img,
 #other_products ul li .product-list:hover img,
+#snack ul li .product-list:hover img,
 #products_homepage ul li .suggested-products-wrapper:hover img,
 #display_products ul li .suggested-products-wrapper:hover img,
 .view-collection-products ul li .suggested-products-wrapper:hover img,
 #suggested_product ul li .suggested-products-wrapper:hover img,
-#other_products ul li .suggested-products-wrapper:hover img {
+#other_products ul li .suggested-products-wrapper:hover img,
+#snack ul li .suggested-products-wrapper:hover img,
+#products_homepage ul li .snack-product-wrapper:hover img,
+#display_products ul li .snack-product-wrapper:hover img,
+.view-collection-products ul li .snack-product-wrapper:hover img,
+#suggested_product ul li .snack-product-wrapper:hover img,
+#other_products ul li .snack-product-wrapper:hover img,
+#snack ul li .snack-product-wrapper:hover img {
   -webkit-transform: scale(0.9);
   transform: scale(0.9);
   opacity: 0.5;
