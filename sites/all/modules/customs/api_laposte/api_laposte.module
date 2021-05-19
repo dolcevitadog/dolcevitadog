@@ -152,6 +152,8 @@ function api_laposte_show_events($uid, $order_id, $id) {
             $variables['product_type'] = api_laposte_get_product_type($response);
             $variables['tracking_id'] = $response->shipment->idShip;
             $country = api_laposte_get_country_arrival($response);
+            $estimated_delivery = api_laposte_get_estimated_delivery($response);
+            $variables['delivery'] = $estimated_delivery;
             $getEvents = api_laposte_get_events($response);
             $events = api_laposte_get_array_events($getEvents, $response, $country);
             $variables['events'] = $events;
