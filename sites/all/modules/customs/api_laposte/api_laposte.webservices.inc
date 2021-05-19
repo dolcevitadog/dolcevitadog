@@ -67,6 +67,28 @@ function api_laposte_get_country_arrival($response) {
 
 /**
  * @param $response
+ * @return Date estimée de livraison
+ * Fonction tres moche, car impossible d'avoir la date avec une clé, il faut parser le tableau ... (AMEN LAPOSTE)
+ */
+
+function api_laposte_get_estimated_delivery($response)
+{
+  $returnCode = api_laposte_get_returnCode($response);
+  if ($returnCode == '200') {
+    $timeline = $response->shipment->timeline;
+    foreach ($timeline as $event) {
+      if ($event->shortLabel == 'La livraison de votre colis est prévue') {
+        $date_obj = $event->date;
+        $date = format_date(strtotime($date_obj), 'custom', 'd M Y');
+      }
+    }
+    return $date;
+  }
+  return NULL;
+}
+
+/**
+ * @param $response
  * @return mixed : Retourne le type de produit LaPoste utilisé (lettre, colis, ...)
  */
 function api_laposte_get_product_type($response) {

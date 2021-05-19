@@ -8,6 +8,11 @@
             </div>
             <div class="laposte-product-id">
                 <?php print(t('Following number')); ?> : <?php print $variables['tracking_id']; ?>
+                <?php if ($variables['delivery']): ?>
+                  <div class="laposte-delivery-date">
+                    <?php print(t('Your order will be delivered on')); ?> : <?php print $variables['delivery']; ?>
+                  </div>
+              <?php endif; ?>
             </div>
         </div>
         <?php foreach($variables['events'] as $event): ?>
