@@ -83,7 +83,7 @@ function _dolce_se_dateToFrench($date, $format)
 
 /* Temps de livraison selon le code pays */
 function add_days($countryCode, $day) {
-  /*
+  
     $array =  array(
         'FR' => array(
             'Monday' => 4,
@@ -104,7 +104,8 @@ function add_days($countryCode, $day) {
             'Sunday' => 7,
         ),
     );
-    */
+
+  /*
      $array =  array(
         'FR' => array(
             'Monday' => 12,
@@ -125,6 +126,7 @@ function add_days($countryCode, $day) {
             'Sunday' => 15,
         ),
     );
+  */
     return $array[$countryCode][$day];
 }
 
