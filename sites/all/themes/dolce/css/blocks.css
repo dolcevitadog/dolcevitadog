@@ -5,6 +5,27 @@
   font-family: "JandaQuickNote";
   src: url("../fonts/JandaQuickNote.ttf") format("truetype");
 }
+#block-views-products-homepage-block-2,
+#block-views-products-homepage-block-3,
+#block-views-products-homepage-block-4,
+#block-views-products-homepage-block-5,
+#block-views-products-homepage-block-6 {
+  background: black;
+}
+#block-views-products-homepage-block-2 h2,
+#block-views-products-homepage-block-3 h2,
+#block-views-products-homepage-block-4 h2,
+#block-views-products-homepage-block-5 h2,
+#block-views-products-homepage-block-6 h2 {
+  color: white;
+}
+#block-views-products-homepage-block-2 .discount-products-wrapper,
+#block-views-products-homepage-block-3 .discount-products-wrapper,
+#block-views-products-homepage-block-4 .discount-products-wrapper,
+#block-views-products-homepage-block-5 .discount-products-wrapper,
+#block-views-products-homepage-block-6 .discount-products-wrapper {
+  background: white;
+}
 #block-mailchimp-signup-dolcevitadog-mailchimp {
   text-align: center;
   background: #323435;
@@ -18,9 +39,6 @@
 }
 #block-mailchimp-signup-dolcevitadog-mailchimp #mailchimp-signup-subscribe-block-dolcevitadog-mailchimp-form .form-actions {
   margin: 10px;
-}
-#homeslider {
-  max-height: 400px;
 }
 #homeslider .bx-wrapper {
   box-shadow: none;
