@@ -1,0 +1,12 @@
+name = elFinder
+description = AJAX file manager with Wysiwyg API capable editors support.
+package = User interface
+configure = "admin/config/media/elfinder"
+core = 7.x
+project status url = https://drupal-elfinder.sourceforge.io/release-history.php
+
+; Information added by Drupal.org packaging script on 2020-05-27
+version = "7.x-2.x-dev"
+core = "7.x"
+project = "elfinder"
+datestamp = "1590547621"
