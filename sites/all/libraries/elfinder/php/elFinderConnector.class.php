@@ -36,6 +36,7 @@ class elFinderConnector
      */
     protected $reqMethod = '';
 
+    /**
      * Content type of output JSON
      *
      * @var string
