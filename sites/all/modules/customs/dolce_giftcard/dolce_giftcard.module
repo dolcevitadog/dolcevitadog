@@ -1,0 +1,255 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function dolce_giftcard_menu()
+{
+  $items['admin/config/dolce-giftcard'] = array(
+    'title' => t('Configuration of Dolce Giftcard Module'),
+    'page callback' => 'drupal_get_form',
+    'page arguments'=> array('dolce_giftcard_form'),
+    'access arguments' => array('administer site configuration'),
+  );
+
+  return $items;
+}
+
+function dolce_giftcard_entity_update($entity, $type) {
+  if ($entity->type == 'commerce_order') {
+    $status = $entity->status;
+    switch ($status) {
+      case 'completed':
+        //FAIRE QQCHOSE
+        dolce_giftcard_check_if_gifcard_in_order($entity);
+    }
+  }
+}
+
+/*Si giftcard dans la commande de la personne, alors générer un code coupon dans le discount) */
+function dolce_giftcard_check_if_gifcard_in_order($order) {
+  //Quels sont les discounts et PIDS pour les giftcards
+  $attachement = array();
+  $giftcards = dolce_giftcard_get_giftcards();
+  $pids = array_keys($giftcards);
+  foreach ($order->commerce_line_items['und'] as $key => $line_item) {
+    $line_item_load = commerce_line_item_load($line_item['line_item_id']);
+    //dpr($line_item_load);
+    if (!empty($line_item_load->commerce_product)) {
+      if (in_array($line_item_load->commerce_product['und']['0']['product_id'], $pids)) {
+        //FAIRE QQCHOSE
+        $quantity = $line_item_load->quantity;
+        $price = $line_item_load->commerce_unit_price['und'][0]['amount']/100;
+        for ($i = 1; $i<=$quantity; $i++) {
+          $attachement[] = dolce_giftcard_giftcard_process($giftcards[$line_item_load->commerce_product['und']['0']['product_id']], $order, $price);
+        }
+      }
+    }
+  }
+  if (!empty($attachement)) {
+    dolce_giftcard_send_giftcard($order, $attachement);
+  }
+}
+
+function dolce_giftcard_get_discount_by_pid($discounts, $pid) {
+  $discount_name = $discounts[$pid];
+  $discount = dolce_giftcard_get_discount_by_name($discount_name);
+  return $discount->discount_id;
+}
+
+function dolce_giftcard_get_discount_by_name($name) {
+  $result = db_select('commerce_discount', 'c')
+    ->fields('c')
+    ->condition('name', $name,'=')
+    ->execute()
+    ->fetchAssoc();
+    return $result;
+}
+
+/**
+ * Implements hook_mail().
+ */
+function dolce_giftcard_mail($key, &$message, $params)
+{
+  switch ($key) {
+    case 'dolce_giftcard_coupon':
+      // Set headers etc
+      $message['to'] = $params['to'];
+      $message['subject'] = t('Votre Carte Cadeau DolceVitaDog');
+      if (count($params['attachment']) > 1) {
+        $message['body'][] = t('Bonjour, vous trouverez en pièce jointe vos cartes cadeaux DolceVitaDog');
+      }
+      else {
+        $message['body'][] = t('Bonjour, vous trouverez en pièce jointe votre carte cadeau DolceVitaDog');
+      }
+      if ($params['attachment']) {
+        foreach ($params['attachment'] as $attachment) {
+          $message['params']['attachments'][] = $attachment;
+        }
+      }
+      break;
+  }
+}
+
+/* Generate the giftcard */
+function dolce_giftcard_giftcard_process($discount_name, $order, $price) {
+  $coupon = commerce_coupon_load_by_code('njxUZcXT');
+  $discount = dolce_giftcard_get_discount_by_name($discount_name);
+  //On genere un coupon code et on le ratache au discount
+  # @TODO plus tard: Alimenter Table avec CouponID / Order_ID /
+  $data = dolce_giftcard_create_coupon($discount['discount_id']);
+  $image_data = dolce_giftcard_generate_image($data, $order, $price);
+  return $image_data;
+}
+
+function dolce_giftcard_generate_image($data, $order, $price) {
+    error_reporting(E_ALL);
+    $coupon = $data['coupon'];
+    $date = $data['date'];
+    $path = drupal_get_path('module', 'dolce_giftcard');
+    $file = 'pattern/giftcard.png';
+    $filename = $path.'/'.$file;
+    $font = $path.'/pattern/Raleway.ttf';
+    $font2 = $path.'/pattern/comfortaa-bold.ttf';
+    ini_set("display_errors", 1);
+
+    $conteneur = imagecreatetruecolor(1772, 886);
+    $image = imagecreatefrompng($filename);
+    //dsm($image);
+
+    imagecopy($conteneur, $image, 0, 0, 0, 0, 1772, 886);
+    list($x, $y) = dolce_giftcard_ImageTTFCenter($image, "Code : ".$coupon->code
+      , $font, 50);
+    $blanc = imagecolorallocatealpha($conteneur, 255, 255, 255, 0);
+    imagettftext($conteneur, 50, 0, $x-30, $y-80, $blanc, $font, "Code: ".$coupon->code);
+    list($x, $y) = dolce_giftcard_ImageTTFCenter($image, $date['date2_print']
+      , $font, 20);
+    $noir = imagecolorallocatealpha($conteneur, 0, 0, 0, 0);
+    imagettftext($conteneur, 20, 0, $x+150, $y+70, $blanc, $font2, $date['date2_print']);
+    list($x, $y) = dolce_giftcard_ImageTTFCenter($image, $date['date2_print']
+    , $font, 65);
+    $noir = imagecolorallocatealpha($conteneur, 0, 0, 0, 0);
+    imagettftext($conteneur, 65, 0, $x+700, $y-70, $noir, $font2, $price."€");
+    //imagettftext($conteneur, 88, 0, $x-100, $y-250, $blanc, $font, $date['date2']);
+    //imagettftext($conteneur, 88, 0, 1400, 900, $blanc, $font, $texte);
+    //header("Content-type: image/png");
+    imagepng($conteneur, $path.'/images/'.$order->order_id.'_'.$coupon->code.'.png');
+    imagedestroy($conteneur);
+    return array(
+      'filepath' => $path.'/images/'.$order->order_id.'_'.$coupon->code.'.png',
+      'filename' => $order->order_id.'_'.$coupon->code.'.png',
+      //'order' => $order,
+    );
+}
+
+function dolce_giftcard_ImageTTFCenter($image, $text, $font, $size, $angle = 45)
+{
+  $xi = imagesx($image);
+  $yi = imagesy($image);
+  $box = imagettfbbox($size, $angle, $font, $text);
+  $xr = abs(max($box[2], $box[4]));
+  $yr = abs(max($box[5], $box[7]));
+  $x = intval(($xi - $xr) / 2);
+  $y = intval(($yi + $yr) / 2);
+  return array($x, $y);
+}
+/* Create a specific coupon code for Each Order of a Giftcard */
+function dolce_giftcard_create_coupon($discount_id) {
+  $code = commerce_coupon_generate_coupon_code('string', '8');
+  $date = dolce_giftcard_generate_date_for_coupon();
+  $coupon = new StdClass();
+  $coupon->type = 'discount_coupon';
+  $coupon->uid = 1;
+  $coupon->status = 1;
+  $coupon->code = $code;
+  $coupon->data = array();
+  $coupon->commerce_discount_reference['und']['0']['target_id'] = $discount_id;
+  $coupon->commerce_coupon_conditions = array(
+    'und' => array(
+      '0' => array(
+        'condition_name' => 'commerce_coupon_date_evaluate_date',
+        'condition_settings' => array(
+          'start' => $date['date1'],
+          'end' => $date['date2'],
+          'condition_logic_operator' => NULL,
+          ),
+        'condition_negate' => 0,
+      ),
+      '1' => array(
+        'condition_name' => 'commerce_coupon_usage_evaluate_usage',
+        'condition_settings' => array(
+          'max_usage' => 1,
+        ),
+       'condition_negate' => 0,
+       'condition_logic_operator' => 1,
+      )
+    )
+  );
+  commerce_coupon_save($coupon);
+  return array(
+    'coupon' => $coupon,
+    'date' => $date
+  );
+}
+
+/* Preparation du mail avant de l'envoyer */
+function dolce_giftcard_send_giftcard($order, $attachment) {
+  $attachments = array();
+  foreach ($attachment as $key => $data) {
+    $attachments[] = array(
+      'filecontent' => file_get_contents(DRUPAL_ROOT . '/' . $data['filepath']),
+      'filename' => $data['filename'],// You can change the name and extension of the file you need to send.
+      'filemime' => 'image/png'
+    );
+  }
+  return drupal_mail('dolce_giftcard', 'dolce_giftcard_coupon', $order->mail, 'fr',
+    array('order' => $order, 'to' => $order->mail, 'attachment' => $attachments), 'contact@dolcevitadog.com', TRUE);
+}
+
+/* Generate Date for interval of use for coupon */
+function dolce_giftcard_generate_date_for_coupon() {
+  $date = new DateTime();
+  $date2 = new DateTime();
+  $date2->add(new DateInterval('P365D'));
+  return array(
+    'date1' => $date->format('Y-m-d'),
+    'date2' => $date2->format('Y-m-d'),
+    'date2_print' => $date2->format('d/m/Y'),
+  );
+}
+
+/*Create table with Price and Discount ID) */
+function dolce_giftcard_get_giftcards() {
+  $giftcards = array();
+  $config = variable_get('dolce_giftcard_giftcards', '');
+  if (!empty($config)) {
+    $segments = explode(';', $config);
+    foreach ($segments as $key => $data) {
+      if (!empty($data)) {
+        $segment = explode('/', $data);
+        $giftcards[$segment[0]] = $segment[1];
+      }
+    }
+  }
+  return $giftcards;
+}
+
+/**
+ * Implements hook_form().
+ */
+function dolce_giftcard_form($node, &$form_state)
+{
+  $form['dolce_giftcard_giftcards'] = array(
+    '#title' => t('PID/DiscountID (separated by semicolon)'),
+    '#type' => 'textfield',
+    '#default_value' => variable_get('dolce_giftcard_giftcards', '')
+  );
+
+  $form['dolce_giftcard_pid'] = array(
+    '#title' => t('Pid (separated by semicolon)'),
+    '#type' => 'textfield',
+    '#default_value' => variable_get('dolce_giftcard_pid', '')
+  );
+
+  return system_settings_form($form);
+}
