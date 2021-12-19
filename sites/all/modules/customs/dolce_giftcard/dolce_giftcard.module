@@ -19,7 +19,7 @@ function dolce_giftcard_entity_update($entity, $type) {
   if ($entity->type == 'commerce_order') {
     $status = $entity->status;
     switch ($status) {
-      case 'completed':
+      case 'giftcard':
         //FAIRE QQCHOSE
         dolce_giftcard_check_if_gifcard_in_order($entity);
     }
@@ -75,13 +75,15 @@ function dolce_giftcard_mail($key, &$message, $params)
     case 'dolce_giftcard_coupon':
       // Set headers etc
       $message['to'] = $params['to'];
-      $message['subject'] = t('Votre Carte Cadeau DolceVitaDog');
+      $message['subject'] = t('Carte Cadeau DolceVitaDog');
+      $message['body'][] = t("Merci d'avoir commandé une Carte Cadeau chez DolceVitaDog<br />");
       if (count($params['attachment']) > 1) {
-        $message['body'][] = t('Bonjour, vous trouverez en pièce jointe vos cartes cadeaux DolceVitaDog');
+        $message['body'][] = t('Vous trouverez en pièce jointe vos cartes cadeaux DolceVitaDog');
       }
       else {
-        $message['body'][] = t('Bonjour, vous trouverez en pièce jointe votre carte cadeau DolceVitaDog');
+        $message['body'][] = t('Vous trouverez en pièce jointe votre carte cadeau DolceVitaDog');
       }
+      $message['body'][] = t('À très bientôt');
       if ($params['attachment']) {
         foreach ($params['attachment'] as $attachment) {
           $message['params']['attachments'][] = $attachment;
