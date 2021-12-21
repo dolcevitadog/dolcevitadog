@@ -108,15 +108,6 @@ function add_days($countryCode, $day) {
   */
      $array =  array(
         'FR' => array(
-            'Monday' => 10,
-            'Tuesday' => 16,
-            'Wednesday' => 15,
-            'Thursday' => 14,
-            'Friday' => 13,
-            'Saturday' => 12,
-            'Sunday' => 11,
-        ),
-        'OTHER' => array(
             'Monday' => 12,
             'Tuesday' => 18,
             'Wednesday' => 17,
@@ -124,6 +115,15 @@ function add_days($countryCode, $day) {
             'Friday' => 15,
             'Saturday' => 14,
             'Sunday' => 13,
+        ),
+        'OTHER' => array(
+            'Monday' => 15,
+            'Tuesday' => 21,
+            'Wednesday' => 20,
+            'Thursday' => 19,
+            'Friday' => 18,
+            'Saturday' => 17,
+            'Sunday' => 16,
         ),
     );
 
