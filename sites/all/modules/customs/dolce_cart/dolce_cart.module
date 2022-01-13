@@ -9,11 +9,12 @@ function dolce_cart_form_alter(&$form, &$form_state, $form_id)
         $form['#attached']['library'][] = array('commerce_kickstart_product_ui', 'jquery_expander');
         /***** AJOUTE LE TABLEAU DES TAILLES SI L'ATTRIBUT TAILLE EXISTE ******/
         if (isset($form['attributes']['field_hh_size'])) {
-            $node = menu_get_object();
-            $field_hh_informations = $node->field_hh_informations['und'][0]['value'];
-            $form['attributes']['field_hh_size']['#suffix'] = '<a class="modal-size-chart" type="button" data-toggle="modal" data-target=".size-chart"
-><i class="fa fa-table"></i> ' . t('Size chart') . '</a>';
-
+            $form['attributes']['field_hh_size']['#suffix'] = '<button class="btn btn-primary modal-size-chart" type="button" data-toggle="modal" data-target=".size-chart"
+><i class="fa fa-table"></i> ' . t('Choose the right size') . '</button>';
+        }
+        if (isset($form['attributes']['field_gb_size'])) {
+          $form['attributes']['field_gb_size']['#suffix'] = '<button class="btn btn-primary modal-size-chart" type="button" data-toggle="modal" data-target=".size-chart"
+><i class="fa fa-table"></i> ' . t('Choose the right size') . '</button>';
         }
         $form['#validate'][] = 'dolce_cart_add_to_cart_validate';
     }

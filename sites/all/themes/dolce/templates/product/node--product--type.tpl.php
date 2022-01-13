@@ -62,22 +62,29 @@
         <div class="col-lg-4 col-sm-4 col-xs-12 col-md-4">
             <div class="achats">
                 <div<?php print $content_attributes; ?>>
-                    <?php print render($content); ?>
-                </div>
+                  <?php print render($content); ?>
+
             </div>
         </div>
     </div>
-    <?php if ($type == 'haqihana_harness'): ?>
+    <?php if ($type == 'haqihana_harness' || $type == 'grossenbacher_harness'): ?>
         <div class="modal size-chart fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title"><?php print t('Size chart'); ?></h4>
+                        <h4 class="modal-title"><?php print t('Choose the right size'); ?></h4>
                     </div>
                     <div class="modal-body">
-                        <?php print render($hh_informations); ?>
-                    </div>
+                      <h3 class="intro"><?php echo "Bien choisir son harnais, c'est important !<br /> Voici la méthode pour sélectionner la taille la plus adaptée."; ?></h3>
+                      <img class="img-responsive" src="/sites/default/files/guide_tailles/mesure.png" />
+                      <?php if ($type == 'haqihana_harness'): ?>
+                        <img class="img-responsive" src="/sites/default/files/guide_tailles/taille_haqihana.png" />
+                      <?php endif; ?>
+                      <?php if ($type == 'grossenbacher_harness'): ?>
+                        <img class="img-responsive" src="/sites/default/files/guide_tailles/taille_gb.png" />
+                      <?php endif; ?>
+                    </h3>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal"><?php print t('Thank you'); ?></button>
                         <a target="_blank" href="/contact" type="button" class="btn btn-default"><?php print t('Contact DolceVitaDog'); ?></a>
