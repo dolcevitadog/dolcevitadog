@@ -20,7 +20,7 @@ function file_field_info() {
       ),
       'instance_settings' => array(
         'file_extensions' => 'txt',
-        'file_directory' => '[date:custom:Y]-[date:custom:m]',
+        'file_directory' => '',
         'max_filesize' => '',
         'description_field' => 0,
       ),
@@ -943,7 +943,7 @@ function theme_file_upload_help($variables) {
 
   $descriptions = array();
 
-  if (!empty($description)) {
+  if (strlen($description)) {
     $descriptions[] = $description;
   }
   if (isset($upload_validators['file_validate_size'])) {
