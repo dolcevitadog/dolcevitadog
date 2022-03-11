@@ -15,7 +15,7 @@ function dolce_giftcard_menu()
   return $items;
 }
 
-function dolce_giftcard_entity_update($entity, $type) {
+function dolce_giftcard_entity_update($entity) {
   if ($entity->type == 'commerce_order') {
     $status = $entity->status;
     switch ($status) {
