@@ -35,7 +35,7 @@ function dolce_vod_entity_update($entity) {
     switch ($status) {
       case 'vod':
         //FAIRE QQCHOSE
-        dolce_vod_check_if_vod_in_order($entity);
+        dolce_vod_process($entity);
     }
   }
 }
@@ -53,7 +53,9 @@ function dolce_vod_commerce_order_update($order) {
   if ($order->status == 'pending') {
     $payment_type = $order->data['payment_method'];
     $payment_full = $order->data['commerce_payment_order_paid_in_full_invoked'];
-    if ($payment_type == 'commerce_stripe_pi|commerce_payment_commerce_stripe_pi' && $payment_full == TRUE) {
+    $vods = dolce_vod_check_if_vod_in_order($order);
+    // Avant de passer tout le monde en VOD ... on verifie si paiement par CB, paiement OK et si la personne a du VOD dans la commande.
+    if ($payment_type == 'commerce_stripe_pi|commerce_payment_commerce_stripe_pi' && $payment_full == TRUE && !empty($vods)) {
       commerce_order_status_update($order, 'vod', TRUE, 'Order VOD');
       $order->log = 'Order status update to VOD programatically';
       commerce_order_save($order);
@@ -61,13 +63,12 @@ function dolce_vod_commerce_order_update($order) {
   }
 }
 
-/*Si giftcard dans la commande de la personne, alors générer un code coupon dans le discount) */
+/*Si VOD est dans la commande */
 function dolce_vod_check_if_vod_in_order($order) {
   foreach ($order->commerce_line_items['und'] as $key => $line_item) {
     $line_item_load = commerce_line_item_load($line_item['line_item_id']);
     if (isset($line_item_load->commerce_product)) {
       $product = commerce_product_load($line_item_load->commerce_product['und']['0']['product_id']);
-
       switch ($product->type) {
         case 'vod':
           $pids[] = $product->product_id;
@@ -75,6 +76,12 @@ function dolce_vod_check_if_vod_in_order($order) {
       }
     }
   }
+  return $pids;
+}
+
+/* Process function */
+function dolce_vod_process($order) {
+  $pids = dolce_vod_check_if_vod_in_order($order);
   if (!empty($pids)) {
     $buyer = _dolce_vod_attach_vod_to_user($pids, $order->uid);
     dolce_vod_send_mail($order);
@@ -145,8 +152,8 @@ function dolce_vod_mail($key, &$message, $params)
       // Set headers etc
       $message['to'] = $params['to'];
       $message['subject'] = t('Your VOD access');
-      $message['body'][] = t("Thank you for buying a video on our platform<br />");
-      $message['body'][] = t("You can find all your purchased videos on your VOD area at the following address : <br /><br />");
+      $message['body'][] = t("Thank you for ordering a vod access for one of our videos.<br />");
+      $message['body'][] = t("You can find all your videos on your VOD area at the following address : <br /><br />");
       $message['body'][] = $params['link'] . '<br />';
       $message['body'][] = t('See you soon');
       break;

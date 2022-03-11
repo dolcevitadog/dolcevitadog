@@ -432,3 +432,6 @@
 .field-name-field-vod-language language-icon {
   display: inline;
 }
+.view-vod-by-user .field-name-title-field {
+  text-align: center;
+}
