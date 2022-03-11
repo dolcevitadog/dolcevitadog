@@ -166,6 +166,7 @@ function _dolce_user_links_addressbook_data() {
  */
 function _dolce_user_links_profile_data() {
     global $user;
+    $user_data = user_load($user->uid);
     $args = arg();
     $uid = $args[1];
     global $language;
@@ -196,6 +197,15 @@ function _dolce_user_links_profile_data() {
           'icon' => 'fa fa-4x fa-film',
           'class' => 'events',
           'text' => t('DolceVitaDog Symposium'),
+      );
+    }
+
+    if (!empty($user_data->field_user_vod)) {
+      $profile['vod'] = array(
+        'link' => url("user/$uid/vod", array('absolute' => TRUE, 'language' => $language)),
+        'icon' => 'fab fa-4x fa-youtube',
+        'class' => 'vod',
+        'text' => t('My Videos on Demand'),
       );
     }
     return $profile;
