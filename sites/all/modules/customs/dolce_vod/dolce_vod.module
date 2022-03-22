@@ -171,7 +171,7 @@ function dolce_vod_mail($key, &$message, $params)
 function dolce_vod_send_mail($order) {
   global $language;
   return drupal_mail('dolce_vod', 'dolce_vod_mail', $order->mail, $language->lang,
-    array('link' => l('Access to VOD Area', 'user/'. $order->uid . '/vod', array('absolute' => TRUE)), 'to' => $order->mail), 'contact@dolcevitadog.com', TRUE);
+    array('link' => l(t('Access to VOD Area'), 'user/'. $order->uid . '/vod', array('absolute' => TRUE)), 'to' => $order->mail), 'contact@dolcevitadog.com', TRUE);
 }
 
 function dolce_vod_form_alter(&$form, &$form_state, $form_id) {
