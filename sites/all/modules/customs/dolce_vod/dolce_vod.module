@@ -6,12 +6,19 @@
 function dolce_vod_menu()
 {
   $items['user/%/vod/%'] = array(
-    'title' => 'VOD',
+    'title' => t('VOD'),
     'title callback' => 'dolce_vod_title_video',
     'title arguments' => array(3),
     'page callback' => 'dolce_vod_player_page',
     'page arguments' => array(1, 3),
     'access arguments' => array('access vod player'),
+  );
+
+  $items['admin/config/vod'] = array(
+    'title' => t('VOD Configuration module'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('drupal_vod_admin_settings_form'),
+    'access arguments' => array('administer site configuration'),
   );
 
   return $items;
@@ -169,12 +176,20 @@ function dolce_vod_send_mail($order) {
 
 function dolce_vod_form_alter(&$form, &$form_state, $form_id) {
   global $user;
-  if ($user->uid == 1) {
-    dsm($form);
-  }
   $order = commerce_cart_order_load($user->uid);
+  $nid_to_unset = variable_get('dolce_vod_nid', '');
   //SI pas de VOD dans le panier, aucune utilité d'accepter les CGV pour la VOD
   if (empty(dolce_vod_check_if_vod_in_order($order))) {
-    unset($form['extra_pane__node__160']);
+    unset($form['extra_pane__node__'.$nid_to_unset]);
   }
+}
+
+function drupal_vod_admin_settings_form($form, $form_state) {
+  $form['dolce_vod_nid'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Nid to unset if order has not VOD'),
+    '#default_value' => variable_get('dolce_vod_nid', '')
+  );
+
+  return system_settings_form($form);
 }
