@@ -166,3 +166,15 @@ function dolce_vod_send_mail($order) {
   return drupal_mail('dolce_vod', 'dolce_vod_mail', $order->mail, $language->lang,
     array('link' => l('Access to VOD Area', 'user/'. $order->uid . '/vod', array('absolute' => TRUE)), 'to' => $order->mail), 'contact@dolcevitadog.com', TRUE);
 }
+
+function dolce_vod_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  if ($user->uid == 1) {
+    dsm($form);
+  }
+  $order = commerce_cart_order_load($user->uid);
+  //SI pas de VOD dans le panier, aucune utilité d'accepter les CGV pour la VOD
+  if (empty(dolce_vod_check_if_vod_in_order($order))) {
+    unset($form['extra_pane__node__160']);
+  }
+}
