@@ -103,7 +103,7 @@ function _dolce_vod_attach_vod_to_user($pids, $uid) {
       $buyer->field_user_vod['und']['0'] = $pid;
     }
     else {
-      if (dolce_vod_user_already_purchase_vod($buyer->field_user_vod['und'], $pid)){
+      if (!dolce_vod_user_already_purchase_vod($buyer->field_user_vod['und'], $pid)){
         array_push($buyer->field_user_vod['und'], $pid);
       }
     }
