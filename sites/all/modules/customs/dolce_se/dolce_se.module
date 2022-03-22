@@ -23,6 +23,18 @@ function dolce_se_configure_form($form, $form_state)
         '#default_value' => variable_get('dolce_se_text', ''),
     );
 
+    $form['dolce_se_vacation_mode'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Activate the vacation mode'),
+      '#default_value' => variable_get('dolce_se_vacation_mode', ''),
+    );
+
+    $form['dolce_se_vacation_mode_days'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Days to increment for the vacation mode'),
+      '#default_value' => variable_get('dolce_se_vacation_mode_days', ''),
+    );
+
     return system_settings_form($form);
 }
 
@@ -83,8 +95,7 @@ function _dolce_se_dateToFrench($date, $format)
 
 /* Temps de livraison selon le code pays */
 function add_days($countryCode, $day) {
-  /*
-    $array =  array(
+     $array =  array(
         'FR' => array(
             'Monday' => 4,
             'Tuesday' => 4,
@@ -94,39 +105,20 @@ function add_days($countryCode, $day) {
             'Saturday' => 5,
             'Sunday' => 4,
         ),
-        'OTHER' => array(
-            'Monday' => 6,
-            'Tuesday' => 6,
-            'Wednesday' => 6,
-            'Thursday' => 6,
-            'Friday' => 8,
-            'Saturday' => 8,
-            'Sunday' => 7,
-        ),
-    );
-
-  */
-     $array =  array(
-        'FR' => array(
-            'Monday' => 7,
-            'Tuesday' => 7,
-            'Wednesday' => 6,
-            'Thursday' => 6,
-            'Friday' => 5,
-            'Saturday' => 5,
-            'Sunday' => 5,
-        ),
        'OTHER' => array(
          'Monday' => 6,
          'Tuesday' => 6,
          'Wednesday' => 6,
          'Thursday' => 6,
-         'Friday' => 8,
-         'Saturday' => 8,
+         'Friday' => 7,
+         'Saturday' => 7,
          'Sunday' => 7,
        ),
     );
-
+    if (variable_get('dolce_se_vacation_mode', 0)) {
+      $increment = variable_get('dolce_se_vacation_mode_days', 0);
+      return $array[$countryCode][$day]+$increment;
+    }
     return $array[$countryCode][$day];
 }
 
