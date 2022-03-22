@@ -109,11 +109,6 @@
     $links = render($content['links']);
     if ($field_tags || $links):
   ?>
-   <footer>
-     <?php print $field_tags; ?>
-     <?php print $links; ?>
-     TOTO
-  </footer>
     <?php endif; ?>
   <?php print render($content['comments']); ?>
 </article>
