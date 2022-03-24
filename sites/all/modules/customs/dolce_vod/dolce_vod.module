@@ -162,7 +162,7 @@ function dolce_vod_mail($key, &$message, $params)
       $message['body'][] = t("Thank you for ordering a vod access for one of our videos.<br />");
       $message['body'][] = t("You can find all your videos on your VOD area at the following address : <br /><br />");
       $message['body'][] = $params['link'] . '<br />';
-      $message['body'][] = t('See you soon');
+      $message['body'][] = t('See you soon'); 
       break;
   }
 }
