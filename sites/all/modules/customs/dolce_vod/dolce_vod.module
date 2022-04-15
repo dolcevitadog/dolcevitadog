@@ -17,7 +17,7 @@ function dolce_vod_menu()
   );
 
   $items['user/%/vod'] = array(
-    'title' => t('My VOD'),
+    'title' => t('My Videos On Demand'),
     'page callback' => 'dolce_vod_videos',
     'page arguments' => array(1),
     'access arguments' => array('access vod player'),
