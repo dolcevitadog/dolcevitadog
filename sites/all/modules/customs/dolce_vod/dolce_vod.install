@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function dolce_vod_schema()
+{
+  $schema['dolce_vod'] = array(
+    'description' => 'The base table for VOD order.',
+    'fields' => array(
+      'vodid' => array(
+        'description' => 'The primary identifier for a VOD Rental identifier.',
+        'type' => 'serial',
+        'unsigned' => TRUE,
+        'not null' => TRUE),
+      'uid' => array(
+        'description' => 'Uid of user of the VOD order',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0),
+      'pid' => array(
+        'description' => 'The pid in the order containing a VOD content',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0),
+      'orderid' => array(
+        'description' => 'Order Id',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0),
+      'start' => array(
+        'description' => 'The Unix timestamp : start validity of the VOD renting',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0),
+      'end' => array(
+        'description' => 'The Unix timestamp : end validity of the VOD renting',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 0),
+    ),
+    'unique keys' => array(
+      'vodid' => array('vodid'),
+    ),
+    'primary key' => array('vodid'),
+  );
+
+  return $schema;
+}
+
+/**
+ * Implements hook_install().
+ */
+function dolce_vod_install()
+{
+  drupal_install_schema('dolce_vod');
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function dolce_vod_uninstall()
+{
+  drupal_uninstall_schema('dolce_vod');
+}
