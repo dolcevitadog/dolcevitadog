@@ -1,5 +1,7 @@
 <?php
 
+require 'dolce_vod.database.inc';
+
 /**
  * Implements hook_menu().
  */
@@ -14,10 +16,17 @@ function dolce_vod_menu()
     'access arguments' => array('access vod player'),
   );
 
+  $items['user/%/vod'] = array(
+    'title' => t('My VOD'),
+    'page callback' => 'dolce_vod_videos',
+    'page arguments' => array(1),
+    'access arguments' => array('access vod player'),
+  );
+
   $items['admin/config/vod'] = array(
     'title' => t('VOD Configuration module'),
     'page callback' => 'drupal_get_form',
-    'page arguments' => array('drupal_vod_admin_settings_form'),
+    'page arguments' => array('dolce_vod_admin_settings_form'),
     'access arguments' => array('administer site configuration'),
   );
 
@@ -33,6 +42,11 @@ function dolce_vod_theme($existing, $type, $theme, $path) {
       'template' => 'dolce_vod_player',
       'arguments' => array('data' => array())
     ),
+
+    'dolce_vod_videos' => array(
+      'template' => 'dolce_vod_videos',
+      'arguments' => array('data' => array())
+    ),
   );
 }
 
@@ -44,6 +58,13 @@ function dolce_vod_entity_update($entity) {
         //FAIRE QQCHOSE
         dolce_vod_process($entity);
     }
+  }
+}
+
+/* Si l'order est supprimé, on supprime les PID dans la base */
+function dolce_vod_entity_delete($entity) {
+  if (isset($entity->type) && $entity->type == 'commerce_order') {
+    drupal_vod_delete_vod_by_orderid($entity->order_id);
   }
 }
 
@@ -90,13 +111,22 @@ function dolce_vod_check_if_vod_in_order($order) {
 function dolce_vod_process($order) {
   $pids = dolce_vod_check_if_vod_in_order($order);
   if (!empty($pids)) {
-    $buyer = _dolce_vod_attach_vod_to_user($pids, $order->uid);
+    dolce_vod_complete_process($order, $pids);
     dolce_vod_send_mail($order);
   }
 }
 
+/* Insertion dans la BDD les infos */
+function dolce_vod_complete_process($order, $pids) {
+  foreach ($pids as $key => $pid) {
+    $increment = dolce_vod_get_location_time($pid);
+    $time = time();
+    dolce_vod_set_vid($order->uid, $order->order_id, $pid, $time, $increment);
+  }
+}
+
+/*
 function _dolce_vod_attach_vod_to_user($pids, $uid) {
-  $buyer = user_load($uid);
   foreach ($pids as $key => $pid) {
     $pid = array('product_id' => $pid);
     if (empty($buyer->field_user_vod['und'])) {
@@ -111,21 +141,25 @@ function _dolce_vod_attach_vod_to_user($pids, $uid) {
   $buyer = user_save($buyer);
   return $buyer;
 }
+*/
 
+/* Recuperation de l'ID VIMEO */
 function dolce_vod_get_video_id($product_id) {
   $product = commerce_product_load($product_id);
   $vimeo_id = $product->field_vod_vimeo_id['und']['0']['value'];
   return $vimeo_id;
 }
 
+/* Recuperation du titre de la video */
 function dolce_vod_title_video($product_id) {
   $product = commerce_product_load($product_id);
   return $product->title;
 }
 
+/* On genere la page du player */
 function dolce_vod_player_page($uid, $product_id) {
   global $user;
-  if (dolce_vod_user_purchases($product_id) == FALSE || $uid != $user->uid) {
+  if (empty(dolce_vod_user_purchase_pid($uid, $product_id))|| $uid != $user->uid) {
     drupal_access_denied();
   }
   $vimeo_id = dolce_vod_get_video_id($product_id);
@@ -133,11 +167,31 @@ function dolce_vod_player_page($uid, $product_id) {
   return theme('dolce_vod_player', array('data' => $data));
 }
 
-function dolce_vod_user_purchases($product_id) {
-  global $user;
-  $account = user_load($user->uid);
-  $vods = $account->field_user_vod['und'];
-  return dolce_vod_user_already_purchase_vod($vods, $product_id);
+/* On genere la page avec toute les videos louees */
+
+function dolce_vod_videos($uid) {
+
+  $result = dolce_vod_get_valid_videos_by_user($uid);
+  $numberofRows = count($result);
+  if (empty($result)) {
+    $data['empty'] = t('You have no VOD available');
+  }
+  else {
+    foreach ($result as $one) {
+      $product = commerce_product_load($one->pid);
+      $render = entity_view('product', $product, 'list');
+      $entities[$one->pid] = array(
+        'title' => $product->title_original,
+        'image' => image_style_url('catalog', $product->field_images['und'][0]['uri']),
+        'link' => l($product->title_original, 'user/'.$uid.'/vod/'.$one->pid)
+      );
+    }
+     $data['entities'] = $entities;
+  }
+  $responsiveCol = 12/$numberofRows;
+  $responsiveCol = 4;
+  $data['col'] = "col-lg-$responsiveCol col-md-$responsiveCol col-sm-6 col-xs-12";
+  return theme('dolce_vod_videos', array('data' => $data));
 }
 
 function dolce_vod_user_already_purchase_vod($vods, $product_id) {
@@ -162,7 +216,7 @@ function dolce_vod_mail($key, &$message, $params)
       $message['body'][] = t("Thank you for ordering a vod access for one of our videos.<br />");
       $message['body'][] = t("You can find all your videos on your VOD area at the following address : <br /><br />");
       $message['body'][] = $params['link'] . '<br />';
-      $message['body'][] = t('See you soon'); 
+      $message['body'][] = t('See you soon');
       break;
   }
 }
@@ -184,7 +238,7 @@ function dolce_vod_form_alter(&$form, &$form_state, $form_id) {
   }
 }
 
-function drupal_vod_admin_settings_form($form, $form_state) {
+function dolce_vod_admin_settings_form($form, $form_state) {
   $form['dolce_vod_nid'] = array(
     '#type' => 'textfield',
     '#title' => t('Nid to unset if order has not VOD'),
@@ -193,3 +247,24 @@ function drupal_vod_admin_settings_form($form, $form_state) {
 
   return system_settings_form($form);
 }
+
+/* Get Duration Time of VOD product in timestamp*/
+function dolce_vod_get_location_time($pid) {
+  $product = commerce_product_load($pid);
+  $duration_tid = $product->field_vod_duration['und']['0']['tid'];
+  if (!empty($duration_tid)) {
+    $term = taxonomy_term_load($duration_tid);
+    return $term->field_duration_timestamp['und']['0']['value'];
+  }
+  else {
+    return variable_get('dolce_vod_default_duration', 0);
+  }
+}
+
+/* Hook user_delete, on supprime tous ses achats de VODS */
+function dolce_vod_user_delete($account) {
+  db_delete('dolce_vod')
+    ->condition('uid', $account->uid)
+    ->execute();
+}
+
