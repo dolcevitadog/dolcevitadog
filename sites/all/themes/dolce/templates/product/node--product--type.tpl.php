@@ -46,7 +46,7 @@
                       </div>
                       <div class="modal-body">
                         Votre récompense : Le code promo PAQUESB9X vous permettra de bénéficier 10% sur nos longes Biothane DolceVitaDog jusqu'au 18 avril 2022.
-                        Deux autres oeufs offrent un autre type de récompense ! Alors chercher bien et ayez l'oeil.
+                        Trois autres oeufs offrent un autre type de récompense ! Alors chercher bien et ayez l'oeil.
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -66,7 +66,7 @@
                       </div>
                       <div class="modal-body">
                         Votre récompense : Le code promo PAQUES4R5 vous permettra de bénéficier 10% sur nos harnais Mantrailing jusqu'au 18 avril 2022.
-                        Deux autres oeufs offrent un autre type de récompense ! Alors chercher bien et ayez l'oeil.
+                        Trois autres oeufs offrent un autre type de récompense ! Alors chercher bien et ayez l'oeil.
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -86,7 +86,7 @@
                       </div>
                       <div class="modal-body">
                         Votre récompense : Le code promo PAQUEST3X vous permettra de bénéficier 10% sur toutes nos friandises à mâcher jusqu'au 18 avril 2022.
-                        Deux autres oeufs offrent un autre type de récompense ! Alors chercher bien et ayez l'oeil.
+                        Trois autres oeufs offrent un autre type de récompense ! Alors chercher bien et ayez l'oeil.
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
@@ -106,7 +106,7 @@
                       </div>
                       <div class="modal-body">
                         Votre récompense : Le code promo PAQUESU7X vous permettra de bénéficier 10% sur toute la gamme Haqihana jusqu'au 18 avril 2022.
-                        Deux autres oeufs offrent un autre type de récompense ! Alors chercher bien et ayez l'oeil.
+                        Trois autres oeufs offrent un autre type de récompense ! Alors chercher bien et ayez l'oeil.
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
