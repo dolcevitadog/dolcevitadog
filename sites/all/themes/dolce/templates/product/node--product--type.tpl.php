@@ -55,6 +55,26 @@
                   </div>
                 </div>
               <?php endif; ?>
+              <?php if ($node->nid == 49): ?>
+                <a data-toggle="modal" data-target="#myModal"><img class="easter" src="/sites/all/themes/dolce/images/egg4.png" width="30px" /></a>
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Bravo vous avez trouvé un oeuf ! </h4>
+                      </div>
+                      <div class="modal-body">
+                        Votre récompense : Le code promo PAQUES4R5 vous permettra de bénéficier 10% sur nos harnais Mantrailing jusqu'au 18 avril 2022.
+                        Deux autres oeufs offrent un autre type de récompense ! Alors chercher bien et ayez l'oeil.
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <?php endif; ?>
               <?php if ($node->nid == 93): ?>
                 <a data-toggle="modal" data-target="#myModal"><img class="easter" src="/sites/all/themes/dolce/images/egg2.png" width="30px" /></a>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
