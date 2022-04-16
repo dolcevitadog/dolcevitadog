@@ -36,7 +36,7 @@
                 <?php print render($content['product:field_images']); ?>
                 <?php print render($content['field_gallery']); ?>
               <?php if ($node->nid == 209): ?>
-                <a data-toggle="modal" data-target="#myModal"><img class="easter" src="/sites/all/themes/dolce/images/egg3.png" width="30px" /></a>
+                <a data-toggle="modal" data-target="#myModal"><img class="easter" src="/sites/all/themes/dolce/images/egg1.png" width="30px" /></a>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -56,7 +56,7 @@
                 </div>
               <?php endif; ?>
               <?php if ($node->nid == 93): ?>
-                <a data-toggle="modal" data-target="#myModal"><img class="easter" src="/sites/all/themes/dolce/images/egg3.png" width="30px" /></a>
+                <a data-toggle="modal" data-target="#myModal"><img class="easter" src="/sites/all/themes/dolce/images/egg2.png" width="30px" /></a>
                 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
