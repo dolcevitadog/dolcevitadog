@@ -200,14 +200,13 @@ function _dolce_user_links_profile_data() {
       );
     }
 
-    if (!empty($user_data->field_user_vod)) {
       $profile['vod'] = array(
         'link' => url("user/$uid/vod", array('absolute' => TRUE, 'language' => $language)),
         'icon' => 'fab fa-4x fa-youtube',
         'class' => 'vod',
         'text' => t('My Videos on Demand'),
       );
-    }
+
     return $profile;
 }
 
