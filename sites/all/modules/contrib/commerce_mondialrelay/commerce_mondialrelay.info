@@ -1,0 +1,16 @@
+name = Commerce Mondial Relay
+description = Integrates the Mondial Relay shipping service with Commerce.
+package = Commerce (shipping)
+dependencies[] = commerce_physical
+dependencies[] = commerce_shipping
+dependencies[] = commerce_ui
+dependencies[] = jquery_update
+dependencies[] = transliteration
+core = 7.x
+
+; Information added by Drupal.org packaging script on 2016-10-28
+version = "7.x-1.0"
+core = "7.x"
+project = "commerce_mondialrelay"
+datestamp = "1477656435"
+

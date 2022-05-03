@@ -1,0 +1,402 @@
+<?php
+
+/**
+ * @file
+ * Written by Henri MEDOT <henri.medot[AT]absyx[DOT]fr>
+ * http://www.absyx.fr
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function commerce_mondialrelay_permission() {
+  return array(
+    'ship orders' => array(
+      'title' => t('Ship orders'),
+    )
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function commerce_mondialrelay_menu() {
+  $items['admin/commerce/config/shipping/services/mondialrelay-mondialrelay/settings'] = array(
+    'title' => 'Configure',
+    'description' => 'Configure the Mondial Relay shipping service.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('commerce_mondialrelay_settings_form'),
+    'access arguments' => array('administer shipping'),
+    'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_INLINE,
+    'weight' => -10,
+    'file' => 'commerce_mondialrelay.admin.inc',
+  );
+  $items['admin/commerce/orders/%commerce_order/mondialrelay'] = array(
+    'title' => 'Mondial Relay',
+    'page callback' => 'commerce_mondialrelay_order_ship_page',
+    'page arguments' => array(3),
+    'access callback' => 'commerce_mondialrelay_order_ship_access',
+    'access arguments' => array(3),
+    'type' => MENU_LOCAL_TASK,
+    'context' => MENU_CONTEXT_PAGE | MENU_CONTEXT_INLINE,
+    'file' => 'commerce_mondialrelay.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_commerce_shipping_method_info().
+ */
+function commerce_mondialrelay_commerce_shipping_method_info() {
+  $shipping_methods['mondialrelay'] = array(
+    'title' => t('Mondial Relay'),
+    'description' => t('Provides the Mondial Relay shipping service.'),
+  );
+
+  return $shipping_methods;
+}
+
+/**
+ * Implements hook_commerce_shipping_service_info().
+ */
+function commerce_mondialrelay_commerce_shipping_service_info() {
+  $shipping_services['mondialrelay'] = array(
+    'title' => t('Mondial Relay'),
+    'description' => t('Delivery to the parcelshop of your choice.'),
+    'display_title' => t('Mondial Relay'),
+    'shipping_method' => 'mondialrelay',
+    'price_component' => 'shipping',
+    'callbacks' => array(
+      'rate' => 'commerce_mondialrelay_service_rate',
+      'details_form' => 'commerce_mondialrelay_service_details_form',
+      'details_form_validate' => 'commerce_mondialrelay_service_details_form_validate',
+      'details_form_submit' => 'commerce_mondialrelay_service_details_form_submit',
+    ),
+  );
+
+  return $shipping_services;
+}
+
+/**
+ * Shipping service callback for rate.
+ */
+function commerce_mondialrelay_service_rate($shipping_service, $order) {
+  $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+  $country = $order_wrapper->commerce_customer_shipping->commerce_customer_address->country->value();
+  $weight = commerce_physical_order_weight($order, 'kg');
+  $rate = commerce_mondialrelay_get_rate($country, $weight['weight']);
+  if ($rate) {
+    $rate *= 100;
+    $base_rate = array(
+      'amount' => $rate,
+      'currency_code' => variable_get('commerce_mondialrelay_currency_code', ''),
+      'data' => array(),
+    );
+
+    if (module_exists('commerce_tax')) {
+      $included_tax = variable_get('commerce_mondialrelay_included_tax', '');
+      if ($included_tax && ($tax_rate = commerce_tax_rate_load($included_tax))) {
+        // Calculate tax amount.
+        $tax_amount = $rate * (1 - 1 / (1 + $tax_rate['rate']));
+        $tax_amount = commerce_tax_rate_round_amount($tax_rate, $tax_amount);
+
+        // Add a base price to the data array.
+        $component = array(
+          'amount' => $base_rate['amount'] - $tax_amount,
+          'currency_code' => $base_rate['currency_code'],
+          'data' => array(),
+        );
+        $base_rate['data'] = commerce_price_component_add($base_rate, 'shipping', $component, TRUE, FALSE);
+
+        // Add the tax to the data array.
+        $component['amount'] = $tax_amount;
+        $component['data']['tax_rate'] = $tax_rate;
+        $base_rate['data'] = commerce_price_component_add($base_rate, $tax_rate['price_component'], $component, TRUE);
+      }
+    }
+
+    return $base_rate;
+  }
+
+  return FALSE;
+}
+
+/**
+ * Returns the rate for a country and a weight.
+ */
+function commerce_mondialrelay_get_rate($country, $weight) {
+  if ($country && $weight > 0) {
+    $country = strtolower($country);
+    $rates = variable_get('commerce_mondialrelay_rates', array());
+    if (isset($rates[$country])) {
+      $rates = $rates[$country];
+      foreach ($rates as $max_weight => $rate) {
+        if ($weight <= floatval($max_weight)) {
+          return floatval($rate);
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Returns the list of supported countries.
+ */
+function commerce_mondialrelay_get_countries() {
+  return array(
+    'be' => t('Belgium'),
+    'es' => t('Spain'),
+    'fr' => t('France'),
+    'lu' => t('Luxembourg'),
+    'pt' => t('Portugal'),
+    'de' => t('Germany'),
+    'it' => t('Italy'),
+  );
+}
+
+/**
+ * Parses rates.
+ */
+function commerce_mondialrelay_parse_rates($text, &$error) {
+  $rates = array();
+
+  $text = trim(preg_replace('`\r\n?`', "\n", $text));
+  $lines = explode("\n", $text);
+  $lines = array_filter(array_map('trim', $lines));
+
+  $countries = commerce_mondialrelay_get_countries();
+  $country = NULL;
+
+  foreach ($lines as $line) {
+    $line = preg_replace('`\s+`', '', $line);
+    $values = explode('|', $line);
+    switch (count($values)) {
+      case 1:
+        $value = strtolower($values[0]);
+        if (!isset($countries[$value])) {
+          $error = t('%country is not a valid country code.', array('%country' => $value));
+          return FALSE;
+        }
+        $country = $value;
+        break;
+
+      case 2:
+        if (!isset($country)) {
+          $error = t('No country has been specified for line %line.', array('%line' => $line));
+          return FALSE;
+        }
+        foreach ($values as $i => $value) {
+          $value = str_replace(',', '.', $value);
+          if (!preg_match('`^\d+(?:\.\d+)?$`', $value) || !floatval($value)) {
+            $error = t('%value is not a valid value.', array('%value' => $value));
+            return FALSE;
+          }
+          $values[$i] = floatval($value);
+        }
+        $rates[$country][strval($values[0])] = strval($values[1]);
+        break;
+
+      default:
+        $error = t('The format of line %line is invalid.', array('%line' => $line));
+        return FALSE;
+    }
+  }
+
+  return $rates;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for commerce_checkout_form_shipping().
+ */
+function commerce_mondialrelay_form_commerce_checkout_form_shipping_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['commerce_shipping']['shipping_service']['#options']['mondialrelay'])) {
+    $path =  drupal_get_path('module', 'commerce_mondialrelay');
+    $form['#attached']['css'][] = $path . '/commerce_mondialrelay.css';
+    if (!variable_get('commerce_mondialrelay_no_gmap_api', 0)) {
+      $form['#attached']['js'][] = array('data' => '//unpkg.com/leaflet/dist/leaflet.js', 'type' => 'external', 'group' => JS_LIBRARY);
+      $form['#attached']['css'][] = '//unpkg.com/leaflet/dist/leaflet.css';
+    }
+    $form['#attached']['js'][] = array('data' => 'https://widget.mondialrelay.com/parcelshop-picker/jquery.plugin.mondialrelay.parcelshoppicker.min.js', 'type' => 'external', 'group' => JS_LIBRARY);
+    $form['#attached']['js'][] = $path . '/commerce_mondialrelay.js';
+  }
+}
+
+/**
+ * Shipping service callback for details_form.
+ */
+function commerce_mondialrelay_service_details_form($pane_form, $pane_values, $checkout_pane, $order, $shipping_service) {
+  $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+  $address = $order_wrapper->commerce_customer_shipping->commerce_customer_address;
+  $form['#attached']['js'][] = array('data' => array('commerce_mondialrelay' => array(
+    'brand' => variable_get('commerce_mondialrelay_brand', ''),
+    'country' => $address->country->value(),
+    'postal_code' => $address->postal_code->value(),
+  )), 'type' => 'setting');
+
+  $form['parcelshop_id'] = array('#type' => 'hidden');
+  $form['parcelshop'] = array('#type' => 'hidden');
+  $form['widget'] = array('#markup' => '<div id="commerce-mondialrelay-widget"></div>');
+  return $form;
+}
+
+/**
+ * Shipping service callback for details_form_validate.
+ */
+function commerce_mondialrelay_service_details_form_validate($details_form, $details_values, $shipping_service, $order, $form_parents) {
+  if (empty($details_values['parcelshop_id']) || empty($details_values['parcelshop'])) {
+    form_set_error('parcelshop_id', t('Please select a Mondial Relay parcelshop.'));
+  }
+  else {
+    $data = json_decode($details_values['parcelshop'], TRUE);
+    if (is_array($data)) {
+      foreach (array('Adresse1', 'CP', 'ID', 'Nom', 'Pays', 'Ville') as $key) {
+        if (empty($data[$key])) {
+          $error = TRUE;
+          break;
+        }
+      }
+      if (empty($error)) {
+        $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+        $country = $order_wrapper->commerce_customer_shipping->commerce_customer_address->country->value();
+        if (strtolower($country) == strtolower($data['Pays'])) {
+          return;
+        }
+      }
+    }
+  }
+
+  return FALSE;
+}
+
+/**
+ * Shipping service callback for details_form_submit.
+ */
+function commerce_mondialrelay_service_details_form_submit($details_form, $details_values, $line_item) {
+  $data = json_decode($details_values['parcelshop'], TRUE);
+  $line_item_wrapper = entity_metadata_wrapper('commerce_line_item', $line_item);
+  $line_item_wrapper->value()->data['mondialrelay'] = array('parcelshop' => $data);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter() for commerce_checkout_form_review().
+ */
+function commerce_mondialrelay_form_commerce_checkout_form_review_alter(&$form, &$form_state, $form_id) {
+  // Replace shipping information.
+  $order = $form_state['order'];
+  if (commerce_mondialrelay_get_line_item($order)) {
+    $form['checkout_review']['review']['#data']['customer_profile_shipping']['data'] = theme('commerce_mondialrelay_shipping', array('order' => $order));
+  }
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function commerce_mondialrelay_entity_view_alter(&$build, $type) {
+  // Replace shipping information.
+  if ($type == 'commerce_order') {
+    $order = $build['#entity'];
+    if (commerce_mondialrelay_get_line_item($order)) {
+      $build['commerce_customer_shipping'] = array(
+        '#theme' => 'commerce_mondialrelay_shipping',
+        '#order' => $order,
+        '#field_label' => t('Shipping information'),
+      );
+    }
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function commerce_mondialrelay_theme() {
+  return array(
+    'commerce_mondialrelay_shipping' => array(
+      'variables' => array('order' => NULL, 'field_label' => NULL),
+      'template' => 'commerce-mondialrelay-shipping',
+    ),
+  );
+}
+
+/**
+ * Preprocesses theme commerce_mondialrelay_shipping.
+ */
+function template_preprocess_commerce_mondialrelay_shipping(&$variables) {
+  $line_item = commerce_mondialrelay_get_line_item($variables['order']);
+  $profile = commerce_mondialrelay_get_customer($variables['order']);
+  $variables['parcelshop'] = $line_item->data['mondialrelay']['parcelshop'];
+  $variables['parcelshop_name_and_id'] = t('@name (Mondial Relay parcelshop #@id)', array('@name' => $variables['parcelshop']['Nom'], '@id' => $variables['parcelshop']['ID']));
+  $countries = commerce_mondialrelay_get_countries();
+  $variables['parcelshop_country'] = $countries[strtolower($variables['parcelshop']['Pays'])];
+  $variables['profile'] = $profile;
+}
+
+/**
+ * Retrieves the Mondial Relay shipping line item from an order.
+ */
+function commerce_mondialrelay_get_line_item($order) {
+  $order_wrapper = entity_metadata_wrapper('commerce_order', $order);
+  foreach ($order_wrapper->commerce_line_items as $line_item_wrapper) {
+    if ($line_item_wrapper->getBundle() == 'shipping' && $line_item_wrapper->commerce_shipping_service->value() == 'mondialrelay') {
+      $line_item = $line_item_wrapper->value();
+      return isset($line_item->data['mondialrelay']) ? $line_item : NULL;
+    }
+  }
+}
+
+function commerce_mondialrelay_get_customer($order) {
+  $profile_id = $order->commerce_customer_shipping['und']['0']['profile_id'];
+  $profile = commerce_customer_profile_load($profile_id);
+  $content = entity_view('commerce_customer_profile', array($profile->profile_id => $profile), 'customer', $langcode);
+  $result = drupal_render($content);
+  return $result;
+}
+/**
+ * Checks whether user is allowed to ship an order.
+ */
+function commerce_mondialrelay_order_ship_access($order) {
+  if (commerce_order_admin_order_view_access($order) && user_access('ship orders') && commerce_mondialrelay_get_line_item($order)) {
+    $order_status = commerce_order_status_load($order->status);
+    return !in_array($order_status['state'], array('cart', 'checkout'));
+  }
+  return FALSE;
+}
+
+/**
+ * Calls the Mondial Relay web service.
+ */
+function commerce_mondialrelay_call($method, $params, $silent = FALSE) {
+  foreach ($params as $key => $param) {
+    $params[$key] = strtoupper(transliteration_get($param));
+  }
+  $code = implode('', $params);
+  $code .= variable_get('commerce_mondialrelay_key', '');
+  $params['Security'] = strtoupper(md5($code));
+  $client = new SoapClient('http://api.mondialrelay.com/Web_Services.asmx?WSDL');
+  $result = $client->$method($params)->{$method . 'Result'};
+  if (isset($result->STAT)) {
+    if (!$result->STAT) {
+      unset($result->STAT);
+      return $result;
+    }
+    if (!$silent) {
+      drupal_set_message(t('SOAP call to method %method failed with status code %stat.', array('%method' => $method, '%stat' => $result->STAT)), 'error');
+    }
+  }
+  return FALSE;
+}
+
+/**
+ * Redirects a form, bypassing destination.
+ */
+function commerce_mondialrelay_force_redirect($path, &$form_state, array $options = array()) {
+  $destination = array();
+  if (isset($_GET['destination'])) {
+    $destination = drupal_get_destination();
+    unset($_GET['destination']);
+  }
+  $options += array('query' => array());
+  $options['query'] = $destination + $options['query'];
+  $form_state['redirect'] = array($path, $options);
+}
