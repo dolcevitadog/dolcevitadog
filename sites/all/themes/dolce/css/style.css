@@ -3,8 +3,8 @@
  * are compiled using the Less CSS pre-processor.
  */
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .form-item-attributes-field-vod-duration
-.field-item label::after {
-  content: "";
+#edit-attributes-field-vod-duration label::after {
+  content: ""; !important;
 }
 
 .node-product-type .field-type-commerce-product-reference form.commerce-add-to-cart .form-item-attributes-field-vod-duration
