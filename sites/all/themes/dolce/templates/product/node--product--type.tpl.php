@@ -5,6 +5,7 @@
     hide($content['comments']);
     hide($content['links']);
     hide($content['field_gallery']);
+    hide($content['field_product_video_extract']);
 ?>
 <article<?php print $attributes; ?> class="node-product-type">
     <?php //krumo($content); ?>
@@ -63,10 +64,12 @@
             <div class="achats">
                 <div<?php print $content_attributes; ?>>
                   <?php print render($content); ?>
-
+                </div>
             </div>
         </div>
-    </div>
+          <div class="col-lg-12 col-sm-12 col-xs-12 col-md-12">
+            <?php print render($content['field_product_video_extract']); ?>
+          </div>
     <?php if ($type == 'haqihana_harness' || $type == 'grossenbacher_harness'): ?>
         <div class="modal size-chart fade" tabindex="-1" role="dialog">
             <div class="modal-dialog" role="document">
@@ -84,6 +87,7 @@
                       <?php if ($type == 'grossenbacher_harness'): ?>
                         <img class="img-responsive" src="/sites/default/files/guide_tailles/taille_gb.png" />
                       <?php endif; ?>
+                    </div>
                     </h3>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-dismiss="modal"><?php print t('Thank you'); ?></button>
