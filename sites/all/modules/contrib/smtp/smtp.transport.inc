@@ -199,7 +199,7 @@ class SMTP {
     }
 
     // Begin encrypted connection
-    if (!stream_socket_enable_crypto($this->smtp_conn, TRUE, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+    if (!stream_socket_enable_crypto($this->smtp_conn, TRUE, STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT) ) {
       return FALSE;
     }
 
