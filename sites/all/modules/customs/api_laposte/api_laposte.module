@@ -20,13 +20,6 @@ function api_laposte_menu()
         'access arguments' => array('administer site configuration'),
     );
 
-    $items['user/%/orders/%/suivi/%'] = array(
-        'title' => t('Follow my package'),
-        'page callback' => 'api_laposte_show_events',
-        'page arguments' => array(1,3,5),
-        'access arguments' => array('use laposte webservice'),
-    );
-
 
     return $items;
 }

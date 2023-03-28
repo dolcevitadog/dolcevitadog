@@ -1,0 +1,4 @@
+name = API Mondial Relay
+description = Module to get information about a package using Mondial Relay shipment
+core = 7.x
+version = 7.x-1.0

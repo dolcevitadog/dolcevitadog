@@ -1,0 +1,4 @@
+name = API Shipment
+description = Module to serve information about a package using Other API Shipment
+core = 7.x
+version = 7.x-1.0

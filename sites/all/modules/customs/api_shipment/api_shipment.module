@@ -1,0 +1,51 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function api_shipment_menu() {
+  $items['user/%/orders/%/suivi/%/%'] = array(
+    'title' => t('Follow my package'),
+    'page callback' => 'api_shipment_show_events',
+    'page arguments' => array(1,3,5,6),
+    'access arguments' => array('use shipment webservice'),
+  );
+
+  return $items;
+}
+
+function api_shipment_show_events($uid, $order_id, $type, $id) {
+  $variables = array();
+
+  switch ($type) {
+    case 'mondialrelay':
+      return api_mondialrelay_show_events($uid, $order_id, $id);
+      break;
+
+    case 'laposte':
+    case 'laposte_internationnal':
+      return api_laposte_show_events($uid, $order_id, $id);
+      break;
+  }
+}
+
+function api_shipment_get_tracking_url($type, $order_uid, $order_id, $id) {
+    global $language;
+    return l(t('Follow my shipment'), '/user/'.$order_uid.'/orders/'.$order_id.'/suivi/'.$type. '/'. $id, array('language' => $language, 'attributes' => array('class' => array('api-laposte-link'))));
+}
+
+function api_shipment_get_shipment_type($row) {
+  $line_item = commerce_line_item_load($row->commerce_order_shipping_line_item_representiative_line_item_);
+  //dpr($line_item->commerce_shipping_service['und']['0']['value']);
+  if (!empty($line_item->commerce_shipping_service)) {
+    return $line_item->commerce_shipping_service['und']['0']['value'];
+  } else {
+    return NULL;
+  }
+}
+
+function api_shipment_get_shipping_address($order_id) {
+  $order = commerce_order_load($order_id);
+  $mondialrelay = commerce_mondialrelay_get_line_item($order);
+  return $mondialrelay;
+}
