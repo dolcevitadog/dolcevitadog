@@ -1,0 +1,166 @@
+<?php
+
+module_load_include('inc', 'api_mondialrelay', 'api_mondialrelay.webservices');
+
+/**
+ * Implements hook_menu().
+ */
+function api_mondialrelay_menu()
+{
+  $items['admin/config/api-mondialrelay'] = array(
+    'title' => t('API MondialRelay confguration'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('api_mondialrelay_config_form'),
+    'access arguments' => array('administer site configuration'),
+  );
+
+  return $items;
+}
+
+/**
+* Implements hook_form().
+*/
+function api_mondialrelay_config_form($form, $form_state) {
+  $form['api_mondialrelay_url'] = array(
+  '#title' => 'Url of Webservice',
+  '#type' => 'textfield',
+  '#size' => 75,
+  '#default_value' => variable_get('api_mondialrelay_url'),
+  );
+
+  $form['api_mondialrelay_code_enseigne'] = array(
+  '#title' => 'Code Enseigne',
+  '#type' => 'textfield',
+  '#size' => 75,
+  '#default_value' => variable_get('api_mondialrelay_code_enseigne'),
+  );
+
+  $form['api_mondialrelay_cle_prive'] = array(
+    '#title' => 'Clef Prive ',
+    '#type' => 'textfield',
+    '#size' => 75,
+    '#default_value' => variable_get('api_mondialrelay_cle_prive'),
+  );
+
+  $form['api_mondialrelay_code_marque'] = array(
+    '#title' => 'Code marque ',
+    '#type' => 'textfield',
+    '#size' => 75,
+    '#default_value' => variable_get('api_mondialrelay_code_marque'),
+  );
+
+  $form['api_mondialrelay_status'] = array(
+  '#title' => t('Status of application'),
+  '#type' => 'select',
+  '#options' => array(
+  'production' => t('Production'),
+  'sandbox' => t('Sandbox'),
+  ),
+  '#default_value' => variable_get('api_mondialrelay_status'),
+  );
+
+return system_settings_form($form);
+}
+
+function api_mondialrelay_theme() {
+  return array(
+    'api_mondialrelay_events' => array(
+      'template' => 'api-mondialrelay-events',
+      'arguments' => array('variables' => array())
+    ),
+    'api_mondialrelay_relais' => array(
+      'template' => 'api-mondialrelay-relais',
+      'arguments' => array('variables' => array())
+    ),
+  );
+}
+
+function  api_mondialrelay_show_events($order_id, $uid, $id)
+{
+  $expedition = api_mondialrelay_create_object_expedition($id);
+  $expedition_ws = api_mondialrelay_callws($expedition, 'WSI2_TracingColisDetaille');
+  $events_ws = api_mondialrelay_get_events_array($expedition_ws);
+  $events = api_mondialrelay_events_arrange($events_ws);
+
+  $order = commerce_order_load($order_id);
+  $mondialrelay = commerce_mondialrelay_get_line_item($order);
+
+  $relaisArray = $mondialrelay->data['mondialrelay']['parcelshop'];
+  $variables['renderRelais'] = theme('api_mondialrelay_relais', $relaisArray);
+  $variables['num_expedition'] = $id;
+  $variables['events'] = $events;
+  return theme('api_mondialrelay_events', $variables);
+}
+
+function api_mondialrelay_get_relai_array($response) {
+  if ($response->WSI2_DetailPointRelaisResult->STAT == 0) {
+    return $relais = (array) $response->WSI2_DetailPointRelaisResult;
+  }
+  else {
+    return $relais = t("Une erreur s'est produite dans la récupération des informations du point relais.");
+  }
+}
+
+function api_mondialrelay_get_events_array($response) {
+  if (isset($response->WSI2_TracingColisDetailleResult->Tracing->ret_WSI2_sub_TracingColisDetaille)) {
+    return $events = (array) $response->WSI2_TracingColisDetailleResult->Tracing->ret_WSI2_sub_TracingColisDetaille;
+  }
+  else {
+    return t("Une erreur s'est produite dans la récupération des informations de livraison.");
+  }
+}
+
+function api_mondialrelay_is_delivered($id) {
+  $expedition = api_mondialrelay_create_object_expedition($id);
+  $response = api_mondialrelay_callws($expedition, 'WSI2_TracingColisDetaille');
+  if (isset($response->WSI2_TracingColisDetailleResult->Tracing->ret_WSI2_sub_TracingColisDetaille)) {
+    foreach ($response->WSI2_TracingColisDetailleResult->Tracing->ret_WSI2_sub_TracingColisDetaille as $result) {
+      if (isset($result->Libelle) && $result->Libelle == 'COLIS LIVRÉ') {
+        $is_delivered = 1;
+        break;
+      }
+    }
+  }
+  return $is_delivered;
+}
+
+function api_mondialrelay_events_arrange($events) {
+  $events_arr = (array) $events;
+  $events_arr = array_reverse($events_arr);
+  foreach($events_arr as $key => $event) {
+    $event_arr = (array) $event;
+    switch ($event->Libelle) {
+      case 'PRISE EN CHARGE POINT RELAIS':
+        $data[$key]['text'] = t('Votre colis a été pris en charge dans un point relais.');
+        $data[$key]['date'] = $event_arr['Date'];
+        //$data[$key]['emplacement']
+        break;
+      case 'PRISE EN CHARGE EN AGENCE':
+        $data[$key]['text'] = t('Votre colis est en transit sur les plates-formes logistiques de Mondial Relay.');
+        $data[$key]['date'] = $event_arr['Date'];
+        //$data[$key]['']
+        break;
+      case 'PRISE EN CHARGE PAR LE TRANSPO':
+        $data[$key]['text'] = t('Votre colis a été pris en charge par le transporteur.');
+        $data[$key]['date'] = $event_arr['Date'];
+        //$data[$key]['']
+        break;
+      case 'EN COURS DE LIVRAISON':
+        $data[$key]['text'] = t('Votre colis est en cours de livraison.');
+        $data[$key]['date'] = $event_arr['Date'];
+        //$data[$key]['']
+        break;
+      case 'DISPONIBLE AU POINT RELAIS':
+        $data[$key]['text'] = t('Votre colis est disponible dans votre point relais.');
+        $data[$key]['date'] = $event_arr['Date'];
+        //$data[$key]['']
+        break;
+        case 'COLIS LIVRÉ':
+          $data[$key]['text'] = t('Votre colis a été livré.');
+          $data[$key]['date'] = $event_arr['Date'];
+          //$data[$key]['']
+          break;
+    }
+  }
+  return $data;
+}

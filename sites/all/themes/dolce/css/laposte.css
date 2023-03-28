@@ -1,24 +1,41 @@
-#laposte-following {
+#laposte-following,
+#mondialrelay-following {
   max-width: 640px;
   border: 1px solid #1a1a1a;
   text-align: center;
   margin: 0 auto;
   padding: 15px;
 }
-#laposte-following .laposte-header {
+#laposte-following .laposte-header,
+#mondialrelay-following .laposte-header,
+#laposte-following .mondialrelay-header,
+#mondialrelay-following .mondialrelay-header {
   margin-bottom: 25px;
   padding-bottom: 25px;
   border-bottom: 2px solid #dfb853;
 }
-#laposte-following .laposte-header .laposte-product-type {
+#laposte-following .laposte-header .laposte-product-type,
+#mondialrelay-following .laposte-header .laposte-product-type,
+#laposte-following .mondialrelay-header .laposte-product-type,
+#mondialrelay-following .mondialrelay-header .laposte-product-type {
   font-weight: bold;
   font-size: 20px;
 }
-#laposte-following .laposte-header .laposte-product-id {
+#laposte-following .laposte-header .laposte-product-id,
+#mondialrelay-following .laposte-header .laposte-product-id,
+#laposte-following .mondialrelay-header .laposte-product-id,
+#mondialrelay-following .mondialrelay-header .laposte-product-id,
+#laposte-following .laposte-header .mondialrelay-product-id,
+#mondialrelay-following .laposte-header .mondialrelay-product-id,
+#laposte-following .mondialrelay-header .mondialrelay-product-id,
+#mondialrelay-following .mondialrelay-header .mondialrelay-product-id {
   font-weight: bold;
   font-size: 20px;
 }
-#laposte-following .laposte-event {
+#laposte-following .laposte-event,
+#mondialrelay-following .laposte-event,
+#laposte-following .mondialrelay-event,
+#mondialrelay-following .mondialrelay-event {
   border: 1px solid #dfb853;
   width: 300px;
   max-height: 340px;
@@ -26,16 +43,24 @@
   position: relative;
   text-align: center;
 }
-#laposte-following .laposte-event .laposte-event-date {
+#laposte-following .laposte-event .laposte-event-date,
+#mondialrelay-following .laposte-event .laposte-event-date,
+#laposte-following .mondialrelay-event .laposte-event-date,
+#mondialrelay-following .mondialrelay-event .laposte-event-date {
   font-weight: bold;
   display: block;
 }
-#laposte-following .laposte-event .laposte-event-text {
+#laposte-following .laposte-event .laposte-event-text,
+#mondialrelay-following .laposte-event .laposte-event-text,
+#laposte-following .mondialrelay-event .laposte-event-text,
+#mondialrelay-following .mondialrelay-event .laposte-event-text {
   display: block;
   padding: 5px;
 }
 #laposte-following .api-laposte-first,
-#laposte-following .api-laposte-inside {
+#mondialrelay-following .api-laposte-first,
+#laposte-following .api-laposte-inside,
+#mondialrelay-following .api-laposte-inside {
   height: 50px;
   width: 4px;
   margin: 0 auto;
