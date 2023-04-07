@@ -1,0 +1,55 @@
+.box {
+    border: 3px solid #0b4361;
+    position: relative;
+    width: 484px;
+    height: 324px;
+    margin: 0 auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+    background: url(gagne.png) no-repeat;
+    z-index: 0;
+}
+
+#gagne, #played {
+  position: relative;
+  top: 55px;
+  max-width: 362px;
+  left: 55px;
+}
+
+#played {
+  top: 120px;
+  font-size: 30px;
+}
+
+.code {
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+}
+.canvas {
+    position: absolute;
+    top: 0;
+    z-index: 1;
+}
+
+.forms {
+    padding: 30px;
+}
+
+.dolce-game-halloween {
+    font-family: "Raleway";
+
+}
+
+.dolce-game-halloween em {
+    font-size : 22px;
+}
+
+#must-share {
+    color: orangered;
+    font-size: 18px;
+}
