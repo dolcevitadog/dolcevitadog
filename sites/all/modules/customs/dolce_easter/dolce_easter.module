@@ -1,0 +1,467 @@
+<?php
+
+function dolce_easter_menu() {
+    $items['paques'] = array(
+        'title' => t('Jeux à gratter de Pâques'),
+        'page callback' => 'dolce_easter_page',
+        'access arguments' => array('access content'),
+    );
+
+    $items['easter/played'] = array(
+        'page callback' => 'dolce_easter_played',
+        'access arguments' => array('access content'),
+    );
+
+    $items['dolce-easter/admin'] = array(
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('dolce_easter_settings'),
+        'access arguments' => array('administer site configuration'),
+    );
+
+    $items['dolce-game/send_email'] = array(
+        'page callback' => 'dolce_easter_send_game_email',
+        'access arguments' => array('administer site configuration'),
+    );
+
+    return $items;
+}
+
+function dolce_easter_page()
+{
+    if (!_easter_played()) {
+
+        drupal_add_css(drupal_get_path('module', 'dolce_easter') . '/dolce_easter.css');
+        drupal_add_js(drupal_get_path('module', 'dolce_easter') . '/scratch.js');
+        $body = variable_get('dolce_easter_body');
+        $output = $body;
+        //$output .=  dolce_easter_jeu_html();
+        $output .= '<div class="box" id="js-container">';
+        $output .= '<canvas class="canvas" id="js-canvas" width="480" height="320"></canvas>';
+        $output .=  dolce_easter_jeu_html();
+        $output .= '</div>';
+    } else {
+        drupal_add_css(drupal_get_path('module', 'dolce_easter') . '/dolce_easter.css');
+        drupal_add_js(drupal_get_path('module', 'dolce_easter') . '/scratch.js');
+        $body = variable_get('dolce_easter_body');
+        $output = $body;
+        $output .= '<div class="box" id="js-container">';
+        $output .= '<canvas class="canvas" id="js-canvas" width="480" height="320"></canvas>';
+        $output .=  dolce_easter_jeu_played();
+        $output .= '</div>';
+        //echo $output;
+
+    }
+    return $output;
+}
+
+function dolce_easter_played() {
+  $prefix = variable_get('dolce_easter_day');
+  $_SESSION[$prefix]['played'] = 'EASTER';
+}
+function _easter_played() {
+  $prefix = variable_get('dolce_easter_day');
+  if (empty($_SESSION[$prefix]['played'])) {
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+function dolce_easter_jeu_played() {
+  $code = dolce_easter_jeu();
+  $html = '<div id="played">';
+  $html .= '<h3>'.t("Vous avez déjà joué !").'</h3>';
+  $html .= '</div>';
+  return $html;
+}
+function dolce_easter_jeu_html() {
+  $code = dolce_easter_jeu();
+  $html = '<div id="gagne">';
+  $html .= '<h2>Bravo !</h2>';
+  $html .= '<h3>'.t("Vous avez gagné @num % de réduction sur votre commande", array('@num' => $code['num'])).'</h3>';
+  $html .= '<div class="code">'.t('CODE : @code', array('@code' => $code['code'])).'</div>';
+  $html .= '</div>';
+  return $html;
+}
+function dolce_easter_jeu() {
+  $discount = array(
+    '5%' => 55,
+    '10%' => 35,
+    '15%' => 7,
+    '20%' => 2.9999,
+    '40%' => 0.0001
+  );
+  /*
+  $gagnants = array();
+  for ($i=1;$i<1001;$i++) {
+    $num = pickRand($discount, 1);
+    if ($num == '40%') {
+      $already = variable_get('easter_40', false);
+      if ($already) {
+        $num = pickRand($discount, 1);
+      }
+      variable_set('easter_40', true);
+    }
+    $gagnants[$num]['total']++;
+  }
+  */
+  $gagne = pickRand($discount, 1);
+  if ($gagne == '40%') {
+    $already = variable_get('easter_40', false);
+    if ($already) {
+      $num = pickRand($discount, 1);
+    }
+    variable_set('easter_40', true);
+  }
+  switch ($gagne) {
+    case '5%':
+      return array('code' => 'RTqHsNbW', 'num' => 5);
+      break;
+    case '10%':
+      return array('code' => 'nshLtsyk', 'num' => 10);
+      break;
+    case '15%':
+      return array('code' => 'xYgbYp8o', 'num' => 15);
+      break;
+    case '20%':
+      return array('code' => 'M5Rv43J4', 'num' => 20);
+      break;
+    case '40%':
+      return array('code' => 'nZgFtBms', 'num' => 40);
+      break;
+  }
+}
+
+function pickRand($array, $nb) {
+  $newArray = [];
+  foreach ($array as $name => $probability) {
+    $num = $probability;
+    while ($num > 0) {
+      $newArray[] = $name;
+      $num--;
+    }
+  }
+  return $newArray[array_rand($newArray, $nb)];
+}
+
+function _dolce_easter_add_facebook_image() {
+    $img = file_create_url('sites/all/modules/customs/dolce_easter/game.jpg');
+    $element = array(
+        '#tag' => 'meta',
+        '#attributes' => array(
+            "property" => "og:image",
+            "content" => $img,
+        ),
+    );
+    drupal_add_html_head($element, 'facebook_share_image');
+}
+
+function _dolce_easter_ip_participated($params) {
+    $id = db_select('dolce_easter', 'dg')->fields('dg')->condition('ip', $params['ip'],'=')
+        ->orderBy('timestamp', 'DESC')
+        ->execute()
+        ->fetchAssoc();
+    return $id;
+}
+
+function dolce_easter_generate_code() {
+    $code = _easter_generateRandomString(6);
+    $code = substr($code, 0, 6);
+    while (_dolce_easter_code_exists($code)) {
+        $code = _easter_generateRandomString(6);
+        $code = substr($code, 0, 6);
+    }
+    return $code;
+}
+
+function _dolce_easter_code_exists($code) {
+    $result = db_select('dolce_easter', 'dg')->fields('dg', array('id'))->condition('id', $code,
+        '=')
+        ->execute()
+        ->fetchAssoc();
+    if (!empty($result)) {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+function dolce_easter_form($form, $form_state) {
+
+    $date = date_create();
+    $format = date_format($date, 'dmy');
+    $test = 'dvd_'.$format;
+    if (empty($_SESSION[$test]['played'])) {
+        $code = dolce_easter_generate_code();
+        $_SESSION[$test]['played'] = $code;
+    }
+    else {
+        $code = $_SESSION[$test]['played'];
+    }
+
+    $form['id'] = array(
+        '#type' => 'markup',
+        '#markup' => '<strong>'.t('Your code is : ').$code.'</strong>',
+    );
+
+    $form['id_hidden'] = array(
+        '#type' => 'value',
+        '#value' => $code,
+    );
+
+    $form['mail'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Votre email'),
+        '#size' => 20,
+    );
+
+    $form['code'] = array(
+        '#type' => 'textfield',
+        '#title' => t('Recopiez votre code'),
+        '#size' => 20,
+    );
+
+    $form['submit'] = array(
+        '#type' => 'submit',
+        '#value' => t('Play'),
+    );
+
+    $form['#attached']['css'][] = array(
+        'data' => '.forms { visibilty: hidden; }',
+        'type' => 'inline',
+    );
+
+    $form['#attributes'] = array('class' => 'forms');
+    return $form;
+}
+
+function dolce_easter_form_validate(&$form, &$form_state) {
+    $values = $form_state['values'];
+    if ($values['id_hidden'] != $values['code']) {
+        form_set_error('Code', t('The code is not exact.'));
+    }
+    if (!valid_email_address($values['mail'])) {
+        form_set_error('mail', t('Your email is not valid.'));
+    }
+}
+
+function dolce_easter_form_submit(&$form, &$form_state) {
+    $values = $form_state['values'];
+    //
+
+    $timestamp = time();
+    $prov = 'ingame';
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $id = check_plain($values['code']);
+    $mail = check_plain($values['mail']);
+
+    $params = array(
+        'prov' => $prov,
+        'ip' => $ip,
+        'id' => $id,
+        'mail' => $mail,
+        'timestamp' => $timestamp,
+    );
+
+    $result = _dolce_easter_insert_data($params);
+    if ($result) {
+        drupal_set_message(t('Thanks for playing ! '));
+    }
+}
+
+function _easter_generateRandomString($length){
+    $characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+    $charsLength = strlen($characters) -1;
+    $string = "";
+    for($i=0; $i<$length; $i++){
+        $randNum = mt_rand(0, $charsLength);
+        $string .= $characters[$randNum];
+    }
+    return $string;
+}
+
+function _dolce_easter_insert_data($params) {
+    $id = db_insert('dolce_easter') // Table name no longer needs {}
+    ->fields(array(
+        'id' => $params['id'],
+        'mail' => $params['mail'],
+        'ip' => $params['ip'],
+        'prov' => $params['prov'],
+        'timestamp' => $params['timestamp'],
+    ))->execute();
+    return true;
+}
+
+function _dolce_easter_select_data($params) {
+    $id = db_select('dolce_easter', 'dg')->fields('dg')->condition('ip', $params['ip'],'=')
+        ->condition('id', $params['id'], '=')
+        ->execute()
+        ->fetchAssoc();
+    return $id;
+}
+
+function _easter_user_has_participated() {
+    $timestamp = time();
+    $ip = $_SERVER['REMOTE_ADDR'];
+    $result = db_select('dolce_easter', 'dg')->fields('dg', array('ip', 'timestamp'))->condition('ip', $ip,'=')
+        ->orderBy('timestamp', 'DESC')
+        ->execute()
+        ->fetchAssoc();
+
+    $day = new DateTime();
+    $day->setTimestamp($timestamp);
+    $day_format = date_format($day, 'd-m-Y');
+    if (empty($result)) {
+        return FALSE;
+    }
+    else {
+        $participating = new DateTime();
+        $participating->setTimestamp($result['timestamp']);
+        $participating_format = date_format($participating, 'd-m-Y');
+        if ($day_format != $participating_format) {
+            return FALSE;
+        }
+        return TRUE;
+    }
+}
+
+function dolce_easter_second_chance($code, $ip)
+{
+    $params = array(
+        'prov' => 'fb',
+        'ip' => $ip,
+        'id' => $code,
+    );
+    $ids = _dolce_easter_select_data($params);
+    $params['mail'] = $ids['mail'];
+    $params['timestamp'] = time();
+    if (!dolce_easter_second_chance_exists($code, $ip)) {
+        if (_dolce_easter_insert_data($params)) {
+            echo 'Merci pour votre partage.';
+        }
+    }
+    else {
+        echo 'Vous avez déjà partagé le jeu.';
+    }
+    exit;
+}
+
+function dolce_easter_second_chance_exists($code, $ip) {
+    $result = db_select('dolce_easter', 'dg')->fields('dg', array('ip', 'timestamp'))->condition('ip', $ip,'=')
+        ->condition('id', $code, '=')->condition('prov', 'fb', '=')
+        ->execute()
+        ->fetchAssoc();
+    if (!empty($result)) {
+        return true;
+    }
+    return false;
+}
+/*
+* Implements hook_block_info().
+ */
+function dolce_easter_block_info() {
+    $blocks = array();
+    $blocks['dolce_easter_welcome'] = array(
+        'info' => t('Dolce Game Welcome'),
+    );
+
+    return $blocks;
+}
+
+/*
+* Implements hook_block_configure().
+ */
+function dolce_easter_block_configure($delta='') {
+    $form = array();
+
+    switch($delta) {
+        case 'dolce_easter_welcome' :
+            // Text field form element
+            $form['dolce_easter_body'] = array(
+                '#type' => 'text_format',
+                '#title' => t('Your welcome message'),
+                '#default_value' => variable_get('dolce_easter_body', ''),
+            );
+
+            break;
+    }
+    return $form;
+}
+
+/**
+ * Implements hook_block_save().
+ */
+function dolce_easter_block_save($delta = '', $edit = array()) {
+    switch($delta) {
+        case 'dolce_easter_welcome' :
+            // Saving the WYSIWYG text
+            variable_set('dolce_easter_body', $edit['dolce_easter_body']['value']);
+            break;
+    }
+}
+
+function dolce_easter_admin_view() {
+    $table = "dolce_easter";
+    $result = db_select($table, 'dg')->fields('dg')->execute()->fetchAll();
+    if ($result) {
+        $header = array('ID', 'email', 'how', 'ip', 'timestamp');
+        $rows = array();
+        foreach ($result as $key => $value) {
+            $day = new DateTime();
+            $day->setTimestamp($value->timestamp);
+            $day_format = date_format($day, 'd-m-Y');
+            $rows[] = array(
+                $value->id,
+                $value->mail,
+                $value->prov,
+                $value->ip,
+                $day_format,
+            );
+    }
+    return theme('table', array('header' => $header, 'rows' => $rows));
+    }
+}
+
+function dolce_easter_mail($key, &$message, $params) {
+    switch ($key) {
+        case 'dolce_easter_participant':
+            // Set headers etc
+            $message['to'] = $params['to'];
+            $message['subject'] = t('Jeux concours Halloween, 100% gagnants');
+            $message['body'][] = '<img src="https://www.dolcevitadog.com/sites/all/themes/dolce/logo.png" /><br />';
+            $message['body'][] = t("Bonjour,<br />");
+            $message['body'][] = t("Merci d'avoir participé au jeu Concours Halloween ! <br />");
+            $message['body'][] = t("Afin qu'il n'y ait que des gagnants, nous avons décidé de vous offrir
+            un bon de réduction de 5€ valable sur notre boutique jusqu'au 31 décembre 2018.<br /><br />");
+            $message['body'][] = t("Votre code promo* : zdPyJvag<br />");
+            $message['body'][] = t("* Offre non cumulable avec d'autres réductions<br />");
+            $message['body'][] = t("Au plaisir de vous revoir sur notre site.<br /><br />");
+            $message['body'][] = t("L'équipe de DolceVitaDog <br />");
+            break;
+    }
+}
+
+function dolce_easter_send_game_email()
+{
+    $handle = fopen(drupal_get_path('module', 'dolce_easter') . '/emails.csv', "r");
+    while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+        $num = count($data);
+        for ($c = 0; $c < $num; $c++) {
+            //echo $data[$c] . "<br />\n";
+            drupal_mail('dolce_easter', 'dolce_easter_participant', $data[$c], 'fr',
+                $params = array('to' => $data[$c]), $from = NULL, $send = TRUE);
+
+        }
+    }
+    fclose($handle);
+    return '';
+}
+
+function dolce_easter_settings($form, $form_state) {
+  $form['dolce_easter_day'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Prefix day'),
+    '#default_value' => variable_get('dolce_easter_day', 'nvm'),
+  );
+  return system_settings_form($form);
+}

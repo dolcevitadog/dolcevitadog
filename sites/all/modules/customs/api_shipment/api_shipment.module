@@ -36,7 +36,7 @@ function api_shipment_get_tracking_url($type, $order_uid, $order_id, $id) {
 
 function api_shipment_get_shipment_type($row) {
   $line_item = commerce_line_item_load($row->commerce_order_shipping_line_item_representiative_line_item_);
-  //dpr($line_item->commerce_shipping_service['und']['0']['value']);
+  dpr($line_item->commerce_shipping_service['und']['0']['value']);
   if (!empty($line_item->commerce_shipping_service)) {
     return $line_item->commerce_shipping_service['und']['0']['value'];
   } else {
