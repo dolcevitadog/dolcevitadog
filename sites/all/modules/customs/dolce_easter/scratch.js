@@ -104,8 +104,8 @@
             x, y;
 
         for (var i = 0; i < dist; i++) {
-            x = lastPoint.x + (Math.sin(angle) * i) - 25;
-            y = lastPoint.y + (Math.cos(angle) * i) - 25;
+            x = lastPoint.x + (Math.sin(angle) * i) - 50;
+            y = lastPoint.y + (Math.cos(angle) * i) - 50;
             ctx.globalCompositeOperation = 'destination-out';
             ctx.drawImage(brush, x, y);
         }
