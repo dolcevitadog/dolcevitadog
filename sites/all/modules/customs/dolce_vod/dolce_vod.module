@@ -146,8 +146,8 @@ function _dolce_vod_attach_vod_to_user($pids, $uid) {
 /* Recuperation de l'ID VIMEO */
 function dolce_vod_get_video_id($product_id) {
   $product = commerce_product_load($product_id);
-  $vimeo_id = $product->field_vod_vimeo_id['und']['0']['value'];
-  return $vimeo_id;
+  $vimeo_ids = $product->field_vod_vimeo_id['und'];
+  return $vimeo_ids;
 }
 
 /* Recuperation du titre de la video */
@@ -162,8 +162,8 @@ function dolce_vod_player_page($uid, $product_id) {
   if (empty(dolce_vod_user_purchase_pid($uid, $product_id))|| $uid != $user->uid) {
     drupal_access_denied();
   }
-  $vimeo_id = dolce_vod_get_video_id($product_id);
-  $data['vimeo_id'] = $vimeo_id;
+  $vimeo_ids = dolce_vod_get_video_id($product_id);
+  $data['vimeo_ids'] = $vimeo_ids;
   return theme('dolce_vod_player', array('data' => $data));
 }
 
